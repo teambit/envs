@@ -4,6 +4,7 @@ TS Compiler
 Support for the Typescript language using tsc. 
 
 **Features**
+
 1. Configuration - read local tsconfig.json 
 2. Configuration - Provide overrides to config inline in (bit/package.json).
 3. Dynamic dependencies - support dynamic dependencies if needed. 
@@ -11,11 +12,13 @@ Support for the Typescript language using tsc.
 5. Isolation - using the capsule API to isolate the component. 
 6. Copy policy - support CSS/Asset by setting copy (default)/no-copy strategy. 
 
-nice to have
-7. preset support - allow pre-configured presets.
+(nice to have)
+
+7. preset support - angular/react etc.
 8. css - generate typed css file to support import. 
 
 **Config**
+
 Project config and component aren't the same due to possible change in entry point.
 The following limitations apply:
 
