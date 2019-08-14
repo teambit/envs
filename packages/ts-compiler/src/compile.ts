@@ -5,6 +5,8 @@ import Vinyl from 'vinyl'
 import { promises as fs } from 'fs'
 import { GenericObject } from './compiler';
 
+import 'typescript'
+
 const os = require('os')
 const DEBUG_FLAG = 'DEBUG'
 

@@ -30,9 +30,16 @@
   },
   "bit": {
     "env": {
-      "compiler": "qballer.tsc/typescript@0.0.2"
+      "compiler": "qballer.tsc/typescript@0.0.3"
     },
     "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "overrides": {
+      "*": {
+        "devDependencies": {
+          "@types/node": "+"
+        }
+      }
+    }
   }
 }

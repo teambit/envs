@@ -1,6 +1,6 @@
 import { Compiler, InitAPI, CompilerContext, Logger } from "./compiler";
 import { compile } from './compile'
-
+import Vinyl from 'vinyl'
 let order = 1
 export class TypescriptCompiler implements Compiler {
     private _logger: Logger | undefined
@@ -23,12 +23,12 @@ export class TypescriptCompiler implements Compiler {
         return {}
     }
 
-    async action(ctx: CompilerContext) {
+    action(ctx: CompilerContext) {
         print('action')
         debugger
-        const files = null
+        const files:Vinyl[] = []
         //const files = await compile([], 'dist-path', {api:'api'})
-        return { files }
+        return Promise.resolve({ files })
     }
     
     get logger (): Logger |undefined {

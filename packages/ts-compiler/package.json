@@ -1,5 +1,5 @@
 {
-  "name": "typescript",
+  "name": "ts-compiler",
   "version": "1.0.0",
   "description": "Typescript compiler integration with bit",
   "main": "dist/index.js",
@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "recursive-readdir": "^2.2.2",
+    "typescript": "^3.5.3",
     "vinyl": "^2.2.0"
   },
   "devDependencies": {
