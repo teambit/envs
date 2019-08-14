@@ -10,6 +10,7 @@ Support for the Typescript language using tsc.
 4. DEBUG mode - `env DEBUG=true bit build` keeps capsule and prints messages. 
 5. Isolation - using the capsule API to isolate the component. 
 6. Copy policy - support CSS/Asset by setting copy (default)/no-copy strategy. 
+7. preset support - allow pre-configured presets.
 
 **Config**
 Project config and component aren't the same due to possible change in entry point.
