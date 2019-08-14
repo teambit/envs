@@ -23,7 +23,7 @@ Project config and component aren't the same due to possible change in entry poi
 The following limitations apply:
 
 1. tsconfig.json `files` | `include` entry may change by the compiler.
-2. import helpers will be forced to false - changed by override.
+2. import helpers will be forced to false - changes by override.
 3. 
 
 Overrides may be used normally to change component config.

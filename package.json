@@ -7,7 +7,7 @@
     "test": "bit test",
     "build": "run-p lint build:bit",
     "build:bit": "bit build",
-    "e2e": "",
+    "e2e": "mocha --require ts-node/register/transpile-only --require source-map-support/register e2e/*.e2e.ts",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "watch": "bit watch"
   },
@@ -15,18 +15,23 @@
   "author": "Doron Tsur, <doron@bit.dev>",
   "license": "MIT",
   "dependencies": {
-    "eslint": "^6.1.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-prettier": "^3.1.0",
-    "execa": "^2.0.3",
-    "prettier": "^1.18.2"
+    "chai": "^4.2.0",
+    "execa": "^2.0.3"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.0",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.1",
     "@types/recursive-readdir": "^2.2.0",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
-    "npm-run-all": "^4.1.5"
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "mocha": "^6.2.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.3.0"
   },
   "bit": {
     "env": {
