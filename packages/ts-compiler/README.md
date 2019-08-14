@@ -14,7 +14,7 @@ Support for the Typescript language using tsc.
 
 (nice to have)
 
-7. preset support - angular/react etc.
+7. preset support react.
 8. css - generate typed css file to support import. 
 
 **Config**

@@ -1,7 +1,6 @@
 import { Compiler, InitAPI, CompilerContext, Logger } from "./compiler";
 import { compile } from './compile'
 import Vinyl from 'vinyl'
-let order = 1
 export class TypescriptCompiler implements Compiler {
     private _logger: Logger | undefined
     
@@ -25,7 +24,6 @@ export class TypescriptCompiler implements Compiler {
 
     action(ctx: CompilerContext) {
         print('action')
-        debugger
         const files:Vinyl[] = []
         //const files = await compile([], 'dist-path', {api:'api'})
         return Promise.resolve({ files })
@@ -35,6 +33,8 @@ export class TypescriptCompiler implements Compiler {
         return this._logger
     }
 } 
+
+let order = 1
 
 function print(name:string) {
     console.log(`${name} is in order ${order++}`)
