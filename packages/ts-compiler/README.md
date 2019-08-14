@@ -7,9 +7,10 @@ Features:
 ----------
 1. Configuration - read local tsconfig.json 
 2. Configuration - Provide overrides to config inline in (bit/package.json).
-3. DEBUG mode - `env DEBUG=true bit build` keeps capsule and prints messages. 
-4. Isolation - using the capsule API to isolate the component. 
-5. Copy policy - support CSS/Asset support by setting copy (default)/no-copy strategy. 
+3. Dynamic depndencies - support some dynamic depndencies. 
+4. DEBUG mode - `env DEBUG=true bit build` keeps capsule and prints messages. 
+5. Isolation - using the capsule API to isolate the component. 
+6. Copy policy - support CSS/Asset support by setting copy (default)/no-copy strategy. 
 
 Config:
 -------

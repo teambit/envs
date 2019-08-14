@@ -6,5 +6,5 @@ A collection of bit extensions required for the development life cycle of a bit 
 
 Supported Compilers: 
 
-1. Typescript
+1. [Typescript](https://github.com/teambit/envs/tree/master/packages/ts-compiler) - packages/ts-compiler 
 
