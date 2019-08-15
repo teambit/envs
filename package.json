@@ -7,7 +7,6 @@
     "test": "bit test",
     "build": "run-p lint build:bit",
     "build:bit": "bit build",
-    "e2e": "mocha --require ts-node/register/transpile-only --require source-map-support/register e2e/*.e2e.ts",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "watch": "bit watch"
   },

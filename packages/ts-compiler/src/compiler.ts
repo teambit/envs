@@ -11,7 +11,7 @@ export interface Logger {
   error: Function
 }
 
-export interface Options {
+export interface InitOptions {
   write: boolean
 }
 
@@ -25,7 +25,7 @@ export interface CompilerContext {
 }
 
 export interface Compiler {
-  init: ({ api }: { api: InitAPI }) => Options
+  init: ({ api }: { api: InitAPI }) => InitOptions
   action: (ctx: CompilerContext) => Promise<{ files: Vinyl[] }>
   getDynamicPackageDependencies: (ctx: CompilerContext, name?: string ) => GenericObject
   getDynamicConfig: (ctx: CompilerContext) => GenericObject
