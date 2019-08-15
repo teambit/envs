@@ -60,6 +60,7 @@
     // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
   },
   "exclude": [
-    "e2e/fixtures/**/*"
+    "e2e/fixtures/**/*",
+    "dist/**/*.*"
   ]
 }
