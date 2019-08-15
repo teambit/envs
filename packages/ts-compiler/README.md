@@ -15,6 +15,7 @@ Some configuration is imposed on tsc from bit:
 1. `ImportHelpers` (a.k.a `tslib`) is forced to false by default because the pattern makes less sense in a component perspective. This may be configured by using.
 the following key in `bit.json` - TODO:add here.
 2. The entry of a component and the entry of a project are different. This will force configuration change around `files`|`include`.
+3. for now multilayer configuration isn't supported so `extends` keyword will be ommited. Missing config can be done with overrides. 
 
 **Isolation** Bit will use the capsule API to isolate the component from the rest of the project so `tsc` will only walk the needed imports. In case compilation fails you may debug an isolated environment by using `env DEBUG=true bit build` which keeps the capsule in the `/tmp/bit/cpausle-[number]` folder.
 
