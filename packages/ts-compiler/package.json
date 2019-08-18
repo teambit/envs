@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/recursive-readdir": "^2.2.0",
+    "chai": "^4.2.0",
+    "execa": "^2.0.4",
     "recursive-readdir": "^2.2.2",
     "typescript": "^3.5.3",
     "vinyl": "^2.2.0"
