@@ -1,4 +1,4 @@
-Envs - Environments Common for the bit Community
+Envs - Environments common for the bit community
 ------------------------------------------------
 ------------------------------------------------
 
