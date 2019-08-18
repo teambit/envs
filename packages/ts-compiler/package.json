@@ -15,6 +15,7 @@
     "vinyl": "^2.2.0"
   },
   "devDependencies": {
+    "@types/node": "^12.7.2",
     "@types/vinyl": "^2.0.3"
   }
 }
