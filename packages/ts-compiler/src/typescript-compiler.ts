@@ -32,9 +32,8 @@ export class TypescriptCompiler implements Compiler {
     async action(ctx: CompilerContext) {
         debugger
         print('action')
-        // const files:Vinyl[] = []
-        const compileResult = await compile([], ctx.context.rootDistDir, ctx.context)
-        debugger
+        const compileResult:{dists:Vinyl[]} = {dists: []}
+        //const compileResult = await compile([], ctx.context.rootDistDir, ctx.context)
         return compileResult
     }
     
