@@ -13,7 +13,10 @@
   "keywords": [],
   "author": "Doron Tsur, <doron@bit.dev>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@types/recursive-readdir": "^2.2.0",
+    "recursive-readdir": "^2.2.2"
+  },
   "devDependencies": {
     "@types/chai": "^4.2.0",
     "@types/mocha": "^5.2.7",
@@ -29,7 +32,7 @@
   },
   "bit": {
     "env": {
-      "compiler": "qballer.tsc/typescript@0.0.3"
+      "compiler": "qballer.tsc/typescript@0.0.6"
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",
@@ -37,6 +40,12 @@
       "*": {
         "devDependencies": {
           "@types/node": "+"
+        }
+      },
+      "compilers/typescript": {
+        "dependencies": {
+          "@types/recursive-readdir": "+",
+          "recursive-readdir": "+"
         }
       }
     }

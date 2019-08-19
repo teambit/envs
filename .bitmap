@@ -13,7 +13,7 @@
         "origin": "AUTHORED",
         "exported": false
     },
-    "ts-compiler": {
+    "compilers/typescript": {
         "files": [
             {
                 "relativePath": "packages/ts-compiler/README.md",
@@ -49,35 +49,9 @@
                 "relativePath": "packages/ts-compiler/src/typescript-compiler.ts",
                 "test": false,
                 "name": "typescript-compiler.ts"
-            },
-            {
-                "relativePath": "packages/ts-compiler/test/fixtures/ts-compiler-happy/index.ts",
-                "test": false,
-                "name": "index.ts"
-            },
-            {
-                "relativePath": "packages/ts-compiler/test/fixtures/ts-compiler-happy/ninja.tsx",
-                "test": false,
-                "name": "ninja.tsx"
-            },
-            {
-                "relativePath": "packages/ts-compiler/test/fixtures/ts-compiler-happy/package.json",
-                "test": false,
-                "name": "package.json"
-            },
-            {
-                "relativePath": "packages/ts-compiler/test/fixtures/ts-compiler-happy/tsconfig.json",
-                "test": false,
-                "name": "tsconfig.json"
-            },
-            {
-                "relativePath": "packages/ts-compiler/test/main.spec.ts",
-                "test": false,
-                "name": "main.spec.ts"
             }
         ],
         "mainFile": "packages/ts-compiler/src/index.ts",
-        "trackDir": "packages/ts-compiler",
         "origin": "AUTHORED",
         "exported": false
     },

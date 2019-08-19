@@ -13,18 +13,20 @@ const DEBUG_FLAG = 'DEBUG'
 const compiledFileTypes = ['ts', 'tsx'];
 const tsconfig = require(path.join(__dirname, './tsconfig.json'));
 
-export const compile = (files: Vinyl[], distPath: string, api: GenericObject) => {
+export const compile = async (files: Vinyl[], distPath: string, api: GenericObject) => {
     const compilerOptions = tsconfig
     return typescriptCompile(files, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
 }
 
 const typescriptCompile = async (_files: Vinyl[], distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
+    debugger
     const { res, directory } = await isolate(api)
     const context = await createContext(res, directory, distPath)
 
     await createTSConfig(context, extra.compilerOptions)
     const results = await _compile(context)
 
+    debugger
     if (!process.env[DEBUG_FLAG]) {
         await context.capsule.destroy()
     }
@@ -111,7 +113,6 @@ function getCustomDependencies(dir: string) {
 function print(msg: string) {
     process.env[DEBUG_FLAG] && console.log(msg)
 }
-
 
 export interface CompilationContext {
     directory: string,
