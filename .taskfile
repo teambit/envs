@@ -6,12 +6,13 @@ function eachPackageDo() {
     for fold in */; do 
         cd $fold
         $1
-        cd..
+        cd ..
     done 
     cd ..
 }
 
 function clean(){
+    rm -rf dist
     eachPackageDo "rm -rf dist"
 }
 

@@ -29,9 +29,8 @@ export class TypescriptCompiler implements Compiler {
     }
 
     async action(ctx: CompilerContext) {
-        // const compileResult:{dists:Vinyl[]} = {dists: []}
         const compileResult = await compile([], ctx.context.rootDistDir, ctx.context)
-        return compileResult
+        return withCopiedFiles(ctx, compileResult)
     }
     
     get logger (): Logger |undefined {
@@ -40,6 +39,12 @@ export class TypescriptCompiler implements Compiler {
 } 
 
 let order = 1
+
+function withCopiedFiles(ctx:CompilerContext, results:{dists: Vinyl.BufferFile[]}) {
+    debugger
+    
+    return results
+}
 
 function print(name:string, logger?:Logger) {
     console.log(`\n${name} is in order ${order++}`)
