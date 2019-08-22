@@ -1,5 +1,6 @@
-import { Compiler, InitAPI, CompilerContext, Logger } from "./compiler";
+import { Compiler, InitAPI, CompilerContext, Logger } from "../../common/src/compiler";
 import { compile } from './compile'
+import {withCopiedFiles} from '../../common/src/copy-policy'
 import Vinyl from 'vinyl'
 
 const CONFIG_NAME = 'tsconfig'
@@ -24,10 +25,6 @@ export class TypescriptCompiler implements Compiler {
         return {}
     }
 
-    getDynamicConfig(ctx:CompilerContext){
-        return {}
-    }
-
     async action(ctx: CompilerContext) {
         const compileResult = await compile([], ctx.context.rootDistDir, ctx.context)
         return withCopiedFiles(ctx, compileResult)
@@ -38,18 +35,15 @@ export class TypescriptCompiler implements Compiler {
     }
 } 
 
-let order = 1
 
-function withCopiedFiles(ctx:CompilerContext, results:{dists: Vinyl.BufferFile[]}) {
-    debugger
-    
-    return results
-}
 
-function print(name:string, logger?:Logger) {
-    console.log(`\n${name} is in order ${order++}`)
-    if (name === 'action') { 
-        order = 0
+export function getPrinter() {
+    let order = 1
+    return function print(name:string, logger?:Logger) {
+        console.log(`\n${name} is in order ${order++}`)
+        if (name === 'action') { 
+            order = 0
+        }
     }
 }
 

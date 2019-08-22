@@ -18,8 +18,8 @@ export interface InitOptions {
 export interface CompilerContext {
   context: GenericObject
   configFiles: Array<Vinyl>
-  files?: Array<Vinyl>
-  rawConfig?: GenericObject
+  files: Array<Vinyl>
+  rawConfig: GenericObject
   dynamicConfig?: GenericObject
   api?: any
 }
@@ -28,6 +28,6 @@ export interface Compiler {
   init: ({ api }: { api: InitAPI }) => InitOptions
   action: (ctx: CompilerContext) => Promise<{ dists: Vinyl[] }>
   getDynamicPackageDependencies: (ctx: CompilerContext, name?: string ) => GenericObject
-  getDynamicConfig: (ctx: CompilerContext) => GenericObject
+  getDynamicConfig?: (ctx: CompilerContext) => GenericObject
   logger?: Logger
 }

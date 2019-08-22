@@ -3,7 +3,7 @@ import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
 import { promises as fs } from 'fs'
-import { GenericObject } from './compiler';
+import { GenericObject } from '../../common/src/compiler';
 
 import 'typescript'
 
