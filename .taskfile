@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -e
+function eachPackageDo() {
+    cd packages
+    for fold in */; do 
+        cd $fold
+        $1
+        cd..
+    done 
+    cd ..
+}
+
+function clean(){
+    eachPackageDo "rm -rf dist"
+}
+
+function post_install() {
+    eachPackageDo "npm i"
+}
+
+TIMEFORMAT="Task completed in %3lR"
+time ${@:-default}
+

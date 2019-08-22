@@ -19,14 +19,12 @@ export const compile = async (files: Vinyl[], distPath: string, api: GenericObje
 }
 
 const typescriptCompile = async (_files: Vinyl[], distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
-    debugger
     const { res, directory } = await isolate(api)
     const context = await createContext(res, directory, distPath)
 
     await createTSConfig(context, extra.compilerOptions)
     const results = await _compile(context)
 
-    debugger
     if (!process.env[DEBUG_FLAG]) {
         await context.capsule.destroy()
     }

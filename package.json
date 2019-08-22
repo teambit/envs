@@ -4,11 +4,15 @@
   "description": "Environments Common for the bit Community",
   "main": "index.js",
   "scripts": {
+    "clean": "./.taskfile clean",
     "test": "bit test",
-    "build": "run-p lint build:bit",
+    "build": "run-p lint build:bit copy",
+    "build:tsc": "run-p buuk",
+    "copy": "cp packages/ts-compiler/src/tsconfig.json ./dist/packages/ts-compiler/src/tsconfig.json",
     "build:bit": "bit build",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "watch": "bit watch"
+    "watch": "bit watch",
+    "postinstall": "./.taskfile post_install "
   },
   "keywords": [],
   "author": "Doron Tsur, <doron@bit.dev>",
