@@ -1,4 +1,4 @@
 import { TypescriptCompiler } from './typescript-compiler'
-export { TypescriptCompiler} 
+export { TypescriptCompiler }
 
 export default (new TypescriptCompiler())

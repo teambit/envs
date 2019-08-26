@@ -12,8 +12,7 @@ TS-compiler will use bit's API to add those dependencies to the component
 
 Some configuration is imposed on tsc from bit: 
 
-1. `ImportHelpers` (a.k.a `tslib`) is forced to false by default because the pattern makes less sense in a component perspective. This may be configured by using.
-the following key in `bit.json` - TODO:add here.
+1. `ImportHelpers` (a.k.a `tslib`) is forced to false by default because the pattern makes less sense in a component perspective. This may be configured by using the following key in `bit.json` - 
 2. The entry of a component and the entry of a project are different. This will force configuration change around `files`|`include`.
 3. for now multilayer configuration isn't supported so `extends` keyword will be omitted. Missing config can be done with overrides. 
 
@@ -26,8 +25,27 @@ the following key in `bit.json` - TODO:add here.
 
 **example bit.json**
 ```javascript
-//TODO:
+{
+    "bit": {
+        "env": {
+            "compiler": {
+                "@bit.envs/compilers/typescript": {
+                    "rawConfig": {
+                        "forceImportHelpers": false,
+                        "copyToTarget": "*.{css,md}",
+                        "preset":  "default" | "none"
+                    },
+                    "files": {
+                        "tsconfig": "./tsconfig.json",
+                    },
+                    "options": {}
+                }
+            }
+        }
+    }
+}
 ```
+
 
 
 
