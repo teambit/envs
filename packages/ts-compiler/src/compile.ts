@@ -103,9 +103,12 @@ async function collectDistFiles(context: CompilationContext) {
         return fs.readFile(file)
     }))
     return files.map((file, index) => {
+        const pathToFile = file.split(path.join(capsuleDir, 'dist'))[1]
+
         return new Vinyl({
-            path: path.join(context.name, file.split(path.join(capsuleDir, 'dist'))[1]),
-            contents: readFiles[index]
+            path: pathToFile,
+            contents: readFiles[index],
+            basename: path.dirname(pathToFile).split(path.sep).pop()
         })
     })
 }
