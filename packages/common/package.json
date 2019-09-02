@@ -11,9 +11,11 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^12.7.2",
-    "@types/vinyl": "^2.0.3"
+    "@types/vinyl": "^2.0.3",
+    "@types/minimatch": "^3.0.3"
   },
   "dependencies": {
+    "minimatch": "^3.0.4",
     "vinyl": "^2.2.0"
   }
 }

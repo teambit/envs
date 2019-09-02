@@ -3,7 +3,7 @@ import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
 import { promises as fs } from 'fs'
-import { GenericObject } from '../../common/src/compiler';
+import { GenericObject } from './compiler';
 
 import 'typescript'
 
@@ -36,7 +36,17 @@ async function _compile(context: CompilationContext) {
     const pathToTSC = require.resolve('typescript/bin/tsc')
     await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
     const dists = await collectDistFiles(context)
-    return { dists }
+    const mainFile = findMainFile(context, dists)
+    return { dists, mainFile }
+}
+
+export function findMainFile(context, dists) {
+    const getNameOfFile = (val, split) => val.split(split)[0]
+    const sourceFileName = getNameOfFile(context.main, '.ts')
+    const res = dists.find((val)=> {
+        return  sourceFileName === getNameOfFile(val.basename, '.js')
+    })
+    return (res || {}).path
 }
 
 function createContext(res: GenericObject, directory: string, distPath: string): CompilationContext {

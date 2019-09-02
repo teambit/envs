@@ -1,7 +1,6 @@
-import { Compiler, InitAPI, CompilerContext, Logger } from "../../common/src/compiler";
+import { Compiler, InitAPI, CompilerContext, Logger } from "./compiler";
 import { compile } from './compile'
-import {withCopiedFiles} from '../../common/src/copy-policy'
-import Vinyl from 'vinyl'
+import {withCopiedFiles} from './copy-policy'
 
 const CONFIG_NAME = 'tsconfig'
 
@@ -9,7 +8,7 @@ export class TypescriptCompiler implements Compiler {
     private _logger: Logger | undefined
     
     init(ctx: { api: InitAPI }) {
-       this._logger = ctx.api.getLogger()
+        this._logger = ctx.api.getLogger()
         return {
             write: true
         }
