@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@bit/bit.utils.object.group-by": "^1.0.0",
     "@types/recursive-readdir": "^2.2.0",
     "chai": "^4.2.0",
     "execa": "^2.0.4",

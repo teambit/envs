@@ -1,17 +1,12 @@
 import Vinyl from 'vinyl'
 import { CompilerContext } from './compiler';
-import minimatch from 'minimatch'
 
 export function withCopiedFiles(ctx:CompilerContext, results:{ dists: Vinyl[]}) {
-    if (!ctx.rawConfig.copyGlob) {
-        ctx.rawConfig.copyGlobs = './**/*.{less, scss, json}'
-    }
-    debugger
-    ctx.files.filter(file => {
-       return minimatch(file.base, ctx.rawConfig.copyGlob)
-    }).forEach(toCopy => { 
-       console.log(toCopy.base) 
+    const files = ctx.files
+    const toCopy = files.filter(function(file){
+        return !file.path.endsWith('ts') && !file.path.endsWith('tsx')
     })
-    
+
+    results.dists.concat(toCopy)
     return results
 }

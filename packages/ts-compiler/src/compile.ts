@@ -11,6 +11,7 @@ const os = require('os')
 const DEBUG_FLAG = 'DEBUG'
 
 const compiledFileTypes = ['ts', 'tsx'];
+debugger
 const tsconfig = require(path.join(__dirname, './tsconfig.json'));
 
 export const compile = async (files: Vinyl[], distPath: string, api: GenericObject) => {
