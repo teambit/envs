@@ -19,7 +19,7 @@ Support for the Babel abstract transpiler.
     "bit": {
         "env": {
             "compiler": {
-                "@bit.envs/compilers/typescript": {
+                "@bit.envs/compilers/babel": {
                     "rawConfig": {
                         "forceTransformRuntime": false, //https://babeljs.io/docs/en/babel-runtime
                         "copyToTarget": "*.{css,md}", // -> consider an array
