@@ -119,17 +119,18 @@ async function isolate(api: GenericObject) {
 
 async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
     const capsuleDir = context.directory
-    const compDistDir = path.resolve(capsuleDir, 'dist')
-    const files = await readdir(compDistDir)
+    const compDistRoot = path.resolve(capsuleDir, 'dist')
+    const files = await readdir(compDistRoot)
     const readFiles = await Promise.all(files.map(file => {
         return fs.readFile(file)
     }))
     return files.map((file, index) => {
-        const pathToFile = file.split(path.join(capsuleDir, 'dist'))[1]
+        
+        const pathToFile = path.join(compDistRoot, file.split(path.join(capsuleDir, 'dist'))[1])
         return new Vinyl({
             path: pathToFile,
             contents: readFiles[index],
-            base: compDistDir
+            base: compDistRoot
         })
     })
 }
