@@ -11,8 +11,18 @@ const os = require('os')
 const DEBUG_FLAG = 'DEBUG'
 
 const compiledFileTypes = ['ts', 'tsx'];
-debugger
 const tsconfig = require(path.join(__dirname, './tsconfig.json'));
+
+
+export interface CompilationContext {
+    directory: string,
+    name: string,
+    main: string,
+    dist: string,
+    dependencies: GenericObject,
+    capsule: GenericObject,
+
+}
 
 export const compile = async (files: Vinyl[], distPath: string, api: GenericObject) => {
     const compilerOptions = tsconfig
@@ -41,13 +51,13 @@ async function _compile(context: CompilationContext) {
     return { dists, mainFile }
 }
 
-export function findMainFile(context, dists) {
-    const getNameOfFile = (val, split) => val.split(split)[0]
+export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
+    const getNameOfFile = (val:string, split:string) => val.split(split)[0]
     const sourceFileName = getNameOfFile(context.main, '.ts')
     const res = dists.find((val)=> {
         return  sourceFileName === getNameOfFile(val.basename, '.js')
     })
-    return (res || {}).path
+    return (res || {path:""}).path 
 }
 
 function createContext(res: GenericObject, directory: string, distPath: string): CompilationContext {
@@ -124,14 +134,4 @@ function getCustomDependencies(dir: string) {
 
 function print(msg: string) {
     process.env[DEBUG_FLAG] && console.log(msg)
-}
-
-export interface CompilationContext {
-    directory: string,
-    name: string,
-    main: string,
-    dist: string,
-    dependencies: GenericObject,
-    capsule: GenericObject,
-
 }
