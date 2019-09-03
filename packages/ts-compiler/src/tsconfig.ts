@@ -1,4 +1,4 @@
-{
+export default {
   "compilerOptions": {
       "target": "es2015",
       "skipLibCheck": true,

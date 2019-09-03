@@ -11,7 +11,7 @@ const os = require('os')
 const DEBUG_FLAG = 'DEBUG'
 
 const compiledFileTypes = ['ts', 'tsx'];
-const tsconfig = require(path.join(__dirname, './tsconfig.json'));
+import tsconfig from './tsconfig'
 
 export interface CompilationContext {
     directory: string
@@ -47,6 +47,7 @@ async function _compile(context: CompilationContext, cc:CompilerContext) {
     const dists = await collectDistFiles(context)
     const nonCompiledDists = await collectNonDistFiles(context, cc.files)
     const mainFile = findMainFile(context, dists)
+    debugger
     return { dists: dists.concat(nonCompiledDists), mainFile }
 }
 
@@ -69,7 +70,7 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     const res = dists.find((val)=> {
         return  sourceFileName === getNameOfFile(val.basename, '.js')
     })
-    return (res || {path:""}).path 
+    return  (res || {relative:''}).relative
 }
 
 function createContext(res: GenericObject, directory: string, distPath: string): CompilationContext {
