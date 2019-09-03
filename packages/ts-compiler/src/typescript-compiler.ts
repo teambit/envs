@@ -1,4 +1,4 @@
-import { Compiler, InitAPI, CompilerContext, Logger } from "./compiler";
+import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "./compiler";
 import { compile } from './compile'
 
 const CONFIG_NAME = 'tsconfig'
@@ -20,7 +20,7 @@ export class TypescriptCompiler implements Compiler {
         return {}
     }
 
-    async action(ctx: CompilerContext) {
+    async action(ctx: CompilerContext):Promise<ActionReturnType> {
         const compileResult = await compile(ctx, ctx.context.rootDistDir, ctx.context)
         return compileResult
     }
