@@ -66,6 +66,11 @@ Or set specific fields directly in the `rawConfig` section:
 }
 ```
 
+Note: These options can be combined. If they are, they override each other in the following order of precedence:
+1. Explicit configuration options in rawConfig
+2. Options defined in the babel configuration file
+3. Compiler defaults
+
 **Features**
 The compiler will detect plugins/presets/transforms automatically and install them as `devDependencies`
 
