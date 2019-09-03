@@ -16,9 +16,15 @@
   "author": "Doron Tsur, <doron@bit.dev>",
   "license": "MIT",
   "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@types/babel__core": "^7.1.2",
     "@types/recursive-readdir": "^2.2.0",
+    "@types/uuid": "^3.4.5",
     "@types/vinyl": "^2.0.3",
-    "recursive-readdir": "^2.2.2"
+    "execa": "^2.0.4",
+    "recursive-readdir": "^2.2.2",
+    "uuid": "^3.3.3",
+    "vinyl": "^2.2.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.0",
