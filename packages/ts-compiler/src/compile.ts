@@ -3,7 +3,7 @@ import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
 import { promises as fs } from 'fs'
-import { GenericObject } from './compiler';
+import { GenericObject, CompilerContext } from './compiler';
 
 import 'typescript'
 
@@ -13,28 +13,26 @@ const DEBUG_FLAG = 'DEBUG'
 const compiledFileTypes = ['ts', 'tsx'];
 const tsconfig = require(path.join(__dirname, './tsconfig.json'));
 
-
 export interface CompilationContext {
-    directory: string,
+    directory: string
     name: string,
     main: string,
     dist: string,
     dependencies: GenericObject,
     capsule: GenericObject,
-
 }
 
-export const compile = async (files: Vinyl[], distPath: string, api: GenericObject) => {
+export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
     const compilerOptions = tsconfig
-    return typescriptCompile(files, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
+    return typescriptCompile(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
 }
 
-const typescriptCompile = async (_files: Vinyl[], distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
+const typescriptCompile = async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
     const { res, directory } = await isolate(api)
     const context = await createContext(res, directory, distPath)
 
     await createTSConfig(context, extra.compilerOptions)
-    const results = await _compile(context)
+    const results = await _compile(context, cc)
 
     if (!process.env[DEBUG_FLAG]) {
         await context.capsule.destroy()
@@ -43,12 +41,26 @@ const typescriptCompile = async (_files: Vinyl[], distPath: string, api: Generic
     return results
 }
 
-async function _compile(context: CompilationContext) {
+async function _compile(context: CompilationContext, cc:CompilerContext) {
     const pathToTSC = require.resolve('typescript/bin/tsc')
     await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
     const dists = await collectDistFiles(context)
+    const nonCompiledDists = await collectNonDistFiles(context, cc.files)
     const mainFile = findMainFile(context, dists)
-    return { dists, mainFile }
+    return { dists: dists.concat(nonCompiledDists), mainFile }
+}
+
+export function collectNonDistFiles(context: CompilationContext, files:Vinyl[]) { 
+    const nonCompiledDists:Vinyl[] =  files.filter((f) => {
+        return !f.basename.endsWith('ts') && !f.basename.endsWith('tsx')
+    }).map((f) => {
+        const newFile = f.clone()
+        newFile.base = path.join(context.directory, 'dist')
+        const realtiveFile = f.path.split(process.cwd())[1]
+        newFile.path = path.join(newFile.base, realtiveFile)
+        return newFile
+    })
+    return nonCompiledDists
 }
 
 export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
@@ -71,7 +83,6 @@ function createContext(res: GenericObject, directory: string, distPath: string):
         directory
     }
 }
-
 
 async function runNodeScriptInDir(directory: string, scriptFile: string, args: string[]) {
     let result = null
@@ -106,7 +117,7 @@ async function isolate(api: GenericObject) {
     return { res, directory: targetDir }
 }
 
-async function collectDistFiles(context: CompilationContext) {
+async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
     const capsuleDir = context.directory
     const compDistDir = path.resolve(capsuleDir, 'dist')
     const files = await readdir(compDistDir)
@@ -115,11 +126,10 @@ async function collectDistFiles(context: CompilationContext) {
     }))
     return files.map((file, index) => {
         const pathToFile = file.split(path.join(capsuleDir, 'dist'))[1]
-
         return new Vinyl({
             path: pathToFile,
             contents: readFiles[index],
-            basename: path.dirname(pathToFile).split(path.sep).pop()
+            base: compDistDir
         })
     })
 }

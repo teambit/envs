@@ -8,6 +8,7 @@
     "test": "bit test",
     "build": "run-s build:bit copy",
     "copy": "cp packages/ts-compiler/src/tsconfig.json dist/compilers/typescript/tsconfig.json",
+    "copy:tsc": "cp packages/ts-compiler/src/tsconfig.json dist/packages/ts-compiler/src/tsconfig.json", 
     "build:bit": "bit build",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix --jsx",
     "watch": "bit watch",

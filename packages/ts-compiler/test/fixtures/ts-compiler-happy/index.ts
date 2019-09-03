@@ -1,1 +1,0 @@
-export {Ninja} from './ninja'
