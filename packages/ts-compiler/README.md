@@ -3,6 +3,18 @@ TS Compiler
 
 Support for the Typescript language using tsc. 
 
+**How to use?**
+
+Import the environment.
+```bash
+bit import bit.envs/compilers/react -c
+```
+
+Then build using bit build.
+```bash
+bit build
+```
+
 **Features:**
 
 **Configuration** The compiler will read the author environment `tsconfig.json` and will adapt it to the structure of the component. Detection of config will happen automatic unless directed otherwise by the user. The user may also override specific `tsconfig.json` from the bit.json file. This is to correct a situation when a 
