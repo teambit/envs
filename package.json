@@ -16,20 +16,18 @@
   "author": "Doron Tsur, <doron@bit.dev>",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.5.5",
-    "@types/babel__core": "^7.1.2",
-    "@types/recursive-readdir": "^2.2.0",
-    "@types/uuid": "^3.4.5",
-    "@types/vinyl": "^2.0.3",
     "execa": "^2.0.4",
     "recursive-readdir": "^2.2.2",
     "uuid": "^3.3.3",
     "vinyl": "^2.2.0"
   },
   "devDependencies": {
-    "@types/chai": "^4.2.0",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^12.7.2",
+    "@babel/core": "^7.5.5",
+    "@types/babel__core": "^7.1.2",
+    "@types/node": "^12.7.4",
+    "@types/recursive-readdir": "^2.2.0",
+    "@types/uuid": "^3.4.5",
+    "@types/vinyl": "^2.0.3",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "eslint": "^6.1.0",
@@ -47,14 +45,19 @@
     "packageManager": "npm",
     "overrides": {
       "*": {
-        "devDependencies": {
-          "@types/node": "+"
+         "devDependencies": {
+          "@types/node": "+",
+          "@types/mocha": "^5.2.7"
         }
       },
       "compilers/typescript": {
         "dependencies": {
           "@types/recursive-readdir": "+",
           "recursive-readdir": "+"
+        }, 
+        "devDependencies": {
+          "@types/node": "+",
+          "@types/mocha": "^5.2.7"
         }
       }
     }

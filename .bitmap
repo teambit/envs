@@ -55,7 +55,7 @@
             },
             {
                 "relativePath": "packages/ts-compiler/test/test-compile.spec.ts",
-                "test": false,
+                "test": true,
                 "name": "test-compile.spec.ts"
             }
         ],
