@@ -6,11 +6,13 @@ Support for the Typescript language using tsc.
 **How to use?**
 
 Import the environment.
+
 ```bash
 bit import bit.envs/compilers/react -c
 ```
 
 Then build using bit build.
+
 ```bash
 bit build
 ```
