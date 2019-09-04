@@ -8,7 +8,7 @@ Support for the Typescript language using tsc.
 Import the environment.
 
 ```bash
-bit import bit.envs/compilers/react -c
+bit import bit.envs/compilers/typescript -c
 ```
 
 Then build using bit build.
