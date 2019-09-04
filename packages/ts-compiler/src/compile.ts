@@ -65,10 +65,12 @@ export function collectNonDistFiles(context: CompilationContext, files:Vinyl[]) 
 }
 
 export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
+    const compDistRoot = path.resolve(context.directory, 'dist/')
     const getNameOfFile = (val:string, split:string) => val.split(split)[0]
     const sourceFileName = getNameOfFile(context.main, '.ts')
     const res = dists.find((val)=> {
-        return  sourceFileName === getNameOfFile(val.basename, '.js')
+        const nameToCheck = getNameOfFile(val.path, '.js').split(compDistRoot)[1]
+        return sourceFileName.endsWith(nameToCheck);
     })
     return  (res || {relative:''}).relative
 }
