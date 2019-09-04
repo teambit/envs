@@ -7,11 +7,11 @@ import { GenericObject, CompilerContext } from './compiler';
 
 import 'typescript'
 
-const os = require('os')
 const DEBUG_FLAG = 'DEBUG'
 
 const compiledFileTypes = ['ts', 'tsx'];
 import tsconfig from './tsconfig'
+import { getCapsuleName } from './utils';
 
 export interface CompilationContext {
     directory: string
@@ -108,8 +108,7 @@ function createTSConfig(context: CompilationContext, content: GenericObject) {
 
 //@TODO refactor out of here and share with angular compiler.
 async function isolate(api: GenericObject) {
-    const uuidHack = `capsule-${Date.now().toString().slice(-5)}`
-    const targetDir = path.join(os.tmpdir(), 'bit', uuidHack)
+    const targetDir = getCapsuleName();
     const componentName = api.componentObject.name
     print(`\n building ${componentName} on directory ${targetDir}`)
 
