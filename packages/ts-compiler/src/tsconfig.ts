@@ -13,6 +13,7 @@ export default {
       "isolatedModules": false,
       "declaration": false,
       "experimentalDecorators": true,
-      "jsx": "react"
+      "jsx": "react",
+      "rootDir": './'
   }
 }

@@ -1,4 +1,4 @@
-import path from 'path'
+import path, { relative } from 'path'
 import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
@@ -20,6 +20,7 @@ export interface CompilationContext {
     dist: string,
     dependencies: GenericObject,
     capsule: GenericObject,
+    res: GenericObject
 }
 
 export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
@@ -47,17 +48,21 @@ async function _compile(context: CompilationContext, cc:CompilerContext) {
     const dists = await collectDistFiles(context)
     const nonCompiledDists = await collectNonDistFiles(context, cc.files)
     const mainFile = findMainFile(context, dists)
-    debugger
     return { dists: dists.concat(nonCompiledDists), mainFile }
 }
 
 export function collectNonDistFiles(context: CompilationContext, files:Vinyl[]) { 
+    const originallySharedDir = context.res.componentWithDependencies.component.originallySharedDir
     const nonCompiledDists:Vinyl[] =  files.filter((f) => {
         return !f.basename.endsWith('ts') && !f.basename.endsWith('tsx')
     }).map((f) => {
         const newFile = f.clone()
         newFile.base = path.join(context.directory, 'dist')
-        const realtiveFile = f.path.split(process.cwd())[1]
+
+        let realtiveFile = f.path.split(process.cwd())[1]
+        if (realtiveFile.startsWith(`/${originallySharedDir}`)) {
+            realtiveFile = realtiveFile.split(originallySharedDir)[1]
+        }
         newFile.path = path.join(newFile.base, realtiveFile)
         return newFile
     })
@@ -83,7 +88,8 @@ function createContext(res: GenericObject, directory: string, distPath: string):
         name: componentObject.name,
         dependencies: getCustomDependencies(directory),
         capsule: res.capsule,
-        directory
+        directory,
+        res
     }
 }
 

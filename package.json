@@ -16,6 +16,7 @@
   "author": "Doron Tsur, <doron@bit.dev>",
   "license": "MIT",
   "dependencies": {
+    "@types/mocha": "^5.2.7",
     "execa": "^2.0.4",
     "recursive-readdir": "^2.2.2",
     "uuid": "^3.3.3",
@@ -39,13 +40,19 @@
   },
   "bit": {
     "env": {
-      "compiler": "bit.envs/compilers/typescript@3.0.25"
+      "compiler": {
+        "meta": {
+          "options": {
+            "file": "/home/qballer/code/open/envs/dist/packages/ts-compiler/src/index.js"
+          }
+        }
+      }
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",
     "overrides": {
       "*": {
-         "devDependencies": {
+        "devDependencies": {
           "@types/node": "+",
           "@types/mocha": "^5.2.7"
         }
@@ -54,7 +61,7 @@
         "dependencies": {
           "@types/recursive-readdir": "+",
           "recursive-readdir": "+"
-        }, 
+        },
         "devDependencies": {
           "@types/node": "+",
           "@types/mocha": "^5.2.7"
