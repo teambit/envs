@@ -40,13 +40,7 @@
   },
   "bit": {
     "env": {
-      "compiler": {
-        "meta": {
-          "options": {
-            "file": "/home/qballer/code/open/envs/dist/packages/ts-compiler/src/index.js"
-          }
-        }
-      }
+      "compiler": "bit.envs/compilers/typescript@3.0.25"
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",

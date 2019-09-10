@@ -74,7 +74,7 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     const getNameOfFile = (val:string, split:string) => val.split(split)[0]
     const sourceFileName = getNameOfFile(context.main, '.ts')
     const res = dists.find((val)=> {
-        const nameToCheck = getNameOfFile(val.path, '.js').split(compDistRoot)[1]
+        const nameToCheck = getNameOfFile(val.path, '.js').split(`${compDistRoot}${compDistRoot.endsWith('/') ? '':'/'}`)[1]
         return sourceFileName.endsWith(nameToCheck);
     })
     return  (res || {relative:''}).relative
@@ -98,8 +98,9 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
     const cwd = process.cwd()
     try {
         process.chdir(directory)
-        result = await execa(scriptFile, args)
+        result = await execa(scriptFile, args,{stdout:1})
     } catch (e) {
+
         process.chdir(cwd)
         throw e
     }
