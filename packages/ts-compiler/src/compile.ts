@@ -29,12 +29,19 @@ export const compile = async ( cc:CompilerContext, distPath: string, api: Generi
 }
 
 const typescriptCompile = async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
+ 
     const { res, directory } = await isolate(api)
     const context = await createContext(res, directory, distPath)
-
+    let results = null
     await createTSConfig(context, extra.compilerOptions)
-    const results = await _compile(context, cc)
 
+    if (getNonCompiledFiles(cc.files).length === cc.files.length) {
+        const dists = collectNonDistFiles(context, cc.files)   
+        results = {dists}
+    } else { 
+        results = await _compile(context, cc)
+    }
+    
     if (!process.env[DEBUG_FLAG]) {
         await context.capsule.destroy()
     }
@@ -46,16 +53,20 @@ async function _compile(context: CompilationContext, cc:CompilerContext) {
     const pathToTSC = require.resolve('typescript/bin/tsc')
     await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
     const dists = await collectDistFiles(context)
-    const nonCompiledDists = await collectNonDistFiles(context, cc.files)
+    const nonCompiledDists = collectNonDistFiles(context, cc.files)
     const mainFile = findMainFile(context, dists)
     return { dists: dists.concat(nonCompiledDists), mainFile }
 }
 
+function getNonCompiledFiles(files:Vinyl[]) { 
+    return files.filter((f) => {
+        return !f.basename.endsWith('ts') && !f.basename.endsWith('tsx')
+    })
+}
+
 export function collectNonDistFiles(context: CompilationContext, files:Vinyl[]) { 
     const originallySharedDir = context.res.componentWithDependencies.component.originallySharedDir
-    const nonCompiledDists:Vinyl[] =  files.filter((f) => {
-        return !f.basename.endsWith('ts') && !f.basename.endsWith('tsx')
-    }).map((f) => {
+    const nonCompiledDists:Vinyl[] = getNonCompiledFiles(files).map((f) => {
         const newFile = f.clone()
         newFile.base = path.join(context.directory, 'dist')
 
@@ -100,7 +111,6 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
         process.chdir(directory)
         result = await execa(scriptFile, args,{stdout:1})
     } catch (e) {
-
         process.chdir(cwd)
         throw e
     }

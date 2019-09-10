@@ -23,7 +23,7 @@ export interface CompilerContext {
   dynamicConfig?: GenericObject
   api?: any
 }
-export interface ActionReturnType { dists: Vinyl[], mainFile: string }
+export interface ActionReturnType { dists: Vinyl[], mainFile?: string }
 
 export interface Compiler {
   init: ({ api }: { api: InitAPI }) => InitOptions
