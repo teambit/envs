@@ -2,13 +2,12 @@ import path, { relative } from 'path'
 import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
-import { promises as fs } from 'fs'
+import { promises as fs, Stats, read } from 'fs'
 import { GenericObject, CompilerContext } from './compiler';
 
 import 'typescript'
 
 const DEBUG_FLAG = 'DEBUG'
-
 const compiledFileTypes = ['ts', 'tsx'];
 import tsconfig from './tsconfig'
 import { getCapsuleName } from './utils';
@@ -23,20 +22,19 @@ export interface CompilationContext {
     res: GenericObject
 }
 
+
 export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
     const compilerOptions = tsconfig
     return typescriptCompile(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
 }
 
 const typescriptCompile = async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
- 
     const { res, directory } = await isolate(api)
     const context = await createContext(res, directory, distPath)
     let results = null
     await createTSConfig(context, extra.compilerOptions)
-
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
-        const dists = collectNonDistFiles(context, cc.files)   
+        const dists = await collectNonDistFiles(context)   
         results = {dists}
     } else { 
         results = await _compile(context, cc)
@@ -53,7 +51,7 @@ async function _compile(context: CompilationContext, cc:CompilerContext) {
     const pathToTSC = require.resolve('typescript/bin/tsc')
     await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
     const dists = await collectDistFiles(context)
-    const nonCompiledDists = collectNonDistFiles(context, cc.files)
+    const nonCompiledDists = await collectNonDistFiles(context)
     const mainFile = findMainFile(context, dists)
     return { dists: dists.concat(nonCompiledDists), mainFile }
 }
@@ -62,22 +60,6 @@ function getNonCompiledFiles(files:Vinyl[]) {
     return files.filter((f) => {
         return !f.basename.endsWith('ts') && !f.basename.endsWith('tsx')
     })
-}
-
-export function collectNonDistFiles(context: CompilationContext, files:Vinyl[]) { 
-    const originallySharedDir = context.res.componentWithDependencies.component.originallySharedDir
-    const nonCompiledDists:Vinyl[] = getNonCompiledFiles(files).map((f) => {
-        const newFile = f.clone()
-        newFile.base = path.join(context.directory, 'dist')
-
-        let realtiveFile = f.path.split(process.cwd())[1]
-        if (realtiveFile.startsWith(`/${originallySharedDir}`)) {
-            realtiveFile = realtiveFile.split(originallySharedDir)[1]
-        }
-        newFile.path = path.join(newFile.base, realtiveFile)
-        return newFile
-    })
-    return nonCompiledDists
 }
 
 export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
@@ -152,6 +134,31 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
             base: compDistRoot
         })
     })
+}
+
+async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]> {
+    const capsuleDir = context.directory
+    const compDistRoot = path.resolve(capsuleDir, 'dist')
+
+    const ignoreFunction = function (file:string, stats: Stats){
+        return !!~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/')
+    }
+    
+    const fileList = await readdir(capsuleDir, ['*.ts', '*.tsx', ignoreFunction])
+    const readFiles = await Promise.all(fileList.map(file => {
+        return fs.readFile(file)
+    }))
+    const list = fileList.map((file, index) => {
+        const pathToFile = path.join(compDistRoot, file.split(capsuleDir)[1])
+
+        return new Vinyl({
+            path: pathToFile,
+            contents: readFiles[index],
+            base: compDistRoot
+        })
+    })
+
+    return list
 }
 
 function getTSConfigPath(context: CompilationContext) {

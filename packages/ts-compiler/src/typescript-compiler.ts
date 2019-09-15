@@ -12,9 +12,6 @@ export class TypescriptCompiler implements Compiler {
             write: true
         }
     }
-    getDynamicConfig(ctx:CompilerContext) {
-        return {}
-    }
 
     getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
         return {}
