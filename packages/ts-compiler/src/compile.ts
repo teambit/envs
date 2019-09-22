@@ -34,12 +34,12 @@ const typescriptCompile = async (cc:CompilerContext, distPath: string, api: Gene
     let results = null
     await createTSConfig(context, extra.compilerOptions)
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
-        const dists = await collectNonDistFiles(context)   
+        const dists = await collectNonDistFiles(context)
         results = {dists}
-    } else { 
+    } else {
         results = await _compile(context, cc)
     }
-    
+
     if (!process.env[DEBUG_FLAG]) {
         await context.capsule.destroy()
     }
@@ -56,7 +56,7 @@ async function _compile(context: CompilationContext, cc:CompilerContext) {
     return { dists: dists.concat(nonCompiledDists), mainFile }
 }
 
-function getNonCompiledFiles(files:Vinyl[]) { 
+function getNonCompiledFiles(files:Vinyl[]) {
     return files.filter((f) => {
         return !f.basename.endsWith('ts') && !f.basename.endsWith('tsx')
     })
@@ -66,8 +66,14 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     const compDistRoot = path.resolve(context.directory, 'dist/')
     const getNameOfFile = (val:string, split:string) => val.split(split)[0]
     const sourceFileName = getNameOfFile(context.main, '.ts')
+    const pathPrefix = `${compDistRoot}${compDistRoot.endsWith('/') ? '':'/'}`
+    const distMainFileExt = '.js'
     const res = dists.find((val)=> {
-        const nameToCheck = getNameOfFile(val.path, '.js').split(`${compDistRoot}${compDistRoot.endsWith('/') ? '':'/'}`)[1]
+        if (!val.path.endsWith(distMainFileExt)) {
+            // makes sure to not pick up files such as '.js.map'
+            return false;
+        }
+        const nameToCheck = getNameOfFile(val.path, distMainFileExt).split(pathPrefix)[1]
         return sourceFileName.endsWith(nameToCheck);
     })
     return  (res || {relative:''}).relative
@@ -126,7 +132,7 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
         return fs.readFile(file)
     }))
     return files.map((file, index) => {
-        
+
         const pathToFile = path.join(compDistRoot, file.split(path.join(capsuleDir, 'dist'))[1])
         return new Vinyl({
             path: pathToFile,
@@ -143,7 +149,7 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
     const ignoreFunction = function (file:string, stats: Stats){
         return !!~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/')
     }
-    
+
     const fileList = await readdir(capsuleDir, ['*.ts', '*.tsx', ignoreFunction])
     const readFiles = await Promise.all(fileList.map(file => {
         return fs.readFile(file)
