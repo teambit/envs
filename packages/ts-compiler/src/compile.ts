@@ -107,9 +107,11 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 }
 
 
-function createTSConfig(context: CompilationContext, content: GenericObject) {
+async function createTSConfig(context: CompilationContext, content: GenericObject) {
     const pathToConfig = getTSConfigPath(context)
     content.compilerOptions.outDir = 'dist'
+    // const fileList = await collectSourceFiles(context)
+    // content.files = fileList
     return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4))
 }
 
@@ -147,7 +149,7 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
     const compDistRoot = path.resolve(capsuleDir, 'dist')
 
     const ignoreFunction = function (file:string, stats: Stats){
-        return !!~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/')
+        return !~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/') || !!~file.indexOf('.dependencies')
     }
 
     const fileList = await readdir(capsuleDir, ['*.ts', '*.tsx', ignoreFunction])
@@ -166,6 +168,19 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
 
     return list
 }
+
+
+// async function collectSourceFiles(context:CompilationContext): Promise<String[]> {
+//     const capsuleDir = context.directory
+
+//     const ignoreFunction = function (file:string, stats: Stats){
+//         return !!~file.indexOf('/node_modules/') || 
+//                !!~file.indexOf('/dist/')         || 
+//                !!~file.indexOf('.dependencies')  ||
+//                (!file.endsWith('ts') && !file.endsWith('tsx')) 
+//     }
+//     return readdir(capsuleDir, [ignoreFunction])
+// }
 
 function getTSConfigPath(context: CompilationContext) {
     return path.join(context.directory, 'tsconfig.json')
