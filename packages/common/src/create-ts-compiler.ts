@@ -1,3 +1,4 @@
+
 import path from 'path'
 import execa from 'execa'
 import readdir from 'recursive-readdir'
@@ -9,7 +10,7 @@ import 'typescript'
 
 const DEBUG_FLAG = 'DEBUG'
 const compiledFileTypes = ['ts', 'tsx'];
-import tsconfig from './tsconfig'
+import { getCapsuleName } from './utils';
 
 export interface CompilationContext {
     directory: string
@@ -21,41 +22,8 @@ export interface CompilationContext {
     res: GenericObject
 }
 
-export async function preCompile(context:CompilationContext, options:GenericObject) {
-    await createTSConfig(context, options)
-    await createStencilConfig(context, 
-`import { Config } from '@stencil/core';
-
-export const config: Config = {
-    namespace: '${'name'}',
-    outputTargets: [
-    {
-        type: 'dist',
-        esmLoaderPath: '../loader'
-    },
-    {
-        type: 'docs-readme'
-    },
-    {
-        type: 'www',
-        serviceWorker: null // disable service workers
-    }]
-};
-`)
-}
-
 export type RunCompiler = (ctx:CompilationContext) => Promise<void>
 export type PreCompile = (ctx:CompilationContext, options:GenericObject) => Promise<void>
-
-async function runCompiler(context:CompilationContext) {
-    const pathToStencil = require.resolve('@stencil/core/bin/stencil')
-    await runNodeScriptInDir(context.directory, pathToStencil, ['build'])
-}
-
-export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
-    const compilerOptions = tsconfig
-    return createCompiler(preCompile, runCompiler)(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
-}
 
 
 function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler){
@@ -77,7 +45,6 @@ function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler){
     
         return results
     }
-    
 }
 
 
@@ -124,7 +91,7 @@ function createContext(res: GenericObject, directory: string, distPath: string):
     }
 }
 
-async function runNodeScriptInDir(directory: string, scriptFile: string, args: string[]) {
+export async function runNodeScriptInDir(directory: string, scriptFile: string, args: string[]) {
     let result = null
     const cwd = process.cwd()
     try {
@@ -139,13 +106,13 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 }
 
 
-async function createTSConfig(context: CompilationContext, content: GenericObject) {
+export async function createTSConfig(context: CompilationContext, content: GenericObject) {
     const pathToConfig = getTSConfigPath(context)
     content.compilerOptions.outDir = 'dist'
     return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4))
 }
 
-async function createStencilConfig(context: CompilationContext, content: string) {
+export async function createStencilConfig(context: CompilationContext, content: string) {
     const pathToConfig =  path.join(context.directory, 'stencil.config.ts')
     return fs.writeFile(pathToConfig, content)
 }

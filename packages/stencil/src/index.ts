@@ -1,4 +1,4 @@
-import { TypescriptCompiler } from './typescript-compiler'
-export { TypescriptCompiler }
+import { StencilCompiler } from './stencil-compiler'
+export { StencilCompiler }
 
-export default (new TypescriptCompiler())
+export default (new StencilCompiler())

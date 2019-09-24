@@ -1,4 +1,4 @@
-import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "./compiler";
+import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "@bit/bit.envs.common.compiler-types";
 import { compile } from './compile'
 
 
