@@ -4,13 +4,13 @@ import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
 import { promises as fs, Stats } from 'fs'
-import { GenericObject, CompilerContext } from '@bit/bit.envs.common.compiler-types';
+import { GenericObject, CompilerContext } from './compiler-types';
 
 import 'typescript'
 
 const DEBUG_FLAG = 'DEBUG'
 const compiledFileTypes = ['ts', 'tsx'];
-import { getCapsuleName } from './utils';
+import { getCapsuleName } from './get-capsule-name';
 
 export interface CompilationContext {
     directory: string
@@ -26,7 +26,7 @@ export type RunCompiler = (ctx:CompilationContext) => Promise<void>
 export type PreCompile = (ctx:CompilationContext, options:GenericObject) => Promise<void>
 
 
-function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler){
+export function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler){
     return async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
         const { res, directory } = await isolate(api)
         const context = await createContext(res, directory, distPath)

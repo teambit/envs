@@ -40,7 +40,7 @@
   },
   "bit": {
     "env": {
-      "compiler": "bit.envs/compilers/typescript@3.0.28"
+      "compiler": "bit.envs/compilers/typescript@3.0.31"
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",
