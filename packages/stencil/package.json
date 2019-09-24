@@ -12,6 +12,6 @@
   "dependencies": {
     "@bit/bit.envs.common.compiler-types": "0.0.2",
     "@bit/bit.envs.common.create-ts-compiler": "0.0.2",
-    "@stencil/core": "^1.4.0"
+    "@stencil/core": "^1.5.0"
   }
 }

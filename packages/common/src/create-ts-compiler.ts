@@ -6,10 +6,7 @@ import Vinyl from 'vinyl'
 import { promises as fs, Stats } from 'fs'
 import { GenericObject, CompilerContext } from './compiler-types';
 
-import 'typescript'
-
 const DEBUG_FLAG = 'DEBUG'
-const compiledFileTypes = ['ts', 'tsx'];
 import { getCapsuleName } from './get-capsule-name';
 
 export interface CompilationContext {
@@ -46,7 +43,6 @@ export function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler){
         return results
     }
 }
-
 
 async function _compile(context: CompilationContext, cc:CompilerContext, runCompiler:RunCompiler) {
     await runCompiler(context)
@@ -110,11 +106,6 @@ export async function createTSConfig(context: CompilationContext, content: Gener
     const pathToConfig = getTSConfigPath(context)
     content.compilerOptions.outDir = 'dist'
     return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4))
-}
-
-export async function createStencilConfig(context: CompilationContext, content: string) {
-    const pathToConfig =  path.join(context.directory, 'stencil.config.ts')
-    return fs.writeFile(pathToConfig, content)
 }
 
 async function isolate(api: GenericObject) {
