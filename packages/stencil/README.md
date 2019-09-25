@@ -1,4 +1,4 @@
-Stencil Compiler
+Stencil Compiler (PRE-ALPHA, not really working)
 --------------
 
 Support for the stencil compiler using the cli. 
