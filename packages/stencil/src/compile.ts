@@ -4,7 +4,7 @@ import { GenericObject, CompilerContext } from '@bit/bit.envs.common.compiler-ty
 import {createTSConfig, runNodeScriptInDir, createCompiler, CompilationContext} from '@bit/bit.envs.common.create-ts-compiler'
 import tsconfig from './tsconfig'
 import '@stencil/core'
-import { promises as fs } from 'fs'
+import { promises as fs, Stats } from 'fs'
 
 
 const compiledFileTypes = ['ts', 'tsx'];
@@ -18,18 +18,28 @@ export const config: Config = {
     namespace: '${context.name}',
     outputTargets: [
     {
-        type: 'dist',
-    },
-    {
-        type: 'docs-readme'
-    },
-    {
-        type: 'www',
-        serviceWorker: null // disable service workers
+        type: 'dist'
     }]
 };
 `)
+    await adjustPackageJsonInFS(context)
+}   
+
+async function adjustPackageJsonInFS(context: CompilationContext) {
+    const pathToPkJson = path.resolve(context.directory, 'package.json')
+    const packageJsonRawContent = await fs.readFile(pathToPkJson, 'utf8')
+    const packageJson = JSON.parse(packageJsonRawContent)
+    adjustPackageJson(context, packageJson)
+    await fs.writeFile(pathToPkJson, JSON.stringify(packageJson,null, 4))
 }
+
+function adjustPackageJson(context: CompilationContext, content: GenericObject) {
+    content.main = `dist/index.js`
+    content.module = 'dist/index.mjs'
+    content.collection = 'dist/collection/collection-manifest.json'
+    content.types = `dist/types/${context.main.endsWith('.ts') ? context.main.split('.ts')[0]: context.main.split('.tsx')[0]}.d.ts`
+}
+
 
 async function runCompiler(context:CompilationContext) {
     const pathToStencil = require.resolve('@stencil/core/bin/stencil')
@@ -38,10 +48,17 @@ async function runCompiler(context:CompilationContext) {
 
 export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
     const compilerOptions = tsconfig
-    return createCompiler(preCompile, runCompiler)(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
+    return createCompiler(preCompile, runCompiler, ignoreFunction)(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
 }
 
 export async function createStencilConfig(context: CompilationContext, content: string) {
     const pathToConfig =  path.join(context.directory, 'stencil.config.ts')
     return fs.writeFile(pathToConfig, content)
+}
+
+const ignoreFunction = function (file:string, stats: Stats){
+    return !~file.indexOf('/node_modules/') || 
+          !!~file.indexOf('/dist/')         || 
+          !!~file.indexOf('.dependencies')  ||
+          !!~file.indexOf('www')            
 }

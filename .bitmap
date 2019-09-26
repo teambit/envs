@@ -13,7 +13,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/create-ts-compiler@0.0.3": {
+    "bit.envs/common/create-ts-compiler@0.0.4": {
         "files": [
             {
                 "relativePath": "packages/common/src/create-ts-compiler.ts",
@@ -37,7 +37,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/stencil@0.0.2": {
+    "bit.envs/compilers/stencil@0.0.4": {
         "files": [
             {
                 "relativePath": "packages/stencil/README.md",
@@ -138,5 +138,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.3.0"
+    "version": "14.4.0"
 }

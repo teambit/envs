@@ -21,19 +21,26 @@ export interface CompilationContext {
 
 export type RunCompiler = (ctx:CompilationContext) => Promise<void>
 export type PreCompile = (ctx:CompilationContext, options:GenericObject) => Promise<void>
+export type IgnoreFunction = (file: string, stats: Stats) => boolean 
+
+const defaultIgnoreFunction = function (file:string, stats: Stats){
+    return !~file.indexOf('/node_modules/') || 
+          !!~file.indexOf('/dist/')         || 
+          !!~file.indexOf('.dependencies') 
+}
 
 
-export function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler){
+export function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler, ignoreFunction = defaultIgnoreFunction){
     return async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
         const { res, directory } = await isolate(api)
         const context = await createContext(res, directory, distPath)
         let results = null
         preCompile(context, extra.compilerOptions)
         if (getNonCompiledFiles(cc.files).length === cc.files.length) {
-            const dists = await collectNonDistFiles(context)
+            const dists = await collectNonDistFiles(context, ignoreFunction)
             results = {dists}
         } else {
-            results = await _compile(context, cc, runCompiler)
+            results = await _compile(context, cc, runCompiler, ignoreFunction)
         }
     
         if (!process.env[DEBUG_FLAG]) {
@@ -44,10 +51,10 @@ export function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler){
     }
 }
 
-async function _compile(context: CompilationContext, cc:CompilerContext, runCompiler:RunCompiler) {
+async function _compile(context: CompilationContext, cc:CompilerContext, runCompiler:RunCompiler, ignoreFunction:IgnoreFunction) {
     await runCompiler(context)
     const dists = await collectDistFiles(context)
-    const nonCompiledDists = await collectNonDistFiles(context)
+    const nonCompiledDists = await collectNonDistFiles(context, ignoreFunction)
     const mainFile = findMainFile(context, dists)
     return { dists: dists.concat(nonCompiledDists), mainFile }
 }
@@ -136,14 +143,9 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
     })
 }
 
-async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]> {
+async function collectNonDistFiles(context:CompilationContext, ignoreFunction:IgnoreFunction): Promise<Vinyl[]> {
     const capsuleDir = context.directory
     const compDistRoot = path.resolve(capsuleDir, 'dist')
-
-    const ignoreFunction = function (file:string, stats: Stats){
-        return !~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/') || !!~file.indexOf('.dependencies')
-    }
-
     const fileList = await readdir(capsuleDir, ['*.ts', '*.tsx', ignoreFunction])
     const readFiles = await Promise.all(fileList.map(file => {
         return fs.readFile(file)
