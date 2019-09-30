@@ -1,0 +1,17 @@
+{
+  "name": "stencil",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@bit/bit.envs.common.compiler-types": "0.0.2",
+    "@bit/bit.envs.common.create-ts-compiler": "0.0.2",
+    "@stencil/core": "^1.5.0"
+  }
+}

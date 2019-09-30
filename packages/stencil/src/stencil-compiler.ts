@@ -1,9 +1,8 @@
-import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "./compiler";
+import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "@bit/bit.envs.common.compiler-types";
 import { compile } from './compile'
 
-const CONFIG_NAME = 'tsconfig'
 
-export class TypescriptCompiler implements Compiler {
+export class StencilCompiler implements Compiler {
     private _logger: Logger | undefined
 
     init(ctx: { api: InitAPI }) {

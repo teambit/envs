@@ -1,16 +1,13 @@
-import path, { relative } from 'path'
+
+import path from 'path'
 import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
-import { promises as fs, Stats, read } from 'fs'
-import { GenericObject, CompilerContext } from './compiler';
-
-import 'typescript'
+import { promises as fs, Stats } from 'fs'
+import { GenericObject, CompilerContext } from './compiler-types';
 
 const DEBUG_FLAG = 'DEBUG'
-const compiledFileTypes = ['ts', 'tsx'];
-import tsconfig from './tsconfig'
-import { getCapsuleName } from './utils';
+import { getCapsuleName } from './get-capsule-name';
 
 export interface CompilationContext {
     directory: string
@@ -22,34 +19,33 @@ export interface CompilationContext {
     res: GenericObject
 }
 
+export type RunCompiler = (ctx:CompilationContext) => Promise<void>
+export type PreCompile = (ctx:CompilationContext, options:GenericObject) => Promise<void>
 
-export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
-    const compilerOptions = tsconfig
-    return typescriptCompile(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
+
+export function createCompiler(preCompile:PreCompile, runCompiler:RunCompiler){
+    return async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
+        const { res, directory } = await isolate(api)
+        const context = await createContext(res, directory, distPath)
+        let results = null
+        preCompile(context, extra.compilerOptions)
+        if (getNonCompiledFiles(cc.files).length === cc.files.length) {
+            const dists = await collectNonDistFiles(context)
+            results = {dists}
+        } else {
+            results = await _compile(context, cc, runCompiler)
+        }
+    
+        if (!process.env[DEBUG_FLAG]) {
+            await context.capsule.destroy()
+        }
+    
+        return results
+    }
 }
 
-const typescriptCompile = async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
-    const { res, directory } = await isolate(api)
-    const context = await createContext(res, directory, distPath)
-    let results = null
-    await createTSConfig(context, extra.compilerOptions)
-    if (getNonCompiledFiles(cc.files).length === cc.files.length) {
-        const dists = await collectNonDistFiles(context)
-        results = {dists}
-    } else {
-        results = await _compile(context, cc)
-    }
-
-    if (!process.env[DEBUG_FLAG]) {
-        await context.capsule.destroy()
-    }
-
-    return results
-}
-
-async function _compile(context: CompilationContext, cc:CompilerContext) {
-    const pathToTSC = require.resolve('typescript/bin/tsc')
-    await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
+async function _compile(context: CompilationContext, cc:CompilerContext, runCompiler:RunCompiler) {
+    await runCompiler(context)
     const dists = await collectDistFiles(context)
     const nonCompiledDists = await collectNonDistFiles(context)
     const mainFile = findMainFile(context, dists)
@@ -70,7 +66,6 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     const distMainFileExt = '.js'
     const res = dists.find((val)=> {
         if (!val.path.endsWith(distMainFileExt)) {
-            // makes sure to not pick up files such as '.js.map'
             return false;
         }
         const nameToCheck = getNameOfFile(val.path, distMainFileExt).split(pathPrefix)[1]
@@ -92,7 +87,7 @@ function createContext(res: GenericObject, directory: string, distPath: string):
     }
 }
 
-async function runNodeScriptInDir(directory: string, scriptFile: string, args: string[]) {
+export async function runNodeScriptInDir(directory: string, scriptFile: string, args: string[]) {
     let result = null
     const cwd = process.cwd()
     try {
@@ -107,15 +102,12 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 }
 
 
-async function createTSConfig(context: CompilationContext, content: GenericObject) {
+export async function createTSConfig(context: CompilationContext, content: GenericObject) {
     const pathToConfig = getTSConfigPath(context)
     content.compilerOptions.outDir = 'dist'
-    // const fileList = await collectSourceFiles(context)
-    // content.files = fileList
     return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4))
 }
 
-//@TODO refactor out of here and share with angular compiler.
 async function isolate(api: GenericObject) {
     const targetDir = getCapsuleName();
     const componentName = api.componentObject.name
@@ -169,18 +161,6 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
     return list
 }
 
-
-// async function collectSourceFiles(context:CompilationContext): Promise<String[]> {
-//     const capsuleDir = context.directory
-
-//     const ignoreFunction = function (file:string, stats: Stats){
-//         return !!~file.indexOf('/node_modules/') || 
-//                !!~file.indexOf('/dist/')         || 
-//                !!~file.indexOf('.dependencies')  ||
-//                (!file.endsWith('ts') && !file.endsWith('tsx')) 
-//     }
-//     return readdir(capsuleDir, [ignoreFunction])
-// }
 
 function getTSConfigPath(context: CompilationContext) {
     return path.join(context.directory, 'tsconfig.json')

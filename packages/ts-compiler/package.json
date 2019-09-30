@@ -10,15 +10,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/recursive-readdir": "^2.2.0",
-    "chai": "^4.2.0",
     "execa": "^2.0.4",
+    "mkdirp": "^0.5.1",
     "recursive-readdir": "^2.2.2",
     "typescript": "^3.5.3",
     "vinyl": "^2.2.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.1",
+    "@types/mkdirp": "^0.5.2",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
-    "@types/vinyl": "^2.0.3"
+    "@types/recursive-readdir": "^2.2.0",
+    "@types/vinyl": "^2.0.3",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
   }
 }
