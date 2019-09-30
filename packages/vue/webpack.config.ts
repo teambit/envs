@@ -15,6 +15,8 @@ import cssLoader from 'css-loader';
 import sassLoader from 'sass-loader';
 import lessLoader from 'less-loader';
 import babelLoader from 'babel-loader';
+import tsLoader from 'ts-loader';
+import ts from 'typescript';
 import presetEnv from '@babel/preset-env';
 import vue from 'vue';
 import Vinyl from 'vinyl';
@@ -56,6 +58,14 @@ const getConfig = (files: Vinyl[], distPath: string) => {
             babelrc: false,
             presets: [presetEnv]
           }
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       // this will apply to both plain `.css` files
       // AND `<style>` blocks in `.vue` files

@@ -4,9 +4,15 @@ const getFilesList = (files: Vinyl[]) => {
     const list: { [key: string]: any } = {};
   
     files.forEach(file => {
-        // TODO: this will cause files to override each other 
-        // whenever there are two files with different extensions and identical name
-        list[file.stem] = [file.path]
+      if (list[file.stem] && list[file.stem][0].endsWith('.js')) {
+        // no-op
+        // prefer js files over any other (eg .vue) files
+        //
+        // TODO: this should be done by pointing to the component main file
+        // rather than doing this hack
+      } else {
+        list[file.stem] = [file.path];
+      }
     });
 
     return list;
