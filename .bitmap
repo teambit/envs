@@ -51,7 +51,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/create-ts-compiler@0.0.3": {
+    "bit.envs/common/create-ts-compiler@0.0.4": {
         "files": [
             {
                 "relativePath": "packages/common/src/create-ts-compiler.ts",
@@ -75,7 +75,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/stencil@0.0.2": {
+    "bit.envs/compilers/stencil@0.0.4": {
         "files": [
             {
                 "relativePath": "packages/stencil/README.md",
@@ -113,7 +113,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.0.32": {
+    "bit.envs/compilers/typescript@3.0.34": {
         "files": [
             {
                 "name": "README.md",

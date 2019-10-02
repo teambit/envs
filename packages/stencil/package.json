@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@bit/bit.envs.common.compiler-types": "0.0.2",
-    "@bit/bit.envs.common.create-ts-compiler": "0.0.2",
+    "@bit/bit.envs.common.create-ts-compiler": "0.0.4",
     "@stencil/core": "^1.5.0"
   }
 }
