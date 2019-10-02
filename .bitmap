@@ -113,7 +113,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.0.32": {
+    "bit.envs/compilers/typescript@3.0.34": {
         "files": [
             {
                 "name": "README.md",

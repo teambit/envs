@@ -32,6 +32,7 @@ const typescriptCompile = async (cc:CompilerContext, distPath: string, api: Gene
     const { res, directory } = await isolate(api)
     const context = await createContext(res, directory, distPath)
     let results = null
+    debugger
     await createTSConfig(context, extra.compilerOptions)
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
         const dists = await collectNonDistFiles(context)
@@ -149,7 +150,7 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
     const compDistRoot = path.resolve(capsuleDir, 'dist')
 
     const ignoreFunction = function (file:string, stats: Stats){
-        return !~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/') || !!~file.indexOf('.dependencies')
+        return !!~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/') || !!~file.indexOf('.dependencies')
     }
 
     const fileList = await readdir(capsuleDir, ['*.ts', '*.tsx', ignoreFunction])
