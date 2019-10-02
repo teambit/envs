@@ -32,7 +32,6 @@ const typescriptCompile = async (cc:CompilerContext, distPath: string, api: Gene
     const { res, directory } = await isolate(api)
     const context = await createContext(res, directory, distPath)
     let results = null
-    debugger
     await createTSConfig(context, extra.compilerOptions)
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
         const dists = await collectNonDistFiles(context)
