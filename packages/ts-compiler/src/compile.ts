@@ -29,10 +29,9 @@ export const compile = async ( cc:CompilerContext, distPath: string, api: Generi
 }
 
 const typescriptCompile = async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
-    const { res, directory } = await isolate(api)
+    const { res, directory } = await isolate(api, cc)
     const context = await createContext(res, directory, distPath)
     let results = null
-    debugger
     await createTSConfig(context, extra.compilerOptions)
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
         const dists = await collectNonDistFiles(context)
@@ -41,16 +40,16 @@ const typescriptCompile = async (cc:CompilerContext, distPath: string, api: Gene
         results = await _compile(context, cc)
     }
 
-    if (!process.env[DEBUG_FLAG]) {
-        await context.capsule.destroy()
-    }
+//    if (!process.env[DEBUG_FLAG]) {
+//        await context.capsule.destroy()
+//    }
 
     return results
 }
 
 async function _compile(context: CompilationContext, cc:CompilerContext) {
     const pathToTSC = require.resolve('typescript/bin/tsc')
-    await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
+    await context.capsule.execNode(pathToTSC, ['-d'])
     const dists = await collectDistFiles(context)
     const nonCompiledDists = await collectNonDistFiles(context)
     const mainFile = findMainFile(context, dists)
@@ -117,8 +116,8 @@ async function createTSConfig(context: CompilationContext, content: GenericObjec
 }
 
 //@TODO refactor out of here and share with angular compiler.
-async function isolate(api: GenericObject) {
-    const targetDir = getCapsuleName();
+async function isolate(api: GenericObject, ctx: CompilerContext) {
+    const targetDir = getCapsuleName(ctx);
     const componentName = api.componentObject.name
     print(`\n building ${componentName} on directory ${targetDir}`)
 

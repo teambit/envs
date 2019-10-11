@@ -14,6 +14,7 @@ export default {
       "declaration": false,
       "experimentalDecorators": true,
       "jsx": "react",
-      "rootDir": './'
+      "rootDir": './',
+      "incremental": true
   }
 }

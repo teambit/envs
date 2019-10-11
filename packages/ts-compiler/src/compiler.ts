@@ -21,7 +21,9 @@ export interface CompilerContext {
   files: Array<Vinyl>
   rawConfig: GenericObject
   dynamicConfig?: GenericObject
-  api?: any
+  api?: any,
+  rootDistDir: string,
+  componentObject: GenericObject
 }
 export interface ActionReturnType { dists: Vinyl[], mainFile?: string }
 

@@ -4,19 +4,21 @@ import mkdirp, { Options } from 'mkdirp'
 import path from 'path'
 
 export async function createWorkspace(content: WorkspaceContent, options:WorkspaceOptions): Promise<string> {
-    const targetDir = getCapsuleName('space')
-    enrichContentWithDefaults(content, options)
-
-    await mkdirpPromise(targetDir, {})
-    await Object.keys(content).map( async key => {
-        const containingFolder = path.dirname(key)
-        await mkdirpPromise(containingFolder, {})
-        const filePath = path.resolve(targetDir, key)
-        await fs.writeFile(filePath, content[key])
-    })
-
-    // insert actions on workspace
-    return targetDir
+  // TODO: fix this by providing getCapsuleName with a CompilerContext
+//    const targetDir = getCapsuleName('space')
+//    enrichContentWithDefaults(content, options)
+//
+//    await mkdirpPromise(targetDir, {})
+//    await Object.keys(content).map( async key => {
+//        const containingFolder = path.dirname(key)
+//        await mkdirpPromise(containingFolder, {})
+//        const filePath = path.resolve(targetDir, key)
+//        await fs.writeFile(filePath, content[key])
+//    })
+//
+//    // insert actions on workspace
+//    return targetDir
+  return Promise.resolve('foo')
 }
 export interface WorkspaceOptions {
     env: string, 
