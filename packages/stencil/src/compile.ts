@@ -46,7 +46,7 @@ async function runCompiler(context:CompilationContext) {
     await runNodeScriptInDir(context.directory, pathToStencil, ['build'])
 }
 
-export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
+export const compile = async (cc:CompilerContext, distPath: string, api: GenericObject) => {
     const compilerOptions = tsconfig
     return createCompiler(preCompile, runCompiler, ignoreFunction)(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
 }
