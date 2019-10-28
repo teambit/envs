@@ -116,11 +116,6 @@
     "bit.envs/compilers/typescript@3.0.34": {
         "files": [
             {
-                "name": "README.md",
-                "relativePath": "packages/ts-compiler/README.md",
-                "test": false
-            },
-            {
                 "name": "package.json",
                 "relativePath": "packages/ts-compiler/package.json",
                 "test": false
@@ -169,6 +164,11 @@
                 "name": "test-compile.spec.ts",
                 "relativePath": "packages/ts-compiler/test/test-compile.spec.ts",
                 "test": true
+            },
+            {
+                "relativePath": "packages/ts-compiler/tests.spec.js",
+                "test": false,
+                "name": "tests.spec.js"
             }
         ],
         "mainFile": "packages/ts-compiler/src/index.ts",

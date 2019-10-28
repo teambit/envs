@@ -4,7 +4,7 @@
   "description": "Typescript compiler integration with bit",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require ts-node/register/transpile-only  --require source-map-support/register test/*.spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,8 @@
     "execa": "^2.0.4",
     "mkdirp": "^0.5.1",
     "recursive-readdir": "^2.2.2",
+    "source-map-support": "^0.5.13",
+    "ts-node": "^8.4.1",
     "typescript": "^3.5.3",
     "vinyl": "^2.2.0"
   },

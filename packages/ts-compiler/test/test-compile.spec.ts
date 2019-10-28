@@ -1,19 +1,26 @@
-import {expect} from 'chai'
 import { createWorkspace } from './create-workspace';
 
 describe('typescript', () => {
-    it('should support compile', function() {
-        const directory = createWorkspace({
-            'a.ts':`
-                export print(msg:string) {
-                    console.log(msg)
+    it('should support compile', async function() {
+        const component = {
+            'src/comp.tsx': `import React from 'react'
+export class HelloWorld {
+    render() {
+        return <div>Hello-World</div>
+    }
+}`            
+        }
+        const directory =  await createWorkspace(component, {
+            env: '',
+            name: 'typescript',
+            packageJSON: {
+                dependencies: {
+                    "@types/react": "^16.9.11",
+                    "react": "^16.11.0"
                 }
-            `
-        }, {
-            env:''
+            }
         })
-
-        console.log('directory', {})
+        console.log('directory is:', directory)
 
     })
 })
