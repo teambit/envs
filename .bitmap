@@ -42,9 +42,9 @@
     "bit.envs/common/compiler-types@0.0.2": {
         "files": [
             {
+                "name": "compiler-types.ts",
                 "relativePath": "packages/common/src/compiler-types.ts",
-                "test": false,
-                "name": "compiler-types.ts"
+                "test": false
             }
         ],
         "mainFile": "packages/common/src/compiler-types.ts",
@@ -54,9 +54,9 @@
     "bit.envs/common/create-ts-compiler@0.0.4": {
         "files": [
             {
+                "name": "create-ts-compiler.ts",
                 "relativePath": "packages/common/src/create-ts-compiler.ts",
-                "test": false,
-                "name": "create-ts-compiler.ts"
+                "test": false
             }
         ],
         "mainFile": "packages/common/src/create-ts-compiler.ts",
@@ -66,9 +66,9 @@
     "bit.envs/common/get-capsule-name@0.0.2": {
         "files": [
             {
+                "name": "get-capsule-name.ts",
                 "relativePath": "packages/common/src/get-capsule-name.ts",
-                "test": false,
-                "name": "get-capsule-name.ts"
+                "test": false
             }
         ],
         "mainFile": "packages/common/src/get-capsule-name.ts",
@@ -78,34 +78,34 @@
     "bit.envs/compilers/stencil@0.0.4": {
         "files": [
             {
+                "name": "README.md",
                 "relativePath": "packages/stencil/README.md",
-                "test": false,
-                "name": "README.md"
+                "test": false
             },
             {
+                "name": "package.json",
                 "relativePath": "packages/stencil/package.json",
-                "test": false,
-                "name": "package.json"
+                "test": false
             },
             {
+                "name": "compile.ts",
                 "relativePath": "packages/stencil/src/compile.ts",
-                "test": false,
-                "name": "compile.ts"
+                "test": false
             },
             {
+                "name": "index.ts",
                 "relativePath": "packages/stencil/src/index.ts",
-                "test": false,
-                "name": "index.ts"
+                "test": false
             },
             {
+                "name": "stencil-compiler.ts",
                 "relativePath": "packages/stencil/src/stencil-compiler.ts",
-                "test": false,
-                "name": "stencil-compiler.ts"
+                "test": false
             },
             {
+                "name": "tsconfig.ts",
                 "relativePath": "packages/stencil/src/tsconfig.ts",
-                "test": false,
-                "name": "tsconfig.ts"
+                "test": false
             }
         ],
         "mainFile": "packages/stencil/src/index.ts",
@@ -176,5 +176,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.4.0"
+    "version": "14.4.3"
 }
