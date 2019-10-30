@@ -7,6 +7,33 @@ export async function createWorkspace(content: WorkspaceContent, options:Workspa
     const targetDir = getCapsuleName('space')
     enrichContentWithDefaults(content, options)
 
+    await createFS(targetDir, content)
+    await runActions(targetDir, options.actions || [])
+
+    return targetDir
+}
+
+export type Action = {
+    command:string, 
+    args:string[]
+}
+export interface WorkspaceOptions {
+    env: string, 
+    name: string,
+    packageJSON?:{[k:string]:any},
+    actions?: Action[]
+}
+export interface WorkspaceContent {
+    [k: string]: string 
+}
+
+function mkdirpPromise(dir: string, opts: Options) {
+    return new Promise((resolve, reject) => {
+        mkdirp(dir, opts, (err, made) => err === null ? resolve(made) : reject(err))
+    })
+}
+
+async function createFS(targetDir:string, content: WorkspaceContent){
     await mkdirpPromise(targetDir, {})
     await Object.keys(content).map( async key => {
         const realPath = path.join(targetDir, key)
@@ -14,23 +41,6 @@ export async function createWorkspace(content: WorkspaceContent, options:Workspa
         await mkdirpPromise(containingFolder, {})
         const filePath = path.resolve(targetDir, key)
         await fs.writeFile(filePath, content[key])
-    })
-
-    // insert actions on workspace
-    return targetDir
-}
-export interface WorkspaceOptions {
-    env: string, 
-    name: string,
-    packageJSON?:{[k:string]:any}
-}
-export interface WorkspaceContent {
-    [k: string]: string 
-}
-
-export function mkdirpPromise(dir: string, opts: Options) {
-    return new Promise((resolve, reject) => {
-        mkdirp(dir, opts, (err, made) => err === null ? resolve(made) : reject(err))
     })
 }
 
@@ -59,4 +69,16 @@ function enrichContentWithDefaults(content: WorkspaceContent, options: Workspace
     
     ${JSON.stringify({"version": "14.3.0"}, null, 4)}`
     content['.gitignore'] =  content['.gitignore'] || `dist\nnode_modules\n`
+}
+
+async function runActions(directory:string, actions:Action[]) {
+    const cwd = process.cwd()
+    process.chdir(directory)
+    const allActions = await Promise.all(actions.map((action)=> {
+        return runAction(action)
+    }))
+    return allActions
+}
+function runAction(action:Action) {
+    
 }

@@ -14,7 +14,14 @@ export class TypescriptCompiler implements Compiler {
     }
 
     getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-        return {}
+        return {
+            peerDependencies: {
+                "react": "^16.11.0"
+            },
+            devDependencies: {
+                "@types/react": "^16.9.11",
+            }
+        }
     }
 
     async action(ctx: CompilerContext):Promise<ActionReturnType> {

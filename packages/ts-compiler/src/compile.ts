@@ -23,7 +23,7 @@ export interface CompilationContext {
 }
 
 
-export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
+export const compile = async (cc:CompilerContext, distPath: string, api: GenericObject) => {
     const compilerOptions = tsconfig
     return typescriptCompile(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
 }
