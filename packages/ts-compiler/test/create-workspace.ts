@@ -54,7 +54,7 @@ function enrichContentWithDefaults(content: WorkspaceContent, options: Workspace
               compiler: {
                   meta: {
                       options: {
-                          file: options.env
+                          file: path.resolve(options.env)
                       }
                   }
               }
@@ -77,8 +77,10 @@ async function runActions(directory:string, actions:Action[]) {
     const allActions = await Promise.all(actions.map((action)=> {
         return runAction(action)
     }))
+    process.chdir(cwd)
     return allActions
 }
+
 function runAction(action:Action) {
     
 }
