@@ -1,10 +1,10 @@
-Envs - Environments common for the bit community
-------------------------------------------------
+Envs - Development environments for bit components
 ------------------------------------------------
 
 A collection of bit extensions required for the development life cycle of a bit component.
 
-Supported Compilers: 
+Current Extensions 
+------------------
 
 1. **Typescript** - [packages/ts-compiler](https://github.com/teambit/envs/tree/master/packages/ts-compiler) 
 2. **Common** - [packages/common](https://github.com/teambit/envs/tree/master/packages/common) 

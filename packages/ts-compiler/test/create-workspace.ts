@@ -82,5 +82,5 @@ async function runActions(directory:string, actions:Action[]) {
 }
 
 function runAction(action:Action) {
-    
+    console.log(`command: ${action.command} ${action.args.join('')}`)
 }
