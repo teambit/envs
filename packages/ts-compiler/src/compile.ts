@@ -1,4 +1,4 @@
-import path, { relative } from 'path'
+import path, { sep } from 'path'
 import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
@@ -19,18 +19,20 @@ export interface CompilationContext {
     dist: string,
     dependencies: GenericObject,
     capsule: GenericObject,
-    res: GenericObject
+    res: GenericObject,
+    srcTestFiles: Vinyl[]
 }
 
 
-export const compile = async (cc:CompilerContext, distPath: string, api: GenericObject) => {
+export const compile = async ( cc:CompilerContext, distPath: string, api: GenericObject) => {
     const compilerOptions = tsconfig
     return typescriptCompile(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
 }
 
 const typescriptCompile = async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
     const { res, directory } = await isolate(api)
-    const context = await createContext(res, directory, distPath)
+    const srcTestFiles = getSrcTestFiles(cc.files);
+    const context = await createContext(res, directory, distPath, srcTestFiles)
     let results = null
     await createTSConfig(context, extra.compilerOptions)
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
@@ -62,6 +64,12 @@ function getNonCompiledFiles(files:Vinyl[]) {
     })
 }
 
+function getSrcTestFiles(files: Vinyl[]) {
+    return files.filter((f) => {
+        return f.test === true;
+    })
+}
+
 export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     const compDistRoot = path.resolve(context.directory, 'dist/')
     const getNameOfFile = (val:string, split:string) => val.split(split)[0]
@@ -79,7 +87,7 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     return  (res || {relative:''}).relative
 }
 
-function createContext(res: GenericObject, directory: string, distPath: string): CompilationContext {
+function createContext(res: GenericObject, directory: string, distPath: string, srcTestFiles: Vinyl[]): CompilationContext {
     const componentObject = res.componentWithDependencies.component.toObject()
     return {
         main: componentObject.mainFile,
@@ -88,7 +96,8 @@ function createContext(res: GenericObject, directory: string, distPath: string):
         dependencies: getCustomDependencies(directory),
         capsule: res.capsule,
         directory,
-        res
+        res,
+        srcTestFiles
     }
 }
 
@@ -134,12 +143,22 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
         return fs.readFile(file)
     }))
     return files.map((file, index) => {
-
-        const pathToFile = path.join(compDistRoot, file.split(path.join(capsuleDir, 'dist'))[1])
+        // const relativePath = file.split(path.join(capsuleDir, 'dist'))[1]
+        const relativePath = path.relative(path.join(capsuleDir, 'dist'), file)
+        const pathToFile = path.join(compDistRoot, relativePath)
+        let test = false;
+        // Only check js files not d.ts or .map files
+        if (getExt(relativePath) === 'js') {
+            // Don't compare extension name, it will surly be different.
+            // the source is ts / tsx and the dist is js.
+            test = isTestFile(context.srcTestFiles, relativePath, false);
+        }
+        
         return new Vinyl({
             path: pathToFile,
             contents: readFiles[index],
-            base: compDistRoot
+            base: compDistRoot,
+            test
         })
     })
 }
@@ -149,7 +168,7 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
     const compDistRoot = path.resolve(capsuleDir, 'dist')
 
     const ignoreFunction = function (file:string, stats: Stats){
-        return !!~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/') || !!~file.indexOf('.dependencies')
+        return file.includes(`${sep}node_modules${sep}`) || file.includes(`${sep}dist${sep}`) || file.includes('.dependencies');
     }
 
     const fileList = await readdir(capsuleDir, ['*.ts', '*.tsx', ignoreFunction])
@@ -157,12 +176,16 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
         return fs.readFile(file)
     }))
     const list = fileList.map((file, index) => {
-        const pathToFile = path.join(compDistRoot, file.split(capsuleDir)[1])
-
+        // const relativePathToFile = file.split(capsuleDir)[1];
+        const relativePath = path.relative(capsuleDir, file)
+        const pathToFile = path.join(compDistRoot, relativePath)
+        console.log('relativePath nondist', relativePath)
+        const test = isTestFile(context.srcTestFiles, relativePath);
         return new Vinyl({
             path: pathToFile,
             contents: readFiles[index],
-            base: compDistRoot
+            base: compDistRoot,
+            test
         })
     })
 
@@ -174,10 +197,10 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
 //     const capsuleDir = context.directory
 
 //     const ignoreFunction = function (file:string, stats: Stats){
-//         return !!~file.indexOf('/node_modules/') || 
-//                !!~file.indexOf('/dist/')         || 
+//         return !!~file.indexOf('/node_modules/') ||
+//                !!~file.indexOf('/dist/')         ||
 //                !!~file.indexOf('.dependencies')  ||
-//                (!file.endsWith('ts') && !file.endsWith('tsx')) 
+//                (!file.endsWith('ts') && !file.endsWith('tsx'))
 //     }
 //     return readdir(capsuleDir, [ignoreFunction])
 // }
@@ -192,4 +215,27 @@ function getCustomDependencies(dir: string) {
 
 function print(msg: string) {
     process.env[DEBUG_FLAG] && console.log(msg)
+}
+
+function getExt(filename: string): string {
+    return filename.substring(filename.lastIndexOf('.') + 1, filename.length); // readonly 1 to remove the '.'
+}
+
+function getWithoutExt(filename: string): string {
+    const ext = getExt(filename);
+    // There is no extension just return the file name
+    if (ext === filename) {
+        return filename;
+    }
+    return filename.substring(0, filename.length - ext.length - 1); // -1 to remove the '.'
+}
+
+function isTestFile(srcTestFiles: Vinyl[], fileToCheck: string, compareWithExtension: boolean = true) {
+    const found = srcTestFiles.find((testFile) => {
+        if (compareWithExtension) {
+            return testFile.relative === fileToCheck;
+        }
+        return getWithoutExt(testFile.relative) === getWithoutExt(fileToCheck);
+    })
+    return !!found;
 }
