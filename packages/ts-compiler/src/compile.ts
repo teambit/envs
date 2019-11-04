@@ -143,7 +143,6 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
         return fs.readFile(file)
     }))
     return files.map((file, index) => {
-        // const relativePath = file.split(path.join(capsuleDir, 'dist'))[1]
         const relativePath = path.relative(path.join(capsuleDir, 'dist'), file)
         const pathToFile = path.join(compDistRoot, relativePath)
         let test = false;
@@ -176,10 +175,8 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
         return fs.readFile(file)
     }))
     const list = fileList.map((file, index) => {
-        // const relativePathToFile = file.split(capsuleDir)[1];
         const relativePath = path.relative(capsuleDir, file)
         const pathToFile = path.join(compDistRoot, relativePath)
-        console.log('relativePath nondist', relativePath)
         const test = isTestFile(context.srcTestFiles, relativePath);
         return new Vinyl({
             path: pathToFile,
