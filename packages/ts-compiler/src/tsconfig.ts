@@ -14,6 +14,10 @@ export default {
       "declaration": false,
       "experimentalDecorators": true,
       "jsx": "react",
-      "rootDir": './'
+      "rootDir": './',
+      "typeRoots": [
+        "./node_modules/@types",
+        "./node_modules/@bit/bit.envs.types"
+      ]
   }
 }

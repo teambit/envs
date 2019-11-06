@@ -116,6 +116,16 @@
     "bit.envs/compilers/typescript@3.0.34": {
         "files": [
             {
+                "relativePath": "packages/ts-compiler/Dockerfile",
+                "test": false,
+                "name": "Dockerfile"
+            },
+            {
+                "relativePath": "packages/ts-compiler/README.md",
+                "test": false,
+                "name": "README.md"
+            },
+            {
                 "name": "package.json",
                 "relativePath": "packages/ts-compiler/package.json",
                 "test": false
@@ -166,9 +176,9 @@
                 "test": true
             },
             {
-                "relativePath": "packages/ts-compiler/tests.spec.js",
+                "relativePath": "packages/ts-compiler/tsconfig.json",
                 "test": false,
-                "name": "tests.spec.js"
+                "name": "tsconfig.json"
             }
         ],
         "mainFile": "packages/ts-compiler/src/index.ts",

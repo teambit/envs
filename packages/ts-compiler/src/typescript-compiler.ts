@@ -15,11 +15,8 @@ export class TypescriptCompiler implements Compiler {
 
     getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
         return {
-            peerDependencies: {
-                "react": "^16.11.0"
-            },
             devDependencies: {
-                "@types/react": "^16.9.11",
+                "@bit/bit.envs.types": ""
             }
         }
     }
