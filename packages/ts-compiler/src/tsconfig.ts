@@ -23,7 +23,7 @@ export function getTSConfig() {
       // should not clutter dist folder
       jsx: 'react',
       rootDir: './',
-      // the root of the capsule is CWD when transpiling and should be rootDir.
+      // the root of the capsule is CWD when transpiling and should be rootDir to adjust library sturcture.
       removeComments: !isDev,
       typeRoots: [
         "./node_modules/@types", // be able to consume types.
