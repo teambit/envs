@@ -19,7 +19,7 @@ Whats inside?
 2. **Isolation**  - The component is isolated from the workspace for compilation. This is done because while compiling typescript code, the compiler traverses it's import statements in order to resolve types and transpile modules. By isolating the component we make sure that it will only compile the source code of a single component (assuming dependencies are already compiled). We also make sure we have all correct dependencies and that it doesn't depend on anything implicit. Read more about isolation [here](https://docs.bit.dev/docs/ext-concepts.html#what-is-an-isolated-component-environment). 
 
 3. **Copy Policy** - For re-useability purposes non typescript files of the component would be copied to the dist folder. One of the main reasons this is done is to support different style files that should be compiled while consuming the component. This is also applied to all other static assets (e.g. .gif file). By default the compiler ignores ```package.json``` and ```package-lock.json``` files. You may customize the ignorePatterns and feature as following. 
-   ```json
+   ```js
    {
         "bit": {
             "env": {
@@ -39,7 +39,7 @@ Whats inside?
    ```
       
 4. **Configuration** - Currently configuration is predefined in a preset. In order to change configuration you will need override it using the bit entry in the package.json. You may override compilerOptions and other configuration using the following config. 
-```json
+```js
    {
        "bit": {
             "env": {
