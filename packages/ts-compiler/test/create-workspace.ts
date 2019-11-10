@@ -23,22 +23,23 @@ export interface WorkspaceOptions {
     packageJSON?:{[k:string]:any},
     actions?: Action[]
 }
+
 export interface WorkspaceContent {
     [k: string]: string 
 }
 
-function mkdirpPromise(dir: string, opts: Options) {
+function mkdirPromise(dir: string, opts: Options) {
     return new Promise((resolve, reject) => {
         mkdirp(dir, opts, (err, made) => err === null ? resolve(made) : reject(err))
     })
 }
 
 async function createFS(targetDir:string, content: WorkspaceContent){
-    await mkdirpPromise(targetDir, {})
-    await Object.keys(content).map( async key => {
+    await mkdirPromise(targetDir, {})
+    await Object.keys(content).map(async key => {
         const realPath = path.join(targetDir, key)
         const containingFolder = path.dirname(realPath)
-        await mkdirpPromise(containingFolder, {})
+        await mkdirPromise(containingFolder, {})
         const filePath = path.resolve(targetDir, key)
         await fs.writeFile(filePath, content[key])
     })

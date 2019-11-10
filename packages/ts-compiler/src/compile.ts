@@ -9,7 +9,7 @@ import 'typescript'
 
 const DEBUG_FLAG = 'DEBUG'
 const compiledFileTypes = ['ts', 'tsx'];
-import tsconfig from './tsconfig'
+import {getTSConfig} from './tsconfig'
 import { getCapsuleName } from './utils';
 
 export interface CompilationContext {
@@ -22,9 +22,8 @@ export interface CompilationContext {
     res: GenericObject
 }
 
-
 export const compile = async (cc:CompilerContext, distPath: string, api: GenericObject) => {
-    const compilerOptions = tsconfig
+    const compilerOptions = getTSConfig()
     return typescriptCompile(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
 }
 
@@ -168,19 +167,6 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
 
     return list
 }
-
-
-// async function collectSourceFiles(context:CompilationContext): Promise<String[]> {
-//     const capsuleDir = context.directory
-
-//     const ignoreFunction = function (file:string, stats: Stats){
-//         return !!~file.indexOf('/node_modules/') || 
-//                !!~file.indexOf('/dist/')         || 
-//                !!~file.indexOf('.dependencies')  ||
-//                (!file.endsWith('ts') && !file.endsWith('tsx')) 
-//     }
-//     return readdir(capsuleDir, [ignoreFunction])
-// }
 
 function getTSConfigPath(context: CompilationContext) {
     return path.join(context.directory, 'tsconfig.json')

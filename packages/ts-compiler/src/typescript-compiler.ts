@@ -16,7 +16,7 @@ export class TypescriptCompiler implements Compiler {
     getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
         return {
             devDependencies: {
-                "@bit/bit.envs.types": ""
+                "@bit/qballer.react-scripts.types-env": "^0.0.1"
             }
         }
     }

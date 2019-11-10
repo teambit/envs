@@ -51,6 +51,11 @@
           "@types/mocha": "^5.2.7"
         }
       },
+      "types": {
+        "env": {
+          "compiler": "-"
+        }
+      },
       "compilers/typescript": {
         "dependencies": {
           "@types/recursive-readdir": "+",
