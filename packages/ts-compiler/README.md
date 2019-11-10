@@ -58,6 +58,6 @@ Whats inside?
        
    }
 ```
-The configuration detailed in the tsconfig.ts file. The configs are chosen because we believe they are best for transpiling reusable components. Please open an issue if you feel it should be different or there is a bug in implementation. (TBD - preset)
+The configuration detailed in the [tsconfig.ts](https://github.com/teambit/envs/blob/master/packages/ts-compiler/src/tsconfig.ts) file. The configs are chosen because we believe they are best for transpiling reusable components. Please open an issue if you feel it should be different or there is a bug in implementation. (TBD - preset)
 
  5. **Styling support** - Import statements of style files must include the type definition of that file, else the type checker fails. The compiler adds the ``` @bit/qballer.react-scripts.types-env``` component to the devDependencies and the typesRoots compiler option. This can be changed via overrides if needed. Remove the devDependency using the "-" override like described in the [guide](https://docs.bit.dev/docs/overrides#components-dependencies). You may also remove the type lookup from typesRoots as in the example of section (4). 
