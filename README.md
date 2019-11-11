@@ -51,4 +51,4 @@ When creating a new environment please provide the following:
 
 1. A proposal document which describes the configuration options, tradeoffs and practices that are or should be implemented.
 2. A PR with tests which covers the main points from the doc. 
-
+3. Provide 3 projects the environment is applicable and tested on.
