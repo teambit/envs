@@ -6,7 +6,7 @@ Typescript support for bit components.
 How to use?
 -----------
 
-In order to run this extension your must have a bit workspace with at least one component defined, for more information on how to build please read the [docs](https://docs.bit.dev/docs/building-components) section on the bit website. TL;DR version: 
+In order to run this extension your must have a [bit workspace](https://docs.bit.dev/docs/concepts#bit-workspace) with at least one component defined, for more information on how to build please read the [docs](https://docs.bit.dev/docs/building-components) section on the bit website. TL;DR version: 
 
 1. ```bit import -c bit.envs/compilers/typescript``` to install the extension.
 2. ```bit build``` - to build the component
@@ -33,8 +33,7 @@ Features
                     }
                 }
             }
-        }
-       
+        } 
    }
    ```
       
@@ -54,8 +53,6 @@ Features
                 }
             }
        }
-       
-       
    }
 ```
 The configuration detailed in the [tsconfig.ts](https://github.com/teambit/envs/blob/master/packages/ts-compiler/src/tsconfig.ts) file. The configs are chosen because we believe they are best for transpiling reusable components. Please open an issue if you feel it should be different or there is a bug in implementation. (TBD - preset)

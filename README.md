@@ -30,6 +30,7 @@ Concepts
 -------
 **Isolation** - When building code as part of an app, we can create unknown side effects. Dependencies may be resolved even if not declared, and some states may be derived from the global scope. We want to shed light on these unknowns and create a feedback loop that allows the developer to fix it. Bit isolation layer is here to provide insights and feedback on that process. If a dependency is implicit and Bit doesn't detect it, it won't be isolated. This will cause errors and alert the author that some changes need to apply. 
 
+
 To achieve that, Bit exposed the capsule API for the extension system. This way, an env can run the component's build and test detached from the original workspace. A gap between results in the workspace and results in the capsule shows the developer there is an issue with reusing code. The developer can then apply changes and repeat the process until he gets the desirable results.
 
 **Compilation**
