@@ -45,9 +45,10 @@ When thinking about javascript component we also have to consider the style of a
 
 How to contrib ?
 ----------------
-Before submitting a PR please read our (code of conduct)[https://github.com/teambit/bit/blob/master/CODE_OF_CONDUCT.md]. 
+Before submitting a PR please read our [code of conduct](https://github.com/teambit/bit/blob/master/CODE_OF_CONDUCT.md). 
 
 When creating a new environment please provide the following:
 
-1. A proposal document which describes the configuration options, tradeoffs and practices that are or should implemented.
+1. A proposal document which describes the configuration options, tradeoffs and practices that are or should be implemented.
 2. A PR with tests which covers the main points from the doc. 
+
