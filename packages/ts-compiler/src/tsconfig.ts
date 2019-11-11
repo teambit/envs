@@ -2,7 +2,7 @@ export function getTSConfig() {
   const isDev = process.env['NODE_ENV'] == 'development'
   return {
     compilerOptions: {
-      target: isDev ? 'ES2017': 'ES6',
+      target: isDev ? 'ES2017': 'ES2015',
       // ES6 For production to accommodate old browsers/node. ES2017 to provide better debugging in development.
       sourceMap: isDev,
       // Only on dev mode.
@@ -20,7 +20,7 @@ export function getTSConfig() {
       // support decorator syntax
       inlineSourceMap: isDev,
       inlineSources: isDev,
-      // should not clutter dist folder
+      // inline so it won't clutter dist folder
       jsx: 'react',
       rootDir: './',
       // the root of the capsule is CWD when transpiling and should be rootDir to adjust library sturcture.
