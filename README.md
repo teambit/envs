@@ -12,11 +12,11 @@ Current Extensions
 
 What is bit? 
 -------------
-Bit is an echo system for creating, maintaing and collaborating around javascript components. It's composed from the bit cli, an open source tool which acts as a distributed network of components. The component is a small, sharable and reusable code part. It may be created and consumed in one project (author) and shared with others (consumers). Consumers may offer changes and push back code if they are allowed. The second part is the bit.dev component cloud. This is where open source components are shared with the world and closed source components can be shared with teams and selected groups of users. This give you the power of search and discoverability over large scale units of code. 
+Bit is an echo system for creating, maintaining and collaborating around javascript components. It's composed from the bit cli, an open source tool which acts as a distributed network of components. The component is a small, sharable and reusable code part. It may be created and consumed in one project (author) and shared with others (consumers). Consumers may offer changes and push back code if they are allowed. The second part is the bit.dev component cloud. This is where open source components are shared with the world and closed source components can be shared with teams and selected groups of users. This give you the power of search and discoverability over large scale units of code. For more information on bit read the (docs)[https://docs.bit.dev/docs/what-is-bit].
 
 Why do we need environments?
 -----------------------------
-There is more then one way to skin a cat. When consuming source code you need to agree on that way. Users which write vanilla code would like to share it with typescript users and vice versa. Even very similar flavors of components may have different needs in terms of configurations and dependencies. In order to collaborate well, we would like to decouple the logic from the way we build and test it. This way we can apply fixes and move around the code base with little consideration to every build and test detail.
+There is more then one way to skin a cat, hence there is more then one way to maintain a component. When consuming source code you need to agree on that way. Users which write vanilla code would like to share it with typescript users and vice versa. Even very similar flavors of components may have different needs in terms of configurations and dependencies. In order to collaborate well, we would like to decouple the logic from the way we build and test the component. This way we can apply fixes and move around the code base with little consideration to every build and test detail.
 
 Environments are bit extensions which are aimed to help with the development of bit components and accommodate reusability. They solve that by providing integration betweens bit and the authors development tool set. They also aim to provide smart defaults and best practices when it comes to dealing with the component medium.
 
@@ -31,32 +31,23 @@ Compilation is the process of converting source code to consumable code (a.k.a t
 
 Prefer transpilation over bundling!
 
-It is the application responsibilty to create runable bundles. We need only to create reusable target consumed by those bundlers. Transpilation of components allows us to remain flexible no matter the use case the component is used in. If we accept this reasoning then the ideal target format becomes apparent - ESM2015. While there are still gaps in the support of the format by browsers, bundlers handle this module system very well. This keeps the target future proof for later use and brings us great features made by the Javascript.
+It is the application responsibilty to create runable bundles. We need only to create reusable target consumed by those bundlers. Transpilation of components allows us to remain flexible no matter the use case the component is used in. If we accept this reasoning then the ideal target format becomes apparent - ESM2015. While there are still gaps in the support of the format by browsers, bundlers handle this module system very well. This keeps the target future proof for when ESM will be wide spread.
 
 **Testing**
-Testing is code which verifies that the component is functioning as expected of it. Many guides were written for the benefits of tests (here are some). An important question is raised when we run our test and that is: Which asset should be tested, source or target? Bit made the decision to test target code. The main benefits of running test over sources is derived from source maps support and ease of use/debug. In order to have better confidence that the code will work in the consumer environment it is prefer to test the target code over source code.  
+Testing is code which verifies that a component is functioning as expected of it. Many guides were written for the benefits of tests (here are some). An important question is raised when we run our test and that is: Which asset should be tested, source or target? Bit made the decision to test target code. The main benefits of running test over sources is derived from source maps support and ease of use/debug. On the other hand in order to have better confidence that the code will work in the consumer environment it is prefer to test the target code over source code.  
 
 **Style Reusing**
 When thinking about javascript component we also have to consider the style of a UI component. How do we support the reusing and composition of styles? In order to consider that we need to think about the different ways that one can style a component. 
 
-1. Native CSS - Not the recommended way to handle styles for components, but if used it will be copied to the target dir.
-2. CSS in JS  - Is composed of Javascript objects which describes the different styles. Should be handled normally like any other javascript code. 
-3. Style pre-processor - Copied to the target dir to allow bundlers to reuse things like var, scoped classes etc.
-
-Which environment should I use? 
--------------------------------
-   
-How to create an environment?
-------------------------------
-1. env doc.
-2. Environment interface.
-3. Extension API
-4. Isolation
+1. Native CSS - Not the recommended way to handle styles for components due to issues with scope but it is supported
+2. CSS in JS  - Is composed of Javascript objects which describes the different styles. Should be handled normally like any other Javascript code. 
+3. Style pre-processor - Copied to the target dir to allow bundlers to reuse things like var, scoped classes etc. 
 
 How to contrib ?
 ----------------
-1. CoC
-2. PR doc
-3. Testing
+Before submitting a PR please read our (code of conduct)[https://github.com/teambit/bit/blob/master/CODE_OF_CONDUCT.md]. 
 
+When creating a new environment please provide the following:
 
+1. A proposal document which describes the configuration options, tradeoffs and practices that are or should implemented.
+2. A PR with tests which covers the main points from the doc. 
