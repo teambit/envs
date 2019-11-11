@@ -2,11 +2,15 @@ Envs - Development environments for bit components
 ------------------------------------------------
 
 A collection of bit extensions required for the development life cycle of a bit component.
+
 <p align="center">
   <a href="https://bit.dev/bit/envs"><img src="https://storage.googleapis.com/bit-docs/Screen%20Shot%202019-06-06%20at%201.26.32%20PM.png"></a>
 </p>
+
+[Compiler/Tester collection](https://bit.dev/bit/envs) • [Docs](https://docs.bit.dev/docs/building-components.html)
+
 Packages
-------------------
+---------------
 
 1. **Typescript** - [packages/ts-compiler](https://github.com/teambit/envs/tree/master/packages/ts-compiler) 
 2. **Common** - [packages/common](https://github.com/teambit/envs/tree/master/packages/common) 
