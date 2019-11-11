@@ -23,6 +23,9 @@ export class HelloWorld {
             },
             actions: [
                 {
+                    command: "bit",
+                    args: ['init']
+                }, {
                     command: 'bit',
                     args: ['add', 'src/comp.tsx', '--id', 'comp']
                 }, {

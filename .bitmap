@@ -116,11 +116,6 @@
     "bit.envs/compilers/typescript@3.0.34": {
         "files": [
             {
-                "relativePath": "packages/ts-compiler/Dockerfile",
-                "test": false,
-                "name": "Dockerfile"
-            },
-            {
                 "relativePath": "packages/ts-compiler/README.md",
                 "test": false,
                 "name": "README.md"

@@ -30,7 +30,7 @@ export function getTSConfig() {
         "./node_modules/@bit/qballer.react-scripts.types-env" // lookup custom types provided by compiler.
       ],
       importHelpers: false,
-      // bundle size in component would be better if we don't depend on tslib
+      // bundle size in component would be better if we don't depend on tslib.
     }
   }
 }

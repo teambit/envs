@@ -4,7 +4,7 @@
   "description": "Typescript compiler integration with bit",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --require ts-node/register/transpile-only --require source-map-support/register test/*.spec.ts",
+    "test": "node --inspect=9999 --debug-brk node_modules/.bin/mocha --require ts-node/register/transpile-only --require source-map-support/register test/*.spec.ts",
     "test:hero": "run-s docker:build docker:run",
     "docker:build": "docker build -t ts-compiler:test .",
     "docker:run": "docker run --rm ts-compiler:test"
@@ -13,7 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "execa": "^2.0.4",
+    "@types/execa": "^2.0.0",
+    "execa": "^2.1.0",
     "mkdirp": "^0.5.1",
     "recursive-readdir": "^2.2.2",
     "source-map-support": "^0.5.13",
