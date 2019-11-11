@@ -33,8 +33,7 @@ Features
                     }
                 }
             }
-        }
-       
+        } 
    }
    ```
       
@@ -54,8 +53,6 @@ Features
                 }
             }
        }
-       
-       
    }
 ```
 The configuration detailed in the [tsconfig.ts](https://github.com/teambit/envs/blob/master/packages/ts-compiler/src/tsconfig.ts) file. The configs are chosen because we believe they are best for transpiling reusable components. Please open an issue if you feel it should be different or there is a bug in implementation. (TBD - preset)
