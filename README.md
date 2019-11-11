@@ -34,9 +34,14 @@ Prefer transpilation over bundling!
 It is the application responsibilty to create runable bundles. We need only to create reusable target consumed by those bundlers. Transpilation of components allows us to remain flexible no matter the use case the component is used in. If we accept this reasoning then the ideal target format becomes apparent - ESM2015. While there are still gaps in the support of the format by browsers, bundlers handle this module system very well. This keeps the target future proof for later use and brings us great features made by the Javascript.
 
 **Testing**
-Testing is code which verifies that the component is functioning as expected of it. Many guides were written for the benefits of tests (here are some). An important question is raised when we run our test and that is: Which asset should I test, source or target? Bit made the decision to test target code. The main benefits of running test over non transpiled sources is derived from source maps issues and ease of use. In order to have better confidence that the code will work in the consumer environment we should prefer to test the target code over source code. 
+Testing is code which verifies that the component is functioning as expected of it. Many guides were written for the benefits of tests (here are some). An important question is raised when we run our test and that is: Which asset should be tested, source or target? Bit made the decision to test target code. The main benefits of running test over sources is derived from source maps support and ease of use/debug. In order to have better confidence that the code will work in the consumer environment it is prefer to test the target code over source code.  
 
-**style reusing**
+**Style Reusing**
+When thinking about javascript component we also have to consider the style of a UI component. How do we support the reusing and composition of styles? In order to consider that we need to think about the different ways that one can style a component. 
+
+1. Native CSS - Not the recommended way to handle styles for components, but if used it will be copied to the target dir.
+2. CSS in JS  - Is composed of Javascript objects which describes the different styles. Should be handled normally like any other javascript code. 
+3. Style pre-processor - Copied to the target dir to allow bundlers to reuse things like var, scoped classes etc.
 
 Which environment should I use? 
 -------------------------------
