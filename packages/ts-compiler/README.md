@@ -55,7 +55,27 @@ Features
        }
    }
 ```
-The configuration detailed in the [tsconfig.ts](https://github.com/teambit/envs/blob/master/packages/ts-compiler/src/tsconfig.ts) file. The configs are chosen because we believe they are best for transpiling reusable components. Please open an issue if you feel it should be different or there is a bug in implementation. (TBD - preset)
+The configuration detailed in the [tsconfig.ts](https://github.com/teambit/envs/blob/master/packages/ts-compiler/src/tsconfig.ts) file. The configs are chosen because we believe they are best for transpiling reusable components. Please open an issue if you feel it should be different or there is a bug in implementation. 
+
+Here are the full configuration options, by default you don't need to configure any of them. 
+```js
+   {
+       "bit": {
+            "env": {
+                "bit.envs/compilers/typescript@(some-version)": { 
+                    "rawConfig": {
+                        "tsconfig":{ /** override tsconfig **/},
+                        "preset" : "react" || "none", // for predefined flavor of configuration
+                        "development": true || false, // change mode for development for debugging and testing
+                        "copyPolicy": {
+                            "ignorePatterns": ["package.json", "package-lock.json"],
+                            "enable": true // should copyPolicy run
+                        }
+                }
+            }
+       }
+   }
+```
 
 5. **Styling support** - Import statements of style files must include the type definition of that file, else the type checker fails. The compiler adds the 
 6. ```@bit/qballer.react-scripts.types-env``` component to the devDependencies and the typesRoots compiler option. This can be changed via overrides if needed. Remove the devDependency using the "-" override like described in the [guide](https://docs.bit.dev/docs/overrides#components-dependencies). You may also remove the type lookup from typesRoots as in the example of section 4. 
