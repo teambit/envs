@@ -57,14 +57,13 @@ In the case of a web application, many times, we create bundles that can be cons
 
 Prefer transpilation over bundling!
 
-This would allow the consumer with more flexibility and improve the performance of their app, as features like tree-shaking and dependencies deduping don't work on bundled code.  
-The reason being that it is the application's responsibility to create runnable bundles. Components should only by reusable target consumed by those bundlers. Transpilation of components allows us to remain flexible no matter the use case the component is used in. If we accept this reasoning, the ideal target format becomes apparent - **ESM2015**.
+This would allow the consumer more flexibility and improve the performance of their app, as features like tree-shaking and dependencies deduping don't work on bundled code. The reason being that it is the application's responsibility to create runnable bundles. Components should only by reusable target consumed by those bundlers. Transpilation of components allows us to remain flexible no matter the use case the component is used in. If we accept this reasoning, the ideal target format becomes apparent - **ESM2015**.
 
 > While there are still gaps in support of ESM2015 by browsers, bundlers handle this module system very well.
 
 #### Testing
 
-Testing is code, which verifies that a component is functioning as expected of it. Many guides were written for the benefits of tests (here are some). An important question is raised when we run our test, and that is: Which asset should be tested source or target? Bit decided to test the target code. The main benefits of running the test over sources are derived from source maps support, and ease of use/debug. On the other hand, to have better confidence that the code will work in the consumer environment, it is preferred to test the target code over source code.
+Testing is code, which verifies that a component is functioning as expected of it. Many guides were written for the benefits of tests ([here](https://martinfowler.com/articles/microservice-testing/) [are](https://medium.com/javascript-scene/tdd-changed-my-life-5af0ce099f80) [some](https://www.youtube.com/watch?v=AoIfc5NwRks)). An important question is raised when we run our test, and that is: Which asset should be tested source or target? Bit decided to test the target code. The main benefits of running the test over sources are derived from source maps support, and ease of use/debug. On the other hand, to have better confidence that the code will work in the consumer environment, it is preferred to test the target code over source code.
 
 #### Styling
 
