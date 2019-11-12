@@ -28,7 +28,7 @@ Features
                         // these are the default values, no need to configure them. 
                         "copyPolicy": {
                             "ignorePatterns": ["package.json", "package-lock.json"],
-                            "enabled": true
+                            "enable": true // should copyPolicy run
                         } 
                     }
                 }

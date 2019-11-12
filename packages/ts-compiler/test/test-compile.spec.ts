@@ -1,6 +1,7 @@
 import { createWorkspace } from './create-workspace';
 import {expect} from 'chai'
-import { verify } from 'crypto';
+const bit:any = require('bit-bin')
+
 
 describe('typescript', () => {
     it('should support compile', async function() {
@@ -35,7 +36,7 @@ export class HelloWorld {
                 
             ]
         })
-        const result = verifyComponent(directory)
+        const result = await verifyComponent(directory)
         expect(result).to.equal(true)
     })
 })
