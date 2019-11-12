@@ -1,6 +1,6 @@
 import { createWorkspace } from './create-workspace';
 import {expect} from 'chai'
-const bit:any = require('bit-bin')
+const bit:any = require('bit-bin/dist/api')
 
 
 describe('typescript', () => {
