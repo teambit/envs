@@ -72,13 +72,11 @@ When a Bit extension finds this type of file, it merely copies it and ships it w
 
 ##### Style pre-processors and CSS Modules
 
-This method refers to the using of CSS transpilers that gives more features on top of native CSS, to improve the development experience. Using such tools is very helpful, as different bundlers can use it to create vars, scoped classes, and other features that make this methodology work well with developing components.  
-Similar to how Bit handles native CSS styling - this too needs to be managed by the consuming project's bundlers, usually by configuring a specific plugin that handles the type fo pre-processor.
+This method refers to the using of CSS transpilers that gives more features on top of native CSS, to improve the development experience. Using such tools is very helpful, as different bundlers can use it to create vars, scoped classes, and other features that make this methodology work well with developing components. Similar to how Bit handles native CSS styling - this too needs to be managed by the consuming project's bundlers, usually by configuring a specific plugin that handles the type fo pre-processor.
 
 ##### CSS in JS
 
-CSS-in-JS is a methodology that uses Javascript objects which describe the different styles. It styles the component during runtime, with the JavaScript code is being evaluated.  
-Components that designed using this method should be handled like any other JavaScript code. Unlike the previously discussed styling options, here, the consumer does not need to do anything, as Bit already transpiles the JS objects alongside the implementation itself.
+CSS-in-JS is a methodology that uses Javascript objects whichdescribe the different styles. It styles the component during runtime, with the JavaScript code is being evaluated. Components that designed using this method should be handled like any other JavaScript code. Unlike the previously discussed styling options, here, the consumer does not need to do anything, as Bit already transpiles the JS objects alongside the implementation itself.
 
 ## How to contribute?
 
