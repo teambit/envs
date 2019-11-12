@@ -93,3 +93,7 @@ When creating a new environment please provide the following:
 1. A proposal document that describes the configuration options, tradeoffs and practices that are implemented.
 2. A PR with tests that covers the main points from the doc.
 3. Provide 3 projects the environment is applicable and tested on.
+
+## License
+
+Apache License, Version 2.0 - see [here](https://github.com/teambit/envs/blob/master/LICENSE)
