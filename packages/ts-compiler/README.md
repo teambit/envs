@@ -68,8 +68,8 @@ Here are the full configuration options, by default you don't need to configure 
                         "preset" : "react" || "none", // for predefined flavor of configuration
                         "development": true || false, // change mode for development for debugging and testing
                         "copyPolicy": {
-                            "ignorePatterns": ["package.json", "package-lock.json"],
-                            "enable": true // should copyPolicy run
+                            "ignorePatterns": ["package.json", "package-lock.json"], // pattens to help ignore coping files
+                            "enable": true || false// should copyPolicy run
                         }
                 }
             }
