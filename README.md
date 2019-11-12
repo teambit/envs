@@ -16,11 +16,17 @@ A collection of Bit extensions required for the development lifecycle of Bit com
 
 ## What is Bit?
 
-Bit helps JavaScript developers to build, distribute and control many components across a single or more repositories at any scale. It blurs repository boundaries and allows development and distribution of components across multiple repositories. 
+## About  
 
-With Bit you can **isolate reusable components** from existing projects,, with **fully-automated dependancy graph control** and **scalable versioning**. It lets you **reuse individual components across projects**, using your favorite **package managers like npm and yarn** through [Bit's component hub](https://bit.dev). It lets you **extend Git's workflow** to **develop components from any consuming project**, **suggest updates** and **easily sync changes across your codebase**.
+**Bit makes it easy to share and manage components between projects and apps at any scale**.
 
-*Bit is a collaborative open source project, actively developed and maintained by a venture-backed team and used by more teams and communities every day.*
+It lets you **isolate components** from existing projects with **0 refactoring**, with **fully-automated dependancy definition/resolution** and **scalable versioning**.
+
+It lets you **reuse individual components across projects**, using your favorite package managers like **npm** and **yarn** through **[Bit's component hub](https://bit.dev)**.
+
+It lets you **extend Git's workflow** to **develop components from any consuming project** , suggest updates and **easily sync changes across your codebase**.
+
+*Bit is a collaborative open source project, actively developed and maintained by a venture-backed company and used by more teams and communities every day.*
 
 ### What are Components?
 
