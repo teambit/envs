@@ -16,25 +16,25 @@ A collection of Bit extensions required for the development lifecycle of Bit com
 
 ## What is Bit?
 
-[Bit](www.github.com/teambit/bit) provides an eco-system for creating, maintaining, and collaborating around JavaScript components. It allows a distributed component management workflow, so both maintainers and consumers can collaborate on components together.
+Bit helps JavaScript developers to build, distribute and control many components across a single or more repositories at any scale. It blurs repository boundaries and allows development and distribution of components across multiple repositories. 
+
+With Bit you can **isolate reusable components** from existing projects,, with **fully-automated dependancy graph control** and **scalable versioning**. It lets you **reuse individual components across projects**, using your favorite **package managers like npm and yarn** through [Bit's component hub](https://bit.dev). It lets you **extend Git's workflow** to **develop components from any consuming project**, **suggest updates** and **easily sync changes across your codebase**.
+
+*Bit is a collaborative open source project, actively developed and maintained by a venture-backed team and used by more teams and communities every day.*
 
 ### What are Components?
 
-A component is a [focused, independent, reusable, small & testable](https://addyosmani.com/first/) piece of code that has a single responsibility. Bit handles components as first-class citizens and provides workflows that utilize these properties to share common components between projects.  
-The primary purpose of using components in this context is UI components for the web, like React, Angular, Vue, WebComponents, etc.
+A component is a [focused, independent, reusable, small & testable](https://addyosmani.com/first/) piece of code that has a single responsibility. Bit handles components as first-class citizens and provides workflows that utilize these properties to share common components between projects. The primary purpose of using components in this context is UI components for the web, like React, Angular, Vue, WebComponents, etc.
 
 ### The problem with sharing components
 
-When writing a shared code, there is a need to agree on the consumption method. For example, developers who write vanilla code would like to share it with TypeScript teams (and vice versa). In most cases, even similar flavors of components may have different needs in terms of configurations and dependencies.  
-To collaborate well, we would like to decouple the logic from the way we build and test. This way, we can apply fixes and move around the code base with little consideration to every build and test detail.  
-To solve these issues, Bit implements Environments.
+When writing a shared code, there is a need to agree on the consumption method. For example, developers who write vanilla code would like to share it with TypeScript teams (and vice versa). In most cases, even similar flavors of components may have different needs in terms of configurations and dependencies.To collaborate well, we would like to decouple the logic from the way we build and test. This way, we can apply fixes and move around the code base with little consideration to every build and test detail. To solve these issues, Bit implements Environments.
 
 ## What is an Environment?
 
-Environments are Bit extensions that are aimed to help with the development of Bit components and accommodate reusability. They provide integration between Bit and the developers' toolset. Additionally, they implement smart defaults and best practices when it comes to dealing with the component medium.  
-Use environments as an underline infrastructure and API for setting components to be distributed and reused by other developers.
+Environments are Bit extensions that are aimed to help with the development of Bit components and accommodate reusability. They provide integration between Bit and the developers' toolset. Additionally, they implement smart defaults and best practices when it comes to dealing with the component medium. Use environments as an underline infrastructure and API for setting components to be distributed and reused by other developers.
 
-### Concepts
+## Concepts
 
 #### Isolation
 
@@ -87,5 +87,5 @@ Before submitting a PR please read our [code of conduct](https://github.com/team
 When creating a new environment please provide the following:
 
 1. A proposal document that describes the configuration options, tradeoffs and practices that are implemented.
-1. A PR with tests that covers the main points from the doc.
-1. Provide 3 projects the environment is applicable and tested on.
+2. A PR with tests that covers the main points from the doc.
+3. Provide 3 projects the environment is applicable and tested on.
