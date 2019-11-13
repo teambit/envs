@@ -16,8 +16,6 @@ A collection of Bit extensions required for the development lifecycle of Bit com
 
 ## What is Bit?
 
-## About  
-
 **Bit makes it easy to share and manage components between projects and apps at any scale**.
 
 It lets you **isolate components** from existing projects with **0 refactoring**, with **fully-automated dependancy definition/resolution** and **scalable versioning**.
