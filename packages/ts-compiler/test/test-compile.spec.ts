@@ -1,9 +1,12 @@
 import { createWorkspace } from './create-workspace';
 import {expect} from 'chai'
-const bit:any = require('bit-bin/dist/api')
+//@ts-ignore
+import Helper from 'bit-bin/dist/e2e-helper/e2e-helper'
 
 
 describe('typescript', () => {
+    debugger
+    const helper = new Helper()
     it('should support compile', async function() {
         const component = {
             'src/comp.tsx': `import React from 'react'
@@ -22,19 +25,6 @@ export class HelloWorld {
                     "react": "^16.11.0"
                 }
             },
-            actions: [
-                {
-                    command: "bit",
-                    args: ['init']
-                }, {
-                    command: 'bit',
-                    args: ['add', 'src/comp.tsx', '--id', 'comp']
-                }, {
-                    command: 'bit',
-                    args: ['build']
-                }
-                
-            ]
         })
         const result = await verifyComponent(directory)
         expect(result).to.equal(true)
