@@ -2,9 +2,33 @@
 
 A curated list of **Extensions** maintained by Bit's [maintainers](https://github.com/orgs/teambit/people) to use as Envs for components. These extensions implement best practices for distributing components and setting them up to be reused across projects.
 
+<p align="center">
+  <a href="https://bit.dev/bit/envs"><img src="https://storage.googleapis.com/bit-docs/Screen%20Shot%202019-06-06%20at%201.26.32%20PM.png"></a>
+</p>
+
 [Browse Envs](https://bit.dev/bit/envs) • [Implementing Envs](https://docs.bit.dev/docs/building-components.html)
 
-## What are Components?
+[Compiler/Tester collection](https://bit.dev/bit/envs) • [Docs](https://docs.bit.dev/docs/building-components.html)
+
+## Packages
+
+1. **Typescript** - [packages/ts-compiler](https://github.com/teambit/envs/tree/master/packages/ts-compiler)
+2. **Common** - [packages/common](https://github.com/teambit/envs/tree/master/packages/common)
+3. **Vue** - [packages/vue](https://github.com/teambit/envs/tree/master/packages/vue)
+
+## What is Bit?
+
+**Bit makes it easy to share and manage components between projects and apps at any scale**.
+
+It lets you **isolate components** from existing projects with **0 refactoring**, with **fully-automated dependancy definition/resolution** and **scalable versioning**.
+
+It lets you **reuse individual components across projects**, using your favorite package managers like **npm** and **yarn** through **[Bit's component hub](https://bit.dev)**.
+
+It lets you **extend Git's workflow** to **develop components from any consuming project** , suggest updates and **easily sync changes across your codebase**.
+
+*Bit is a collaborative open source project, actively developed and maintained by a venture-backed company and used by more teams and communities every day.*
+
+### What are Components?
 
 A component is a [focused, independent, reusable, small & testable](https://addyosmani.com/first/) piece of code that has a single responsibility. Bit handles components as first-class citizens and provides workflows that utilize these properties to share common components between projects. The primary purpose of using components in this context is UI components for the web, like React, Angular, Vue, WebComponents, etc.
 
