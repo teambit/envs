@@ -22,11 +22,7 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 
 It lets you **isolate components** from existing projects with **0 refactoring**, with **fully-automated dependancy definition/resolution** and **scalable versioning**.
 
-It lets you **reuse individual components across projects**, using your favorite package managers like **npm** and **yarn** through **[Bit's component hub](https://bit.dev)**.
-
-It lets you **extend Git's workflow** to **develop components from any consuming project** , suggest updates and **easily sync changes across your codebase**.
-
-*Bit is a collaborative open source project, actively developed and maintained by a venture-backed company and used by more teams and communities every day.*
+It lets you **reuse individual components across projects**, using your favorite package managers like **npm** and **yarn** through **[Bit's component hub](https://bit.dev)**. It lets you **extend Git's workflow** to **develop components from any consuming project** , suggest updates and **easily sync changes across your codebase**.
 
 ### What are Components?
 
