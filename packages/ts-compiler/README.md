@@ -1,15 +1,22 @@
 Typescript
 ==========
 
-Typescript support for bit components.
+A TypeScript compiler for Bit components.
 
 How to use?
 -----------
 
 In order to run this extension your must have a [bit workspace](https://docs.bit.dev/docs/concepts#bit-workspace) with at least one component defined, for more information on how to build please read the [docs](https://docs.bit.dev/docs/building-components) section on the bit website. TL;DR version: 
 
-1. ```bit import -c bit.envs/compilers/typescript``` to install the extension.
-2. ```bit build``` - to build the component
+Install the Typescript compiler
+```
+$ bit import -c bit.envs/compilers/typescript
+```
+
+Then, you can simply build the component using `bit build`
+```
+$ bit build
+```
 
 Features
 -----------
