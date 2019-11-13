@@ -24,9 +24,10 @@ Features
 
 - **Compile components in isolation** - Compiling shared components in true isolation is both challenging and important. It helps to find reusability issues quickly and early throughout the development process. It makes sure your components will compile identically anywhere and without side-effects. Read more about isolation [here](https://docs.bit.dev/docs/ext-concepts.html#what-is-an-isolated-component-environment). 
 
-- **Styles and static file support** - When developing a UI component it can include more then just Typescript code. You may have images, svg files, css and more. Those assets may also be referenced by import statements from the component logic. When that happens target code will not have the correct path for them. The typescript compiler doesn't handle those type of files directly. 
+- **Styles and static file support** - When developing a UI component it can include more then just Typescript code. You may have images, svg files, css etc. Transpiling shared components without bundling can get complicated in regards to those assets in both build time and runtime. 
+    * build time:  TypeScript type checker tries to resolve those files type information and fails. We resolve these issues by automatically providing type definitions for common imported files.
+    * runtime: Import statements may be broken in the target code because the fs structure changed. To resolve that we employ a copy policy which copies the assets to the appropriate location in the target directory.
 
-Transpiling shared components without bundling can get complicated as the TypeScript type checker tries and fails to resolve static assets and css files included in import statements in the component. We resolve these issues by automatically providing type definitions for common imported files.
       
 - **Configuration** - This compiler is configured according to best practices for shared components compiling learned from our experience. For general concepts on how to approach shared components compilation and testing, please see the main [readme](https://github.com/teambit/envs). Feel free to open an issue or submit a PR if you think something should be different or there is a bug in the implementation.
 
@@ -63,10 +64,10 @@ This config state is as if you would configure the compiler as following by hand
     }
 }
 ```
-**tsconfig** - override tsconfig.json configuration.
-**development** - enable or disable dev mode to include source maps and better debugging capabilities.
-**copyPolicy** - manage the copy policy.
-**copyPolicy.ignorePatterns** - Array of pattern to exclude files from being copied.
-**copyPolicy.disable** - turn off the copy policy.
+- **tsconfig** - override tsconfig.json configuration.
+- **development** - enable or disable dev mode to include source maps and better debugging capabilities.
+- **copyPolicy** - manage the copy policy.
+- **copyPolicy.ignorePatterns** - Array of patterns to exclude files from being copied.
+- **copyPolicy.disable** - turn off the copy policy.
 
 
