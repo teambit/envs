@@ -1,7 +1,8 @@
 Typescript Compiler
 =================
 
-A TypeScript component compiler for [Bit](https://github.com/teambit/bit). This compiler follows our best practices guide for compiling shared components.
+A TypeScript component compiler for [Bit](https://github.com/teambit/bit). 
+This compiler follows our best practices guide for compiling shared components.
 
 How to use?
 -----------

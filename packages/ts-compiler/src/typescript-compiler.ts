@@ -1,33 +1,38 @@
 import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "./compiler";
 import { compile } from './compile'
+import { DependenciesJSON, Preset, presetStore } from "./preset";
 
 const CONFIG_NAME = 'tsconfig'
 
 export class TypescriptCompiler implements Compiler {
-    private _logger: Logger | undefined
-
+    private preset: Preset = presetStore.NONE
     init(ctx: { api: InitAPI }) {
-        this._logger = ctx.api.getLogger()
         return {
             write: true
         }
     }
 
     getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-        return {
-            devDependencies: {
-                "@bit/qballer.react-scripts.types-env": "^0.0.1"
+        return this.preset.getDynamicPackageDependencies 
+            ? this.preset.getDynamicPackageDependencies()
+            : {}
+    }
+    
+    getDynamicConfig(ctx: CompilerContext) {
+        const config = Object.assign({
+            tsconfig: {},
+            development: false, 
+            copyPolicy: {
+                ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'], 
+                disable: false 
             }
-        }
+        }, ctx.rawConfig)
+        this.preset = presetStore[config.preset || 'NONE']
+        return config
     }
 
     async action(ctx: CompilerContext):Promise<ActionReturnType> {
-        const compileResult = await compile(ctx, ctx.context.rootDistDir, ctx.context)
+        const compileResult = await compile(ctx, this.preset)
         return compileResult
     }
-
-    get logger(): Logger | undefined {
-        return this._logger
-    }
 }
-

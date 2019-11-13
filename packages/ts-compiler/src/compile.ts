@@ -1,4 +1,4 @@
-import path, { relative } from 'path'
+import path from 'path'
 import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
@@ -11,6 +11,7 @@ const DEBUG_FLAG = 'DEBUG'
 const compiledFileTypes = ['ts', 'tsx'];
 import {getTSConfig} from './tsconfig'
 import { getCapsuleName } from './utils';
+import { Preset } from './preset'
 
 export interface CompilationContext {
     directory: string
@@ -19,17 +20,27 @@ export interface CompilationContext {
     dist: string,
     dependencies: GenericObject,
     capsule: GenericObject,
-    res: GenericObject
+    res: GenericObject,
+    preset: Preset,
+    cc: CompilerContext
 }
 
-export const compile = async (cc:CompilerContext, distPath: string, api: GenericObject) => {
-    const compilerOptions = getTSConfig()
-    return typescriptCompile(cc, distPath, api, { fileTypes: compiledFileTypes, compilerOptions })
+export const compile = async (cc:CompilerContext, preset:Preset) => {
+    const compilerOptions = getTSConfig(false, {}) // TODO move this to better places
+    return typescriptCompile(cc, { fileTypes: compiledFileTypes, compilerOptions, preset })
 }
 
-const typescriptCompile = async (cc:CompilerContext, distPath: string, api: GenericObject, extra: { fileTypes: string[], compilerOptions: GenericObject }) => {
+interface CompilerExtraInfo { 
+    fileTypes: string[], 
+    compilerOptions: GenericObject,
+    preset: Preset
+}
+
+const typescriptCompile = async (cc:CompilerContext, extra:CompilerExtraInfo ) => {
+    const distPath = cc.context.rootDistDir
+    const api = cc.context
     const { res, directory } = await isolate(api)
-    const context = await createContext(res, directory, distPath)
+    const context = await createContext(res, directory, distPath, extra.preset, cc)
     let results = null
     await createTSConfig(context, extra.compilerOptions)
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
@@ -78,7 +89,7 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     return  (res || {relative:''}).relative
 }
 
-function createContext(res: GenericObject, directory: string, distPath: string): CompilationContext {
+function createContext(res: GenericObject, directory: string, distPath: string, preset:Preset, cc: CompilerContext): CompilationContext {
     const componentObject = res.componentWithDependencies.component.toObject()
     return {
         main: componentObject.mainFile,
@@ -87,7 +98,9 @@ function createContext(res: GenericObject, directory: string, distPath: string):
         dependencies: getCustomDependencies(directory),
         capsule: res.capsule,
         directory,
-        res
+        res,
+        preset,
+        cc
     }
 }
 
@@ -109,8 +122,6 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 async function createTSConfig(context: CompilationContext, content: GenericObject) {
     const pathToConfig = getTSConfigPath(context)
     content.compilerOptions.outDir = 'dist'
-    // const fileList = await collectSourceFiles(context)
-    // content.files = fileList
     return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4))
 }
 
@@ -118,7 +129,7 @@ async function createTSConfig(context: CompilationContext, content: GenericObjec
 async function isolate(api: GenericObject) {
     const targetDir = getCapsuleName();
     const componentName = api.componentObject.name
-    print(`\n building ${componentName} on directory ${targetDir}`)
+    print(`\n building ${componentName} in directory ${targetDir}`)
 
     const res = await api.isolate({ targetDir, shouldBuildDependencies: true })
 
@@ -144,11 +155,22 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
 }
 
 async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]> {
+    if (context.cc.dynamicConfig!.copyPolicy.disable) {
+        return Promise.resolve([])
+    }
     const capsuleDir = context.directory
     const compDistRoot = path.resolve(capsuleDir, 'dist')
 
     const ignoreFunction = function (file:string, stats: Stats){
-        return !!~file.indexOf('/node_modules/') || !!~file.indexOf('/dist/') || !!~file.indexOf('.dependencies')
+        const defaultIgnore = [
+            '/node_modules/',
+            '/dist/',
+            '.dependencies',
+        ]
+        return defaultIgnore.concat(context.cc.dynamicConfig!.ignorePatterns)
+                     .reduce(function (prev, curr) {
+                        return prev || !!~file.indexOf(curr)
+                     }, false)
     }
 
     const fileList = await readdir(capsuleDir, ['*.ts', '*.tsx', ignoreFunction])

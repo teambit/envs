@@ -27,13 +27,13 @@ function mkdirPromise(dir: string, opts: Options) {
 
 async function createFS(targetDir:string, content: WorkspaceContent){
     await mkdirPromise(targetDir, {})
-    await Object.keys(content).map(async key => {
+    await Promise.all(Object.keys(content).map(async key => {
         const realPath = path.join(targetDir, key)
         const containingFolder = path.dirname(realPath)
         await mkdirPromise(containingFolder, {})
         const filePath = path.resolve(targetDir, key)
         await fs.writeFile(filePath, content[key])
-    })
+    }))
 }
 
 function enrichContentWithDefaults(content: WorkspaceContent, options: WorkspaceOptions) {

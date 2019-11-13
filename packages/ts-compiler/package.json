@@ -5,9 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "node node_modules/.bin/mocha --require ts-node/register/transpile-only --require source-map-support/register test/*.spec.ts",
-    "test:hero": "run-s docker:build docker:run",
-    "docker:build": "docker build -t ts-compiler:test .",
-    "docker:run": "docker run --rm ts-compiler:test"
+    "test:hero": "run-s build test",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
@@ -27,11 +26,13 @@
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
     "@types/recursive-readdir": "^2.2.0",
+    "@types/rimraf": "^2.0.3",
     "@types/vinyl": "^2.0.3",
-    "bit-bin": "^14.4.3",
+    "bit-bin": "^14.4.4-dev.2",
     "chai": "^4.2.0",
     "mocha": "^6.2.0",
     "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.0",
     "ts-node": "^8.4.1"
   }
 }
