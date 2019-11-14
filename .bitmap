@@ -113,17 +113,12 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.0.34": {
+    "bit.envs/compilers/typescript@3.0.35": {
         "files": [
             {
-                "relativePath": "packages/ts-compiler/Dockerfile",
-                "test": false,
-                "name": "Dockerfile"
-            },
-            {
+                "name": "README.md",
                 "relativePath": "packages/ts-compiler/README.md",
-                "test": false,
-                "name": "README.md"
+                "test": false
             },
             {
                 "name": "package.json",
@@ -144,6 +139,11 @@
                 "name": "index.ts",
                 "relativePath": "packages/ts-compiler/src/index.ts",
                 "test": false
+            },
+            {
+                "relativePath": "packages/ts-compiler/src/preset.ts",
+                "test": false,
+                "name": "preset.ts"
             },
             {
                 "name": "tsconfig.ts",

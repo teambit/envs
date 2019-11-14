@@ -1,8 +1,8 @@
-import path from 'path'
+import path, { relative, sep } from 'path'
 import execa from 'execa'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
-import { promises as fs, Stats, read } from 'fs'
+import { promises as fs, Stats } from 'fs'
 import { GenericObject, CompilerContext } from './compiler';
 
 import 'typescript'
@@ -11,38 +11,23 @@ const DEBUG_FLAG = 'DEBUG'
 const compiledFileTypes = ['ts', 'tsx'];
 import {getTSConfig} from './tsconfig'
 import { getCapsuleName } from './utils';
-import { Preset } from './preset'
+import { Preset, CopyPolicy } from './preset'
 
 export interface CompilationContext {
     directory: string
     name: string,
     main: string,
     dist: string,
-    dependencies: GenericObject,
     capsule: GenericObject,
     res: GenericObject,
-    preset: Preset,
     cc: CompilerContext
 }
 
-export const compile = async (cc:CompilerContext, preset:Preset) => {
-    const compilerOptions = getTSConfig(false, {}) // TODO move this to better places
-    return typescriptCompile(cc, { fileTypes: compiledFileTypes, compilerOptions, preset })
-}
-
-interface CompilerExtraInfo { 
-    fileTypes: string[], 
-    compilerOptions: GenericObject,
-    preset: Preset
-}
-
-const typescriptCompile = async (cc:CompilerContext, extra:CompilerExtraInfo ) => {
-    const distPath = cc.context.rootDistDir
-    const api = cc.context
-    const { res, directory } = await isolate(api)
-    const context = await createContext(res, directory, distPath, extra.preset, cc)
+export async function compile(cc:CompilerContext, _preset: Preset) {
+    const { res, directory } = await isolate(cc)
+    const context = await createContext(res, directory, cc)
     let results = null
-    await createTSConfig(context, extra.compilerOptions)
+    await createTSConfig(context)
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
         const dists = await collectNonDistFiles(context)
         results = {dists}
@@ -53,7 +38,6 @@ const typescriptCompile = async (cc:CompilerContext, extra:CompilerExtraInfo ) =
     if (!process.env[DEBUG_FLAG]) {
         await context.capsule.destroy()
     }
-
     return results
 }
 
@@ -89,17 +73,15 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     return  (res || {relative:''}).relative
 }
 
-function createContext(res: GenericObject, directory: string, distPath: string, preset:Preset, cc: CompilerContext): CompilationContext {
+function createContext(res: GenericObject, directory: string, cc:CompilerContext): CompilationContext {
     const componentObject = res.componentWithDependencies.component.toObject()
     return {
         main: componentObject.mainFile,
-        dist: distPath,
+        dist: cc.context.rootDistDir,
         name: componentObject.name,
-        dependencies: getCustomDependencies(directory),
         capsule: res.capsule,
         directory,
         res,
-        preset,
         cc
     }
 }
@@ -119,17 +101,18 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 }
 
 
-async function createTSConfig(context: CompilationContext, content: GenericObject) {
+async function createTSConfig(context: CompilationContext) {
+    const content:GenericObject = getTSConfig(false, {})
     const pathToConfig = getTSConfigPath(context)
     content.compilerOptions.outDir = 'dist'
     return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4))
 }
 
-//@TODO refactor out of here and share with angular compiler.
-async function isolate(api: GenericObject) {
+async function isolate(cc: CompilerContext) {
+    const api = cc.context
     const targetDir = getCapsuleName();
     const componentName = api.componentObject.name
-    print(`\n building ${componentName} in directory ${targetDir}`)
+    print(`\n building ${componentName} on directory ${targetDir}`)
 
     const res = await api.isolate({ targetDir, shouldBuildDependencies: true })
 
@@ -144,7 +127,6 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
         return fs.readFile(file)
     }))
     return files.map((file, index) => {
-
         const pathToFile = path.join(compDistRoot, file.split(path.join(capsuleDir, 'dist'))[1])
         return new Vinyl({
             path: pathToFile,
@@ -155,19 +137,22 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
 }
 
 async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]> {
-    if (context.cc.dynamicConfig!.copyPolicy.disable) {
+    const copyPolicy:CopyPolicy = context.cc.dynamicConfig!.copyPolicy
+    
+    if (copyPolicy.disable){
         return Promise.resolve([])
     }
+    
     const capsuleDir = context.directory
     const compDistRoot = path.resolve(capsuleDir, 'dist')
 
-    const ignoreFunction = function (file:string, stats: Stats){
+    const ignoreFunction = function (file:string, _stats: Stats) {
         const defaultIgnore = [
             '/node_modules/',
             '/dist/',
             '.dependencies',
         ]
-        return defaultIgnore.concat(context.cc.dynamicConfig!.ignorePatterns)
+        return defaultIgnore.concat(copyPolicy.ignorePatterns)
                      .reduce(function (prev, curr) {
                         return prev || !!~file.indexOf(curr)
                      }, false)
@@ -186,16 +171,11 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
             base: compDistRoot
         })
     })
-
     return list
 }
 
 function getTSConfigPath(context: CompilationContext) {
     return path.join(context.directory, 'tsconfig.json')
-}
-
-function getCustomDependencies(dir: string) {
-    return Object.keys(require(`${dir}/package.json`).dependencies || {})
 }
 
 function print(msg: string) {

@@ -1,38 +1,53 @@
 import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "./compiler";
 import { compile } from './compile'
-import { DependenciesJSON, Preset, presetStore } from "./preset";
+import { Preset, presetStore } from "./preset";
 
 const CONFIG_NAME = 'tsconfig'
 
 export class TypescriptCompiler implements Compiler {
-    private preset: Preset = presetStore.NONE
+    private _logger: Logger | undefined
+    private preset: Preset
+
+    constructor(preset = 'NONE') {
+        this.preset = presetStore[preset] || presetStore.NONE
+        this.getDynamicPackageDependencies = this.getDynamicPackageDependencies.bind(this)
+        this.getDynamicConfig = this.getDynamicConfig.bind(this)
+        this.action = this.action.bind(this)
+    }
+
     init(ctx: { api: InitAPI }) {
+        this._logger = ctx.api.getLogger()
         return {
             write: true
         }
     }
 
     getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-        return this.preset.getDynamicPackageDependencies 
+          return this.preset.getDynamicPackageDependencies 
             ? this.preset.getDynamicPackageDependencies()
             : {}
     }
-    
     getDynamicConfig(ctx: CompilerContext) {
-        const config = Object.assign({
+        let defaultConfig = {
             tsconfig: {},
             development: false, 
             copyPolicy: {
                 ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'], 
                 disable: false 
             }
-        }, ctx.rawConfig)
-        this.preset = presetStore[config.preset || 'NONE']
+        }
+        const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(): {}
+        const config = {...defaultConfig, ...presetConfig, ...ctx.rawConfig} 
         return config
     }
 
-    async action(ctx: CompilerContext):Promise<ActionReturnType> {
-        const compileResult = await compile(ctx, this.preset)
+    async action(compilerContext: CompilerContext):Promise<ActionReturnType> {
+        const compileResult = await compile(compilerContext, this.preset)
         return compileResult
     }
+
+    get logger(): Logger | undefined {
+        return this._logger
+    }
 }
+

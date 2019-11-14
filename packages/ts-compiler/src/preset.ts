@@ -1,3 +1,5 @@
+import { GenericObject } from "./compiler"
+
 export type GenericStringObject = {[k:string]:string}
  
 export type DependenciesJSON = {
@@ -8,13 +10,18 @@ export type DependenciesJSON = {
 
 export type CopyPolicy = {
     ignorePatterns: string[],
-    enable: boolean
+    disable: boolean
 }
 
 export interface Preset { 
     getDynamicPackageDependencies?(): DependenciesJSON,
-    getCopyPolicy?(): CopyPolicy
+    getDynamicConfig?(): GenericObject
+    getCopyPolicy?(): CopyPolicy,
+    runCompiler?(): Promise<void>,
+    preCompile?(): Promise<void>,
 }
+// handle type generation.
+// handle test attribute
 
 export const presetStore:{[k:string]:Preset} = {
     REACT: {

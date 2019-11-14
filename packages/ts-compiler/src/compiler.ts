@@ -1,5 +1,4 @@
 import Vinyl from 'vinyl'
-import { Preset } from './preset';
 
 export type GenericObject = { [key: string]: any };
 
