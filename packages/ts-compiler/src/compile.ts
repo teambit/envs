@@ -20,12 +20,14 @@ export interface CompilationContext {
     dist: string,
     capsule: GenericObject,
     res: GenericObject,
-    cc: CompilerContext
+    cc: CompilerContext,
+    srcTestFiles: Vinyl[]
 }
 
 export async function compile(cc:CompilerContext, _preset: Preset) {
     const { res, directory } = await isolate(cc)
-    const context = await createContext(res, directory, cc)
+    const srcTestFiles = getSrcTestFiles(cc.files)
+    const context = await createContext(res, directory, cc, srcTestFiles)
     let results = null
     await createTSConfig(context)
     if (getNonCompiledFiles(cc.files).length === cc.files.length) {
@@ -73,7 +75,7 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
     return  (res || {relative:''}).relative
 }
 
-function createContext(res: GenericObject, directory: string, cc:CompilerContext): CompilationContext {
+function createContext(res: GenericObject, directory: string, cc:CompilerContext, srcTestFiles: Vinyl[]): CompilationContext {
     const componentObject = res.componentWithDependencies.component.toObject()
     return {
         main: componentObject.mainFile,
@@ -82,8 +84,15 @@ function createContext(res: GenericObject, directory: string, cc:CompilerContext
         capsule: res.capsule,
         directory,
         res,
-        cc
+        cc,
+        srcTestFiles
     }
+}
+
+function getSrcTestFiles(files: Vinyl[]) {
+    return files.filter((f) => {
+        return f.test === true;
+    })
 }
 
 async function runNodeScriptInDir(directory: string, scriptFile: string, args: string[]) {
@@ -128,11 +137,20 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
         return fs.readFile(file)
     }))
     return files.map((file, index) => {
-        const pathToFile = path.join(compDistRoot, file.split(path.join(capsuleDir, 'dist'))[1])
+        const relativePath = path.relative(path.join(capsuleDir, 'dist'), file)
+        const pathToFile = path.join(compDistRoot, relativePath)
+        let test = false;
+        // Only check js files not d.ts or .map files
+        if (getExt(relativePath) === 'js') {
+            // Don't compare extension name, it will surly be different.
+            // the source is ts / tsx and the dist is js.
+            test = isTestFile(context.srcTestFiles, relativePath, false);
+        }
         return new Vinyl({
             path: pathToFile,
             contents: readFiles[index],
-            base: compDistRoot
+            base: compDistRoot,
+            test
         })
     })
 }
@@ -164,12 +182,15 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
         return fs.readFile(file)
     }))
     const list = fileList.map((file, index) => {
-        const pathToFile = path.join(compDistRoot, file.split(capsuleDir)[1])
+        const relativePath = path.relative(capsuleDir, file)
+        const pathToFile = path.join(compDistRoot, relativePath)
+        const test = isTestFile(context.srcTestFiles, relativePath);
 
         return new Vinyl({
             path: pathToFile,
             contents: readFiles[index],
-            base: compDistRoot
+            base: compDistRoot,
+            test
         })
     })
     return list
@@ -181,4 +202,26 @@ function getTSConfigPath(context: CompilationContext) {
 
 function print(msg: string) {
     process.env[DEBUG_FLAG] && console.log(msg)
+}
+function getExt(filename: string): string {
+    return filename.substring(filename.lastIndexOf('.') + 1, filename.length); // readonly 1 to remove the '.'
+}
+
+function getWithoutExt(filename: string): string {
+    const ext = getExt(filename);
+    // There is no extension just return the file name
+    if (ext === filename) {
+        return filename;
+    }
+    return filename.substring(0, filename.length - ext.length - 1); // -1 to remove the '.'
+}
+
+function isTestFile(srcTestFiles: Vinyl[], fileToCheck: string, compareWithExtension: boolean = true) {
+    const found = srcTestFiles.find((testFile) => {
+        if (compareWithExtension) {
+            return testFile.relative === fileToCheck;
+        }
+        return getWithoutExt(testFile.relative) === getWithoutExt(fileToCheck);
+    })
+    return !!found;
 }
