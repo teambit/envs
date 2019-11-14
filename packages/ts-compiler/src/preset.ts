@@ -19,21 +19,7 @@ export interface Preset {
     runCompiler?(): Promise<void>,
     preCompile?(): Promise<void>,
 }
-// preset- done 
-// handle type generation - 
-// handle test attribute -
-// handle configuration override - done
-/***
- *  describing product- done
- e2e
- preset - done
- configuration merging -done
- copy policy - done
- testing.
- react/none preset. done  
- type definition. - done
- Fix issue #10
- */
+
 export const presetStore:{[k:string]:Preset} = {
     REACT: {
         getDynamicPackageDependencies(){
@@ -56,7 +42,11 @@ export const presetStore:{[k:string]:Preset} = {
                         "dom",
                         "es2015"
                     ],
-                    jsx: 'react'
+                    jsx: 'react',
+                    typeRoots: [
+                        "./node_modules/@types", // be able to consume @types.
+                        "./node_modules/@bit/qballer.react-scripts.types-env" // lookup custom types provided by compiler.
+                    ],
                 }
             }
         }

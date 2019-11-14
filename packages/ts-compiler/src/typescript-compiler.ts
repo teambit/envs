@@ -24,9 +24,10 @@ export class TypescriptCompiler implements Compiler {
     }
 
     getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-          return this.preset.getDynamicPackageDependencies 
+        const deps = this.preset.getDynamicPackageDependencies 
             ? this.preset.getDynamicPackageDependencies()
             : {}
+        return deps
     }
     getDynamicConfig(ctx: CompilerContext) {
         let defaultConfig = {

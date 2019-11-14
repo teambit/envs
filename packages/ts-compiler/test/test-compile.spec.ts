@@ -3,6 +3,7 @@ import {expect} from 'chai'
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper'
 import {promises as fs} from 'fs'
 import rimraf from 'rimraf'
+import path from 'path'
 
 describe('typescript', () => {
     const helper = new Helper()
@@ -21,7 +22,8 @@ export class HelloWorld {
     render() {
         return <div>Hello-World</div>
     }
-}`            
+}`,            
+            'src/test.css': ''
         }
         results.directory =  await createWorkspace(component, {
             env: 'dist/src/index.js',
@@ -33,10 +35,12 @@ export class HelloWorld {
                 }
             },
         })
+        console.log('capsule- ', results.directory)
         helper.scopeHelper.initWorkspace(results.directory)
         helper.command.addComponent('src/comp.tsx', {}, results.directory)
+        helper.command.runCmd('bit add src/test.css --id comp', results.directory);
         helper.env.command.buildComponentWithOptions('comp',{}, results.directory)
-        results.files = await fs.readdir(results.directory)
+        results.files = await fs.readdir(path.join(results.directory, '/dist'))
     })
     after(async function () {
         return new Promise((resolve, reject) => rimraf(results.directory, {}, (error) => error ? reject(): resolve()))
@@ -45,5 +49,9 @@ export class HelloWorld {
     it('build should exclude default ignore patterns', async function() {
         expect(results.files.indexOf('package.json')).to.equal(-1)
         expect(results.files.indexOf('tsconfig.json')).to.equal(-1)
+    
+    })
+    it('should copy non dist files', function(){ 
+        expect(!!~results.files.indexOf('test.css')).to.be.true
     })
 })
