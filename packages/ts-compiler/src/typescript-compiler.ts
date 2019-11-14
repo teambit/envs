@@ -1,6 +1,7 @@
 import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "./compiler";
 import { compile } from './compile'
 import { Preset, presetStore } from "./preset";
+import {merge} from 'lodash'
 
 const CONFIG_NAME = 'tsconfig'
 
@@ -37,7 +38,7 @@ export class TypescriptCompiler implements Compiler {
             }
         }
         const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(): {}
-        const config = {...defaultConfig, ...presetConfig, ...ctx.rawConfig} 
+        const config =  merge({}, defaultConfig, presetConfig, ctx.rawConfig) 
         return config
     }
 

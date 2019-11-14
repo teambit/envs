@@ -16,13 +16,24 @@ export type CopyPolicy = {
 export interface Preset { 
     getDynamicPackageDependencies?(): DependenciesJSON,
     getDynamicConfig?(): GenericObject
-    getCopyPolicy?(): CopyPolicy,
     runCompiler?(): Promise<void>,
     preCompile?(): Promise<void>,
 }
-// handle type generation.
-// handle test attribute
-
+// preset- done 
+// handle type generation - 
+// handle test attribute -
+// handle configuration override - done
+/***
+ *  describing product- done
+ e2e
+ preset - done
+ configuration merging -done
+ copy policy - done
+ testing.
+ react/none preset. done  
+ type definition. - done
+ Fix issue #10
+ */
 export const presetStore:{[k:string]:Preset} = {
     REACT: {
         getDynamicPackageDependencies(){
@@ -30,11 +41,22 @@ export const presetStore:{[k:string]:Preset} = {
                 devDependencies: {
                     "@types/react": "16.9.11",
                     "@types/react-dom": "16.9.4",
-                    '@bit/qballer.react-scripts.types-env': '0.0.1'
+                    '@bit/qballer.react-scripts.types-env': '0.0.2'
                 },
                 peerDependencies: {
                     "react": "^16.11.0",
                     "react-dom": "^16.11.0",
+                }
+            }
+        }, 
+        getDynamicConfig(){
+            return {
+                tsconfig: {
+                    lib: [
+                        "dom",
+                        "es2015"
+                    ],
+                    jsx: 'react'
                 }
             }
         }

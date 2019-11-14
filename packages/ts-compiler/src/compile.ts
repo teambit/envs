@@ -102,7 +102,8 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 
 
 async function createTSConfig(context: CompilationContext) {
-    const content:GenericObject = getTSConfig(false, {})
+    const configUserOverrides = context.cc.dynamicConfig!.tsconfig
+    const content:GenericObject = getTSConfig(false, configUserOverrides)
     const pathToConfig = getTSConfigPath(context)
     content.compilerOptions.outDir = 'dist'
     return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4))

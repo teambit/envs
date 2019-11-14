@@ -1,7 +1,9 @@
 import { Preset } from "./preset";
+import { GenericObject } from "./compiler";
+import { merge } from "lodash";
 
-export function getTSConfig(isDev:boolean, preset: Preset) {
-  return {
+export function getTSConfig(isDev:boolean, overrideConfig:GenericObject) {
+  const defaultOptions = {
     compilerOptions: {
       // ES6 For production to accommodate old browsers/node. ES2017 to provide better debugging in development.
       target: isDev ? 'ES2017': 'ES2015',
@@ -32,6 +34,7 @@ export function getTSConfig(isDev:boolean, preset: Preset) {
       importHelpers: false,
     }
   }
+  return merge({}, defaultOptions, overrideConfig )
 }
 
 /*
