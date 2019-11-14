@@ -24,7 +24,8 @@ export class HelloWorld {
     }
 }`,            
             'src/test.css': '',
-            'src/types.d.ts': ''
+            'src/types.d.ts': '',
+            'src/try.svg': ''
         }
         results.directory =  await createWorkspace(component, {
             env: 'dist/src/index.js',
@@ -39,8 +40,10 @@ export class HelloWorld {
         helper.scopeHelper.initWorkspace(results.directory)
         helper.command.addComponent('src/comp.tsx', {}, results.directory)
         helper.command.runCmd('bit add src/test.css --id comp', results.directory)
-        helper.command.runCmd('bit add src/types.d.ts --id comp', results.directory);
-        const output = helper.env.command.runCmd('bit build comp', results.directory)
+        helper.command.runCmd('bit add src/types.d.ts --id comp', results.directory)
+        helper.command.runCmd('bit add src/try.svg --id comp', results.directory);
+        helper.env.command.runCmd('bit build comp', results.directory)
+        // const output = helper.env.command.runCmd('bit build comp', results.directory)
         // console.log('------------output------------')
         // console.log(output)
         // console.log('------------output------------')
@@ -61,5 +64,6 @@ export class HelloWorld {
     it('should copy non dist files', function(){ 
         expect(!!~results.files.indexOf('test.css')).to.be.true
         expect(!!~results.files.indexOf('types.d.ts')).to.be.true
+        expect(!!~results.files.indexOf('try.svg')).to.be.true
     })
 })
