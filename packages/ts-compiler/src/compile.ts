@@ -164,20 +164,23 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
     
     const capsuleDir = context.directory
     const compDistRoot = path.resolve(capsuleDir, 'dist')
-
     const ignoreFunction = function (file:string, _stats: Stats) {
+        if (file.endsWith('.d.ts')){
+            return false
+        }
         const defaultIgnore = [
             '/node_modules/',
             '/dist/',
             '.dependencies',
+            '.ts'
         ]
-        return defaultIgnore.concat(copyPolicy.ignorePatterns)
-                     .reduce(function (prev, curr) {
-                        return prev || !!~file.indexOf(curr)
-                     }, false)
+        return defaultIgnore
+                .concat(copyPolicy.ignorePatterns)
+                .reduce(function (prev, curr) {
+                    return prev || !!~file.indexOf(curr)
+                }, false)
     }
-
-    const fileList = await readdir(capsuleDir, ['*.ts', '*.tsx', ignoreFunction])
+    const fileList = await readdir(capsuleDir, ['*.tsx', ignoreFunction])
     const readFiles = await Promise.all(fileList.map(file => {
         return fs.readFile(file)
     }))
