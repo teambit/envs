@@ -5,7 +5,7 @@ import {presetStore} from '../src/preset'
 import { expect } from 'chai';
 import rimraf = require('rimraf');
 
-describe.only('typescript react', () => {
+describe('typescript react', () => {
     const helper = new Helper()
     const results: {
         directory: string,
