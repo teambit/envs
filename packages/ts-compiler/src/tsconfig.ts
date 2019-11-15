@@ -28,7 +28,6 @@ export function getTSConfig(isDev:boolean, overrideConfig:GenericObject) {
       removeComments: !isDev,
       typeRoots: [
         "./node_modules/@types", // be able to consume @types.
-        "./node_modules/@bit/qballer.react-scripts.types-env" // lookup custom types provided by compiler.
       ],
       // bundle size in component would be better if we don't depend on tslib.
       importHelpers: false,

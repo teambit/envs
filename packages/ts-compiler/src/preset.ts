@@ -27,7 +27,7 @@ export const presetStore:{[k:string]:Preset} = {
                 devDependencies: {
                     "@types/react": "16.9.11",
                     "@types/react-dom": "16.9.4",
-                    '@bit/qballer.react-scripts.types-env': '0.0.2'
+                    '@bit/qballer.env.types': '0.0.2'
                 },
                 peerDependencies: {
                     "react": "^16.11.0",
@@ -38,15 +38,15 @@ export const presetStore:{[k:string]:Preset} = {
         getDynamicConfig(){
             return {
                 tsconfig: {
-                    lib: [
-                        "dom",
-                        "es2015"
-                    ],
-                    jsx: 'react',
-                    typeRoots: [
-                        "./node_modules/@types", // be able to consume @types.
-                        "./node_modules/@bit/qballer.react-scripts.types-env" // lookup custom types provided by compiler.
-                    ],
+                    extends: '@bit/qballer.env.types/tsconfig.json',
+                    compilerOptions: {
+                        lib: [
+                            'dom',
+                            'es2015'
+                        ],
+                        jsx: 'react',
+                    },
+                    "include": ["./**/*"],
                 }
             }
         }

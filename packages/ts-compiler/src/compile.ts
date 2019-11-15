@@ -165,7 +165,6 @@ async function collectNonDistFiles(context:CompilationContext): Promise<Vinyl[]>
     const capsuleDir = context.directory
     const compDistRoot = path.resolve(capsuleDir, 'dist')
     const ignoreFunction = function (file:string, _stats: Stats) {
-        console.log('file', file)
         if (file.endsWith('.d.ts')){
             return false
         }

@@ -30,7 +30,7 @@ export class TypescriptCompiler implements Compiler {
         return deps
     }
     getDynamicConfig(ctx: CompilerContext) {
-        let defaultConfig = {
+        const defaultConfig = {
             tsconfig: {},
             development: false, 
             copyPolicy: {
@@ -39,7 +39,7 @@ export class TypescriptCompiler implements Compiler {
             }
         }
         const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(): {}
-        const config =  merge({}, defaultConfig, presetConfig, ctx.rawConfig) 
+        const config = merge({}, defaultConfig, presetConfig, ctx.rawConfig) 
         return config
     }
 
