@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "clean": "./.taskfile clean",
-    "test": "bit test",
+    "test": "./.taskfile run_test",
+    "prettier": "node_modules/.bin/prettier --write \"./**/**/*.ts\"",
     "build": "run-s build:bit",
     "build:bit": "bit build",
+    "pre-commit": "run-s prettier",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix --jsx",
     "watch": "bit watch",
     "postinstall": "./.taskfile post_install "
@@ -19,6 +21,7 @@
     "@types/mocha": "^5.2.7",
     "execa": "^2.0.4",
     "recursive-readdir": "^2.2.2",
+    "tslint-config-prettier": "^1.18.0",
     "uuid": "^3.3.3",
     "vinyl": "^2.2.0"
   },
@@ -34,9 +37,17 @@
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.3",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.18.2",
-    "ts-node": "^8.3.0"
+    "prettier": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.20.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn pre-commit"
+    }
   },
   "bit": {
     "env": {

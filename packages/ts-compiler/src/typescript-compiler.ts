@@ -1,38 +1,52 @@
-import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from "./compiler";
-import { compile } from './compile'
-import { DependenciesJSON, Preset, presetStore } from "./preset";
+import { merge } from 'lodash';
+import { compile } from './compile';
+import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from './compiler';
+import { Preset, presetStore } from './preset';
 
-const CONFIG_NAME = 'tsconfig'
+const CONFIG_NAME = 'tsconfig';
 
 export class TypescriptCompiler implements Compiler {
-    private preset: Preset = presetStore.NONE
-    init(ctx: { api: InitAPI }) {
-        return {
-            write: true
-        }
-    }
+  private _logger: Logger | undefined;
+  private preset: Preset;
 
-    getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-        return this.preset.getDynamicPackageDependencies 
-            ? this.preset.getDynamicPackageDependencies()
-            : {}
-    }
-    
-    getDynamicConfig(ctx: CompilerContext) {
-        const config = Object.assign({
-            tsconfig: {},
-            development: false, 
-            copyPolicy: {
-                ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'], 
-                disable: false 
-            }
-        }, ctx.rawConfig)
-        this.preset = presetStore[config.preset || 'NONE']
-        return config
-    }
+  constructor(preset = 'NONE') {
+    this.preset = presetStore[preset] || presetStore.NONE;
+    this.getDynamicPackageDependencies = this.getDynamicPackageDependencies.bind(this);
+    this.getDynamicConfig = this.getDynamicConfig.bind(this);
+    this.action = this.action.bind(this);
+  }
 
-    async action(ctx: CompilerContext):Promise<ActionReturnType> {
-        const compileResult = await compile(ctx, this.preset)
-        return compileResult
-    }
+  public init(ctx: { api: InitAPI }) {
+    this._logger = ctx.api.getLogger();
+    return {
+      write: true
+    };
+  }
+
+  public getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
+    const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {};
+    return deps;
+  }
+  public getDynamicConfig(ctx: CompilerContext) {
+    const defaultConfig = {
+      tsconfig: {},
+      development: false,
+      copyPolicy: {
+        ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'],
+        disable: false
+      }
+    };
+    const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig() : {};
+    const config = merge({}, defaultConfig, presetConfig, ctx.rawConfig);
+    return config;
+  }
+
+  public async action(compilerContext: CompilerContext): Promise<ActionReturnType> {
+    const compileResult = await compile(compilerContext, this.preset);
+    return compileResult;
+  }
+
+  get logger(): Logger | undefined {
+    return this._logger;
+  }
 }
