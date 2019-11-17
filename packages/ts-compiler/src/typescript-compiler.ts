@@ -1,7 +1,7 @@
-import { Compiler, InitAPI, CompilerContext, Logger, ActionReturnType } from './compiler'
-import { compile } from './compile'
-import { Preset, presetStore } from './preset'
 import { merge } from 'lodash'
+import { compile } from './compile'
+import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from './compiler'
+import { Preset, presetStore } from './preset'
 
 const CONFIG_NAME = 'tsconfig'
 
@@ -16,18 +16,18 @@ export class TypescriptCompiler implements Compiler {
     this.action = this.action.bind(this)
   }
 
-  init(ctx: { api: InitAPI }) {
+  public init(ctx: { api: InitAPI }) {
     this._logger = ctx.api.getLogger()
     return {
       write: true,
     }
   }
 
-  getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
+  public getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
     const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {}
     return deps
   }
-  getDynamicConfig(ctx: CompilerContext) {
+  public getDynamicConfig(ctx: CompilerContext) {
     const defaultConfig = {
       tsconfig: {},
       development: false,
@@ -41,7 +41,7 @@ export class TypescriptCompiler implements Compiler {
     return config
   }
 
-  async action(compilerContext: CompilerContext): Promise<ActionReturnType> {
+  public async action(compilerContext: CompilerContext): Promise<ActionReturnType> {
     const compileResult = await compile(compilerContext, this.preset)
     return compileResult
   }

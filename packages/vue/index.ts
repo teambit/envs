@@ -1,7 +1,7 @@
-import Vinyl from 'vinyl'
-import path from 'path'
-import webpack from 'webpack'
 import MemoryFS from 'memory-fs'
+import path from 'path'
+import Vinyl from 'vinyl'
+import webpack from 'webpack'
 import getConfig from './webpack.config'
 
 const runWebpack = (files: Vinyl[], distPath: string) => {

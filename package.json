@@ -6,8 +6,10 @@
   "scripts": {
     "clean": "./.taskfile clean",
     "test": "./.taskfile run_test",
+    "prettier": "node_modules/.bin/prettier --write \"./**/**/*.ts\"",
     "build": "run-s build:bit",
     "build:bit": "bit build",
+    "pre-commit": "run-s prettier",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix --jsx",
     "watch": "bit watch",
     "postinstall": "./.taskfile post_install "
@@ -41,6 +43,10 @@
     "prettier": "^1.19.1",
     "ts-node": "^8.3.0",
     "tslint": "^5.20.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn pre-commit"
   },
   "bit": {
     "env": {

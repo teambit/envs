@@ -1,14 +1,14 @@
 import { GenericObject } from './compiler'
 
-export type GenericStringObject = { [k: string]: string }
+export interface GenericStringObject { [k: string]: string }
 
-export type DependenciesJSON = {
+export interface DependenciesJSON {
   dependencies?: GenericStringObject
   devDependencies?: GenericStringObject
   peerDependencies?: GenericStringObject
 }
 
-export type CopyPolicy = {
+export interface CopyPolicy {
   ignorePatterns: string[]
   disable: boolean
 }

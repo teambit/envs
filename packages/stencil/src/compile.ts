@@ -1,14 +1,14 @@
-import path from 'path'
-import { GenericObject, CompilerContext } from '@bit/bit.envs.common.compiler-types'
+import { CompilerContext, GenericObject } from '@bit/bit.envs.common.compiler-types'
 import {
+  CompilationContext,
+  createCompiler,
   createTSConfig,
   runNodeScriptInDir,
-  createCompiler,
-  CompilationContext,
 } from '@bit/bit.envs.common.create-ts-compiler'
-import tsconfig from './tsconfig'
 import '@stencil/core'
 import { promises as fs, Stats } from 'fs'
+import path from 'path'
+import tsconfig from './tsconfig'
 
 const compiledFileTypes = ['ts', 'tsx']
 

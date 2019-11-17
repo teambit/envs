@@ -1,17 +1,17 @@
-import path, { relative, sep } from 'path'
 import execa from 'execa'
+import { promises as fs, Stats } from 'fs'
+import path, { relative, sep } from 'path'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
-import { promises as fs, Stats } from 'fs'
-import { GenericObject, CompilerContext } from './compiler'
+import { CompilerContext, GenericObject } from './compiler'
 
 import 'typescript'
 
 const DEBUG_FLAG = 'DEBUG'
 const compiledFileTypes = ['ts', 'tsx']
+import { CopyPolicy, Preset } from './preset'
 import { getTSConfig } from './tsconfig'
 import { getCapsuleName } from './utils'
-import { Preset, CopyPolicy } from './preset'
 
 export interface CompilationContext {
   directory: string

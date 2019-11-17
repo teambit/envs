@@ -1,9 +1,9 @@
-import path from 'path'
 import execa from 'execa'
+import { promises as fs, Stats } from 'fs'
+import path from 'path'
 import readdir from 'recursive-readdir'
 import Vinyl from 'vinyl'
-import { promises as fs, Stats } from 'fs'
-import { GenericObject, CompilerContext } from './compiler-types'
+import { CompilerContext, GenericObject } from './compiler-types'
 
 const DEBUG_FLAG = 'DEBUG'
 import { getCapsuleName } from './get-capsule-name'

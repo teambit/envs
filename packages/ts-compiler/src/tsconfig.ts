@@ -1,6 +1,6 @@
-import { Preset } from './preset'
-import { GenericObject } from './compiler'
 import { merge } from 'lodash'
+import { GenericObject } from './compiler'
+import { Preset } from './preset'
 
 export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
   const defaultOptions = {

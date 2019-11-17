@@ -1,6 +1,6 @@
 import Vinyl from 'vinyl'
 
-export type GenericObject = { [key: string]: any }
+export interface GenericObject { [key: string]: any }
 
 export interface InitAPI {
   getLogger: () => Logger
@@ -17,8 +17,8 @@ export interface InitOptions {
 
 export interface CompilerContext {
   context: GenericObject
-  configFiles: Array<Vinyl>
-  files: Array<Vinyl>
+  configFiles: Vinyl[]
+  files: Vinyl[]
   rawConfig: GenericObject
   dynamicConfig?: GenericObject
   api?: any

@@ -1,9 +1,9 @@
-import { createWorkspace } from './create-workspace'
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper'
-import { GenericObject } from '../src/compiler'
-import { presetStore } from '../src/preset'
 import { expect } from 'chai'
 import rimraf = require('rimraf')
+import { GenericObject } from '../src/compiler'
+import { presetStore } from '../src/preset'
+import { createWorkspace } from './create-workspace'
 
 describe('typescript react', () => {
   const helper = new Helper()
