@@ -1,6 +1,6 @@
-import { merge } from 'lodash'
-import { GenericObject } from './compiler'
-import { Preset } from './preset'
+import { merge } from 'lodash';
+import { GenericObject } from './compiler';
+import { Preset } from './preset';
 
 export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
   const defaultOptions = {
@@ -27,15 +27,15 @@ export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
       rootDir: './',
       removeComments: !isDev,
       typeRoots: [
-        './node_modules/@types', // be able to consume @types.
+        './node_modules/@types' // be able to consume @types.
       ],
       // bundle size in component would be better if we don't depend on tslib.
-      importHelpers: false,
+      importHelpers: false
     },
     include: ['./**/*'],
-    exclude: ['node_modules', '.dependencies', 'dist'],
-  }
-  return merge({}, defaultOptions, overrideConfig)
+    exclude: ['node_modules', '.dependencies', 'dist']
+  };
+  return merge({}, defaultOptions, overrideConfig);
 }
 
 /*

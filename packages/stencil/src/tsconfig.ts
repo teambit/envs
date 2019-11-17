@@ -11,7 +11,7 @@ export default {
     noUnusedLocals: true,
     noUnusedParameters: true,
     jsx: 'react',
-    jsxFactory: 'h',
+    jsxFactory: 'h'
   },
-  exclude: ['dist', '.dependencies', 'node_modules'],
-}
+  exclude: ['dist', '.dependencies', 'node_modules']
+};

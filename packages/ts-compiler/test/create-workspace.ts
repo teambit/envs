@@ -1,41 +1,41 @@
-import { promises as fs } from 'fs'
-import mkdirp, { Options } from 'mkdirp'
-import path from 'path'
-import { getCapsuleName } from '../src/utils'
+import { promises as fs } from 'fs';
+import mkdirp, { Options } from 'mkdirp';
+import path from 'path';
+import { getCapsuleName } from '../src/utils';
 
 export async function createWorkspace(content: WorkspaceContent, options: WorkspaceOptions): Promise<string> {
-  const targetDir = getCapsuleName('space')
-  enrichContentWithDefaults(content, options)
-  await createFS(targetDir, content)
-  return targetDir
+  const targetDir = getCapsuleName('space');
+  enrichContentWithDefaults(content, options);
+  await createFS(targetDir, content);
+  return targetDir;
 }
 export interface WorkspaceOptions {
-  env: string
-  name: string
-  packageJSON?: { [k: string]: any }
+  env: string;
+  name: string;
+  packageJSON?: { [k: string]: any };
 }
 
 export interface WorkspaceContent {
-  [k: string]: string
+  [k: string]: string;
 }
 
 function mkdirPromise(dir: string, opts: Options) {
   return new Promise((resolve, reject) => {
-    mkdirp(dir, opts, (err, made) => (err === null ? resolve(made) : reject(err)))
-  })
+    mkdirp(dir, opts, (err, made) => (err === null ? resolve(made) : reject(err)));
+  });
 }
 
 async function createFS(targetDir: string, content: WorkspaceContent) {
-  await mkdirPromise(targetDir, {})
+  await mkdirPromise(targetDir, {});
   await Promise.all(
     Object.keys(content).map(async key => {
-      const realPath = path.join(targetDir, key)
-      const containingFolder = path.dirname(realPath)
-      await mkdirPromise(containingFolder, {})
-      const filePath = path.resolve(targetDir, key)
-      await fs.writeFile(filePath, content[key])
+      const realPath = path.join(targetDir, key);
+      const containingFolder = path.dirname(realPath);
+      await mkdirPromise(containingFolder, {});
+      const filePath = path.resolve(targetDir, key);
+      await fs.writeFile(filePath, content[key]);
     })
-  )
+  );
 }
 
 function enrichContentWithDefaults(content: WorkspaceContent, options: WorkspaceOptions) {
@@ -49,18 +49,18 @@ function enrichContentWithDefaults(content: WorkspaceContent, options: Workspace
           compiler: {
             meta: {
               options: {
-                file: path.resolve(options.env),
-              },
-            },
-          },
+                file: path.resolve(options.env)
+              }
+            }
+          }
         },
         componentsDefaultDirectory: 'components/{name}',
-        packageManager: 'npm',
-      },
+        packageManager: 'npm'
+      }
     },
     options.packageJSON || {}
-  )
+  );
 
-  content['package.json'] = content['package.json'] || JSON.stringify(packageJSON, null, 4)
-  content['.gitignore'] = content['.gitignore'] || `dist\nnode_modules\n`
+  content['package.json'] = content['package.json'] || JSON.stringify(packageJSON, null, 4);
+  content['.gitignore'] = content['.gitignore'] || `dist\nnode_modules\n`;
 }

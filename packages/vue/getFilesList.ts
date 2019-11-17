@@ -1,7 +1,7 @@
-import Vinyl from 'vinyl'
+import Vinyl from 'vinyl';
 
 const getFilesList = (files: Vinyl[]) => {
-  const list: { [key: string]: any } = {}
+  const list: { [key: string]: any } = {};
 
   files.forEach(file => {
     if (list[file.stem] && list[file.stem][0].endsWith('.js')) {
@@ -11,11 +11,11 @@ const getFilesList = (files: Vinyl[]) => {
       // TODO: this should be done by pointing to the component main file
       // rather than doing this hack
     } else {
-      list[file.stem] = [file.path]
+      list[file.stem] = [file.path];
     }
-  })
+  });
 
-  return list
-}
+  return list;
+};
 
-export default getFilesList
+export default getFilesList;

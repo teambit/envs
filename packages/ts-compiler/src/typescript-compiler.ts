@@ -1,31 +1,31 @@
-import { merge } from 'lodash'
-import { compile } from './compile'
-import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from './compiler'
-import { Preset, presetStore } from './preset'
+import { merge } from 'lodash';
+import { compile } from './compile';
+import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from './compiler';
+import { Preset, presetStore } from './preset';
 
-const CONFIG_NAME = 'tsconfig'
+const CONFIG_NAME = 'tsconfig';
 
 export class TypescriptCompiler implements Compiler {
-  private _logger: Logger | undefined
-  private preset: Preset
+  private _logger: Logger | undefined;
+  private preset: Preset;
 
   constructor(preset = 'NONE') {
-    this.preset = presetStore[preset] || presetStore.NONE
-    this.getDynamicPackageDependencies = this.getDynamicPackageDependencies.bind(this)
-    this.getDynamicConfig = this.getDynamicConfig.bind(this)
-    this.action = this.action.bind(this)
+    this.preset = presetStore[preset] || presetStore.NONE;
+    this.getDynamicPackageDependencies = this.getDynamicPackageDependencies.bind(this);
+    this.getDynamicConfig = this.getDynamicConfig.bind(this);
+    this.action = this.action.bind(this);
   }
 
   public init(ctx: { api: InitAPI }) {
-    this._logger = ctx.api.getLogger()
+    this._logger = ctx.api.getLogger();
     return {
-      write: true,
-    }
+      write: true
+    };
   }
 
   public getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-    const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {}
-    return deps
+    const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {};
+    return deps;
   }
   public getDynamicConfig(ctx: CompilerContext) {
     const defaultConfig = {
@@ -33,20 +33,20 @@ export class TypescriptCompiler implements Compiler {
       development: false,
       copyPolicy: {
         ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'],
-        disable: false,
-      },
-    }
-    const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig() : {}
-    const config = merge({}, defaultConfig, presetConfig, ctx.rawConfig)
-    return config
+        disable: false
+      }
+    };
+    const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig() : {};
+    const config = merge({}, defaultConfig, presetConfig, ctx.rawConfig);
+    return config;
   }
 
   public async action(compilerContext: CompilerContext): Promise<ActionReturnType> {
-    const compileResult = await compile(compilerContext, this.preset)
-    return compileResult
+    const compileResult = await compile(compilerContext, this.preset);
+    return compileResult;
   }
 
   get logger(): Logger | undefined {
-    return this._logger
+    return this._logger;
   }
 }

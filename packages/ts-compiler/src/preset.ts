@@ -1,25 +1,25 @@
-import { GenericObject } from './compiler'
+import { GenericObject } from './compiler';
 
 export interface GenericStringObject {
-  [k: string]: string
+  [k: string]: string;
 }
 
 export interface DependenciesJSON {
-  dependencies?: GenericStringObject
-  devDependencies?: GenericStringObject
-  peerDependencies?: GenericStringObject
+  dependencies?: GenericStringObject;
+  devDependencies?: GenericStringObject;
+  peerDependencies?: GenericStringObject;
 }
 
 export interface CopyPolicy {
-  ignorePatterns: string[]
-  disable: boolean
+  ignorePatterns: string[];
+  disable: boolean;
 }
 
 export interface Preset {
-  getDynamicPackageDependencies?(): DependenciesJSON
-  getDynamicConfig?(): GenericObject
-  runCompiler?(): Promise<void>
-  preCompile?(): Promise<void>
+  getDynamicPackageDependencies?(): DependenciesJSON;
+  getDynamicConfig?(): GenericObject;
+  runCompiler?(): Promise<void>;
+  preCompile?(): Promise<void>;
 }
 
 export const presetStore: { [k: string]: Preset } = {
@@ -29,13 +29,13 @@ export const presetStore: { [k: string]: Preset } = {
         devDependencies: {
           '@types/react': '16.9.11',
           '@types/react-dom': '16.9.4',
-          '@bit/qballer.env.types': '0.0.2',
+          '@bit/qballer.env.types': '0.0.2'
         },
         peerDependencies: {
           react: '^16.11.0',
-          'react-dom': '^16.11.0',
-        },
-      }
+          'react-dom': '^16.11.0'
+        }
+      };
     },
 
     getDynamicConfig() {
@@ -44,12 +44,12 @@ export const presetStore: { [k: string]: Preset } = {
           extends: '@bit/qballer.env.types/tsconfig.json',
           compilerOptions: {
             lib: ['dom', 'es2015'],
-            jsx: 'react',
+            jsx: 'react'
           },
-          include: ['./**/*'],
-        },
-      }
-    },
+          include: ['./**/*']
+        }
+      };
+    }
   },
-  NONE: {},
-}
+  NONE: {}
+};
