@@ -31,7 +31,9 @@ export function getTSConfig(isDev:boolean, overrideConfig:GenericObject) {
       ],
       // bundle size in component would be better if we don't depend on tslib.
       importHelpers: false,
-    }
+    },
+    include: ['./**/*'],
+    exclude: ['node_modules', '.dependencies', 'dist']
   }
   return merge({}, defaultOptions, overrideConfig )
 }

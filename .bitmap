@@ -161,6 +161,16 @@
                 "test": false
             },
             {
+                "relativePath": "packages/ts-compiler/test/compile-react.spec.ts",
+                "test": false,
+                "name": "compile-react.spec.ts"
+            },
+            {
+                "relativePath": "packages/ts-compiler/test/compile.spec.ts",
+                "test": false,
+                "name": "compile.spec.ts"
+            },
+            {
                 "name": "create-workspace.ts",
                 "relativePath": "packages/ts-compiler/test/create-workspace.ts",
                 "test": false
@@ -171,9 +181,9 @@
                 "test": false
             },
             {
-                "name": "test-compile.spec.ts",
-                "relativePath": "packages/ts-compiler/test/test-compile.spec.ts",
-                "test": true
+                "relativePath": "packages/ts-compiler/test/typescript-react.ts",
+                "test": false,
+                "name": "typescript-react.ts"
             },
             {
                 "relativePath": "packages/ts-compiler/tsconfig.json",

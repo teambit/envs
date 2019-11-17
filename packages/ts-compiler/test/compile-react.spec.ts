@@ -21,6 +21,7 @@ describe('typescript react', () => {
         const component = {
             'src/comp.tsx': `import React from 'react'
 import style from './test.css'
+import svgs from './try.svg'
 export class HelloWorld {
     render() {
         return <div>Hello-World</div>
