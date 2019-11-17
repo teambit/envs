@@ -10,6 +10,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: install
-      run: npm i 
+      run: |
+        npm config set @bit:registry https://node.bit.dev
+        npm i 
+
     - name: run tests
       run: npm run test
