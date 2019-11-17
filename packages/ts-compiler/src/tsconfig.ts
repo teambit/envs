@@ -37,4 +37,3 @@ export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
   };
   return merge({}, defaultOptions, overrideConfig);
 }
-
