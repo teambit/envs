@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "./.taskfile clean",
-    "test": "bit test",
+    "test": "./.taskfile run_test",
     "build": "run-s build:bit",
     "build:bit": "bit build",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix --jsx",

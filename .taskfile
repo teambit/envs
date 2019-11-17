@@ -16,6 +16,12 @@ function clean(){
     eachPackageDo "rm -rf dist"
 }
 
+function run_test(){
+    cd packages/ts-compiler
+    npm run test:hero
+}
+
+
 function post_install() {
     eachPackageDo "npm i"
 }
