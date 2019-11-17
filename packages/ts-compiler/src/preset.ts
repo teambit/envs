@@ -1,6 +1,8 @@
 import { GenericObject } from './compiler'
 
-export interface GenericStringObject { [k: string]: string }
+export interface GenericStringObject {
+  [k: string]: string
+}
 
 export interface DependenciesJSON {
   dependencies?: GenericStringObject

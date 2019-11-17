@@ -1,6 +1,8 @@
 import Vinyl from 'vinyl'
 
-export interface GenericObject { [key: string]: any }
+export interface GenericObject {
+  [key: string]: any
+}
 
 export interface InitAPI {
   getLogger: () => Logger

@@ -14,7 +14,7 @@ describe('typescript', () => {
     directory: '',
     files: [],
   }
-  before(async function(){
+  before(async function() {
     this.timeout(1000 * 10 * 10)
     const component = {
       'src/comp.tsx': `import React from 'react'
