@@ -1,11 +1,8 @@
 {
   "printWidth": 120,
-  "proseWrap": "preserve",
-  "semi": false,
+  "parser": "typescript",
   "singleQuote": true,
-  "useTabs": false,
   "tabWidth": 2,
-  "arrowParens": "avoid",
-  "trailingComma": "es5",
-  "parser":"typescript"
+  "useTabs": false,
+  "bracketSpacing": true
 }
