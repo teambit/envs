@@ -24,7 +24,8 @@
     "recursive-readdir": "^2.2.2",
     "tslint-config-prettier": "^1.18.0",
     "uuid": "^3.3.3",
-    "vinyl": "^2.2.0"
+    "vinyl": "^2.2.0",
+    "@bit/bit.envs.compilers.react-typescript": "file:./packages/react-typescript"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -58,6 +59,11 @@
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",
     "overrides": {
+      "compilers/react-typescript": {
+        "env": {
+          "compiler": "bit.envs/compilers/typescript@3.0.31"
+        }
+      },
       "*": {
         "devDependencies": {
           "@types/node": "+",

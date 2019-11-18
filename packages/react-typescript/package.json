@@ -1,0 +1,18 @@
+{
+  "name": "@bit/bit.envs.compilers.react-typescript",
+  "version": "3.0.30",
+  "homepage": "https://bit.dev/bit/envs/compilers/react-typescript",
+  "main": "dist/index.js",
+  "dependencies": {
+    "@bit/bit.envs.compilers.typescript": null,
+    "@types/node": "^12.12.8"
+  },
+  "devDependencies": {},
+  "peerDependencies": {},
+  "license": "SEE LICENSE IN LICENSE",
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/babel@0.0.7"
+    }
+  }
+}

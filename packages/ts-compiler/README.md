@@ -51,12 +51,14 @@ This config state is as if you would configure the compiler as following by hand
     "bit": {
         "env": {
             "compiler": {
-                "bit.envs/compilers/typescript@[version]": { 
-                    "tsconfig": {},
-                    "development": false
-                    "copyPolicy": {
-                        "ignorePatterns": ["package.json", "package-lock.json"], 
-                        "disable": false
+                "bit.envs/compilers/typescript@[version]": {
+                    "rawConfig: {
+                        "tsconfig": {},
+                        "development": false
+                        "copyPolicy": {
+                            "ignorePatterns": ["package.json", "package-lock.json"], 
+                            "disable": false
+                        }
                     }
                 }
             }
