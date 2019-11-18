@@ -1,4 +1,17 @@
 # Envs - Development environments for components
+  
+  https://github.com/teambit/envs/workflows/ci/badge.svg
+
+  <a href="https://opensource.org/licenses/Apache-2.0"><img alt="apache" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
+ [![Gitter chat](https://badgen.now.sh/badge/chat/on%20gitter/cyan)](https://gitter.im/bit-src/Bit)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+  
+A curated list of **Extensions** maintained by Bit's [maintainers](https://github.com/orgs/teambit/people) to use as Envs for components. These extensions implement best practices for distributing components and setting them up to be reused across projects.
+
+<p align="center">
+  <a href="https://bit.dev/bit/envs"><img src="https://storage.googleapis.com/bit-docs/Screen%20Shot%202019-06-06%20at%201.26.32%20PM.png"></a>
+</p>
+
 
 A curated list of **Extensions** maintained by Bit's [maintainers](https://github.com/orgs/teambit/people) to use as Envs for components. These extensions implement best practices for distributing components and setting them up to be reused across projects.
 

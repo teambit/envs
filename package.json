@@ -12,7 +12,8 @@
     "pre-commit": "run-s prettier",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix --jsx",
     "watch": "bit watch",
-    "postinstall": "./.taskfile post_install "
+    "postinstall": "./.taskfile post_install ",
+    "changelog": "node_modules/.bin/conventional-changelog -o CHANGELOG.md"
   },
   "keywords": [],
   "author": "Doron Tsur, <doron@bit.dev>",
@@ -34,6 +35,7 @@
     "@types/vinyl": "^2.0.3",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
+    "conventional-changelog-cli": "^2.0.27",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",
