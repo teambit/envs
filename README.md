@@ -11,15 +11,22 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
   <a href="https://bit.dev/bit/envs"><img src="https://storage.googleapis.com/bit-docs/Screen%20Shot%202019-06-06%20at%201.26.32%20PM.png"></a>
 </p>
 
+## Quick links
+
 [Browse Envs](https://bit.dev/bit/envs) • [Implementing Envs](https://docs.bit.dev/docs/building-components.html)
 
 [Compiler/Tester collection](https://bit.dev/bit/envs) • [Docs](https://docs.bit.dev/docs/building-components.html)
 
-## Packages
+| Which Compiler?    |                                                                         |                                                     |
+| ------------------ | ----------------------------------------------------------------------- | --------------------------------------------------- |
+| React JS           | [react](https://bit.dev/bit/envs/compilers/react)                       | `bit import bit.envs/compilers/react -c`            |
+| React TS           | [react-typescript](https://bit.dev/bit/envs/compilers/react-typescript) | `bit import bit.envs/compilers/react-typescript -c` |
+| Vue                | [vue](https://bit.dev/bit/envs/bundlers/vue)                            | `bit import bit.envs/bundlers/vue -c`               |
+| Angular            | [angular](https://bit.dev/bit/envs/compilers/angular)                   | `bit import bit.envs/compilers/angular -c`          |
+| Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)             | `bit import bit.envs/compilers/typescript -c`       |
+| Javascript Vanilla | [babel](<(https://bit.dev/bit/envs/compilers/typescript)>)              | `bit import bit.envs/compilers/babel -c`            |
 
-1. **Typescript** - [packages/ts-compiler](https://github.com/teambit/envs/tree/master/packages/ts-compiler)
-2. **Common** - [packages/common](https://github.com/teambit/envs/tree/master/packages/common)
-3. **Vue** - [packages/vue](https://github.com/teambit/envs/tree/master/packages/vue)
+|
 
 ## What is Bit?
 
