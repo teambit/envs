@@ -29,10 +29,10 @@ export const presetStore: { [k: string]: Preset } = {
         devDependencies: {
           '@types/react': '16.9.11',
           '@types/react-dom': '16.9.4',
-          '@bit/qballer.env.types': '0.0.2'
+          '@bit/bit.envs.types': '0.0.3'
         },
         peerDependencies: {
-          react: '^16.11.0',
+          'react': '^16.11.0',
           'react-dom': '^16.11.0'
         }
       };
