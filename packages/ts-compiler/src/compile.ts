@@ -4,7 +4,7 @@ import path, { relative, sep } from 'path';
 import readdir from 'recursive-readdir';
 import Vinyl from 'vinyl';
 import { CompilerContext, GenericObject } from './compiler';
-import {FIXED_OUT_DIR} from './tsconfig'
+import { FIXED_OUT_DIR } from './tsconfig';
 import 'typescript';
 
 const DEBUG_FLAG = 'DEBUG';

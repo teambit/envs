@@ -1,10 +1,10 @@
-import { getTSConfig } from "../src/tsconfig"
-import { exportAllDeclaration } from "@babel/types"
-import { expect } from "chai"
+import { getTSConfig } from '../src/tsconfig';
+import { exportAllDeclaration } from '@babel/types';
+import { expect } from 'chai';
 
-describe('tsconfig', function(){
-    it('out dir can not be changed', function () {
-        const config = getTSConfig(true, {compilerOptions:{ outDir: 'other'}})
-        expect(config.compilerOptions.outDir).to.equal('dist')
-    })
-})
+describe('tsconfig', function() {
+  it('out dir can not be changed', function() {
+    const config = getTSConfig(true, { compilerOptions: { outDir: 'other' } });
+    expect(config.compilerOptions.outDir).to.equal('dist');
+  });
+});

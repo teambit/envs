@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import { GenericObject } from './compiler';
 
-export const FIXED_OUT_DIR = 'dist'
+export const FIXED_OUT_DIR = 'dist';
 export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
   const defaultOptions = {
     compilerOptions: {
@@ -38,11 +38,11 @@ export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
   };
 
   const config = merge({}, defaultOptions, overrideConfig);
-  
+
   if (config.compilerOptions.outDir !== FIXED_OUT_DIR) {
-    console.warn('Forced outDir to be: "dist".')
-    config.compilerOptions.outDir = FIXED_OUT_DIR
+    console.warn('Forced outDir to be: "dist".');
+    config.compilerOptions.outDir = FIXED_OUT_DIR;
   }
-  
-  return config
+
+  return config;
 }
