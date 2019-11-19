@@ -32,8 +32,6 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 
 ### Which tester to use?
 
-//https://bit.dev/bit/envs/testers/mocha
-
 | Flavor | Env                                             | Import Command                         |
 | ------ | ----------------------------------------------- | -------------------------------------- |
 | Mocha  | [mocha](https://bit.dev/bit/envs/testers/mocha) | `bit import bit.envs/testers/mocha -t` |
