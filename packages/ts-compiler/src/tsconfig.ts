@@ -1,10 +1,11 @@
 import { merge } from 'lodash';
 import { GenericObject } from './compiler';
-import { Preset } from './preset';
 
+export const FIXED_OUT_DIR = 'dist'
 export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
   const defaultOptions = {
     compilerOptions: {
+      outDir: FIXED_OUT_DIR,
       // ES6 For production to accommodate old browsers/node. ES2017 to provide better debugging in development.
       target: isDev ? 'ES2017' : 'ES2015',
       // Only on dev mode.
@@ -33,7 +34,15 @@ export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
       importHelpers: false
     },
     include: ['./**/*'],
-    exclude: ['node_modules', '.dependencies', 'dist']
+    exclude: ['node_modules', '.dependencies', FIXED_OUT_DIR]
   };
-  return merge({}, defaultOptions, overrideConfig);
+
+  const config = merge({}, defaultOptions, overrideConfig);
+  
+  if (config.compilerOptions.outDir !== FIXED_OUT_DIR) {
+    console.warn('Forced outDir to be: "dist".')
+    config.compilerOptions.outDir = FIXED_OUT_DIR
+  }
+  
+  return config
 }

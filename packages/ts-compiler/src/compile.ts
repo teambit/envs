@@ -4,7 +4,7 @@ import path, { relative, sep } from 'path';
 import readdir from 'recursive-readdir';
 import Vinyl from 'vinyl';
 import { CompilerContext, GenericObject } from './compiler';
-
+import {FIXED_OUT_DIR} from './tsconfig'
 import 'typescript';
 
 const DEBUG_FLAG = 'DEBUG';
@@ -59,7 +59,7 @@ function getNonCompiledFiles(files: Vinyl[]) {
 }
 
 export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
-  const compDistRoot = path.resolve(context.directory, 'dist/');
+  const compDistRoot = path.resolve(context.directory, FIXED_OUT_DIR);
   const getNameOfFile = (val: string, split: string) => val.split(split)[0];
   const sourceFileName = getNameOfFile(context.main, '.ts');
   const pathPrefix = `${compDistRoot}${compDistRoot.endsWith('/') ? '' : '/'}`;
@@ -118,7 +118,6 @@ async function createTSConfig(context: CompilationContext) {
   const configUserOverrides = context.cc.dynamicConfig!.tsconfig;
   const content: GenericObject = getTSConfig(false, configUserOverrides);
   const pathToConfig = getTSConfigPath(context);
-  content.compilerOptions.outDir = 'dist';
   return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));
 }
 
@@ -135,7 +134,7 @@ async function isolate(cc: CompilerContext) {
 
 async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
   const capsuleDir = context.directory;
-  const compDistRoot = path.resolve(capsuleDir, 'dist');
+  const compDistRoot = path.resolve(capsuleDir, FIXED_OUT_DIR);
   const files = await readdir(compDistRoot);
   const readFiles = await Promise.all(
     files.map(file => {
@@ -143,7 +142,7 @@ async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
     })
   );
   return files.map((file, index) => {
-    const relativePath = path.relative(path.join(capsuleDir, 'dist'), file);
+    const relativePath = path.relative(path.join(capsuleDir, FIXED_OUT_DIR), file);
     const pathToFile = path.join(compDistRoot, relativePath);
     let test = false;
     // Only check js files not d.ts or .map files
@@ -169,7 +168,7 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
   }
 
   const capsuleDir = context.directory;
-  const compDistRoot = path.resolve(capsuleDir, 'dist');
+  const compDistRoot = path.resolve(capsuleDir, FIXED_OUT_DIR);
   const ignoreFunction = function(file: string, _stats: Stats) {
     if (file.endsWith('.d.ts')) {
       return false;
