@@ -12,8 +12,8 @@ jobs:
           npm i
       - name: config bit
         run: |
-          node_modules/.bin/bit config set analytics_reporting false
-          node_modules/.bin/bit config set error_reporting false
-          node_modules/.bin/bit config set no_warnings true
+          packages/ts-compiler/node_modules/.bin/bit config set analytics_reporting false
+          packages/ts-compiler/node_modules/.bin/bit config set error_reporting false
+          packages/ts-compiler/node_modules/.bin/bit config set no_warnings true
       - name: run tests
         run: npm run test
