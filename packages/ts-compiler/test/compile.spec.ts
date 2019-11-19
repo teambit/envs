@@ -42,11 +42,11 @@ export class HelloWorld {
     helper.command.runCmd('bit add src/test.css --id comp', results.directory);
     helper.command.runCmd('bit add src/types.d.ts --id comp', results.directory);
     helper.command.runCmd('bit add src/try.svg --id comp', results.directory);
-    helper.command.runCmd('bit build comp', results.directory);
-    // const output = helper.env.command.runCmd('bit build comp', results.directory)
-    // console.log('------------output------------')
-    // console.log(output)
-    // console.log('------------output------------')
+    // helper.command.runCmd('bit build comp', results.directory);
+    const output = helper.env.command.runCmd('bit build comp', results.directory);
+    console.log('------------output------------');
+    console.log(output);
+    console.log('------------output------------');
     results.files = await fs.readdir(path.join(results.directory, '/dist'));
   });
   after(async () => {

@@ -1,18 +1,19 @@
 name: CI
 
 on: [push]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-    - name: install
-      run: |
-        npm config set @bit:registry https://node.bit.dev
-        npm i 
-
-    - name: run tests
-      run: npm run test
+      - uses: actions/checkout@v1
+      - name: install
+        run: |
+          npm config set @bit:registry https://node.bit.dev
+          npm i
+      - name: config bit
+        run: |
+          packages/ts-compiler/node_modules/.bin/bit config set analytics_reporting false
+          packages/ts-compiler/node_modules/.bin/bit config set error_reporting false
+          packages/ts-compiler/node_modules/.bin/bit config set no_warnings true
+      - name: run tests
+        run: npm run test

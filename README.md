@@ -1,11 +1,11 @@
 # Envs - Development environments for components
-  
-  https://github.com/teambit/envs/workflows/ci/badge.svg
 
-  <a href="https://opensource.org/licenses/Apache-2.0"><img alt="apache" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
- [![Gitter chat](https://badgen.now.sh/badge/chat/on%20gitter/cyan)](https://gitter.im/bit-src/Bit)
+[![Actions Status](https://github.com/teambit/envs/workflows/ci/badge.svg)](https://github.com/teambit/envs/actions)
+
+<a href="https://opensource.org/licenses/Apache-2.0"><img alt="apache" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
+[![Gitter chat](https://badgen.now.sh/badge/chat/on%20gitter/cyan)](https://gitter.im/bit-src/Bit)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-  
+
 A curated list of **Extensions** maintained by Bit's [maintainers](https://github.com/orgs/teambit/people) to use as dev tools for components. These extensions implement best practices for distributing components and setting them up to be reused across projects.
 
 <p align="center">
@@ -89,7 +89,7 @@ CSS-in-JS is a methodology that uses Javascript objects which describe the diffe
 
 #### Testing
 
-Testing is code which verifies that a component is functioning as expected of it. Many guides were written about the benefits of testing ([here](https://martinfowler.com/articles/microservice-testing/) [are](https://medium.com/javascript-scene/tdd-changed-my-life-5af0ce099f80) [some](https://www.youtube.com/watch?v=AoIfc5NwRks)). An important question is raised when we run our test: Which asset should be tested - source or target? Bit decided to test the target code. The main benefits of running the test over sources are source map support, and ease of use/debug. On the other hand, to have better confidence that the code will work in the consumer environment, it is preferred to test the target code over source code. This is because it also detects compilation-related errors. 
+Testing is code which verifies that a component is functioning as expected of it. Many guides were written about the benefits of testing ([here](https://martinfowler.com/articles/microservice-testing/) [are](https://medium.com/javascript-scene/tdd-changed-my-life-5af0ce099f80) [some](https://www.youtube.com/watch?v=AoIfc5NwRks)). An important question is raised when we run our test: Which asset should be tested - source or target? Bit decided to test the target code. The main benefits of running the test over sources are source map support, and ease of use/debug. On the other hand, to have better confidence that the code will work in the consumer environment, it is preferred to test the target code over source code. This is because it also detects compilation-related errors.
 
 ## How to contribute?
 
