@@ -8,6 +8,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: install
         run: |
+          npm i -g bit-bin
           npm config set @bit:registry https://node.bit.dev
           npm i
       - name: config bit
