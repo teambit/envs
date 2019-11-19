@@ -8,13 +8,12 @@ jobs:
       - uses: actions/checkout@v1
       - name: install
         run: |
-          npm i -g bit-bin
           npm config set @bit:registry https://node.bit.dev
           npm i
       - name: config bit
         run: |
-          bit config set analytics_reporting false
-          bit config set error_reporting false
-          bit config set no_warnings true
+          node_modules/.bin/bit config set analytics_reporting false
+          node_modules/.bin/bit config set error_reporting false
+          node_modules/.bin/bit config set no_warnings true
       - name: run tests
         run: npm run test
