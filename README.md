@@ -17,7 +17,7 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 
 [Compiler/Tester collection](https://bit.dev/bit/envs) • [Docs](https://docs.bit.dev/docs/building-components.html)
 
-| Which Compiler?    |                                                                         |                                                     |
+| Flavor             | Env                                                                     | Import Command                                      |
 | ------------------ | ----------------------------------------------------------------------- | --------------------------------------------------- |
 | React JS           | [react](https://bit.dev/bit/envs/compilers/react)                       | `bit import bit.envs/compilers/react -c`            |
 | React TS           | [react-typescript](https://bit.dev/bit/envs/compilers/react-typescript) | `bit import bit.envs/compilers/react-typescript -c` |
