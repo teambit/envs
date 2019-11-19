@@ -1,7 +1,6 @@
 # Envs - Development environments for components
 
 [![Actions Status](https://github.com/teambit/envs/workflows/CI/badge.svg)](https://github.com/teambit/envs/actions)
-
 <a href="https://opensource.org/licenses/Apache-2.0"><img alt="apache" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
 [![Gitter chat](https://badgen.now.sh/badge/chat/on%20gitter/cyan)](https://gitter.im/bit-src/Bit)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
