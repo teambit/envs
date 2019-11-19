@@ -17,6 +17,10 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 
 [Compiler/Tester collection](https://bit.dev/bit/envs) • [Docs](https://docs.bit.dev/docs/building-components.html)
 
+## Usage
+
+### Which compiler to use?
+
 | Flavor             | Env                                                                     | Import Command                                      |
 | ------------------ | ----------------------------------------------------------------------- | --------------------------------------------------- |
 | React JS           | [react](https://bit.dev/bit/envs/compilers/react)                       | `bit import bit.envs/compilers/react -c`            |
@@ -25,6 +29,14 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 | Angular            | [angular](https://bit.dev/bit/envs/compilers/angular)                   | `bit import bit.envs/compilers/angular -c`          |
 | Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)             | `bit import bit.envs/compilers/typescript -c`       |
 | Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/typescript)                  | `bit import bit.envs/compilers/babel -c`            |
+
+### Which tester to use?
+
+//https://bit.dev/bit/envs/testers/mocha
+
+| Flavor | Env                                             | Import Command                         |
+| ------ | ----------------------------------------------- | -------------------------------------- |
+| Mocha  | [mocha](https://bit.dev/bit/envs/testers/mocha) | `bit import bit.envs/testers/mocha -t` |
 
 ## What is Bit?
 
