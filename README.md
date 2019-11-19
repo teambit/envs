@@ -26,8 +26,6 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 | Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)             | `bit import bit.envs/compilers/typescript -c`       |
 | Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/typescript)                  | `bit import bit.envs/compilers/babel -c`            |
 
-|
-
 ## What is Bit?
 
 **Bit makes it easy to share and manage components between projects and apps at any scale**.
