@@ -111,9 +111,9 @@ Before submitting a PR please read our [code of conduct](https://github.com/team
 
 When creating a new environment please provide the following:
 
-1. A proposal document that describes the configuration options, tradeoffs and practices that are implemented.
-2. A PR with tests that covers the main points from the doc.
-3. Provide three projects the environment is applicable to and tested on.
+- A proposal document that describes the configuration options, tradeoffs and practices that are implemented.
+- A PR with tests that covers the main points from the doc.
+- Provide three projects the environment is applicable to and tested on.
 
 ## License
 
