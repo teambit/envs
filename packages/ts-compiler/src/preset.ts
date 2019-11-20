@@ -41,7 +41,7 @@ export const presetStore: { [k: string]: Preset } = {
     getDynamicConfig() {
       return {
         tsconfig: {
-          extends: '@bit/qballer.env.types/tsconfig.json',
+          extends: '@bit/bit.envs.types/tsconfig.json',
           compilerOptions: {
             lib: ['dom', 'es2015'],
             jsx: 'react'
