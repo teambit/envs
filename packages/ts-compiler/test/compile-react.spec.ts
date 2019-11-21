@@ -48,7 +48,11 @@ export class HelloWorld {
     Object.keys(pureComponent).forEach(relativeFilePath => {
       helper.command.runCmd(`bit add ${relativeFilePath} --id comp`, results.directory);
     });
-    helper.command.runCmd('bit build comp', results.directory);
+    //  const output = helper.command.runCmd('node --inspect-brk $(which bit) build comp', results.directory);
+    const output = helper.command.runCmd('bit build comp', results.directory);
+    console.log('------------output------------');
+    console.log(output);
+    console.log('------------output------------');
     results.showComponent = JSON.parse(helper.command.runCmd('bit show comp --json', results.directory));
   });
   after(async function() {

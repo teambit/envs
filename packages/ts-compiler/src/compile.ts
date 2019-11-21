@@ -4,7 +4,7 @@ import * as fs from 'fs-extra';
 import path, { relative, sep } from 'path';
 import readdir from 'recursive-readdir';
 import Vinyl from 'vinyl';
-import { CompilerContext, GenericObject } from './compiler';
+import { CompilerContext, GenericObject, CompilationContext } from './compiler';
 import { FIXED_OUT_DIR } from './tsconfig';
 import 'typescript';
 
@@ -14,23 +14,12 @@ import { CopyPolicy, Preset } from './preset';
 import { getTSConfig } from './tsconfig';
 import { getCapsuleName } from './utils';
 
-export interface CompilationContext {
-  directory: string;
-  name: string;
-  main: string;
-  dist: string;
-  capsule: GenericObject;
-  res: GenericObject;
-  cc: CompilerContext;
-  srcTestFiles: Vinyl[];
-}
-
-export async function compile(cc: CompilerContext, _preset: Preset) {
+export async function compile(cc: CompilerContext, preset: Preset) {
   const { res, directory } = await isolate(cc);
   const srcTestFiles = getSrcTestFiles(cc.files);
   const context = await createContext(res, directory, cc, srcTestFiles);
   let results = null;
-  await createTSConfig(context);
+  await preCompile(context, preset);
   if (getNonCompiledFiles(cc.files).length === cc.files.length) {
     const dists = await collectNonDistFiles(context);
     results = { dists };
@@ -42,6 +31,12 @@ export async function compile(cc: CompilerContext, _preset: Preset) {
     await context.capsule.destroy();
   }
   return results;
+}
+
+async function preCompile(context: CompilationContext, preset: Preset) {
+  return preset.preCompile
+    ? Promise.all([createTSConfig(context), preset.preCompile(context)])
+    : createTSConfig(context);
 }
 
 async function _compile(context: CompilationContext, cc: CompilerContext) {
@@ -109,6 +104,7 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
     result = await execa(scriptFile, args, { stdout: 1 });
   } catch (e) {
     process.chdir(cwd);
+    console.log();
     throw e;
   }
   process.chdir(cwd);
