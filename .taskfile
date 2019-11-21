@@ -26,7 +26,11 @@ function post_install() {
     eachPackageDo "npm i"
 }
 
+function print_tsconfig() {
+    result=$(node -e 'console.log(JSON.stringify(require("./packages/ts-compiler/dist/src/tsconfig.js").getTSConfig(false, {})))' | jq .)
+    printf "### Default Configuration used in capsule\n \`\`\`js\n $result\n \`\`\` \n" > packages/ts-compiler/config.md
+}
+
 TIMEFORMAT="Task completed in %3lR"
 time ${@:-default}
 
-# node -e 'console.log(JSON.stringify(require(\'./dist/src/tsconfig.js\').getTSConfig(false, {})))' | jq .

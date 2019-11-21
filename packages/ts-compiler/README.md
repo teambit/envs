@@ -74,3 +74,5 @@ This config state is as if you would configure the compiler as following by hand
 - **copyPolicy** - manage the copy policy.
 - **copyPolicy.ignorePatterns** - Array of patterns to exclude files from being copied.
 - **copyPolicy.disable** - turn off the copy policy.
+
+The default configuration without dev mode or overrides are mentioned [here](./config.md)
