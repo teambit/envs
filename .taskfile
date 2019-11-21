@@ -29,3 +29,4 @@ function post_install() {
 TIMEFORMAT="Task completed in %3lR"
 time ${@:-default}
 
+# node -e 'console.log(JSON.stringify(require(\'./dist/src/tsconfig.js\').getTSConfig(false, {})))' | jq .
