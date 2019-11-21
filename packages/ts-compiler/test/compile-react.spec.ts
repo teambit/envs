@@ -4,56 +4,18 @@ import rimraf = require('rimraf');
 import { GenericObject } from '../src/compiler';
 import { presetStore } from '../src/preset';
 import { createWorkspace } from './create-workspace';
+import { buildDefaultComponent, BuildResult } from './build-default-component';
 
 describe('typescript react', () => {
   const helper = new Helper();
-  const results: {
-    directory: string;
-    files: string[];
-    showComponent: GenericObject;
-  } = {
+  let results: BuildResult = {
     directory: '',
     files: [],
     showComponent: {}
   };
   before(async function() {
     this.timeout(1000 * 10 * 10);
-    const component = {
-      'src/comp.tsx': `import React from 'react'
-import style from './test.css'
-import svgs from './try.svg'
-export class HelloWorld {
-    render() {
-        return <div>Hello-World</div>
-    }
-}`,
-      'src/test.css': '',
-      'src/types.d.ts': '',
-      'src/try.svg': ''
-    };
-    const pureComponent = { ...component };
-    results.directory = await createWorkspace(component, {
-      env: 'dist/test/typescript-react.js',
-      name: 'typescript',
-      packageJSON: {
-        dependencies: {
-          '@types/react': '^16.9.11',
-          react: '^16.11.0'
-        }
-      }
-    });
-
-    helper.scopeHelper.initWorkspace(results.directory);
-    helper.command.addComponent('src/comp.tsx', {}, results.directory);
-    Object.keys(pureComponent).forEach(relativeFilePath => {
-      helper.command.runCmd(`bit add ${relativeFilePath} --id comp`, results.directory);
-    });
-    //  const output = helper.command.runCmd('node --inspect-brk $(which bit) build comp', results.directory);
-    const output = helper.command.runCmd('bit build comp', results.directory);
-    console.log('------------output------------');
-    console.log(output);
-    console.log('------------output------------');
-    results.showComponent = JSON.parse(helper.command.runCmd('bit show comp --json', results.directory));
+    results = await buildDefaultComponent(helper, { compilerPath: 'dist/test/typescript-react.js' });
   });
   after(async function() {
     return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));

@@ -29,10 +29,11 @@ export const presetStore: { [k: string]: Preset } = {
   REACT: {
     getDynamicPackageDependencies() {
       return {
-        devDependencies: {
+        dependencies: {
           '@types/react': '16.9.11',
           '@types/react-dom': '16.9.4'
         },
+        devDependencies: {},
         peerDependencies: {
           react: '^16.11.0',
           'react-dom': '^16.11.0'
