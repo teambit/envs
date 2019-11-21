@@ -1,5 +1,6 @@
 import execa from 'execa';
-import { promises as fs, Stats } from 'fs';
+import { Stats } from 'fs';
+import * as fs from 'fs-extra';
 import path, { relative, sep } from 'path';
 import readdir from 'recursive-readdir';
 import Vinyl from 'vinyl';
