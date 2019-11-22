@@ -4,7 +4,7 @@ import { GenericObject } from '../src/compiler';
 import { buildOne } from 'bit-bin';
 import { expect } from 'chai';
 
-describe.skip('test files', function() {
+describe.only('test files', function() {
   const helper = new Helper();
   let results: any = null;
   before(async function() {
