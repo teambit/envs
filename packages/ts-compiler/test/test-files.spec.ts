@@ -3,13 +3,14 @@ import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { GenericObject } from '../src/compiler';
 import { buildOne } from 'bit-bin';
 import { expect } from 'chai';
-import compiler, { spy } from './spy-compiler';
+import compiler from './spy-compiler';
+import sinon from 'sinon';
 import rimraf = require('rimraf');
-import { SinonSandbox } from 'sinon';
 
 describe('test files', function() {
   const helper = new Helper();
   let results: any = null;
+  const spy = sinon.spy(compiler, 'action');
 
   before(async function() {
     this.timeout(1000 * 60);
@@ -24,6 +25,7 @@ describe('test files', function() {
     helper.command.runCmd('bit add -t test/test.spec.ts --id comp', results.directory);
   });
   after(async function() {
+    spy.restore();
     return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
   });
   it('should mark as test dist file', async function() {
