@@ -1,5 +1,8 @@
 import { GenericObject } from './compiler';
-
+import { getCustomTypes } from './custom-types';
+import { CompilationContext } from './compiler';
+import path from 'path';
+import fs from 'fs-extra';
 export interface GenericStringObject {
   [k: string]: string;
 }
@@ -19,29 +22,27 @@ export interface Preset {
   getDynamicPackageDependencies?(): DependenciesJSON;
   getDynamicConfig?(): GenericObject;
   runCompiler?(): Promise<void>;
-  preCompile?(): Promise<void>;
+  preCompile?(ctx: CompilationContext): Promise<void>;
 }
 
 export const presetStore: { [k: string]: Preset } = {
   REACT: {
     getDynamicPackageDependencies() {
       return {
-        devDependencies: {
+        dependencies: {
           '@types/react': '16.9.11',
-          '@types/react-dom': '16.9.4',
-          '@bit/qballer.env.types': '0.0.2'
+          '@types/react-dom': '16.9.4'
         },
+        devDependencies: {},
         peerDependencies: {
           react: '^16.11.0',
           'react-dom': '^16.11.0'
         }
       };
     },
-
     getDynamicConfig() {
       return {
         tsconfig: {
-          extends: '@bit/qballer.env.types/tsconfig.json',
           compilerOptions: {
             lib: ['dom', 'es2015'],
             jsx: 'react'
@@ -49,7 +50,16 @@ export const presetStore: { [k: string]: Preset } = {
           include: ['./**/*']
         }
       };
+    },
+    preCompile(ctx: CompilationContext) {
+      return generateTypes(ctx);
     }
   },
   NONE: {}
 };
+
+export function generateTypes(ctx: CompilationContext) {
+  const typesPath = path.join(ctx.directory, 'bit_types.d.ts');
+  const content = getCustomTypes();
+  return fs.writeFile(typesPath, content);
+}
