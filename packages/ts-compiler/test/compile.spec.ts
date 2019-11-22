@@ -1,7 +1,7 @@
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { expect } from 'chai';
 import rimraf from 'rimraf';
-import { BuildResult, buildDefaultComponent } from './build-default-component';
+import { BuildResult, buildComponentInWorkspace } from './build-default-component';
 
 describe('typescript', () => {
   const helper = new Helper();
@@ -12,7 +12,7 @@ describe('typescript', () => {
   };
   before(async function() {
     this.timeout(1000 * 10 * 10);
-    results = await buildDefaultComponent(helper);
+    results = await buildComponentInWorkspace(helper);
   });
   after(async () => {
     return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));

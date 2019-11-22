@@ -4,7 +4,7 @@ import rimraf = require('rimraf');
 import { GenericObject } from '../src/compiler';
 import { presetStore } from '../src/preset';
 import { createWorkspace } from './create-workspace';
-import { buildDefaultComponent, BuildResult } from './build-default-component';
+import { buildComponentInWorkspace, BuildResult } from './build-default-component';
 
 describe('typescript react', () => {
   const helper = new Helper();
@@ -15,7 +15,7 @@ describe('typescript react', () => {
   };
   before(async function() {
     this.timeout(1000 * 10 * 10);
-    results = await buildDefaultComponent(helper, { compilerPath: 'dist/test/typescript-react.js' });
+    results = await buildComponentInWorkspace(helper, { compilerPath: 'dist/test/typescript-react.js' });
   });
   after(async function() {
     return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));

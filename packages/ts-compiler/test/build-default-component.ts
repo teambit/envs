@@ -14,21 +14,25 @@ export type BuildOptions = {
   shouldPrintOutput?: boolean;
   shouldDebugEnvironment?: boolean;
   compilerPath?: string;
+  disableBuildStep?: boolean;
+  component?: GenericObject;
 };
 
-export async function buildDefaultComponent(helper: Helper, opts?: BuildOptions): Promise<BuildResult> {
+export const defaultComponent = {
+  'src/comp.tsx': `import React from 'react'
+export class HelloWorld {
+    render() {
+        return <div>Hello-World</div>
+    }
+}`,
+  'src/test.css': '',
+  'src/types.d.ts': '',
+  'src/try.svg': ''
+};
+
+export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOptions): Promise<BuildResult> {
   const results: BuildResult = { directory: '', files: [], showComponent: {} };
-  const component = {
-    'src/comp.tsx': `import React from 'react'
-  export class HelloWorld {
-      render() {
-          return <div>Hello-World</div>
-      }
-  }`,
-    'src/test.css': '',
-    'src/types.d.ts': '',
-    'src/try.svg': ''
-  };
+  const component = (opts && opts.component) || defaultComponent;
   results.directory = await createWorkspace(component, {
     env: (opts && opts.compilerPath) || 'dist/src/index.js',
     name: 'typescript',
@@ -44,8 +48,11 @@ export async function buildDefaultComponent(helper: Helper, opts?: BuildOptions)
   helper.command.runCmd('bit add src/test.css --id comp', results.directory);
   helper.command.runCmd('bit add src/types.d.ts --id comp', results.directory);
   helper.command.runCmd('bit add src/try.svg --id comp', results.directory);
-
-  const output = helper.env.command.runCmd(getCommandString(opts), results.directory);
+  let output = '';
+  if (!opts || opts.disableBuildStep !== true) {
+    output = helper.env.command.runCmd(getCommandString(opts), results.directory);
+    results.files = await fs.readdir(path.join(results.directory, '/dist'));
+  }
 
   if (opts && opts.shouldPrintOutput) {
     console.log('------------output------------');
@@ -53,7 +60,6 @@ export async function buildDefaultComponent(helper: Helper, opts?: BuildOptions)
     console.log('------------output------------');
   }
 
-  results.files = await fs.readdir(path.join(results.directory, '/dist'));
   results.showComponent = JSON.parse(helper.command.runCmd('bit show comp --json', results.directory));
 
   return results;

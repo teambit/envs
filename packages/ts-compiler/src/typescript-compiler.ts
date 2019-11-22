@@ -24,7 +24,6 @@ export class TypescriptCompiler implements Compiler {
   }
 
   public getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-    debugger;
     const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {};
     return deps;
   }
