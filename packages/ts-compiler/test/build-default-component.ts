@@ -46,7 +46,6 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
     }
   });
   helper.scopeHelper.initWorkspace(results.directory);
-  debugger;
   helper.command.addComponent('src/comp.tsx', {}, results.directory);
   helper.command.runCmd('bit add src/test.css --id comp', results.directory);
   helper.command.runCmd('bit add src/types.d.ts --id comp', results.directory);
