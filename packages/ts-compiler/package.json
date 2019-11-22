@@ -4,7 +4,7 @@
   "description": "Typescript compiler integration with bit",
   "main": "dist/index.js",
   "scripts": {
-    "test": "node node_modules/.bin/mocha --require ts-node/register/transpile-only --require source-map-support/register test/*.spec.ts",
+    "test": "node node_modules/.bin/mocha dist/test/*.spec.js",
     "test:hero": "run-s clean build test",
     "build": "tsc",
     "clean": "rm -rf dist types"
