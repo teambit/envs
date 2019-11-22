@@ -3,7 +3,6 @@ import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { GenericObject } from '../src/compiler';
 import { buildOne } from 'bit-bin';
 import { expect } from 'chai';
-// import {spy} from './spy-compiler'
 
 describe.skip('test files', function() {
   const helper = new Helper();
