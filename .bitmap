@@ -144,6 +144,16 @@
                 "test": false
             },
             {
+                "relativePath": "packages/ts-compiler/config.json",
+                "test": false,
+                "name": "config.json"
+            },
+            {
+                "relativePath": "packages/ts-compiler/config.md",
+                "test": false,
+                "name": "config.md"
+            },
+            {
                 "name": "package.json",
                 "relativePath": "packages/ts-compiler/package.json",
                 "test": false
@@ -157,6 +167,11 @@
                 "name": "compiler.ts",
                 "relativePath": "packages/ts-compiler/src/compiler.ts",
                 "test": false
+            },
+            {
+                "relativePath": "packages/ts-compiler/src/custom-types.ts",
+                "test": false,
+                "name": "custom-types.ts"
             },
             {
                 "name": "index.ts",
@@ -184,6 +199,11 @@
                 "test": false
             },
             {
+                "relativePath": "packages/ts-compiler/test/build-default-component.ts",
+                "test": false,
+                "name": "build-default-component.ts"
+            },
+            {
                 "relativePath": "packages/ts-compiler/test/compile-react.spec.ts",
                 "test": false,
                 "name": "compile-react.spec.ts"
@@ -199,9 +219,19 @@
                 "test": false
             },
             {
-                "name": "index.ts",
-                "relativePath": "packages/ts-compiler/test/index.ts",
-                "test": false
+                "relativePath": "packages/ts-compiler/test/spy-compiler.ts",
+                "test": false,
+                "name": "spy-compiler.ts"
+            },
+            {
+                "relativePath": "packages/ts-compiler/test/test-files.spec.ts",
+                "test": false,
+                "name": "test-files.spec.ts"
+            },
+            {
+                "relativePath": "packages/ts-compiler/test/tsconfig.spec.ts",
+                "test": false,
+                "name": "tsconfig.spec.ts"
             },
             {
                 "relativePath": "packages/ts-compiler/test/typescript-react.ts",
@@ -219,5 +249,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.4.4-dev.2"
+    "version": "14.4.4-dev.8"
 }
