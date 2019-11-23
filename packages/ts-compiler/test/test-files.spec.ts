@@ -31,6 +31,7 @@ describe('test files', function() {
   it('should mark as test dist file', async function() {
     this.timeout(1000 * 60 * 10);
     const cwd = process.cwd();
+
     const files = await buildOne('comp', false, false, results.directory);
     process.chdir(cwd);
 
