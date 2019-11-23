@@ -1,15 +1,20 @@
-import { buildComponentInWorkspace, defaultComponent } from './build-default-component';
+import { buildComponentInWorkspace, getDefaultComponent } from './build-default-component';
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { GenericObject } from '../src/compiler';
 import { buildOne } from 'bit-bin';
 import { expect } from 'chai';
+import compiler from './spy-compiler';
+import sinon from 'sinon';
+import rimraf = require('rimraf');
 
-describe.skip('test files', function() {
+describe('test files', function() {
   const helper = new Helper();
   let results: any = null;
+  const spy = sinon.spy(compiler, 'action');
+
   before(async function() {
     this.timeout(1000 * 60);
-    const component: GenericObject = { ...defaultComponent };
+    const component: GenericObject = getDefaultComponent();
     component['test/test.spec.ts'] = '';
 
     results = await buildComponentInWorkspace(helper, {
@@ -19,13 +24,20 @@ describe.skip('test files', function() {
     });
     helper.command.runCmd('bit add -t test/test.spec.ts --id comp', results.directory);
   });
+  after(async function() {
+    spy.restore();
+    return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
+  });
   it('should mark as test dist file', async function() {
     this.timeout(1000 * 60 * 10);
+    const cwd = process.cwd();
+
     const files = await buildOne('comp', false, false, results.directory);
-    console.log('files:', files);
-    const spy = require('./spy-compiler').spy;
-    const compiler = require('./spy-compiler').default;
+    process.chdir(cwd);
+
     expect(spy === compiler.action).to.be.true;
     expect(spy.callCount).to.equal(1);
+    const returnedTestFile = (await spy.returnValues[0]).dists.find((elem: any) => elem.basename === 'test.spec.js');
+    expect(returnedTestFile!.test).to.be.true;
   });
 });

@@ -1,9 +1,8 @@
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { expect } from 'chai';
 import rimraf = require('rimraf');
-import { GenericObject } from '../src/compiler';
+import sinon, { SinonSandbox } from 'sinon';
 import { presetStore } from '../src/preset';
-import { createWorkspace } from './create-workspace';
 import { buildComponentInWorkspace, BuildResult } from './build-default-component';
 
 describe('typescript react', () => {

@@ -184,7 +184,7 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
   const list = fileList.map((file, index) => {
     const relativePath = path.relative(capsuleDir, file);
     const pathToFile = path.join(compDistRoot, relativePath);
-    const test = isTestFile(context.srcTestFiles, relativePath);
+    const test = false; //isTestFile(context.srcTestFiles, relativePath);
 
     return new Vinyl({
       path: pathToFile,
@@ -221,7 +221,7 @@ function isTestFile(srcTestFiles: Vinyl[], fileToCheck: string, compareWithExten
     if (compareWithExtension) {
       return testFile.relative === fileToCheck;
     }
-    return getWithoutExt(testFile.relative) === getWithoutExt(fileToCheck);
+    return getWithoutExt(testFile.relative).endsWith(getWithoutExt(fileToCheck));
   });
   return !!found;
 }

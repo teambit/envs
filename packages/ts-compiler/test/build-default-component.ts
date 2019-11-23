@@ -18,21 +18,23 @@ export type BuildOptions = {
   component?: GenericObject;
 };
 
-export const defaultComponent = {
-  'src/comp.tsx': `import React from 'react'
-export class HelloWorld {
-    render() {
-        return <div>Hello-World</div>
-    }
-}`,
-  'src/test.css': '',
-  'src/types.d.ts': '',
-  'src/try.svg': ''
-};
+export function getDefaultComponent() {
+  return {
+    'src/comp.tsx': `import React from 'react'
+  export class HelloWorld {
+      render() {
+          return <div>Hello-World</div>
+      }
+  }`,
+    'src/test.css': '',
+    'src/types.d.ts': '',
+    'src/try.svg': ''
+  };
+}
 
 export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOptions): Promise<BuildResult> {
   const results: BuildResult = { directory: '', files: [], showComponent: {} };
-  const component = (opts && opts.component) || defaultComponent;
+  const component = (opts && opts.component) || getDefaultComponent();
   results.directory = await createWorkspace(component, {
     env: (opts && opts.compilerPath) || 'dist/src/index.js',
     name: 'typescript',
