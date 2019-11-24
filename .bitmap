@@ -75,6 +75,34 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "bit.envs/compilers/react-typescript@3.1.0": {
+        "files": [
+            {
+                "relativePath": "packages/react-typescript/README.md",
+                "test": false,
+                "name": "README.md"
+            },
+            {
+                "relativePath": "packages/react-typescript/package.json",
+                "test": false,
+                "name": "package.json"
+            },
+            {
+                "relativePath": "packages/react-typescript/src/index.ts",
+                "test": false,
+                "name": "index.ts"
+            },
+            {
+                "relativePath": "packages/react-typescript/tsconfig.json",
+                "test": false,
+                "name": "tsconfig.json"
+            }
+        ],
+        "mainFile": "packages/react-typescript/src/index.ts",
+        "trackDir": "packages/react-typescript",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "bit.envs/compilers/stencil@0.0.5": {
         "files": [
             {
