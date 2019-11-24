@@ -84,6 +84,7 @@ The default configuration without dev mode or overrides is [here](./config.md)
 ### Whats to do component builds in workspace and doesn't build in capsule?
 
 Most odds your missing a dependency which influences the global scope like `@types/node` or `@types/mocha`.
+Use overrides to add it to the dependencies.
 
 ### What to do component builds in capsule and workspace but breaks in consuming environment ?
 
@@ -94,4 +95,35 @@ you must install it with NPM.
 ### How to include custom-types folder from the author environment?
 
 You have some custom-types folder which extend other types with your own type definition. You want to reuse it in capsule.
-Do the following: 1. create a component from the types. 2. add it in overrides to all other components. 3. include it in `tsconfig.include` array: ['/**/*']
+Do the following: 
+- create a component from the types. 
+- add it in overrides to all other components. 
+- include it in `tsconfig.include` as following: 
+```js
+"bit.envs/compilers/typescript": {
+    "rawConfig": {
+        "tsconfig": {
+            "compilerOptions": {},
+            "include": [
+                 "./**/*",
+                 "node_modules/@bit/org.collection/custom-types"
+            ]
+        }
+    }
+}
+```
+
+### Writing node only components and getting unknown identifer
+Add the flowing configuration override in the bit.json 
+```js
+"bit.envs/compilers/typescript": {
+    "rawConfig": {
+        "tsconfig": {
+            "compilerOptions": {
+                "target": "ES5",
+                "module": "CommonJS"
+            }
+        }
+    }
+}
+```
