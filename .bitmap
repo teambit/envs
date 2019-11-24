@@ -75,29 +75,6 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.0.30": {
-        "files": [
-            {
-                "name": "index.js",
-                "relativePath": "index.js",
-                "test": false
-            },
-            {
-                "name": "readme.md",
-                "relativePath": "readme.md",
-                "test": false
-            },
-            {
-                "name": "tsconfig.json",
-                "relativePath": "tsconfig.json",
-                "test": false
-            }
-        ],
-        "mainFile": "index.js",
-        "rootDir": "packages/react-typescript",
-        "origin": "IMPORTED",
-        "originallySharedDir": "src/compilers/react-typescript"
-    },
     "bit.envs/compilers/stencil@0.0.5": {
         "files": [
             {
