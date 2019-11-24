@@ -106,7 +106,7 @@ Do the following:
             "compilerOptions": {},
             "include": [
                  "./**/*",
-                 "node_modules/@bit/org.collection/custom-types"
+                 "node_modules/@bit/org.collection.custom-types"
             ]
         }
     }

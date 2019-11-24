@@ -75,7 +75,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.1": {
+    "bit.envs/compilers/react-typescript@3.1.2": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -141,7 +141,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.1.2": {
+    "bit.envs/compilers/typescript@3.1.3": {
         "files": [
             {
                 "name": "README.md",
