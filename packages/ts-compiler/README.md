@@ -83,7 +83,7 @@ The default configuration without dev mode or overrides is [here](./config.md).
 
 #### Whats to do component builds in workspace and doesn't build in capsule?
 
-Most odds your missing a dependency which influences the global scope like `@types/node` or `@types/mocha`.
+Most odds you missing a dependency which influences the global scope like `@types/node` or `@types/mocha`.
 Use overrides to add it to the dependencies.
 
 #### Missing types in consumer environment?
