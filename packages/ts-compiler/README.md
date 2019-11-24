@@ -77,22 +77,22 @@ This config state is as if you would configure the compiler as following by hand
 
 ## F.A.Q
 
-### What are my configuration ?
+#### What are my configuration ?
 
-The default configuration without dev mode or overrides is [here](./config.md)
+The default configuration without dev mode or overrides is [here](./config.md).
 
-### Whats to do component builds in workspace and doesn't build in capsule?
+#### Whats to do component builds in workspace and doesn't build in capsule?
 
 Most odds your missing a dependency which influences the global scope like `@types/node` or `@types/mocha`.
 Use overrides to add it to the dependencies.
 
-### What to do component builds in capsule and workspace but breaks in consuming environment ?
+#### Missing types in consumer environment?
 
 Some type dependency should be in th dependencies section and not in devDependencies. This is because
-your component exposes a type from that dependency and in order for the consumer environment to get access to that types,
-you must install it with NPM.
+your component exposes a type from that dependency. In order for the consumer environment to get access to that type,
+you must get when installing the component with NPM.
 
-### How to include custom-types folder from the author environment?
+#### How to include custom-types folder from the author environment?
 
 You have some custom-types folder which extend other types with your own type definition. You want to reuse it in capsule.
 Do the following: 
@@ -113,7 +113,7 @@ Do the following:
 }
 ```
 
-### Writing node only components and getting unknown identifer
+#### Writing node only components and getting unknown identifer exception.
 Add the flowing configuration override in the bit.json 
 ```js
 "bit.envs/compilers/typescript": {
