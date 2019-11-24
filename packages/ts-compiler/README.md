@@ -75,4 +75,23 @@ This config state is as if you would configure the compiler as following by hand
 - **copyPolicy.ignorePatterns** - Array of patterns to exclude files from being copied.
 - **copyPolicy.disable** - turn off the copy policy.
 
-The default configuration without dev mode or overrides are mentioned [here](./config.md)
+## F.A.Q
+
+### What are my configuration ?
+
+The default configuration without dev mode or overrides is [here](./config.md)
+
+### Whats to do component builds in workspace and doesn't build in capsule?
+
+Most odds your missing a dependency which influences the global scope like `@types/node` or `@types/mocha`.
+
+### What to do component builds in capsule and workspace but breaks in consuming environment ?
+
+Some type dependency should be in th dependencies section and not in devDependencies. This is because
+your component exposes a type from that dependency and in order for the consumer environment to get access to that types,
+you must install it with NPM.
+
+### How to include custom-types folder from the author environment?
+
+You have some custom-types folder which extend other types with your own type definition. You want to reuse it in capsule.
+Do the following: 1. create a component from the types. 2. add it in overrides to all other components. 3. include it in `tsconfig.include` array: ['/**/*']
