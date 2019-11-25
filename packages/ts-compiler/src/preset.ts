@@ -1,6 +1,5 @@
-import { GenericObject } from './compiler';
 import { getCustomTypes } from './custom-types';
-import { CompilationContext } from './compiler';
+import { CompilationContext, GenericObject } from '@bit/bit.envs.common.compiler-types';
 import path from 'path';
 import fs from 'fs-extra';
 export interface GenericStringObject {

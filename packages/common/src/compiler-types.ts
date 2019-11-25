@@ -4,6 +4,17 @@ export interface GenericObject {
   [key: string]: any;
 }
 
+export interface CompilationContext {
+  directory: string;
+  name: string;
+  main: string;
+  dist: string;
+  capsule: GenericObject;
+  res: GenericObject;
+  cc: CompilerContext;
+  srcTestFiles: Vinyl[];
+}
+
 export interface InitAPI {
   getLogger: () => Logger;
 }

@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import { GenericObject } from './compiler';
+import { GenericObject } from '@bit/bit.envs.common.compiler-types';
 
 export const FIXED_OUT_DIR = 'dist';
 export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {

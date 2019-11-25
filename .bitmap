@@ -39,7 +39,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/compiler-types@0.0.3": {
+    "bit.envs/common/compiler-types@0.0.4": {
         "files": [
             {
                 "name": "compiler-types.ts",
@@ -51,7 +51,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/create-ts-compiler@0.0.5": {
+    "bit.envs/common/create-ts-compiler@0.0.6": {
         "files": [
             {
                 "name": "create-ts-compiler.ts",
@@ -103,7 +103,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/stencil@0.0.5": {
+    "bit.envs/compilers/stencil@0.0.6": {
         "files": [
             {
                 "name": "README.md",
@@ -162,6 +162,11 @@
                 "name": "package.json",
                 "relativePath": "packages/ts-compiler/package.json",
                 "test": false
+            },
+            {
+                "relativePath": "packages/ts-compiler/src/abstract-environment.ts",
+                "test": false,
+                "name": "abstract-environment.ts"
             },
             {
                 "name": "compile.ts",

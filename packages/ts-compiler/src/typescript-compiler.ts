@@ -1,6 +1,6 @@
 import { merge } from 'lodash';
 import { compile } from './compile';
-import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from './compiler';
+import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
 import { Preset, presetStore } from './preset';
 
 const CONFIG_NAME = 'tsconfig';

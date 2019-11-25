@@ -4,7 +4,7 @@ import * as fs from 'fs-extra';
 import path, { relative, sep } from 'path';
 import readdir from 'recursive-readdir';
 import Vinyl from 'vinyl';
-import { CompilerContext, GenericObject, CompilationContext } from './compiler';
+import { CompilerContext, GenericObject, CompilationContext } from '@bit/bit.envs.common.compiler-types';
 import { FIXED_OUT_DIR } from './tsconfig';
 import 'typescript';
 

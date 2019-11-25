@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@bit/bit.envs.common.compiler-types": "0.0.4",
     "@types/fs-extra": "^8.0.1",
     "@types/lodash": "^4.14.147",
     "execa": "^2.0.4",
