@@ -1,9 +1,7 @@
 import { merge } from 'lodash';
 import { compile } from './compile';
 import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
-import { Preset } from './preset';
-
-const CONFIG_NAME = 'tsconfig';
+import { Preset } from "@bit/bit.envs.common.preset";
 
 export class TypescriptCompiler implements Compiler {
   private _logger: Logger | undefined;

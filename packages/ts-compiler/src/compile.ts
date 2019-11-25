@@ -9,8 +9,8 @@ import { FIXED_OUT_DIR } from './tsconfig';
 import 'typescript';
 
 const DEBUG_FLAG = 'DEBUG';
-const compiledFileTypes = ['ts', 'tsx'];
-import { CopyPolicy, Preset } from './preset';
+import { CopyPolicy, Preset } from '@bit/bit.envs.common.preset';
+
 import { getTSConfig } from './tsconfig';
 import { getCapsuleName } from './utils';
 

@@ -1,4 +1,4 @@
-import { buildComponentInWorkspace, getDefaultComponent } from './build-default-component';
+import { buildComponentInWorkspace, getDefaultComponent } from '@bit/bit.envs.common.build-component';
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { GenericObject } from '@bit/bit.envs.common.compiler-types';
 import { buildOne } from 'bit-bin';

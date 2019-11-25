@@ -1,9 +1,8 @@
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { expect } from 'chai';
 import rimraf = require('rimraf');
-import sinon, { SinonSandbox } from 'sinon';
-import { presetStore } from '../src/preset';
-import { buildComponentInWorkspace, BuildResult } from './build-default-component';
+import { reactPreset } from '../src/react-preset';
+import { buildComponentInWorkspace, BuildResult } from '@bit/bit.envs.common.build-component';
 
 describe('typescript react', () => {
   const helper = new Helper();
@@ -21,7 +20,7 @@ describe('typescript react', () => {
   });
   it('build should pass', async function() {});
   it('should have correct dependencies', function() {
-    const presetConfig = presetStore.REACT.getDynamicPackageDependencies!();
+    const presetConfig = reactPreset.getDynamicPackageDependencies!();
     expect(results.showComponent.compilerPackageDependencies).to.deep.equal(presetConfig);
   });
 });

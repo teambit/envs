@@ -1,7 +1,7 @@
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { expect } from 'chai';
 import rimraf from 'rimraf';
-import { BuildResult, buildComponentInWorkspace } from './build-default-component';
+import { BuildResult, buildComponentInWorkspace } from '@bit/bit.envs.common.build-component';
 
 describe('typescript', () => {
   const helper = new Helper();

@@ -1,5 +1,5 @@
 import sinon from 'sinon';
 import { TypescriptCompiler } from '../src/typescript-compiler';
-import {presetStore} from '../src/preset'
-const toSpy = new TypescriptCompiler(presetStore['REACT']);
+
+const toSpy = new TypescriptCompiler();
 export default toSpy;
