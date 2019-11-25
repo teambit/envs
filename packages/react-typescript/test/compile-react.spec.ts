@@ -13,10 +13,10 @@ describe('typescript react', () => {
   };
   before(async function() {
     this.timeout(1000 * 10 * 10);
-    results = await buildComponentInWorkspace(helper, { compilerPath: 'dist/test/typescript-react.js' });
+    results = await buildComponentInWorkspace(helper, { compilerPath: 'dist/src/index.js' });
   });
   after(async function() {
-    return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
+    // return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
   });
   it('build should pass', async function() {});
   it('should have correct dependencies', function() {

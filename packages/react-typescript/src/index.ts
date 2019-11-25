@@ -1,2 +1,3 @@
 import { TypescriptCompiler } from '@bit/bit.envs.compilers.typescript';
-export default new TypescriptCompiler('REACT');
+import {reactPreset} from './react-preset'
+export default new TypescriptCompiler(reactPreset);

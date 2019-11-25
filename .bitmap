@@ -111,7 +111,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.2": {
+    "bit.envs/compilers/react-typescript@3.1.5": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -124,6 +124,11 @@
                 "name": "package.json"
             },
             {
+                "relativePath": "packages/react-typescript/src/custom-types.ts",
+                "test": false,
+                "name": "custom-types.ts"
+            },
+            {
                 "relativePath": "packages/react-typescript/src/index.ts",
                 "test": false,
                 "name": "index.ts"
@@ -132,6 +137,11 @@
                 "relativePath": "packages/react-typescript/src/react-preset.ts",
                 "test": false,
                 "name": "react-preset.ts"
+            },
+            {
+                "relativePath": "packages/react-typescript/test/compile-react.spec.ts",
+                "test": false,
+                "name": "compile-react.spec.ts"
             },
             {
                 "relativePath": "packages/react-typescript/tsconfig.json",
@@ -182,7 +192,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.1.3": {
+    "bit.envs/compilers/typescript@3.1.4": {
         "files": [
             {
                 "name": "README.md",
@@ -220,11 +230,6 @@
                 "test": false
             },
             {
-                "relativePath": "packages/ts-compiler/src/preset-store.ts",
-                "test": false,
-                "name": "preset-store.ts"
-            },
-            {
                 "name": "tsconfig.ts",
                 "relativePath": "packages/ts-compiler/src/tsconfig.ts",
                 "test": false
@@ -240,24 +245,9 @@
                 "test": false
             },
             {
-                "relativePath": "packages/ts-compiler/test/build-component.ts",
-                "test": false,
-                "name": "build-component.ts"
-            },
-            {
-                "relativePath": "packages/ts-compiler/test/compile-react.spec.ts",
-                "test": false,
-                "name": "compile-react.spec.ts"
-            },
-            {
                 "relativePath": "packages/ts-compiler/test/compile.spec.ts",
                 "test": false,
                 "name": "compile.spec.ts"
-            },
-            {
-                "name": "create-workspace.ts",
-                "relativePath": "packages/ts-compiler/test/create-workspace.ts",
-                "test": false
             },
             {
                 "relativePath": "packages/ts-compiler/test/spy-compiler.ts",
@@ -273,11 +263,6 @@
                 "relativePath": "packages/ts-compiler/test/tsconfig.spec.ts",
                 "test": false,
                 "name": "tsconfig.spec.ts"
-            },
-            {
-                "relativePath": "packages/ts-compiler/test/typescript-react.ts",
-                "test": false,
-                "name": "typescript-react.ts"
             },
             {
                 "relativePath": "packages/ts-compiler/tsconfig.json",

@@ -4,14 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/.bin/mocha dist/test/*.spec.js",
+    "test:hero": "run-s clean build test",
+    "build": "tsc",
+    "clean": "rm -rf dist types"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@bit/bit.envs.common.build-component": "0.0.1",
-    "@bit/bit.envs.compilers.typescript": "^3.1.1",
+    "@bit/bit.envs.compilers.typescript": "^3.1.4",
     "@types/fs-extra": "^8.0.1",
     "@types/rimraf": "^2.0.3",
     "fs-extra": "^8.1.0",

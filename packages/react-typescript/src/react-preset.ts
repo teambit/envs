@@ -1,7 +1,8 @@
-import { CompilationContext } from '@bit/bit.envs.compilers.typescript/dist/ts-compiler/src/compiler';
+import { CompilationContext } from '@bit/bit.envs.common.compiler-types';
 import { getCustomTypes } from './custom-types';
 import path from 'path';
 import fs from 'fs-extra';
+import 'mocha'
 
 export const reactPreset = {
   getDynamicPackageDependencies() {
