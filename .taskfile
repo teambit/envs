@@ -21,7 +21,7 @@ function run_test(){
     cd ts-compiler
     npm run test:hero
     cd ..
-    cd ../react-typescript
+    cd react-typescript
     npm run test:hero
     cd ..
 }
