@@ -1,16 +1,12 @@
 import { merge } from 'lodash';
 import { compile } from './compile';
-import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from './compiler';
-import { Preset, presetStore } from './preset';
-
-const CONFIG_NAME = 'tsconfig';
+import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
+import { Preset } from "@bit/bit.envs.common.preset";
 
 export class TypescriptCompiler implements Compiler {
   private _logger: Logger | undefined;
-  private preset: Preset;
 
-  constructor(preset = 'NONE') {
-    this.preset = presetStore[preset] || presetStore.NONE;
+  constructor(private preset:Preset = {}) {
     this.getDynamicPackageDependencies = this.getDynamicPackageDependencies.bind(this);
     this.getDynamicConfig = this.getDynamicConfig.bind(this);
     this.action = this.action.bind(this);

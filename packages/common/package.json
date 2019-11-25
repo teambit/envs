@@ -15,7 +15,12 @@
     "@types/minimatch": "^3.0.3"
   },
   "dependencies": {
+    "@types/fs-extra": "^8.0.1",
+    "@types/mkdirp": "^0.5.2",
+    "bit-bin": "^14.5.0",
+    "fs-extra": "^8.1.0",
     "minimatch": "^3.0.4",
+    "mkdirp": "^0.5.1",
     "vinyl": "^2.2.0"
   }
 }

@@ -13,6 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@bit/bit.envs.common.build-component": "0.0.1",
+    "@bit/bit.envs.common.compiler-types": "0.0.4",
+    "@bit/bit.envs.common.preset": "0.0.1",
     "@types/fs-extra": "^8.0.1",
     "@types/lodash": "^4.14.147",
     "execa": "^2.0.4",

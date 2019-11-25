@@ -2,7 +2,7 @@ import { createWorkspace } from './create-workspace';
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import path from 'path';
 import fs from 'fs-extra';
-import { GenericObject } from '../src/compiler';
+import { GenericObject } from './compiler-types';
 
 export type BuildResult = {
   directory: string;

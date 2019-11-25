@@ -39,7 +39,19 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/compiler-types@0.0.3": {
+    "bit.envs/common/build-component@0.0.1": {
+        "files": [
+            {
+                "relativePath": "packages/common/src/build-component.ts",
+                "test": false,
+                "name": "build-component.ts"
+            }
+        ],
+        "mainFile": "packages/common/src/build-component.ts",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "bit.envs/common/compiler-types@0.0.4": {
         "files": [
             {
                 "name": "compiler-types.ts",
@@ -51,7 +63,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/create-ts-compiler@0.0.5": {
+    "bit.envs/common/create-ts-compiler@0.0.7": {
         "files": [
             {
                 "name": "create-ts-compiler.ts",
@@ -63,7 +75,19 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/get-capsule-name@0.0.3": {
+    "bit.envs/common/create-workspace@0.0.1": {
+        "files": [
+            {
+                "relativePath": "packages/common/src/create-workspace.ts",
+                "test": false,
+                "name": "create-workspace.ts"
+            }
+        ],
+        "mainFile": "packages/common/src/create-workspace.ts",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "bit.envs/common/get-capsule-name@0.0.4": {
         "files": [
             {
                 "name": "get-capsule-name.ts",
@@ -72,6 +96,18 @@
             }
         ],
         "mainFile": "packages/common/src/get-capsule-name.ts",
+        "origin": "AUTHORED",
+        "exported": true
+    },
+    "bit.envs/common/preset@0.0.1": {
+        "files": [
+            {
+                "relativePath": "packages/common/src/Preset.ts",
+                "test": false,
+                "name": "Preset.ts"
+            }
+        ],
+        "mainFile": "packages/common/src/Preset.ts",
         "origin": "AUTHORED",
         "exported": true
     },
@@ -93,6 +129,11 @@
                 "name": "index.ts"
             },
             {
+                "relativePath": "packages/react-typescript/src/react-preset.ts",
+                "test": false,
+                "name": "react-preset.ts"
+            },
+            {
                 "relativePath": "packages/react-typescript/tsconfig.json",
                 "test": false,
                 "name": "tsconfig.json"
@@ -103,7 +144,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/stencil@0.0.5": {
+    "bit.envs/compilers/stencil@0.0.7": {
         "files": [
             {
                 "name": "README.md",
@@ -169,11 +210,6 @@
                 "test": false
             },
             {
-                "name": "compiler.ts",
-                "relativePath": "packages/ts-compiler/src/compiler.ts",
-                "test": false
-            },
-            {
                 "relativePath": "packages/ts-compiler/src/custom-types.ts",
                 "test": false,
                 "name": "custom-types.ts"
@@ -184,9 +220,9 @@
                 "test": false
             },
             {
-                "relativePath": "packages/ts-compiler/src/preset.ts",
+                "relativePath": "packages/ts-compiler/src/preset-store.ts",
                 "test": false,
-                "name": "preset.ts"
+                "name": "preset-store.ts"
             },
             {
                 "name": "tsconfig.ts",
@@ -204,9 +240,9 @@
                 "test": false
             },
             {
-                "relativePath": "packages/ts-compiler/test/build-default-component.ts",
+                "relativePath": "packages/ts-compiler/test/build-component.ts",
                 "test": false,
-                "name": "build-default-component.ts"
+                "name": "build-component.ts"
             },
             {
                 "relativePath": "packages/ts-compiler/test/compile-react.spec.ts",

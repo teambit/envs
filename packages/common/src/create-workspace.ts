@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs';
 import mkdirp, { Options } from 'mkdirp';
 import path from 'path';
-import { getCapsuleName } from '../src/utils';
+import { getCapsuleName } from './get-capsule-name';
 
 export async function createWorkspace(content: WorkspaceContent, options: WorkspaceOptions): Promise<string> {
   const targetDir = getCapsuleName('space');
