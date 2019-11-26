@@ -41,9 +41,17 @@ export interface ActionReturnType {
   mainFile?: string;
 }
 
-export interface Compiler {
+// export interface Compiler {
+//   init: ({ api }: { api: InitAPI }) => InitOptions;
+//   action: (ctx: CompilerContext) => Promise<ActionReturnType>;
+//   getDynamicPackageDependencies: (ctx: CompilerContext, name?: string) => GenericObject;
+//   getDynamicConfig?: (ctx: CompilerContext) => GenericObject;
+//   logger?: Logger;
+// }
+
+export interface Compiler<A = CompilerContext, B = ActionReturnType> {
   init: ({ api }: { api: InitAPI }) => InitOptions;
-  action: (ctx: CompilerContext) => Promise<ActionReturnType>;
+  action: (ctx: A) => Promise<B>;
   getDynamicPackageDependencies: (ctx: CompilerContext, name?: string) => GenericObject;
   getDynamicConfig?: (ctx: CompilerContext) => GenericObject;
   logger?: Logger;
