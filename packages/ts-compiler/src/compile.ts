@@ -39,11 +39,6 @@ const typescriptCompile = async (cc:CompilerContext, distPath: string, api: Gene
     } else {
         results = await _compile(context, cc)
     }
-
-//    if (!process.env[DEBUG_FLAG]) {
-//        await context.capsule.destroy()
-//    }
-
     return results
 }
 
@@ -121,7 +116,7 @@ async function isolate(api: GenericObject, ctx: CompilerContext) {
     const componentName = api.componentObject.name
     print(`\n building ${componentName} on directory ${targetDir}`)
 
-    const res = await api.isolate({ targetDir, shouldBuildDependencies: true })
+    const res = await api.isolate({ targetDir, skipNodeModules: true })
 
     return { res, directory: targetDir }
 }
