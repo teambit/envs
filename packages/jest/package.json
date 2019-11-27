@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@bit/bit.envs.common.compiler-types": "0.0.5",
+    "@bit/bit.envs.common.compiler-types": "0.0.6",
     "@bit/bit.envs.common.preset": "0.0.1"
   }
 }

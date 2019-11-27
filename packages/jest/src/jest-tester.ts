@@ -1,8 +1,9 @@
 import { merge } from 'lodash';
 import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
+import { TesterAPI, TesterReturnType } from './tester-types';
 
-export class TypescriptCompiler implements Compiler {
+export class Jest implements Compiler<TesterAPI, TesterReturnType> {
   private _logger: Logger | undefined;
 
   constructor(private preset: Preset = {}) {
@@ -24,21 +25,16 @@ export class TypescriptCompiler implements Compiler {
   }
   public getDynamicConfig(ctx: CompilerContext) {
     const defaultConfig = {
-      tsconfig: {},
-      development: false,
-      copyPolicy: {
-        ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'],
-        disable: false
-      }
+      'jest-config': {}
     };
     const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig() : {};
     const config = merge({}, defaultConfig, presetConfig, ctx.rawConfig);
     return config;
   }
 
-  public async action(compilerContext: CompilerContext): Promise<ActionReturnType> {
-    const compileResult = { dists: [] };
-    return compileResult;
+  public async action(compilerContext: CompilerContext): Promise<TesterReturnType> {
+    const result: TesterReturnType = [];
+    return Promise.resolve(result);
   }
 
   get logger(): Logger | undefined {
