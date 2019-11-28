@@ -8,11 +8,11 @@ import { CompilerContext, GenericObject, CompilationContext } from '@bit/bit.env
 import { FIXED_OUT_DIR } from './tsconfig';
 import 'typescript';
 
-const DEBUG_FLAG = 'DEBUG';
 import { CopyPolicy, Preset } from '@bit/bit.envs.common.preset';
 
 import { getTSConfig } from './tsconfig';
 import { getCapsuleName } from './utils';
+import { isolate, DEBUG_FLAG } from '@bit/bit.envs.common.isolate';
 
 export async function compile(cc: CompilerContext, preset: Preset) {
   const { res, directory } = await isolate(cc);
@@ -118,17 +118,6 @@ async function createTSConfig(context: CompilationContext) {
   return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));
 }
 
-async function isolate(cc: CompilerContext) {
-  const api = cc.context;
-  const targetDir = getCapsuleName();
-  const componentName = api.componentObject.name;
-  print(`\n building ${componentName} on directory ${targetDir}`);
-
-  const res = await api.isolate({ targetDir, shouldBuildDependencies: true });
-
-  return { res, directory: targetDir };
-}
-
 async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
   const capsuleDir = context.directory;
   const compDistRoot = path.resolve(capsuleDir, FIXED_OUT_DIR);
@@ -200,9 +189,6 @@ function getTSConfigPath(context: CompilationContext) {
   return path.join(context.directory, 'tsconfig.json');
 }
 
-function print(msg: string) {
-  process.env[DEBUG_FLAG] && console.log(msg);
-}
 function getExt(filename: string): string {
   return filename.substring(filename.lastIndexOf('.') + 1, filename.length); // readonly 1 to remove the '.'
 }

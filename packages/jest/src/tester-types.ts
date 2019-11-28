@@ -2,7 +2,7 @@ import { CompilerContext, Compiler, ActionReturnType } from '@bit/bit.envs.commo
 import Vinyl from 'vinyl';
 
 export type TesterReturnType = TestResult[];
-export interface TesterAPI extends CompilerContext {
+export interface TesterContext extends CompilerContext {
   testFiles: Array<Vinyl>;
 }
 

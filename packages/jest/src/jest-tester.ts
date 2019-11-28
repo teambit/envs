@@ -1,9 +1,9 @@
 import { merge } from 'lodash';
 import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
-import { TesterAPI, TesterReturnType } from './tester-types';
+import { TesterContext, TesterReturnType } from './tester-types';
 
-export class Jest implements Compiler<TesterAPI, TesterReturnType> {
+export class Jest implements Compiler<TesterContext, TesterReturnType> {
   private _logger: Logger | undefined;
 
   constructor(private preset: Preset = {}) {

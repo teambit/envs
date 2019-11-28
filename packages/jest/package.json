@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@bit/bit.envs.common.compiler-types": "0.0.6",
+    "@bit/bit.envs.common.isolate": "0.0.1",
     "@bit/bit.envs.common.preset": "0.0.1"
   }
 }

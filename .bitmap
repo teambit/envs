@@ -99,6 +99,18 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "bit.envs/common/isolate@0.0.1": {
+        "files": [
+            {
+                "relativePath": "packages/common/src/isolate.ts",
+                "test": false,
+                "name": "isolate.ts"
+            }
+        ],
+        "mainFile": "packages/common/src/isolate.ts",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "bit.envs/common/preset@0.0.3": {
         "files": [
             {
@@ -228,6 +240,11 @@
                 "name": "index.ts",
                 "relativePath": "packages/ts-compiler/src/index.ts",
                 "test": false
+            },
+            {
+                "relativePath": "packages/ts-compiler/src/isolate.ts",
+                "test": false,
+                "name": "isolate.ts"
             },
             {
                 "name": "tsconfig.ts",
