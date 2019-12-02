@@ -21,7 +21,7 @@ describe('test files', function() {
       disableBuildStep: true,
       component,
       compilerPath: './dist/test/spy-compiler.js'
-    });
+    } as any);
     helper.command.runCmd('bit add -t test/test.spec.ts --id comp', results.directory);
   });
   after(async function() {

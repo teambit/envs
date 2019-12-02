@@ -6,23 +6,24 @@ describe('Jest environment', function() {
   let directory: string | null = null;
   const helper = new Helper();
   before(async function() {
-    this.timeout(1000 * 10);
+    this.timeout(1000 * 60 * 10);
     const component = getDefaultComponent();
-    component['test/firs.spec.ts'] = '';
-    buildComponentInWorkspace(helper, {
+    (component as any)['src/comp.spec.ts'] = '';
+    const { directory } = await buildComponentInWorkspace(helper, {
+      compilerPath: '../ts-compiler/dist/src',
+      envTester: './dist/src',
       disableBuildStep: true,
       component
     });
-    directory = await createWorkspace(component, {
-      env: './dist/src/index',
-      name: 'jest-tester'
-    });
+    console.log('~!~', directory);
+    helper.command.runCmd('bit add -t src/comp.spec.ts --id comp', directory);
+    const output = helper.command.runCmd('node --inspect-brk $(which bit) test  comp --fork-level=NONE', directory);
+    console.log(output);
   });
   after(async () => {
     if (!directory) {
       return;
     }
-    console.log(directory);
     // return removeWorkspace(directory)
   });
   it('Should pass tests', () => {});

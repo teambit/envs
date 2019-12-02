@@ -17,10 +17,10 @@ export type BuildOptions = {
   compilerPath?: string;
   disableBuildStep?: boolean;
   component?: GenericObject;
-  envTester: string;
+  envTester?: string;
 };
 
-export function getDefaultComponent() {
+export function getDefaultComponent(): GenericObject {
   return {
     'src/comp.tsx': `import React from 'react'
   export class HelloWorld {
@@ -39,7 +39,7 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
   const component = (opts && opts.component) || getDefaultComponent();
   results.directory = await createWorkspace(component, {
     env: (opts && opts.compilerPath) || 'dist/src/index.js',
-    envTester: opts!.envTester,
+    envTester: (opts && opts.envTester) || '',
     name: 'typescript',
     packageJSON: {
       dependencies: {

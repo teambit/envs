@@ -5,7 +5,7 @@ import { TesterContext, TesterOutput } from './tester-types';
 import { runTester } from './tester';
 
 export class Jest implements Compiler<TesterContext, TesterOutput> {
-  private _logger: Logger | undefined;
+  private _logger: InitAPI['getLogger'] | null = null;
 
   constructor(private preset: Preset = {}) {
     this.getDynamicPackageDependencies = this.getDynamicPackageDependencies.bind(this);
@@ -14,7 +14,7 @@ export class Jest implements Compiler<TesterContext, TesterOutput> {
   }
 
   public init(ctx: { api: InitAPI }) {
-    this._logger = ctx.api.getLogger();
+    this._logger = ctx.api.getLogger;
     return {
       write: true
     };
@@ -39,7 +39,7 @@ export class Jest implements Compiler<TesterContext, TesterOutput> {
     return result;
   }
 
-  get logger(): Logger | undefined {
-    return this._logger;
+  get logger(): Logger {
+    return this._logger!();
   }
 }

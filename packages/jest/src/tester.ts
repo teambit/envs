@@ -1,6 +1,7 @@
 import { TesterContext } from './tester-types';
 import { Preset } from '@bit/bit.envs.common.preset';
 import { isolate } from '@bit/bit.envs.common.isolate';
+import fs from 'fs-extra';
 export interface TestResult {
   title: string;
   fullTitle: string;
@@ -10,7 +11,10 @@ export interface TestResult {
 }
 
 export async function runTester(tc: TesterContext, preset: Preset) {
+  console.log('wow');
+  debugger;
   const { res, directory } = await isolate(tc);
+  console.log('capsule directory: ', directory);
   await placeTestFilesInCapsule(tc);
   await run();
   const results = await collectResults();
@@ -19,7 +23,10 @@ export async function runTester(tc: TesterContext, preset: Preset) {
   return results;
 }
 
-export function placeTestFilesInCapsule(tc: TesterContext) {}
+export function placeTestFilesInCapsule(tc: TesterContext) {
+  console.log('yo');
+  debugger;
+}
 export function collectResults() {
   return Promise.resolve([]);
 }
