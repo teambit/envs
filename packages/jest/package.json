@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/.bin/mocha dist/test/*.spec.js",
+    "test:hero": "run-s clean build test",
+    "build": "tsc",
+    "clean": "rm -rf dist types"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +18,8 @@
     "@bit/bit.envs.common.preset": "0.0.1"
   },
   "devDependencies": {
-    "@bit/bit.envs.common.build-component": "0.0.3",
-    "@bit/bit.envs.common.create-workspace": "0.0.1"
+    "@bit/bit.envs.common.build-component": "0.0.4",
+    "@bit/bit.envs.common.create-workspace": "0.0.1",
+    "npm-run-all": "^4.1.5"
   }
 }

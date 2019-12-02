@@ -1,7 +1,7 @@
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { expect } from 'chai';
 import rimraf from 'rimraf';
-import { BuildResult, buildComponentInWorkspace } from '@bit/bit.envs.common.build-component';
+import { BuildResult, buildComponentInWorkspace, removeWorkspace } from '@bit/bit.envs.common.build-component';
 
 describe('typescript', () => {
   const helper = new Helper();
@@ -15,7 +15,7 @@ describe('typescript', () => {
     results = await buildComponentInWorkspace(helper);
   });
   after(async () => {
-    return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
+    return removeWorkspace(results.directory);
   });
   it('build should pass', async () => {});
   it('build should exclude default ignore patterns', async () => {

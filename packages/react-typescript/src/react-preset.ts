@@ -6,7 +6,6 @@ import 'mocha';
 
 export const reactPreset = {
   getDynamicPackageDependencies() {
-    debugger;
     return {
       dependencies: {
         '@types/react': '16.9.11',

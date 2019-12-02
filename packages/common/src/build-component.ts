@@ -17,6 +17,7 @@ export type BuildOptions = {
   compilerPath?: string;
   disableBuildStep?: boolean;
   component?: GenericObject;
+  envTester: string;
 };
 
 export function getDefaultComponent() {
@@ -38,6 +39,7 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
   const component = (opts && opts.component) || getDefaultComponent();
   results.directory = await createWorkspace(component, {
     env: (opts && opts.compilerPath) || 'dist/src/index.js',
+    envTester: opts!.envTester,
     name: 'typescript',
     packageJSON: {
       dependencies: {
@@ -45,7 +47,7 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
         react: '^16.11.0'
       }
     }
-  });
+  } as any);
   helper.scopeHelper.initWorkspace(results.directory);
   helper.command.addComponent('src/comp.tsx', {}, results.directory);
   helper.command.runCmd('bit add src/test.css --id comp', results.directory);

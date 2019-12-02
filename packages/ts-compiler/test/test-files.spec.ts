@@ -1,4 +1,4 @@
-import { buildComponentInWorkspace, getDefaultComponent } from '@bit/bit.envs.common.build-component';
+import { buildComponentInWorkspace, getDefaultComponent, removeWorkspace } from '@bit/bit.envs.common.build-component';
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { GenericObject } from '@bit/bit.envs.common.compiler-types';
 import { buildOne } from 'bit-bin';
@@ -26,7 +26,7 @@ describe('test files', function() {
   });
   after(async function() {
     spy.restore();
-    return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
+    return removeWorkspace(results.directory);
   });
   it('should mark as test dist file', async function() {
     this.timeout(1000 * 60 * 10);

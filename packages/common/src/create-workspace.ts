@@ -11,6 +11,7 @@ export async function createWorkspace(content: WorkspaceContent, options: Worksp
 }
 export interface WorkspaceOptions {
   env: string;
+  envTester?: string;
   name: string;
   packageJSON?: { [k: string]: any };
 }
@@ -50,6 +51,13 @@ function enrichContentWithDefaults(content: WorkspaceContent, options: Workspace
             meta: {
               options: {
                 file: path.resolve(options.env)
+              }
+            }
+          },
+          tester: {
+            meta2: {
+              options: {
+                file: options.envTester ? path.resolve(options.envTester) : ''
               }
             }
           }

@@ -1,6 +1,6 @@
-import { TesterContext, TesterOutput } from './tester-types';
+import { TesterContext } from './tester-types';
 import { Preset } from '@bit/bit.envs.common.preset';
-import { isolate, DEBUG_FLAG } from '@bit/bit.envs.common.isolate';
+import { isolate } from '@bit/bit.envs.common.isolate';
 export interface TestResult {
   title: string;
   fullTitle: string;
