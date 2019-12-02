@@ -17,10 +17,12 @@
   "dependencies": {
     "@types/fs-extra": "^8.0.1",
     "@types/mkdirp": "^0.5.2",
+    "@types/rimraf": "^2.0.3",
     "bit-bin": "^14.5.0",
     "fs-extra": "^8.1.0",
     "minimatch": "^3.0.4",
     "mkdirp": "^0.5.1",
+    "rimraf": "^3.0.0",
     "vinyl": "^2.2.0"
   }
 }

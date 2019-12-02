@@ -22,7 +22,8 @@ $ bit test
 ## Features
 
 - **Test components in isolation** - Testing shared components in true isolation is both challenging and important. It helps to find reusability issues quickly and early throughout the development process. It makes sure your components will run tests identically anywhere. Read more about isolation [here](https://docs.bit.dev/docs/ext-concepts.html#what-is-an-isolated-component-environment).
--
+
+- **Unified UX** - Regardless of the testing tool you use across components you will have a unified testing experience. Bit provides a clear error interface that all testers must abide. This lets users to seeth through components without adjusting to a new tool.
 
 ## Configuration
 
@@ -34,9 +35,6 @@ $ bit test
                 "bit.envs/testers/jest@[version]": {
                     "rawConfig: {
                         "jest-config": {},
-                        "setup-scripts":[
-                            //bit id's
-                        ]
                     }
                 }
             }

@@ -1,6 +1,6 @@
-import { TesterContext } from './tester-types';
+import { TesterContext, TesterOutput } from './tester-types';
 import { Preset } from '@bit/bit.envs.common.preset';
-import { isolate } from '@bit/bit.envs.common.isolate';
+import { isolate, DEBUG_FLAG } from '@bit/bit.envs.common.isolate';
 export interface TestResult {
   title: string;
   fullTitle: string;
@@ -9,9 +9,20 @@ export interface TestResult {
   err: object;
 }
 
-export async function compile(tc: TesterContext, preset: Preset) {
+export async function runTester(tc: TesterContext, preset: Preset) {
   const { res, directory } = await isolate(tc);
-  placeTestFilesInCapsule(tc);
+  await placeTestFilesInCapsule(tc);
+  await run();
+  const results = await collectResults();
+  if (!process.env.DEBUG_FLAG) {
+  }
+  return results;
 }
 
-function placeTestFilesInCapsule(tc: TesterContext) {}
+export function placeTestFilesInCapsule(tc: TesterContext) {}
+export function collectResults() {
+  return Promise.resolve([]);
+}
+export async function run() {
+  return Promise.resolve([]);
+}

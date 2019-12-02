@@ -173,7 +173,7 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
   const list = fileList.map((file, index) => {
     const relativePath = path.relative(capsuleDir, file);
     const pathToFile = path.join(compDistRoot, relativePath);
-    const test = false; //isTestFile(context.srcTestFiles, relativePath);
+    const test = false;
 
     return new Vinyl({
       path: pathToFile,

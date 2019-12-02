@@ -3,6 +3,7 @@ import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import path from 'path';
 import fs from 'fs-extra';
 import { GenericObject } from './compiler-types';
+import rimraf from 'rimraf';
 
 export type BuildResult = {
   directory: string;
@@ -63,10 +64,13 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
   }
 
   results.showComponent = JSON.parse(helper.command.runCmd('bit show comp --json', results.directory));
-
   return results;
 }
 
 function getCommandString(opts?: BuildOptions) {
   return opts && opts.shouldDebugEnvironment ? `node --inspect-brk $(which bit) build comp` : `bit build comp`;
+}
+
+export async function removeWorkspace(directory: string) {
+  return new Promise((resolve, reject) => rimraf(directory, {}, error => (error ? reject() : resolve())));
 }

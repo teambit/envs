@@ -242,11 +242,6 @@
                 "test": false
             },
             {
-                "relativePath": "packages/ts-compiler/src/isolate.ts",
-                "test": false,
-                "name": "isolate.ts"
-            },
-            {
                 "name": "tsconfig.ts",
                 "relativePath": "packages/ts-compiler/src/tsconfig.ts",
                 "test": false

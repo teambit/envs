@@ -1,9 +1,10 @@
 import { merge } from 'lodash';
-import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
+import { Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
-import { TesterContext, TesterReturnType } from './tester-types';
+import { TesterContext, TesterOutput } from './tester-types';
+import { runTester } from './tester';
 
-export class Jest implements Compiler<TesterContext, TesterReturnType> {
+export class Jest implements Compiler<TesterContext, TesterOutput> {
   private _logger: Logger | undefined;
 
   constructor(private preset: Preset = {}) {
@@ -23,6 +24,7 @@ export class Jest implements Compiler<TesterContext, TesterReturnType> {
     const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {};
     return deps;
   }
+
   public getDynamicConfig(ctx: CompilerContext) {
     const defaultConfig = {
       'jest-config': {}
@@ -32,9 +34,9 @@ export class Jest implements Compiler<TesterContext, TesterReturnType> {
     return config;
   }
 
-  public async action(compilerContext: CompilerContext): Promise<TesterReturnType> {
-    const result: TesterReturnType = [];
-    return Promise.resolve(result);
+  public async action(tc: TesterContext): Promise<TesterOutput> {
+    const result: TesterOutput = await runTester(tc, this.preset);
+    return result;
   }
 
   get logger(): Logger | undefined {

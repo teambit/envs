@@ -2,10 +2,11 @@ import { CompilationContext } from '@bit/bit.envs.common.compiler-types';
 import { getCustomTypes } from './custom-types';
 import path from 'path';
 import fs from 'fs-extra';
-import 'mocha'
+import 'mocha';
 
 export const reactPreset = {
   getDynamicPackageDependencies() {
+    debugger;
     return {
       dependencies: {
         '@types/react': '16.9.11',
