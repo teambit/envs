@@ -58,6 +58,7 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
   const compDistRoot = path.resolve(context.directory, FIXED_OUT_DIR);
   const getNameOfFile = (val: string, split: string) => val.split(split)[0];
   const sourceFileName = getNameOfFile(context.main, '.ts');
+  console.log('sourceFileName', sourceFileName);
   const pathPrefix = `${compDistRoot}${compDistRoot.endsWith('/') ? '' : '/'}`;
   const distMainFileExt = '.js';
   const res = dists.find(val => {
@@ -66,7 +67,7 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
       return false;
     }
     const nameToCheck = getNameOfFile(val.path, distMainFileExt).split(pathPrefix)[1];
-    return sourceFileName.endsWith(nameToCheck);
+    return nameToCheck.endsWith(sourceFileName);
   });
   return (res || { relative: '' }).relative;
 }
@@ -118,7 +119,7 @@ async function createTSConfig(context: CompilationContext) {
   return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));
 }
 
-async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
+export async function collectDistFiles(context: CompilationContext): Promise<Vinyl[]> {
   const capsuleDir = context.directory;
   const compDistRoot = path.resolve(capsuleDir, FIXED_OUT_DIR);
   const files = await readdir(compDistRoot);
