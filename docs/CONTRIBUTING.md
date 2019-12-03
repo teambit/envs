@@ -50,7 +50,7 @@ Consume in project by configuring the compiler dist in options.file.
             "compiler": {
                 "bit.envs/compilers/typescript@3.1.0": {
                     "options": {
-                        "file": "[path-to-typescript-dist]"
+                        "file": "[path-to-envs-repo]/packages/ts-compiler/dist/src/index.js"
                     }
                 }
             }
