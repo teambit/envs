@@ -116,7 +116,7 @@ async function isolate(api: GenericObject, ctx: CompilerContext) {
     const componentName = api.componentObject.name
     print(`\n building ${componentName} on directory ${targetDir}`)
 
-    const res = await api.isolate({ targetDir, skipNodeModules: true })
+    const res = await api.isolate({ targetDir, skipNodeModules: true, keepExistingCapsule: true })
 
     return { res, directory: targetDir }
 }

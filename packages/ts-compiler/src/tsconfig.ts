@@ -15,6 +15,6 @@ export default {
       "experimentalDecorators": true,
       "jsx": "react",
       "rootDir": './',
-      "incremental": true
+      "incremental": false
   }
 }
