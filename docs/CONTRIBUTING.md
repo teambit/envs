@@ -71,7 +71,7 @@ to debug run use node inspect protocol
 $ node --inspect-brk $(which bit) build
 ```
 
-if you wish to debug a tester make sure you should cancel fork level.
+if you wish to debug a tester make sure you cancel fork level.
 
 ```bash
 $ node --inspect-brk $(which bit) test --fork-level=NONE
