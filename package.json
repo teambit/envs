@@ -56,16 +56,23 @@
   },
   "bit": {
     "env": {
-      "compiler": "bit.envs/compilers/typescript@3.0.31"
+      "compiler": {
+        "bit.envs/compilers/typescript@3.1.11": {
+          "rawConfig": {
+            "tsconfig": {
+              "compilerOptions": {
+                "target": "ES5",
+                "module": "CommonJS",
+                "skipLibCheck": true
+              }
+            }
+          }
+        }
+      }
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",
     "overrides": {
-      "compilers/react-typescript": {
-        "env": {
-          "compiler": "bit.envs/compilers/typescript@3.0.31"
-        }
-      },
       "*": {
         "devDependencies": {
           "@types/node": "+",
