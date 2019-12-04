@@ -18,9 +18,11 @@
     "@types/fs-extra": "^8.0.1",
     "@types/rimraf": "^2.0.3",
     "fs-extra": "^8.1.0",
+    "recursive-readdir": "^2.2.2",
     "rimraf": "^3.0.0"
   },
   "devDependencies": {
+    "@bit/bit.envs.common.create-workspace": "0.0.4",
     "@types/chai": "^4.2.5",
     "chai": "^4.2.0"
   }

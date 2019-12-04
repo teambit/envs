@@ -123,7 +123,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.13": {
+    "bit.envs/compilers/react-typescript@3.1.14": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -136,9 +136,9 @@
                 "name": "package.json"
             },
             {
-                "relativePath": "packages/react-typescript/src/custom-types.ts",
+                "relativePath": "packages/react-typescript/src/generate-types.ts",
                 "test": false,
-                "name": "custom-types.ts"
+                "name": "generate-types.ts"
             },
             {
                 "relativePath": "packages/react-typescript/src/index.ts",
@@ -154,6 +154,11 @@
                 "relativePath": "packages/react-typescript/test/compile-react.spec.ts",
                 "test": false,
                 "name": "compile-react.spec.ts"
+            },
+            {
+                "relativePath": "packages/react-typescript/test/generate-types.spec.ts",
+                "test": false,
+                "name": "generate-types.spec.ts"
             },
             {
                 "relativePath": "packages/react-typescript/tsconfig.json",

@@ -1,10 +1,9 @@
 import { CompilationContext } from '@bit/bit.envs.common.compiler-types';
-import { getCustomTypes } from './custom-types';
-import path from 'path';
-import fs from 'fs-extra';
-import 'mocha';
+import { Preset } from '@bit/bit.envs.common.preset';
 
-export const reactPreset = {
+import { generateTypes } from './generate-types';
+
+export const reactPreset: Preset = {
   getDynamicPackageDependencies() {
     return {
       dependencies: {
@@ -29,13 +28,7 @@ export const reactPreset = {
       }
     };
   },
-  preCompile(ctx: CompilationContext) {
-    return generateTypes(ctx);
+  async preCompile(ctx: CompilationContext) {
+    await generateTypes(ctx.directory);
   }
 };
-
-export function generateTypes(ctx: CompilationContext) {
-  const typesPath = path.join(ctx.directory, 'bit_types.d.ts');
-  const content = getCustomTypes();
-  return fs.writeFile(typesPath, content);
-}
