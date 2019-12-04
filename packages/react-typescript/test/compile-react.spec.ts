@@ -12,11 +12,17 @@ describe('typescript react', () => {
     showComponent: {}
   };
   before(async function() {
+    debugger;
     this.timeout(1000 * 10 * 10);
-    results = await buildComponentInWorkspace(helper, { compilerPath: 'dist/src/index.js' } as any);
+    results = await buildComponentInWorkspace(helper, {
+      compilerPath: 'dist/src/index.js',
+      envTester: 'dist/src/index.js'
+    });
   });
   after(async function() {
-    return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
+    if (results.directory) {
+      return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
+    }
   });
   it('build should pass', async function() {});
   it('should have correct dependencies', function() {

@@ -9,7 +9,11 @@ export async function generateTypes(_dir: string) {
     filesToCreate.map(file => {
       const extension = file.split('.')[file.split('.').length - 1];
       const content = (strategies as any)[extension];
-      return fs.writeFile(`${file}.d.ts`, content);
+      const dtsFilePath = `${file}.d.ts`;
+      if (!fs.existsSync(dtsFilePath)) {
+        return fs.writeFile(dtsFilePath, content);
+      }
+      return Promise.resolve();
     })
   );
 }
@@ -33,16 +37,16 @@ function getStrategies() {
 
 function getGenericStyle() {
   return `
-    declare const style:readonly {[k:string]:string}
-    export = styles;
+  declare const style: {[k:string]:string}
+  export default style
     `;
 }
 function getSVGType() {
   return `
-    import * as React from 'react';
-    export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-    const src:string
-    export default  src
+  import * as React from 'react';
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  declare const src:string
+  export default  src
     `;
 }
 function getImageType() {
