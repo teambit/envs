@@ -11,8 +11,7 @@ export interface TestResult {
 }
 
 export async function runTester(tc: TesterContext, preset: Preset) {
-  console.log('wow');
-  debugger;
+  console.log('before');
   const { res, directory } = await isolate(tc);
   console.log('capsule directory: ', directory);
   await placeTestFilesInCapsule(tc);
@@ -23,10 +22,7 @@ export async function runTester(tc: TesterContext, preset: Preset) {
   return results;
 }
 
-export function placeTestFilesInCapsule(tc: TesterContext) {
-  console.log('yo');
-  debugger;
-}
+export function placeTestFilesInCapsule(tc: TesterContext) {}
 export function collectResults() {
   return Promise.resolve([]);
 }

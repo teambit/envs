@@ -22,6 +22,7 @@
   "devDependencies": {
     "@bit/bit.envs.common.build-component": "0.0.6",
     "@bit/bit.envs.common.create-workspace": "0.0.2",
+    "bit-bin": "^14.6.1-dev.1",
     "npm-run-all": "^4.1.5"
   }
 }
