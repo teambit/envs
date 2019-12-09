@@ -11,14 +11,18 @@ export interface TestResult {
 }
 
 export async function runTester(tc: TesterContext, preset: Preset) {
+  debugger;
   console.log('before');
-  const { res, directory } = await isolate(tc);
+  const { res, directory } = await isolate(tc, { writeDists: true });
   console.log('capsule directory: ', directory);
   await placeTestFilesInCapsule(tc);
   await run();
   const results = await collectResults();
+
   if (!process.env.DEBUG_FLAG) {
+    // await tc.context.capsule.destroy()
   }
+
   return results;
 }
 

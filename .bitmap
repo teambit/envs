@@ -99,7 +99,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/isolate@0.0.4": {
+    "bit.envs/common/isolate@0.0.6": {
         "files": [
             {
                 "relativePath": "packages/common/src/isolate.ts",
@@ -123,7 +123,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.17": {
+    "bit.envs/compilers/react-typescript@3.1.20": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -209,7 +209,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.1.13": {
+    "bit.envs/compilers/typescript@3.1.16": {
         "files": [
             {
                 "name": "README.md",
@@ -292,5 +292,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.6.1-dev.3"
+    "version": "14.7.0"
 }
