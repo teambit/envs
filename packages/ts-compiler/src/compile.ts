@@ -11,7 +11,6 @@ import 'typescript';
 import { CopyPolicy, Preset } from '@bit/bit.envs.common.preset';
 
 import { getTSConfig } from './tsconfig';
-import { getCapsuleName } from './utils';
 import { isolate, DEBUG_FLAG } from '@bit/bit.envs.common.isolate';
 
 export async function compile(cc: CompilerContext, preset: Preset) {
