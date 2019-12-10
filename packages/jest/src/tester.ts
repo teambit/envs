@@ -11,16 +11,14 @@ export interface TestResult {
 }
 
 export async function runTester(tc: TesterContext, preset: Preset) {
-  debugger;
-  console.log('before');
   const { res, directory } = await isolate(tc, { writeDists: true });
-  console.log('capsule directory: ', directory);
-  await placeTestFilesInCapsule(tc);
-  await run();
+  console.log('dir is: ', directory);
+  await res.writeDists();
+  debugger;
+  await run(directory);
   const results = await collectResults();
 
   if (!process.env.DEBUG_FLAG) {
-    // await tc.context.capsule.destroy()
   }
 
   return results;
@@ -30,6 +28,6 @@ export function placeTestFilesInCapsule(tc: TesterContext) {}
 export function collectResults() {
   return Promise.resolve([]);
 }
-export async function run() {
+export async function run(_dir: string) {
   return Promise.resolve([]);
 }

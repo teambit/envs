@@ -16,7 +16,7 @@ describe('Jest environment', function() {
       component
     });
     helper.command.runCmd('bit add -t src/comp.spec.ts --id comp', directory);
-    helper.command.runCmd('node $(which bit) test comp --fork-level=NONE', directory, 'inherit');
+    helper.command.runCmd('node --inspect-brk $(which bit) test comp --fork-level=NONE', directory, 'inherit');
   });
   after(async () => {
     if (!directory) {
