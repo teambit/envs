@@ -12,7 +12,6 @@ describe('typescript react', () => {
     showComponent: {}
   };
   before(async function() {
-    debugger;
     this.timeout(1000 * 10 * 10);
     results = await buildComponentInWorkspace(helper, {
       compilerPath: 'dist/src/index.js',

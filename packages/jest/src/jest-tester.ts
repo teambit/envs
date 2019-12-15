@@ -35,6 +35,7 @@ export class Jest implements Compiler<TesterContext, TesterOutput> {
   }
 
   public async action(tc: TesterContext): Promise<TesterOutput> {
+    console.log('action');
     const result: TesterOutput = await runTester(tc, this.preset);
     return result;
   }

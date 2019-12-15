@@ -11,11 +11,26 @@ import 'typescript';
 import { CopyPolicy, Preset } from '@bit/bit.envs.common.preset';
 
 import { getTSConfig } from './tsconfig';
-import { getCapsuleName } from './utils';
 import { isolate, DEBUG_FLAG } from '@bit/bit.envs.common.isolate';
+import md5 from 'md5';
+import os from 'os';
 
 export async function compile(cc: CompilerContext, preset: Preset) {
-  const { res, directory } = await isolate(cc);
+  let isolateResult = null;
+  if (!cc.dynamicConfig!.useExperimentalCache) {
+    isolateResult = await isolate(cc);
+  } else {
+    const name = getCapsuleName(cc);
+    isolateResult = await isolate(
+      cc,
+      {
+        skipNodeModules: true,
+        keepExistingCapsule: true
+      },
+      name
+    );
+  }
+  const { res, directory } = isolateResult;
   const srcTestFiles = getSrcTestFiles(cc.files);
   const context = await createContext(res, directory, cc, srcTestFiles);
   let results = null;
@@ -27,7 +42,7 @@ export async function compile(cc: CompilerContext, preset: Preset) {
     results = await _compile(context, cc);
   }
 
-  if (!process.env[DEBUG_FLAG]) {
+  if (!process.env[DEBUG_FLAG] && !cc.dynamicConfig!.useExperimentalCache) {
     await context.capsule.destroy();
   }
   return results;
@@ -41,10 +56,14 @@ async function preCompile(context: CompilationContext, preset: Preset) {
 
 async function _compile(context: CompilationContext, cc: CompilerContext) {
   const pathToTSC = require.resolve('typescript/bin/tsc');
-  await runNodeScriptInDir(context.directory, pathToTSC, ['-d']);
+  !context.cc.dynamicConfig!.useExperimentalCache
+    ? await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
+    : await context.capsule.execNode(pathToTSC, ['-d']);
+
   const dists = await collectDistFiles(context);
   const nonCompiledDists = await collectNonDistFiles(context);
   const mainFile = findMainFile(context, dists);
+
   return { dists: dists.concat(nonCompiledDists), mainFile };
 }
 
@@ -210,4 +229,11 @@ function isTestFile(srcTestFiles: Vinyl[], fileToCheck: string, compareWithExten
     return getWithoutExt(testFile.relative).endsWith(getWithoutExt(fileToCheck));
   });
   return !!found;
+}
+
+export function getCapsuleName(ctx: CompilerContext) {
+  const { name, version } = ctx.context.componentObject;
+  const componentInProjectId = md5(`${ctx.context.rootDistDir}${name}${version}`);
+  const targetDir = path.join(os.tmpdir(), 'bit', componentInProjectId);
+  return targetDir;
 }

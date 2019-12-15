@@ -11,25 +11,23 @@ export interface TestResult {
 }
 
 export async function runTester(tc: TesterContext, preset: Preset) {
-  console.log('wow');
+  const { res, directory } = await isolate(tc, { writeDists: true });
+  console.log('dir is: ', directory);
+  await res.writeDists();
   debugger;
-  const { res, directory } = await isolate(tc);
-  console.log('capsule directory: ', directory);
-  await placeTestFilesInCapsule(tc);
-  await run();
+  await run(directory);
   const results = await collectResults();
+
   if (!process.env.DEBUG_FLAG) {
   }
+
   return results;
 }
 
-export function placeTestFilesInCapsule(tc: TesterContext) {
-  console.log('yo');
-  debugger;
-}
+export function placeTestFilesInCapsule(tc: TesterContext) {}
 export function collectResults() {
   return Promise.resolve([]);
 }
-export async function run() {
+export async function run(_dir: string) {
   return Promise.resolve([]);
 }

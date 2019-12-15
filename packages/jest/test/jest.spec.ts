@@ -10,15 +10,13 @@ describe('Jest environment', function() {
     const component = getDefaultComponent();
     (component as any)['src/comp.spec.ts'] = '';
     const { directory } = await buildComponentInWorkspace(helper, {
-      compilerPath: '../ts-compiler/dist/src',
+      compilerPath: '../ts-compiler/dist/src/index.js',
       envTester: './dist/src',
-      disableBuildStep: true,
+      disableBuildStep: false,
       component
     });
-    console.log('~!~', directory);
     helper.command.runCmd('bit add -t src/comp.spec.ts --id comp', directory);
-    const output = helper.command.runCmd('node --inspect-brk $(which bit) test  comp --fork-level=NONE', directory);
-    console.log(output);
+    helper.command.runCmd('node --inspect-brk $(which bit) test comp --fork-level=NONE', directory, 'inherit');
   });
   after(async () => {
     if (!directory) {
