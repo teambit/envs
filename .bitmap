@@ -292,5 +292,28 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.7.1-dev.1"
+    "compilers/react": {
+        "files": [
+            {
+                "relativePath": "packages/react/README.md",
+                "test": false,
+                "name": "README.md"
+            },
+            {
+                "relativePath": "packages/react/package.json",
+                "test": false,
+                "name": "package.json"
+            },
+            {
+                "relativePath": "packages/react/src/index.ts",
+                "test": false,
+                "name": "index.ts"
+            }
+        ],
+        "mainFile": "packages/react/src/index.ts",
+        "trackDir": "packages/react",
+        "origin": "AUTHORED",
+        "exported": false
+    },
+    "version": "14.7.1"
 }
