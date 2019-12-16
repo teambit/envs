@@ -1,0 +1,19 @@
+{
+    "name": "react-native",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "node node_modules/.bin/mocha dist/test/*.spec.js",
+        "test:hero": "run-s clean build test",
+        "build": "tsc",
+        "clean": "rm -rf dist types"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "metro-react-native-babel-preset": "^0.57.0"
+    },
+    "devDependencies": {}
+}

@@ -292,5 +292,33 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.7.1-dev.1"
+    "compilers/react-native": {
+        "files": [
+            {
+                "relativePath": "packages/react-native/.babelrc",
+                "test": false,
+                "name": ".babelrc"
+            },
+            {
+                "relativePath": "packages/react-native/README.md",
+                "test": false,
+                "name": "README.md"
+            },
+            {
+                "relativePath": "packages/react-native/index.ts",
+                "test": false,
+                "name": "index.ts"
+            },
+            {
+                "relativePath": "packages/react-native/package.json",
+                "test": false,
+                "name": "package.json"
+            }
+        ],
+        "mainFile": "packages/react-native/index.ts",
+        "trackDir": "packages/react-native",
+        "origin": "AUTHORED",
+        "exported": false
+    },
+    "version": "14.7.1"
 }
