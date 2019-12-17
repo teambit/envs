@@ -6,14 +6,13 @@ import { generateTypes } from './generate-types';
 export const reactPreset: Preset = {
   getDynamicPackageDependencies() {
     return {
-      dependencies: {
-        '@types/react': '16.9.11',
-        '@types/react-dom': '16.9.4'
-      },
+      dependencies: {},
       devDependencies: {},
       peerDependencies: {
         react: '^16.11.0',
-        'react-dom': '^16.11.0'
+        'react-dom': '^16.11.0',
+        '@types/react': '16.9.11',
+        '@types/react-dom': '16.9.4'
       }
     };
   },
