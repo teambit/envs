@@ -123,7 +123,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.21": {
+    "bit.envs/compilers/react-typescript@3.1.22": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -209,7 +209,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.1.17": {
+    "bit.envs/compilers/typescript@3.1.18": {
         "files": [
             {
                 "name": "README.md",
@@ -292,5 +292,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.7.1-dev.1"
+    "version": "14.7.1"
 }
