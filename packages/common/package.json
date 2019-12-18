@@ -4,16 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_modules/.bin/mocha dist/test/*.spec.js",
+    "test:hero": "run-s clean build test",
+    "build": "tsc",
+    "clean": "rm -rf dist types"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^12.7.2",
-    "@types/vinyl": "^2.0.3",
-    "@types/minimatch": "^3.0.3"
-  },
   "dependencies": {
     "@types/fs-extra": "^8.0.1",
     "@types/mkdirp": "^0.5.2",
@@ -24,5 +22,14 @@
     "mkdirp": "^0.5.1",
     "rimraf": "^3.0.0",
     "vinyl": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.2",
+    "@types/vinyl": "^2.0.3",
+    "@types/minimatch": "^3.0.3",
+    "@types/chai": "^4.2.5",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
   }
 }

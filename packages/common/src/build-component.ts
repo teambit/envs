@@ -20,23 +20,43 @@ export type BuildOptions = {
   envTester?: string;
 };
 
+//the first file need to be the main file of the component
 export function getDefaultComponent(): GenericObject {
   return {
-    'src/comp.tsx': `import React from 'react'
-  export class HelloWorld {
-      render() {
-          return <div>Hello-World</div>
-      }
-  }`,
+    'src/comp.tsx': `
+    import React from 'react'
+    export class HelloWorld {
+        render() {
+            return <div>Hello-World</div>
+        }
+    }`,
     'src/test.css': '',
     'src/types.d.ts': '',
     'src/try.svg': ''
   };
 }
 
+export function getBitAddCommand(files: Array<string>, compId: string): string {
+  let bitAddCommand = 'bit add';
+  let testsFiles = '';
+  files.forEach(filePath => {
+    if (filePath.includes('.spec.')) {
+      testsFiles += `${filePath},`;
+    } else {
+      bitAddCommand += ` ${filePath}`;
+    }
+  });
+  testsFiles = testsFiles.substring(0, testsFiles.length - 1);
+  bitAddCommand += ` --main ${files[0]} --id ${compId} --tests "${testsFiles}"`;
+  return bitAddCommand;
+}
+
 export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOptions): Promise<BuildResult> {
   const results: BuildResult = { directory: '', files: [], showComponent: {} };
-  const component = (opts && opts.component) || getDefaultComponent();
+  const component: GenericObject = (opts && opts.component) || getDefaultComponent();
+  const files: Array<string> = Object.keys(component);
+  let compId: string = getFileName(files[0]);
+  compId = compId.substring(0, compId.indexOf('.'));
   results.directory = await createWorkspace(component, {
     env: (opts && opts.compilerPath) || 'dist/src/index.js',
     envTester: (opts && opts.envTester) || '',
@@ -48,14 +68,13 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
       }
     }
   } as any);
+
   helper.scopeHelper.initWorkspace(results.directory);
-  helper.command.addComponent('src/comp.tsx', {}, results.directory);
-  helper.command.runCmd('bit add src/test.css --id comp', results.directory);
-  helper.command.runCmd('bit add src/types.d.ts --id comp', results.directory);
-  helper.command.runCmd('bit add src/try.svg --id comp', results.directory);
+  helper.command.runCmd(getBitAddCommand(files, compId), results.directory);
+
   let output = '';
   if (!opts || opts.disableBuildStep !== true) {
-    output = helper.env.command.runCmd(getCommandString(opts), results.directory);
+    output = helper.env.command.runCmd(getCommandString(compId, opts), results.directory);
     results.files = await fs.readdir(path.join(results.directory, '/dist'));
   }
 
@@ -69,8 +88,14 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
   return results;
 }
 
-function getCommandString(opts?: BuildOptions) {
-  return opts && opts.shouldDebugEnvironment ? `node --inspect-brk $(which bit) build comp` : `bit build comp`;
+export function getFileName(path: string): string {
+  return path.replace(/^.*[\\\/]/, '');
+}
+
+function getCommandString(compId: string, opts?: BuildOptions) {
+  return opts && opts.shouldDebugEnvironment
+    ? `node --inspect-brk $(which bit) build ${compId}`
+    : `bit build ${compId}`;
 }
 
 export async function removeWorkspace(directory: string) {
