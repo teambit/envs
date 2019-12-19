@@ -176,6 +176,49 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "bit.envs/compilers/react@1.0.8": {
+        "files": [
+            {
+                "relativePath": "packages/react/.babelrc",
+                "test": false,
+                "name": ".babelrc"
+            },
+            {
+                "relativePath": "packages/react/README.md",
+                "test": false,
+                "name": "README.md"
+            },
+            {
+                "relativePath": "packages/react/index.ts",
+                "test": false,
+                "name": "index.ts"
+            },
+            {
+                "relativePath": "packages/react/package.json",
+                "test": false,
+                "name": "package.json"
+            },
+            {
+                "relativePath": "packages/react/test/compile-react.spec.ts",
+                "test": false,
+                "name": "compile-react.spec.ts"
+            },
+            {
+                "relativePath": "packages/react/test/component-examples.ts",
+                "test": false,
+                "name": "component-examples.ts"
+            },
+            {
+                "relativePath": "packages/react/tsconfig.json",
+                "test": false,
+                "name": "tsconfig.json"
+            }
+        ],
+        "mainFile": "packages/react/index.ts",
+        "trackDir": "packages/react",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "bit.envs/compilers/stencil@0.0.12": {
         "files": [
             {
