@@ -17,19 +17,13 @@ function clean(){
 }
 
 function run_test(){
+    declare -a testFolders=(common ts-compiler react-typescript react)
     cd packages
-    cd common
+    for fold in "${testFolders[@]}"; do
+    cd $fold
     npm run test:hero
     cd ..
-    cd ts-compiler
-    npm run test:hero
-    cd ..
-    cd react-typescript
-    npm run test:hero
-    cd ..
-    cd react
-    npm run test:hero
-    cd ..
+    done
 }
 
 
