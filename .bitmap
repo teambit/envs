@@ -39,12 +39,17 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/build-component@0.0.10": {
+    "bit.envs/common/build-component@0.0.11": {
         "files": [
             {
                 "relativePath": "packages/common/src/build-component.ts",
                 "test": false,
                 "name": "build-component.ts"
+            },
+            {
+                "relativePath": "packages/common/test/build-component.spec.ts",
+                "test": true,
+                "name": "build-component.spec.ts"
             }
         ],
         "mainFile": "packages/common/src/build-component.ts",
@@ -123,7 +128,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.24": {
+    "bit.envs/compilers/react-typescript@3.1.25": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -152,12 +157,12 @@
             },
             {
                 "relativePath": "packages/react-typescript/test/compile-react.spec.ts",
-                "test": false,
+                "test": true,
                 "name": "compile-react.spec.ts"
             },
             {
                 "relativePath": "packages/react-typescript/test/generate-types.spec.ts",
-                "test": false,
+                "test": true,
                 "name": "generate-types.spec.ts"
             },
             {
@@ -209,7 +214,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.1.19": {
+    "bit.envs/compilers/typescript@3.1.20": {
         "files": [
             {
                 "name": "README.md",
