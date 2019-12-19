@@ -18,6 +18,9 @@ function clean(){
 
 function run_test(){
     cd packages
+    cd common
+    npm run test:hero
+    cd ..
     cd ts-compiler
     npm run test:hero
     cd ..
