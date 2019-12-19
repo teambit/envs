@@ -27,6 +27,9 @@ function run_test(){
     cd react-typescript
     npm run test:hero
     cd ..
+    cd react
+    npm run test:hero
+    cd ..
 }
 
 
