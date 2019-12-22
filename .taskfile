@@ -17,7 +17,7 @@ function clean(){
 }
 
 function run_test(){
-    declare -a testFolders=(common ts-compiler react-typescript react)
+    declare -a testFolders=(common react react-native react-typescript ts-compiler)
     cd packages
     for fold in "${testFolders[@]}"; do
     cd $fold

@@ -96,6 +96,26 @@
           "@types/mocha": "^5.2.7",
           "bit-bin": "14.6.0"
         }
+      },
+      "compilers/react": {
+        "dependencies": {
+          "bit-bin": "-"
+        },
+        "devDependencies": {
+          "@types/node": "+",
+          "@types/mocha": "^5.2.7",
+          "bit-bin": "^14.7.1"
+        }
+      },
+      "compilers/react-native": {
+        "dependencies": {
+          "bit-bin": "-"
+        },
+        "devDependencies": {
+          "@types/node": "+",
+          "@types/mocha": "^5.2.7",
+          "bit-bin": "^14.7.1"
+        }
       }
     }
   }

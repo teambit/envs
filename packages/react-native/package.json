@@ -1,0 +1,27 @@
+{
+    "name": "react-native",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "cpx \".babelrc\" dist && node node_modules/.bin/mocha dist/test/*.spec.js",
+        "test:hero": "run-s clean build test",
+        "build": "tsc",
+        "clean": "rm -rf dist types"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "metro-react-native-babel-preset": "^0.57.0",
+        "rimraf": "^3.0.0"
+    },
+    "devDependencies": {
+        "@bit/bit.envs.common.build-component": "0.0.11",
+        "@types/chai": "^4.2.5",
+        "@types/rimraf": "^2.0.3",
+        "bit-bin": "^14.7.1",
+        "chai": "^4.2.0",
+        "cpx": "^1.5.0"
+    }
+}
