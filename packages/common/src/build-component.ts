@@ -84,7 +84,7 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
     console.log('------------output------------');
   }
 
-  results.showComponent = JSON.parse(helper.command.runCmd('bit show comp --json', results.directory));
+  results.showComponent = JSON.parse(helper.command.runCmd(`bit show ${compId} --json`, results.directory));
   return results;
 }
 

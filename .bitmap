@@ -39,7 +39,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/common/build-component@0.0.11": {
+    "bit.envs/common/build-component@0.0.12": {
         "files": [
             {
                 "relativePath": "packages/common/src/build-component.ts",
@@ -128,7 +128,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native@0.0.4": {
+    "bit.envs/compilers/react-native@0.0.5": {
         "files": [
             {
                 "relativePath": "packages/react-native/.babelrc",
@@ -171,7 +171,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.25": {
+    "bit.envs/compilers/react-typescript@3.1.26": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -219,7 +219,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react@1.0.10": {
+    "bit.envs/compilers/react@1.0.11": {
         "files": [
             {
                 "relativePath": "packages/react/.babelrc",
@@ -300,7 +300,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.1.20": {
+    "bit.envs/compilers/typescript@3.1.21": {
         "files": [
             {
                 "name": "README.md",
