@@ -26,6 +26,7 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 | ------------------ | ----------------------------------------------------------------------- | --------------------------------------------------- |
 | React JS           | [react](https://bit.dev/bit/envs/compilers/react)                       | `bit import bit.envs/compilers/react -c`            |
 | React TS           | [react-typescript](https://bit.dev/bit/envs/compilers/react-typescript) | `bit import bit.envs/compilers/react-typescript -c` |
+| React Native JS    | [react-native](https://bit.dev/bit/envs/compilers/react-native)         | `bit import bit.envs/compilers/react-native -c`     |
 | Vue                | [vue](https://bit.dev/bit/envs/bundlers/vue)                            | `bit import bit.envs/bundlers/vue -c`               |
 | Angular            | [angular](https://bit.dev/bit/envs/compilers/angular)                   | `bit import bit.envs/compilers/angular -c`          |
 | Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)             | `bit import bit.envs/compilers/typescript -c`       |
