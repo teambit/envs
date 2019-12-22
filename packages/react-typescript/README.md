@@ -18,4 +18,3 @@ Then, you can simply build the component using `bit build`
 $ bit build
 ```
 
-## configuration
