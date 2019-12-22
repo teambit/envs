@@ -128,7 +128,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native@0.0.3": {
+    "bit.envs/compilers/react-native@0.0.4": {
         "files": [
             {
                 "relativePath": "packages/react-native/.babelrc",
@@ -219,7 +219,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react@1.0.9": {
+    "bit.envs/compilers/react@1.0.10": {
         "files": [
             {
                 "relativePath": "packages/react/.babelrc",
