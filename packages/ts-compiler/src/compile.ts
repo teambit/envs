@@ -178,7 +178,7 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
     if (file.endsWith('.d.ts')) {
       return false;
     }
-    const defaultIgnore = ['node_modules/', FIXED_OUT_DIR, '.dependencies', '.ts'];
+    const defaultIgnore = [`node_modules${path.sep}`, FIXED_OUT_DIR, '.dependencies', '.ts'];
     return defaultIgnore.concat(copyPolicy.ignorePatterns).reduce(function(prev, curr) {
       return prev || !!~file.indexOf(curr);
     }, false);
@@ -215,10 +215,7 @@ function getExt(filename: string): string {
 function getWithoutExt(filename: string): string {
   const ext = getExt(filename);
   // There is no extension just return the file name
-  if (ext === filename) {
-    return filename;
-  }
-  return filename.substring(0, filename.length - ext.length - 1); // -1 to remove the '.'
+  return ext === filename ? filename : filename.substring(0, filename.length - ext.length - 1);
 }
 
 function isTestFile(srcTestFiles: Vinyl[], fileToCheck: string, compareWithExtension: boolean = true) {
