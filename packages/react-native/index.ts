@@ -1,13 +1,12 @@
-import 'metro-react-native-babel-preset';
-import Vinyl from 'vinyl';
+import { ReactNativeCompiler } from './src/reactnative-compiler';
+import { reactNativePreset } from './src/reactnative-preset';
 
-const baseCompile = require('@bit/bit.envs.internal.babel-base-compiler');
-const compiledFileTypes = ['js'];
+export default new ReactNativeCompiler(reactNativePreset);
 
-const compile = (files: Vinyl[], distPath: string) => {
-  return baseCompile(files, distPath, __dirname, compiledFileTypes);
-};
-
-export default {
-  compile
-};
+/**
+ *
+ * send configuration of babelrc with rawConfig,
+ * check that is writed in the babelrc inside the capsule
+ *
+ * check plugin/preset are linked in bit show with the right name
+ */
