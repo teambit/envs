@@ -54,10 +54,21 @@ async function preCompile(context: CompilationContext, preset: Preset) {
 
 async function _compile(context: CompilationContext, cc: CompilerContext) {
   const pathToBABEL = require.resolve('@babel/cli/bin/babel');
-  //const command = '';
   !context.cc.dynamicConfig!.useExperimentalCache
-    ? await runNodeScriptInDir(context.directory, pathToBABEL, ['**/*.js', '-d', 'dist'])
-    : await context.capsule.execNode(pathToBABEL, ['./**/*', '-d', 'dist']);
+    ? await runNodeScriptInDir(context.directory, pathToBABEL, [
+        './**/*',
+        '--ignore',
+        `node_modules,.dependencies,${FIXED_OUT_DIR}`,
+        '-d',
+        FIXED_OUT_DIR
+      ])
+    : await context.capsule.execNode(pathToBABEL, [
+        './**/*',
+        '--ignore',
+        `node_modules,.dependencies,${FIXED_OUT_DIR}`,
+        '-d',
+        FIXED_OUT_DIR
+      ]);
 
   const dists = await collectDistFiles(context);
   const nonCompiledDists = await collectNonDistFiles(context);
@@ -130,8 +141,7 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 }
 
 async function createBabelConfig(context: CompilationContext) {
-  //need to change it to babel overrides configuration
-  const configUserOverrides = context.cc.dynamicConfig!.tsconfig;
+  const configUserOverrides = context.cc.dynamicConfig!.babelrc;
   const content: GenericObject = getBabelrc(configUserOverrides);
   const pathToConfig = getBabelConfigPath(context);
   return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));

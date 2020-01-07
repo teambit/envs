@@ -131,11 +131,6 @@
     "bit.envs/compilers/react-native@0.0.5": {
         "files": [
             {
-                "relativePath": "packages/react-native/.babelrc",
-                "test": false,
-                "name": ".babelrc"
-            },
-            {
                 "relativePath": "packages/react-native/README.md",
                 "test": false,
                 "name": "README.md"
@@ -149,6 +144,36 @@
                 "relativePath": "packages/react-native/package.json",
                 "test": false,
                 "name": "package.json"
+            },
+            {
+                "relativePath": "packages/react-native/src/babelPrefixResolve.ts",
+                "test": false,
+                "name": "babelPrefixResolve.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/babelrc.ts",
+                "test": false,
+                "name": "babelrc.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/compile.ts",
+                "test": false,
+                "name": "compile.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/getDependencieVersion.ts",
+                "test": false,
+                "name": "getDependencieVersion.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/reactnative-compiler.ts",
+                "test": false,
+                "name": "reactnative-compiler.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/reactnative-preset.ts",
+                "test": false,
+                "name": "reactnative-preset.ts"
             },
             {
                 "relativePath": "packages/react-native/test/compile-react.spec.ts",

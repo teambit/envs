@@ -109,7 +109,9 @@
       },
       "compilers/react-native": {
         "dependencies": {
-          "bit-bin": "-"
+          "bit-bin": "-",
+          "@babel/cli": "^7.7.7",
+          "@babel/core": "^7.7.7"
         },
         "devDependencies": {
           "@types/node": "+",

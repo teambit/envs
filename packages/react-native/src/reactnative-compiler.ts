@@ -1,6 +1,15 @@
-import { merge } from 'lodash';
+import { merge, has } from 'lodash';
 import { compile } from './compile';
-import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
+import { babelPrefixResolve } from './babelPrefixResolve';
+import { getDependencieVersion, getPackageDependencies } from './getDependencieVersion';
+import {
+  ActionReturnType,
+  Compiler,
+  CompilerContext,
+  InitAPI,
+  Logger,
+  GenericObject
+} from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
 
 export class ReactNativeCompiler implements Compiler {
@@ -20,13 +29,35 @@ export class ReactNativeCompiler implements Compiler {
   }
 
   public getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-    const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {};
+    let deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {};
+    const packageDeps = getPackageDependencies(
+      `${ctx.context.componentDir ? ctx.context.componentDir : ctx.context.workspaceDir}/package.json`
+    );
+
+    if (has(ctx, 'rawConfig.babelrc.plugins')) {
+      const babelPlugins: GenericObject = {};
+      ctx.rawConfig.babelrc.plugins.map((plugin: string) => {
+        const dep = babelPrefixResolve(plugin, 'plugin');
+        babelPlugins[dep] = getDependencieVersion(packageDeps, dep, 'plugin');
+      });
+      deps.devDependencies = merge(deps.devDependencies, babelPlugins);
+    }
+
+    if (has(ctx, 'rawConfig.babelrc.presets')) {
+      const babelPresets: GenericObject = {};
+      ctx.rawConfig.babelrc.presets.map((preset: string) => {
+        const dep = babelPrefixResolve(preset, 'preset');
+        babelPresets[dep] = getDependencieVersion(packageDeps, dep, 'preset');
+      });
+      deps.devDependencies = merge(deps.devDependencies, babelPresets);
+    }
 
     return deps;
   }
+
   public getDynamicConfig(ctx: CompilerContext) {
     const defaultConfig = {
-      tsconfig: {},
+      babelrc: {},
       development: false,
       copyPolicy: {
         ignorePatterns: ['package.json', 'package-lock.json', '.babelrc', 'babel.config.js'],
