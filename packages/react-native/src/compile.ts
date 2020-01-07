@@ -142,7 +142,8 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 
 async function createBabelConfig(context: CompilationContext) {
   const configUserOverrides = context.cc.dynamicConfig!.babelrc;
-  const content: GenericObject = getBabelrc(configUserOverrides);
+  const isDev = context.cc.dynamicConfig!.development;
+  const content: GenericObject = getBabelrc(isDev, configUserOverrides);
   const pathToConfig = getBabelConfigPath(context);
   return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));
 }

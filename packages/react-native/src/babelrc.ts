@@ -2,10 +2,10 @@ import { merge } from 'lodash';
 import { GenericObject } from '@bit/bit.envs.common.compiler-types';
 
 export const FIXED_OUT_DIR = 'dist';
-export function getBabelrc(overrideConfig: GenericObject) {
+export function getBabelrc(isDev: boolean, overrideConfig: GenericObject) {
   const defaultOptions = {
     presets: ['module:metro-react-native-babel-preset'],
-    sourceMaps: 'inline',
+    sourceMaps: isDev ? 'inline' : false,
     minified: false
   };
 
