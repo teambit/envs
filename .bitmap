@@ -136,6 +136,11 @@
                 "name": "README.md"
             },
             {
+                "relativePath": "packages/react-native/config.md",
+                "test": false,
+                "name": "config.md"
+            },
+            {
                 "relativePath": "packages/react-native/index.ts",
                 "test": false,
                 "name": "index.ts"
@@ -161,9 +166,9 @@
                 "name": "compile.ts"
             },
             {
-                "relativePath": "packages/react-native/src/getDependencieVersion.ts",
+                "relativePath": "packages/react-native/src/dependencies-helpers.ts",
                 "test": false,
-                "name": "getDependencieVersion.ts"
+                "name": "dependencies-helpers.ts"
             },
             {
                 "relativePath": "packages/react-native/src/reactnative-compiler.ts",

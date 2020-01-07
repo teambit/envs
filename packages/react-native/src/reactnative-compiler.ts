@@ -1,7 +1,7 @@
 import { merge, has } from 'lodash';
 import { compile } from './compile';
 import { babelPrefixResolve } from './babelPrefixResolve';
-import { getDependencieVersion, getPackageDependencies } from './getDependencieVersion';
+import { getDependencieVersion, getPackageDependencies } from './dependencies-helpers';
 import {
   ActionReturnType,
   Compiler,
