@@ -12,6 +12,14 @@ describe('Side effects', function() {
     const config = getTSConfig(true, { compilerOptions: { outDir: 'other' } });
     expect(config.compilerOptions.outDir).to.equal('dist');
   });
+  it('tsconfig target to be ES2017 if development flag is true', function() {
+    const config = getTSConfig(true, {});
+    expect(config.compilerOptions.target).to.equal('ES2017');
+  });
+  it('tsconfig target to be ES2015 if development flag is false', function() {
+    const config = getTSConfig(false, {});
+    expect(config.compilerOptions.target).to.equal('ES2015');
+  });
   it('should find mainDistFile', async function() {
     this.timeout(1000 * 60 * 10);
     const helper = new Helper();
