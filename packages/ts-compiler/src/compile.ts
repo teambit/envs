@@ -4,6 +4,7 @@ import * as fs from 'fs-extra';
 import path, { relative, sep } from 'path';
 import readdir from 'recursive-readdir';
 import Vinyl from 'vinyl';
+import { has } from 'lodash';
 import { CompilerContext, GenericObject, CompilationContext } from '@bit/bit.envs.common.compiler-types';
 import { FIXED_OUT_DIR } from './tsconfig';
 import 'typescript';
@@ -132,7 +133,8 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 
 async function createTSConfig(context: CompilationContext) {
   const configUserOverrides = context.cc.dynamicConfig!.tsconfig;
-  const content: GenericObject = getTSConfig(false, configUserOverrides);
+  const isDev = context.cc.dynamicConfig!.development;
+  const content: GenericObject = getTSConfig(isDev, configUserOverrides);
   const pathToConfig = getTSConfigPath(context);
   return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));
 }
@@ -166,9 +168,10 @@ export async function collectDistFiles(context: CompilationContext): Promise<Vin
 }
 
 async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]> {
-  const copyPolicy: CopyPolicy = context.cc.dynamicConfig!.copyPolicy;
+  const dynamicConfig: GenericObject = context.cc.dynamicConfig!;
+  const copyPolicy: CopyPolicy = dynamicConfig.copyPolicy;
 
-  if (copyPolicy.disable) {
+  if (has(dynamicConfig, 'copyPolicy.disable') && copyPolicy.disable) {
     return Promise.resolve([]);
   }
 
