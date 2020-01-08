@@ -1,6 +1,9 @@
 # React-Typescript Compiler
 
-A TypeScript component compiler for [Bit](https://github.com/teambit/bit). With the context of React in mind. This compiler follows our best practices guide for compiling shared components. The compiler is also heavily based on [typescript](https://github.com/teambit/envs/blob/master/packages/ts-compiler/README.md) compiler.
+A TypeScript component compiler for [Bit](https://github.com/teambit/bit). 
+Check out the [best practices](https://docs.bit.dev/docs/best-practices) and also the specific [React guidelines](https://docs.bit.dev/docs/react-guidelines).
+
+The compiler is also heavily based on [typescript](https://github.com/teambit/envs/blob/master/packages/ts-compiler/README.md) compiler.
 
 ## How to use?
 
