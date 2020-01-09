@@ -11,12 +11,12 @@ function eachPackageDo() {
     cd ..
 }
 
-function clean(){
+function clean() {
     rm -rf dist
     eachPackageDo "rm -rf dist"
 }
 
-function run_test(){
+function run_test() {
     declare -a testFolders=(common react react-native react-typescript ts-compiler)
     cd packages
     for fold in "${testFolders[@]}"; do

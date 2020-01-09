@@ -35,23 +35,25 @@ function getStrategies() {
   return strategies;
 }
 
-function getGenericStyle() {
+export function getGenericStyle() {
   return `
-  declare const style: {[k:string]:string}
-  export default style
+  declare const style: {[k:string]:string};
+  export default style;
     `;
 }
-function getSVGType() {
+
+export function getSVGType() {
   return `
   import * as React from 'react';
   export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-  declare const src:string
-  export default  src
+  declare const src:string;
+  export default src;
     `;
 }
-function getImageType() {
+
+export function getImageType() {
   return `
-    const image: string;
+    declare const image: string;
     export default image;
     `;
 }
