@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@bit/bit.envs.compilers.typescript": "^3.1.4",
+    "@bit/bit.envs.compilers.typescript": "^3.1.29",
     "@types/fs-extra": "^8.0.1",
     "@types/rimraf": "^2.0.3",
     "fs-extra": "^8.1.0",
