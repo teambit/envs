@@ -25,12 +25,16 @@
         "lodash": "^4.17.15",
         "md5": "^2.2.1",
         "metro-react-native-babel-preset": "^0.57.0",
-        "rimraf": "^3.0.0"
+        "recursive-readdir": "^2.2.2",
+        "rimraf": "^3.0.0",
+        "vinyl": "^2.2.0"
     },
     "devDependencies": {
         "@bit/bit.envs.common.build-component": "0.0.11",
         "@types/chai": "^4.2.5",
+        "@types/recursive-readdir": "^2.2.0",
         "@types/rimraf": "^2.0.3",
+        "@types/vinyl": "^2.0.4",
         "bit-bin": "^14.7.1",
         "chai": "^4.2.0"
     }
