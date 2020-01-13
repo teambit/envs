@@ -36,7 +36,8 @@ export async function compile(cc: CompilerContext, preset: Preset) {
   const context = await createContext(res, directory, cc, srcTestFiles);
   let results = null;
   await preCompile(context, preset);
-  if (getNonCompiledFiles(cc.files).length === cc.files.length) {
+  const compiledFileTypes = preset.getDynamicConfig ? preset.getDynamicConfig().compiledFileTypes : [];
+  if (getNonCompiledFiles(cc.files, compiledFileTypes).length === cc.files.length) {
     const dists = await collectNonDistFiles(context);
     results = { dists };
   } else {
@@ -56,10 +57,11 @@ async function preCompile(context: CompilationContext, preset: Preset) {
 }
 
 async function _compile(context: CompilationContext, cc: CompilerContext) {
-  const pathToTSC = require.resolve('typescript/bin/tsc');
+  const pathToCompiler = require.resolve(cc.dynamicConfig!.compilerPath);
+  const compilerArguments = cc.dynamicConfig!.compilerArguments;
   !context.cc.dynamicConfig!.useExperimentalCache
-    ? await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
-    : await context.capsule.execNode(pathToTSC, ['-d']);
+    ? await runNodeScriptInDir(context.directory, pathToCompiler, compilerArguments)
+    : await context.capsule.execNode(pathToCompiler, compilerArguments);
 
   const dists = await collectDistFiles(context);
   const nonCompiledDists = await collectNonDistFiles(context);
@@ -68,9 +70,9 @@ async function _compile(context: CompilationContext, cc: CompilerContext) {
   return { dists: dists.concat(nonCompiledDists), mainFile };
 }
 
-function getNonCompiledFiles(files: Vinyl[]) {
+export function getNonCompiledFiles(files: Vinyl[], compiledFileTypes: Array<string>) {
   return files.filter(f => {
-    return !f.basename.endsWith('ts') && !f.basename.endsWith('tsx');
+    return !compiledFileTypes.includes(f.extname.substring(1));
   });
 }
 

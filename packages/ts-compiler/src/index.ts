@@ -1,4 +1,5 @@
 import { TypescriptCompiler } from './typescript-compiler';
-export { TypescriptCompiler };
+import { typeScriptPreset } from './typescript-preset';
 
-export default new TypescriptCompiler();
+export { TypescriptCompiler };
+export default new TypescriptCompiler(typeScriptPreset);
