@@ -79,7 +79,7 @@ export function getNonCompiledFiles(files: Vinyl[], compiledFileTypes: Array<str
 export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
   const compDistRoot = path.resolve(context.directory, FIXED_OUT_DIR);
   const getNameOfFile = (val: string, split: string) => val.split(split)[0];
-  const sourceFileName = getNameOfFile(context.main, '.ts');
+  const sourceFileName = getNameOfFile(context.main, context.main.substring(context.main.indexOf('.')));
   const pathPrefix = `${compDistRoot}${compDistRoot.endsWith(path.sep) ? '' : path.sep}`;
   const distMainFileExt = '.js';
   const res = dists.find(val => {

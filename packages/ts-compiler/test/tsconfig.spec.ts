@@ -20,7 +20,7 @@ describe('Side effects', function() {
     const config = getTSConfig(false, {});
     expect(config.compilerOptions.target).to.equal('ES2015');
   });
-  it('should find mainDistFile', async function() {
+  it('should find mainDistFile for ts', async function() {
     this.timeout(1000 * 60 * 10);
     const helper = new Helper();
     const directory = await createWorkspace(
@@ -44,9 +44,63 @@ describe('Side effects', function() {
     helper.command.runCmd('bit add src/TrapFocus/index.ts --id trap-focus', directory);
     helper.command.runCmd('bit build trap-focus', directory);
     const files = await collectDistFiles({ directory, srcTestFiles: [] } as any);
-    const testFiles = [];
     const main = findMainFile({ directory, main: 'TrapFocus/index.ts' } as any, files);
-    console.log('main', main);
+    expect(main).to.equal('TrapFocus/index.js');
+    await removeWorkspace(directory);
+  });
+  it('should find mainDistFile for tsx', async function() {
+    this.timeout(1000 * 60 * 10);
+    const helper = new Helper();
+    const directory = await createWorkspace(
+      {
+        'src/Focus/index.tsx': `
+        export function print(msg:string) {
+          console.log(msg)
+        }
+      `,
+        'src/TrapFocus/index.tsx': `
+      import {print} from '../Focus';
+      `
+      },
+      {
+        env: 'dist/src/index.js',
+        name: 'MainDistFile'
+      }
+    );
+    helper.scopeHelper.initWorkspace(directory);
+    helper.command.runCmd('bit add src/Focus/index.tsx --id focus', directory);
+    helper.command.runCmd('bit add src/TrapFocus/index.tsx --id trap-focus', directory);
+    helper.command.runCmd('bit build trap-focus', directory);
+    const files = await collectDistFiles({ directory, srcTestFiles: [] } as any);
+    const main = findMainFile({ directory, main: 'TrapFocus/index.tsx' } as any, files);
+    expect(main).to.equal('TrapFocus/index.js');
+    await removeWorkspace(directory);
+  });
+  it('should find mainDistFile for js', async function() {
+    this.timeout(1000 * 60 * 10);
+    const helper = new Helper();
+    const directory = await createWorkspace(
+      {
+        'src/Focus/index.js': `
+        export function print(msg:string) {
+          console.log(msg)
+        }
+      `,
+        'src/TrapFocus/index.js': `
+      import {print} from '../Focus';
+      `
+      },
+      {
+        env: 'dist/src/index.js',
+        name: 'MainDistFile'
+      }
+    );
+    helper.scopeHelper.initWorkspace(directory);
+    helper.command.runCmd('bit add src/Focus/index.js --id focus', directory);
+    helper.command.runCmd('bit add src/TrapFocus/index.js --id trap-focus', directory);
+    helper.command.runCmd('bit build trap-focus', directory);
+    const files = await collectDistFiles({ directory, srcTestFiles: [] } as any);
+    const main = findMainFile({ directory, main: 'TrapFocus/index.js' } as any, files);
     expect(main).to.equal('TrapFocus/index.js');
     await removeWorkspace(directory);
   });
