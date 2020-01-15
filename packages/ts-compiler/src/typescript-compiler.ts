@@ -1,7 +1,15 @@
 import { merge } from 'lodash';
 import { compile } from './compile';
-import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
+import {
+  ActionReturnType,
+  Compiler,
+  CompilerContext,
+  InitAPI,
+  Logger,
+  GenericObject
+} from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
+import { getTSConfig } from './tsconfig';
 
 export class TypescriptCompiler implements Compiler {
   private _logger: Logger | undefined;
@@ -23,18 +31,11 @@ export class TypescriptCompiler implements Compiler {
     const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {};
     return deps;
   }
+
   public getDynamicConfig(ctx: CompilerContext) {
-    const defaultConfig = {
-      tsconfig: {},
-      development: false,
-      copyPolicy: {
-        ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'],
-        disable: false
-      },
-      useExperimentalCache: false
-    };
-    const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig() : {};
-    const config = merge({}, defaultConfig, presetConfig, ctx.rawConfig);
+    //@ts-ignore
+    const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(ctx.rawConfig) : {};
+    const config = merge({}, presetConfig, ctx.rawConfig);
     return config;
   }
 
