@@ -20,6 +20,10 @@ describe('Side effects', function() {
     const config = getTSConfig(false, {});
     expect(config.compilerOptions.target).to.equal('ES2015');
   });
+  it('when development flag is true, sourceMap is true and inlineSourceMap cannot be also true', function() {
+    const config = getTSConfig(true, {});
+    expect(config.compilerOptions.inlineSourceMap).to.equal(false);
+  });
   it('should find mainDistFile for ts', async function() {
     this.timeout(1000 * 60 * 10);
     const helper = new Helper();
@@ -44,6 +48,7 @@ describe('Side effects', function() {
     helper.command.runCmd('bit add src/TrapFocus/index.ts --id trap-focus', directory);
     helper.command.runCmd('bit build trap-focus', directory);
     const files = await collectDistFiles({ directory, srcTestFiles: [] } as any);
+    const testFiles = [];
     const main = findMainFile({ directory, main: 'TrapFocus/index.ts' } as any, files);
     expect(main).to.equal('TrapFocus/index.js');
     await removeWorkspace(directory);
@@ -72,6 +77,7 @@ describe('Side effects', function() {
     helper.command.runCmd('bit add src/TrapFocus/index.tsx --id trap-focus', directory);
     helper.command.runCmd('bit build trap-focus', directory);
     const files = await collectDistFiles({ directory, srcTestFiles: [] } as any);
+    const testFiles = [];
     const main = findMainFile({ directory, main: 'TrapFocus/index.tsx' } as any, files);
     expect(main).to.equal('TrapFocus/index.js');
     await removeWorkspace(directory);

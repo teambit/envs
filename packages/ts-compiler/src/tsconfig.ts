@@ -21,7 +21,7 @@ export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
       declaration: true,
       experimentalDecorators: true,
       // inline sources and source-maps so it won't clutter dist folder
-      inlineSourceMap: isDev,
+      inlineSourceMap: !isDev,
       inlineSources: isDev,
       jsx: 'react',
       // the root of the capsule is CWD when transpiling and should be rootDir to adjust library sturcture.
