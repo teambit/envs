@@ -5,8 +5,8 @@ import { getTSConfig } from './tsconfig';
 export const typeScriptPreset: Preset = {
   //@ts-ignore
   getDynamicConfig(rawConfig?: GenericObject) {
-    const configUserOverrides = rawConfig!.tsconfig ? rawConfig!.tsconfig : {};
-    const isDev = rawConfig!.development ? rawConfig!.development : false;
+    const configUserOverrides = rawConfig?.tsconfig ? rawConfig.tsconfig : {};
+    const isDev = rawConfig?.development ? rawConfig.development : false;
 
     const defaultConfig = {
       compilerPath: 'typescript/bin/tsc',

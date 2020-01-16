@@ -35,9 +35,7 @@ describe('typescript', () => {
     expect(!!~results.files.indexOf('try.svg')).to.be.true;
   });
   it('should get non compiled files', () => {
-    const preset = typeScriptPreset.getDynamicConfig
-      ? typeScriptPreset.getDynamicConfig({ development: false, tsconfig: {} } as any)
-      : {};
+    const preset = typeScriptPreset.getDynamicConfig ? typeScriptPreset.getDynamicConfig() : {};
     const compiledFileTypes: Array<string> = preset.compiledFileTypes;
     const filesPath = [
       'src/Focus/print.ts',
