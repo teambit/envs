@@ -1,15 +1,7 @@
 import { merge } from 'lodash';
 import { compile } from './compile';
-import {
-  ActionReturnType,
-  Compiler,
-  CompilerContext,
-  InitAPI,
-  Logger,
-  GenericObject
-} from '@bit/bit.envs.common.compiler-types';
+import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
-import { getTSConfig } from './tsconfig';
 
 export class TypescriptCompiler implements Compiler {
   private _logger: Logger | undefined;
