@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { typeScriptPreset } from '../src/typescript-preset';
 
-describe.only('TypeScript Preset', function() {
+describe('TypeScript Preset', function() {
   it('getDynamicConfig function needs to be returned from TypeScript Preset', function() {
     const preset = typeScriptPreset.getDynamicConfig;
     expect(preset).to.exist;
