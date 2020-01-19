@@ -3,7 +3,6 @@ import { GenericObject } from '@bit/bit.envs.common.compiler-types';
 import { getTSConfig } from './tsconfig';
 
 export const typeScriptPreset: Preset = {
-  //@ts-ignore
   getDynamicConfig(rawConfig?: GenericObject) {
     const configUserOverrides = rawConfig?.tsconfig ? rawConfig.tsconfig : {};
     const isDev = rawConfig?.development ? rawConfig.development : false;
@@ -11,7 +10,7 @@ export const typeScriptPreset: Preset = {
     const defaultConfig = {
       compilerPath: 'typescript/bin/tsc',
       compilerArguments: ['-d'],
-      compiledFileTypes: ['ts', 'tsx'],
+      compiledFileTypes: ['.ts', '.tsx'],
       configFileName: 'tsconfig.json',
       tsconfig: getTSConfig(isDev, configUserOverrides),
       development: isDev,

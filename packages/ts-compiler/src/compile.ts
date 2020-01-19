@@ -70,7 +70,7 @@ async function _compile(context: CompilationContext, cc: CompilerContext) {
 
 export function getNonCompiledFiles(files: Vinyl[], compiledFileTypes: Array<string>) {
   return files.filter(f => {
-    return !compiledFileTypes.includes(f.extname.substring(1));
+    return !compiledFileTypes.includes(f.extname);
   });
 }
 
@@ -180,12 +180,14 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
     if (file.endsWith('.d.ts')) {
       return false;
     }
-    const defaultIgnore = [`node_modules${path.sep}`, FIXED_OUT_DIR, '.dependencies', '.ts'];
+    const defaultIgnore = [`node_modules${path.sep}`, FIXED_OUT_DIR, '.dependencies'].concat(
+      dynamicConfig.compiledFileTypes
+    );
     return defaultIgnore.concat(copyPolicy.ignorePatterns).reduce(function(prev, curr) {
       return prev || !!~file.indexOf(curr);
     }, false);
   };
-  const fileList = await readdir(capsuleDir, ['*.tsx', ignoreFunction]);
+  const fileList = await readdir(capsuleDir, [ignoreFunction]);
   const readFiles = await Promise.all(
     fileList.map(file => {
       return fs.readFile(file);
