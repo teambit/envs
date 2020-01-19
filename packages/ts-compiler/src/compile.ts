@@ -33,8 +33,9 @@ export async function compile(cc: CompilerContext, preset: Preset) {
   const context = await createContext(res, directory, cc, srcTestFiles);
   let results = null;
   await preCompile(context, preset);
-  //@ts-ignore
-  const compiledFileTypes = preset.getDynamicConfig ? preset.getDynamicConfig(cc.rawConfig).compiledFileTypes : [];
+  const compiledFileTypes = preset.getDynamicConfig
+    ? preset.getDynamicConfig(cc.rawConfig as any).compiledFileTypes
+    : [];
   if (getNonCompiledFiles(cc.files, compiledFileTypes).length === cc.files.length) {
     const dists = await collectNonDistFiles(context);
     results = { dists };
@@ -76,7 +77,6 @@ export function getNonCompiledFiles(files: Vinyl[], compiledFileTypes: Array<str
 
 export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
   const compDistRoot = path.resolve(context.directory, FIXED_OUT_DIR);
-  const getNameOfFile = (val: string, split: string) => val.split(split)[0];
   const sourceFileName = getNameOfFile(context.main, context.main.substring(context.main.indexOf('.')));
   const pathPrefix = `${compDistRoot}${compDistRoot.endsWith(path.sep) ? '' : path.sep}`;
   const distMainFileExt = '.js';
@@ -132,8 +132,8 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
 }
 
 async function createConfigFile(context: CompilationContext) {
-  const configFileName = context.cc.dynamicConfig!.configFileName;
-  const content: GenericObject = context.cc.dynamicConfig![configFileName.substring(0, configFileName.indexOf('.'))];
+  const configFileName = context.cc.dynamicConfig!.configFileName; //example: typescript will be tsconfig.json
+  const content: GenericObject = context.cc.dynamicConfig![getNameOfFile(configFileName, '.')]; //the key of the config file is defined by configFileName and can be dynamic.
   const pathToConfig = getConfigFilePath(context);
   return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));
 }
@@ -207,6 +207,8 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
   });
   return list;
 }
+
+const getNameOfFile = (val: string, split: string) => val.split(split)[0];
 
 function getConfigFilePath(context: CompilationContext) {
   return path.join(context.directory, context.cc.dynamicConfig!.configFileName);
