@@ -6,16 +6,21 @@ export const typeScriptPreset: Preset = {
   getDynamicConfig(rawConfig?: GenericObject) {
     const configUserOverrides = rawConfig?.tsconfig ? rawConfig.tsconfig : {};
     const isDev = rawConfig?.development ? rawConfig.development : false;
+    const compilerArguments = rawConfig?.compilerArguments ? rawConfig.compilerArguments : ['-d'];
+    const compiledFileTypes = rawConfig?.compiledFileTypes ? rawConfig.compiledFileTypes : ['.ts', '.tsx'];
+    const copyPolicyIgnorePatterns = rawConfig?.copyPolicy?.ignorePatterns
+      ? rawConfig.copyPolicy.ignorePatterns
+      : ['package.json', 'package-lock.json', 'tsconfig.json'];
 
     const defaultConfig = {
       compilerPath: 'typescript/bin/tsc',
-      compilerArguments: ['-d'],
-      compiledFileTypes: ['.ts', '.tsx'],
+      compilerArguments,
+      compiledFileTypes,
       configFileName: 'tsconfig.json',
       tsconfig: getTSConfig(isDev, configUserOverrides),
       development: isDev,
       copyPolicy: {
-        ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'],
+        ignorePatterns: copyPolicyIgnorePatterns,
         disable: false
       },
       useExperimentalCache: false

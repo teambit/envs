@@ -25,8 +25,7 @@ export class TypescriptCompiler implements Compiler {
   }
 
   public getDynamicConfig(ctx: CompilerContext) {
-    //this.preset.getDynamicConfig receive CompilationContext type, a this function receive CompilerContext, we need to update the type of this function to receive GenericObject.
-    //CompilationContext > CompilerContext > rawConfig
+    //Update the Preset interface in common folder to remove this flag
     //@ts-ignore
     const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(ctx.rawConfig) : {};
     const config = merge({}, presetConfig, ctx.rawConfig);
