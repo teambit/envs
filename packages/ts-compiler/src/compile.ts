@@ -33,9 +33,8 @@ export async function compile(cc: CompilerContext, preset: Preset) {
   const context = await createContext(res, directory, cc, srcTestFiles);
   let results = null;
   await preCompile(context, preset);
-  const compiledFileTypes = preset.getDynamicConfig
-    ? preset.getDynamicConfig(cc.rawConfig as any).compiledFileTypes
-    : [];
+  //@ts-ignore
+  const compiledFileTypes = preset.getDynamicConfig ? preset.getDynamicConfig(cc.rawConfig).compiledFileTypes : [];
   if (getNonCompiledFiles(cc.files, compiledFileTypes).length === cc.files.length) {
     const dists = await collectNonDistFiles(context);
     results = { dists };
