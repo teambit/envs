@@ -15,17 +15,13 @@ describe('TypeScript Preset', function() {
     expect(preset.configFileName).to.equal('tsconfig.json');
   });
   it('should override compiledFileTypes in getDynamicConfig function', function() {
-    const preset = typeScriptPreset.getDynamicConfig
-      ? //@ts-ignore
-        typeScriptPreset.getDynamicConfig({ compiledFileTypes: ['.ts'] })
-      : {};
+    //@ts-ignore
+    const preset = typeScriptPreset.getDynamicConfig ? typeScriptPreset.getDynamicConfig({ compiledFileTypes: ['.ts'] }) : {};
     expect(preset.compiledFileTypes).to.eql(['.ts']);
   });
   it('should override compilerArguments in getDynamicConfig function', function() {
-    const preset = typeScriptPreset.getDynamicConfig
-      ? //@ts-ignore
-        typeScriptPreset.getDynamicConfig({ compilerArguments: [] })
-      : {};
+    //@ts-ignore
+    const preset = typeScriptPreset.getDynamicConfig ? typeScriptPreset.getDynamicConfig({ compilerArguments: [] }) : {};
     expect(preset.compilerArguments).to.eql([]);
   });
 });
