@@ -58,7 +58,7 @@
   "bit": {
     "env": {
       "compiler": {
-        "bit.envs/compilers/typescript@3.1.29": {
+        "bit.envs/compilers/typescript@3.1.31": {
           "rawConfig": {
             "tsconfig": {
               "compilerOptions": {
