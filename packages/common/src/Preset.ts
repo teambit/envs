@@ -17,7 +17,7 @@ export interface DependenciesJSON {
 
 export interface Preset {
   getDynamicPackageDependencies?(): DependenciesJSON;
-  getDynamicConfig?(): GenericObject;
+  getDynamicConfig?(rawConfig?: GenericObject): GenericObject;
   runCompiler?(): Promise<void>;
   preCompile?(ctx: CompilationContext): Promise<void>;
 }
