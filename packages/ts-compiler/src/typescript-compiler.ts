@@ -23,18 +23,12 @@ export class TypescriptCompiler implements Compiler {
     const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies() : {};
     return deps;
   }
+
   public getDynamicConfig(ctx: CompilerContext) {
-    const defaultConfig = {
-      tsconfig: {},
-      development: false,
-      copyPolicy: {
-        ignorePatterns: ['package.json', 'package-lock.json', 'tsconfig.json'],
-        disable: false
-      },
-      useExperimentalCache: false
-    };
-    const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig() : {};
-    const config = merge({}, defaultConfig, presetConfig, ctx.rawConfig);
+    //Update the Preset interface in common folder to remove this flag
+    //@ts-ignore
+    const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(ctx.rawConfig) : {};
+    const config = merge({}, presetConfig, ctx.rawConfig);
     return config;
   }
 

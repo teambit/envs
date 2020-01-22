@@ -348,6 +348,11 @@
                 "test": false
             },
             {
+                "relativePath": "packages/ts-compiler/src/typescript-preset.ts",
+                "test": false,
+                "name": "typescript-preset.ts"
+            },
+            {
                 "name": "utils.ts",
                 "relativePath": "packages/ts-compiler/src/utils.ts",
                 "test": false
@@ -356,6 +361,11 @@
                 "relativePath": "packages/ts-compiler/test/compile.spec.ts",
                 "test": false,
                 "name": "compile.spec.ts"
+            },
+            {
+                "relativePath": "packages/ts-compiler/test/preset.spec.ts",
+                "test": false,
+                "name": "preset.spec.ts"
             },
             {
                 "relativePath": "packages/ts-compiler/test/spy-compiler.ts",
@@ -383,5 +393,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.7.1"
+    "version": "14.7.2"
 }

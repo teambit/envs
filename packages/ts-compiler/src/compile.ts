@@ -8,10 +8,7 @@ import { has } from 'lodash';
 import { CompilerContext, GenericObject, CompilationContext } from '@bit/bit.envs.common.compiler-types';
 import { FIXED_OUT_DIR } from './tsconfig';
 import 'typescript';
-
 import { CopyPolicy, Preset } from '@bit/bit.envs.common.preset';
-
-import { getTSConfig } from './tsconfig';
 import { isolate, DEBUG_FLAG } from '@bit/bit.envs.common.isolate';
 import md5 from 'md5';
 import os from 'os';
@@ -36,7 +33,9 @@ export async function compile(cc: CompilerContext, preset: Preset) {
   const context = await createContext(res, directory, cc, srcTestFiles);
   let results = null;
   await preCompile(context, preset);
-  if (getNonCompiledFiles(cc.files).length === cc.files.length) {
+  //@ts-ignore
+  const compiledFileTypes = preset.getDynamicConfig ? preset.getDynamicConfig(cc.rawConfig).compiledFileTypes : [];
+  if (getNonCompiledFiles(cc.files, compiledFileTypes).length === cc.files.length) {
     const dists = await collectNonDistFiles(context);
     results = { dists };
   } else {
@@ -51,15 +50,16 @@ export async function compile(cc: CompilerContext, preset: Preset) {
 
 async function preCompile(context: CompilationContext, preset: Preset) {
   return preset.preCompile
-    ? Promise.all([createTSConfig(context), preset.preCompile(context)])
-    : createTSConfig(context);
+    ? Promise.all([createConfigFile(context), preset.preCompile(context)])
+    : createConfigFile(context);
 }
 
 async function _compile(context: CompilationContext, cc: CompilerContext) {
-  const pathToTSC = require.resolve('typescript/bin/tsc');
+  const pathToCompiler = require.resolve(cc.dynamicConfig!.compilerPath);
+  const compilerArguments = cc.dynamicConfig!.compilerArguments;
   !context.cc.dynamicConfig!.useExperimentalCache
-    ? await runNodeScriptInDir(context.directory, pathToTSC, ['-d'])
-    : await context.capsule.execNode(pathToTSC, ['-d']);
+    ? await runNodeScriptInDir(context.directory, pathToCompiler, compilerArguments)
+    : await context.capsule.execNode(pathToCompiler, compilerArguments);
 
   const dists = await collectDistFiles(context);
   const nonCompiledDists = await collectNonDistFiles(context);
@@ -68,16 +68,15 @@ async function _compile(context: CompilationContext, cc: CompilerContext) {
   return { dists: dists.concat(nonCompiledDists), mainFile };
 }
 
-function getNonCompiledFiles(files: Vinyl[]) {
+export function getNonCompiledFiles(files: Vinyl[], compiledFileTypes: Array<string>) {
   return files.filter(f => {
-    return !f.basename.endsWith('ts') && !f.basename.endsWith('tsx');
+    return !compiledFileTypes.includes(f.extname);
   });
 }
 
 export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
   const compDistRoot = path.resolve(context.directory, FIXED_OUT_DIR);
-  const getNameOfFile = (val: string, split: string) => val.split(split)[0];
-  const sourceFileName = getNameOfFile(context.main, '.ts');
+  const sourceFileName = getNameOfFile(context.main, context.main.substring(context.main.indexOf('.')));
   const pathPrefix = `${compDistRoot}${compDistRoot.endsWith(path.sep) ? '' : path.sep}`;
   const distMainFileExt = '.js';
   const res = dists.find(val => {
@@ -131,11 +130,10 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
   return result;
 }
 
-async function createTSConfig(context: CompilationContext) {
-  const configUserOverrides = context.cc.dynamicConfig!.tsconfig;
-  const isDev = context.cc.dynamicConfig!.development;
-  const content: GenericObject = getTSConfig(isDev, configUserOverrides);
-  const pathToConfig = getTSConfigPath(context);
+async function createConfigFile(context: CompilationContext) {
+  const configFileName = context.cc.dynamicConfig!.configFileName; //example: typescript will be tsconfig.json
+  const content: GenericObject = context.cc.dynamicConfig![getNameOfFile(configFileName, '.')]; //the key of the config file is defined by configFileName and can be dynamic.
+  const pathToConfig = getConfigFilePath(context);
   return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));
 }
 
@@ -181,12 +179,14 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
     if (file.endsWith('.d.ts')) {
       return false;
     }
-    const defaultIgnore = [`node_modules${path.sep}`, FIXED_OUT_DIR, '.dependencies', '.ts'];
+    const defaultIgnore = [`node_modules${path.sep}`, FIXED_OUT_DIR, '.dependencies'].concat(
+      dynamicConfig.compiledFileTypes
+    );
     return defaultIgnore.concat(copyPolicy.ignorePatterns).reduce(function(prev, curr) {
       return prev || !!~file.indexOf(curr);
     }, false);
   };
-  const fileList = await readdir(capsuleDir, ['*.tsx', ignoreFunction]);
+  const fileList = await readdir(capsuleDir, [ignoreFunction]);
   const readFiles = await Promise.all(
     fileList.map(file => {
       return fs.readFile(file);
@@ -207,8 +207,10 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
   return list;
 }
 
-function getTSConfigPath(context: CompilationContext) {
-  return path.join(context.directory, 'tsconfig.json');
+const getNameOfFile = (val: string, split: string) => val.split(split)[0];
+
+function getConfigFilePath(context: CompilationContext) {
+  return path.join(context.directory, context.cc.dynamicConfig!.configFileName);
 }
 
 function getExt(filename: string): string {

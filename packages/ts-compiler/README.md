@@ -54,7 +54,11 @@ This config state is as if you would configure the compiler as following by hand
         "env": {
             "compiler": {
                 "bit.envs/compilers/typescript@[version]": {
-                    "rawConfig: {
+                    "rawConfig": {
+                        "compilerPath": "typescript/bin/tsc",
+                        "compilerArguments": ["-d"],
+                        "compiledFileTypes": [".ts", ".tsx"],
+                        "configFileName": "tsconfig.json",
                         "tsconfig": {},
                         "development": false
                         "copyPolicy": {
@@ -69,7 +73,13 @@ This config state is as if you would configure the compiler as following by hand
 }
 ```
 
-- **tsconfig** - override tsconfig.json configuration.
+- **compilerPath** - set the path to the compiler.  
+  E.g: for a Babel based compiler, it will be `@babel/cli/bin/babel`.
+- **compilerArguments** - arguments options to run with the compiler.
+- **compiledFileTypes** - file types to be compiled.
+- **configFileName** - config file that the compiler should have.
+  E.g: for a Babel based compiler, it will be `.babelrc`.
+- **tsconfig** - override `tsconfig.json` configuration.
 - **development** - enable or disable dev mode to include source maps and better debugging capabilities.
 - **copyPolicy** - manage the copy policy.
 - **copyPolicy.ignorePatterns** - Array of patterns to exclude files from being copied.
@@ -95,10 +105,12 @@ you must get when installing the component with NPM.
 #### How to include custom-types folder from the author environment?
 
 You have some custom-types folder which extend other types with your own type definition. You want to reuse it in capsule.
-Do the following: 
-- create a component from the types. 
-- add it in overrides to all other components. 
-- include it in `tsconfig.include` as following: 
+Do the following:
+
+- create a component from the types.
+- add it in overrides to all other components.
+- include it in `tsconfig.include` as following:
+
 ```js
 "bit.envs/compilers/typescript": {
     "rawConfig": {
@@ -114,7 +126,9 @@ Do the following:
 ```
 
 #### Writing node only components and getting unknown identifer exception.
-Add the flowing configuration override in the bit.json 
+
+Add the flowing configuration override in the bit.json
+
 ```js
 "bit.envs/compilers/typescript": {
     "rawConfig": {
