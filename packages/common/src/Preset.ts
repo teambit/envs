@@ -1,4 +1,4 @@
-import { CompilationContext, GenericObject } from './compiler-types';
+import { CompilationContext, GenericObject, CompilerContext } from './compiler-types';
 
 export interface CopyPolicy {
   ignorePatterns: string[];
@@ -16,7 +16,7 @@ export interface DependenciesJSON {
 }
 
 export interface Preset {
-  getDynamicPackageDependencies?(): DependenciesJSON;
+  getDynamicPackageDependencies?(ctx?: CompilerContext): DependenciesJSON;
   getDynamicConfig?(rawConfig?: GenericObject): GenericObject;
   runCompiler?(): Promise<void>;
   preCompile?(ctx: CompilationContext): Promise<void>;
