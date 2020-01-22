@@ -13,8 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@bit/bit.envs.common.build-component": "0.0.4",
-    "@bit/bit.envs.common.compiler-types": "0.0.4",
+    "@bit/bit.envs.common.compiler-types": "0.0.11",
     "@bit/bit.envs.common.isolate": "0.0.6",
     "@bit/bit.envs.common.preset": "0.0.10",
     "@types/fs-extra": "^8.0.1",
@@ -30,6 +29,7 @@
     "vinyl": "^2.2.0"
   },
   "devDependencies": {
+    "@bit/bit.envs.common.build-component": "0.0.4",
     "@types/chai": "^4.2.5",
     "@types/mkdirp": "^0.5.2",
     "@types/mocha": "^5.2.7",
