@@ -199,6 +199,11 @@
                 "name": "react-preset.ts"
             },
             {
+                "relativePath": "packages/react-typescript/src/tsconfig.ts",
+                "test": false,
+                "name": "tsconfig.ts"
+            },
+            {
                 "relativePath": "packages/react-typescript/test/compile-react.spec.ts",
                 "test": true,
                 "name": "compile-react.spec.ts"
@@ -207,6 +212,11 @@
                 "relativePath": "packages/react-typescript/test/generate-types.spec.ts",
                 "test": true,
                 "name": "generate-types.spec.ts"
+            },
+            {
+                "relativePath": "packages/react-typescript/test/preset.spec.ts",
+                "test": false,
+                "name": "preset.spec.ts"
             },
             {
                 "relativePath": "packages/react-typescript/tsconfig.json",
