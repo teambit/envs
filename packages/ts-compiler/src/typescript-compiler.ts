@@ -25,8 +25,6 @@ export class TypescriptCompiler implements Compiler {
   }
 
   public getDynamicConfig(ctx: CompilerContext) {
-    //Update the Preset interface in common folder to remove this flag
-    //@ts-ignore
     const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(ctx.rawConfig) : {};
     const config = merge({}, presetConfig, ctx.rawConfig);
     return config;
