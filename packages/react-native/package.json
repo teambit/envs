@@ -2,9 +2,9 @@
     "name": "react-native",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
-        "test": "cpx \".babelrc\" dist && node node_modules/.bin/mocha dist/test/*.spec.js",
+        "test": "node node_modules/.bin/mocha dist/test/*.spec.js",
         "test:hero": "run-s clean build test",
         "build": "tsc",
         "clean": "rm -rf dist types"
@@ -13,15 +13,23 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@babel/cli": "^7.8.3",
+        "@babel/core": "^7.8.3",
+        "@bit/bit.envs.common.compiler-types": "0.0.11",
+        "@bit/bit.envs.common.preset": "0.0.10",
+        "@bit/bit.envs.compilers.typescript": "3.1.35",
+        "fs-extra": "^8.1.0",
+        "lodash": "^4.17.15",
         "metro-react-native-babel-preset": "^0.57.0",
         "rimraf": "^3.0.0"
     },
     "devDependencies": {
-        "@bit/bit.envs.common.build-component": "0.0.11",
+        "@bit/bit.envs.common.build-component": "0.0.14",
         "@types/chai": "^4.2.5",
+        "@types/fs-extra": "^8.0.1",
+        "@types/lodash": "^4.14.149",
         "@types/rimraf": "^2.0.3",
         "bit-bin": "^14.7.1",
-        "chai": "^4.2.0",
-        "cpx": "^1.5.0"
+        "chai": "^4.2.0"
     }
 }

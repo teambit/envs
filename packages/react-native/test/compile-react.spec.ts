@@ -14,8 +14,8 @@ describe('babel react-native', () => {
   before(async function() {
     this.timeout(1000 * 10 * 10);
     results = await buildComponentInWorkspace(helper, {
-      compilerPath: 'dist/index.js',
-      envTester: 'dist/index.js',
+      compilerPath: 'dist/src/index.js',
+      envTester: 'dist/src/index.js',
       component: {
         'src/comp.js': NormalButtonComponent,
         'src/card.js': CardComponent,
