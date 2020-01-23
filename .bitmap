@@ -146,9 +146,9 @@
                 "name": "package.json"
             },
             {
-                "relativePath": "packages/react-native/src/babelPrefixResolve.ts",
+                "relativePath": "packages/react-native/src/babel-prefix-resolve.ts",
                 "test": false,
-                "name": "babelPrefixResolve.ts"
+                "name": "babel-prefix-resolve.ts"
             },
             {
                 "relativePath": "packages/react-native/src/babelrc.ts",

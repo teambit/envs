@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { babelPrefixResolve } from '../src/babelPrefixResolve';
+import { babelPrefixResolve } from '../src/babel-prefix-resolve';
 
 describe('babelPrefixResolve', function() {
   it('should return correct package to install', function() {

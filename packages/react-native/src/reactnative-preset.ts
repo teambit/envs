@@ -3,7 +3,7 @@ import { Preset } from '@bit/bit.envs.common.preset';
 import { GenericObject, CompilerContext } from '@bit/bit.envs.common.compiler-types';
 import { getBabelrc, FIXED_OUT_DIR } from './babelrc';
 import { getPackageDependencies, getDependencieVersion } from './dependencies-helpers';
-import { babelPrefixResolve } from './babelPrefixResolve';
+import { babelPrefixResolve } from './babel-prefix-resolve';
 
 export const reactNativePreset: Preset = {
   getDynamicPackageDependencies(ctx?: CompilerContext) {
