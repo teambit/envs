@@ -131,24 +131,49 @@
     "bit.envs/compilers/react-native@0.0.7": {
         "files": [
             {
-                "relativePath": "packages/react-native/.babelrc",
-                "test": false,
-                "name": ".babelrc"
-            },
-            {
                 "relativePath": "packages/react-native/README.md",
                 "test": false,
                 "name": "README.md"
             },
             {
-                "relativePath": "packages/react-native/index.ts",
+                "relativePath": "packages/react-native/config.md",
                 "test": false,
-                "name": "index.ts"
+                "name": "config.md"
             },
             {
                 "relativePath": "packages/react-native/package.json",
                 "test": false,
                 "name": "package.json"
+            },
+            {
+                "relativePath": "packages/react-native/src/babel-prefix-resolve.ts",
+                "test": false,
+                "name": "babel-prefix-resolve.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/babelrc.ts",
+                "test": false,
+                "name": "babelrc.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/dependencies-helpers.ts",
+                "test": false,
+                "name": "dependencies-helpers.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/index.ts",
+                "test": false,
+                "name": "index.ts"
+            },
+            {
+                "relativePath": "packages/react-native/src/reactnative-preset.ts",
+                "test": false,
+                "name": "reactnative-preset.ts"
+            },
+            {
+                "relativePath": "packages/react-native/test/babel-prefix.spec.ts",
+                "test": false,
+                "name": "babel-prefix.spec.ts"
             },
             {
                 "relativePath": "packages/react-native/test/compile-react.spec.ts",
@@ -161,12 +186,17 @@
                 "name": "component-examples.ts"
             },
             {
+                "relativePath": "packages/react-native/test/preset.spec.ts",
+                "test": false,
+                "name": "preset.spec.ts"
+            },
+            {
                 "relativePath": "packages/react-native/tsconfig.json",
                 "test": false,
                 "name": "tsconfig.json"
             }
         ],
-        "mainFile": "packages/react-native/index.ts",
+        "mainFile": "packages/react-native/src/index.ts",
         "trackDir": "packages/react-native",
         "origin": "AUTHORED",
         "exported": true
