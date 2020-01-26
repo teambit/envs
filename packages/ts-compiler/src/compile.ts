@@ -119,6 +119,9 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
   const cwd = process.cwd();
   try {
     process.chdir(directory);
+    if (process.env[DEBUG_FLAG]) {
+      console.log(` ${scriptFile} ${args.toString().replace(',', ' ')}`);
+    }
     result = await execa(scriptFile, args, { stdout: 1 });
   } catch (e) {
     process.chdir(cwd);
