@@ -1,3 +1,4 @@
+import { merge } from 'lodash';
 import { compile } from './compile';
 import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
@@ -24,7 +25,7 @@ export class TypescriptCompiler implements Compiler {
 
   public getDynamicConfig(ctx: CompilerContext) {
     const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(ctx.rawConfig) : {};
-    return Object.assign({}, presetConfig, ctx.rawConfig);
+    return merge({}, presetConfig, ctx.rawConfig);
   }
 
   public async action(compilerContext: CompilerContext): Promise<ActionReturnType> {
