@@ -2,30 +2,24 @@ import { Preset } from '@bit/bit.envs.common.preset';
 import { GenericObject } from '@bit/bit.envs.common.compiler-types';
 import { getTSConfig } from './tsconfig';
 
+const COMPILED_EXTENSIONS = ['.ts', '.tsx'];
+const IGNORED_FILES = ['package.json', 'package-lock.json', 'tsconfig.json'];
+
 export const typeScriptPreset: Preset = {
   getDynamicConfig(rawConfig?: GenericObject) {
-    const configUserOverrides = rawConfig?.tsconfig ? rawConfig.tsconfig : {};
-    const isDev = rawConfig?.development ? rawConfig.development : false;
-    const compilerArguments = rawConfig?.compilerArguments ? rawConfig.compilerArguments : ['-d'];
-    const compiledFileTypes = rawConfig?.compiledFileTypes ? rawConfig.compiledFileTypes : ['.ts', '.tsx'];
-    const copyPolicyIgnorePatterns = rawConfig?.copyPolicy?.ignorePatterns
-      ? rawConfig.copyPolicy.ignorePatterns
-      : ['package.json', 'package-lock.json', 'tsconfig.json'];
+    const isDev = rawConfig?.development;
 
-    const defaultConfig = {
+    return {
       compilerPath: 'typescript/bin/tsc',
-      compilerArguments,
-      compiledFileTypes,
+      compilerArguments: rawConfig?.compilerArguments || ['--declaration'],
+      compiledFileTypes: rawConfig?.compiledFileTypes || COMPILED_EXTENSIONS,
       configFileName: 'tsconfig.json',
-      tsconfig: getTSConfig(isDev, configUserOverrides),
+      tsconfig: getTSConfig(isDev, rawConfig?.tsconfig || {}),
       development: isDev,
       copyPolicy: {
-        ignorePatterns: copyPolicyIgnorePatterns,
+        ignorePatterns: rawConfig?.copyPolicy?.ignorePatterns || IGNORED_FILES,
         disable: false
-      },
-      useExperimentalCache: false
+      }
     };
-
-    return defaultConfig;
   }
 };
