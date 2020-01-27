@@ -24,7 +24,7 @@ export const reactPreset: Preset = {
 
     const defaultConfig = {
       compilerPath: 'typescript/bin/tsc',
-      compilerArguments: rawConfig?.compilerArguments || ['-d'],
+      compilerArguments: rawConfig?.compilerArguments || ['--declaration'],
       compiledFileTypes: rawConfig?.compiledFileTypes || COMPILED_EXTENSIONS,
       configFileName: 'tsconfig.json',
       tsconfig: getTSConfig(isDev, rawConfig?.tsconfig || {}),
