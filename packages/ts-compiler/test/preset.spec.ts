@@ -31,6 +31,10 @@ describe('TypeScript Preset', function() {
     expect(preset.development).to.be.true;
   });
   it('should set development to false', function() {
+    const preset = typeScriptPreset.getDynamicConfig ? typeScriptPreset.getDynamicConfig({ development: false }) : {};
+    expect(preset.development).to.be.false;
+  });
+  it('should set development to false', function() {
     const preset = typeScriptPreset.getDynamicConfig ? typeScriptPreset.getDynamicConfig() : {};
     expect(preset.development).to.be.false;
   });

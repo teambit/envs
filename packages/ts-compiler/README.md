@@ -56,7 +56,7 @@ This config state is as if you would configure the compiler as following by hand
                 "bit.envs/compilers/typescript@[version]": {
                     "rawConfig": {
                         "compilerPath": "typescript/bin/tsc",
-                        "compilerArguments": ["-d"],
+                        "compilerArguments": ["--declaration"],
                         "compiledFileTypes": [".ts", ".tsx"],
                         "configFileName": "tsconfig.json",
                         "tsconfig": {},
