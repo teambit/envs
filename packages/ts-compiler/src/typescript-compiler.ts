@@ -1,4 +1,3 @@
-import { merge } from 'lodash';
 import { compile } from './compile';
 import { ActionReturnType, Compiler, CompilerContext, InitAPI, Logger } from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
@@ -20,19 +19,16 @@ export class TypescriptCompiler implements Compiler {
   }
 
   public getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
-    const deps = this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies(ctx) : {};
-    return deps;
+    return this.preset.getDynamicPackageDependencies ? this.preset.getDynamicPackageDependencies(ctx) : {};
   }
 
   public getDynamicConfig(ctx: CompilerContext) {
     const presetConfig = this.preset.getDynamicConfig ? this.preset.getDynamicConfig(ctx.rawConfig) : {};
-    const config = merge({}, presetConfig, ctx.rawConfig);
-    return config;
+    return Object.assign({}, presetConfig, ctx.rawConfig);
   }
 
   public async action(compilerContext: CompilerContext): Promise<ActionReturnType> {
-    const compileResult = await compile(compilerContext, this.preset);
-    return compileResult;
+    return await compile(compilerContext, this.preset);
   }
 
   get logger(): Logger | undefined {

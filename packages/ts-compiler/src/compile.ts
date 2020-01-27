@@ -4,7 +4,6 @@ import * as fs from 'fs-extra';
 import path, { relative, sep } from 'path';
 import readdir from 'recursive-readdir';
 import Vinyl from 'vinyl';
-import { has } from 'lodash';
 import { CompilerContext, GenericObject, CompilationContext } from '@bit/bit.envs.common.compiler-types';
 import { FIXED_OUT_DIR } from './tsconfig';
 import 'typescript';
@@ -14,20 +13,7 @@ import md5 from 'md5';
 import os from 'os';
 
 export async function compile(cc: CompilerContext, preset: Preset) {
-  let isolateResult = null;
-  if (!cc.dynamicConfig!.useExperimentalCache) {
-    isolateResult = await isolate(cc);
-  } else {
-    const name = getCapsuleName(cc);
-    isolateResult = await isolate(
-      cc,
-      {
-        skipNodeModules: true,
-        keepExistingCapsule: true
-      },
-      name
-    );
-  }
+  const isolateResult = await isolate(cc);
   const { res, directory } = isolateResult;
   const srcTestFiles = getSrcTestFiles(cc.files);
   const context = await createContext(res, directory, cc, srcTestFiles);
@@ -41,7 +27,7 @@ export async function compile(cc: CompilerContext, preset: Preset) {
     results = await _compile(context, cc);
   }
 
-  if (!process.env[DEBUG_FLAG] && !cc.dynamicConfig!.useExperimentalCache) {
+  if (!process.env[DEBUG_FLAG]) {
     await context.capsule.destroy();
   }
   return results;
@@ -56,10 +42,7 @@ async function preCompile(context: CompilationContext, preset: Preset) {
 async function _compile(context: CompilationContext, cc: CompilerContext) {
   const pathToCompiler = require.resolve(cc.dynamicConfig!.compilerPath);
   const compilerArguments = cc.dynamicConfig!.compilerArguments;
-  !context.cc.dynamicConfig!.useExperimentalCache
-    ? await runNodeScriptInDir(context.directory, pathToCompiler, compilerArguments)
-    : await context.capsule.execNode(pathToCompiler, compilerArguments);
-
+  await runNodeScriptInDir(context.directory, pathToCompiler, compilerArguments);
   const dists = await collectDistFiles(context);
   const nonCompiledDists = await collectNonDistFiles(context);
   const mainFile = findMainFile(context, dists);
@@ -171,7 +154,7 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
   const dynamicConfig: GenericObject = context.cc.dynamicConfig!;
   const copyPolicy: CopyPolicy = dynamicConfig.copyPolicy;
 
-  if (has(dynamicConfig, 'copyPolicy.disable') && copyPolicy.disable) {
+  if (dynamicConfig?.copyPolicy?.disable) {
     return Promise.resolve([]);
   }
 

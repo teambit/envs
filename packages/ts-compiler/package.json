@@ -21,7 +21,6 @@
     "@types/md5": "^2.1.33",
     "execa": "^2.0.4",
     "fs-extra": "^8.1.0",
-    "lodash": "^4.17.15",
     "md5": "^2.2.1",
     "mkdirp": "^0.5.1",
     "recursive-readdir": "^2.2.2",
