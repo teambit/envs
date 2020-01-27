@@ -112,7 +112,7 @@ Do the following:
 - include it in `tsconfig.include` as following:
 
 ```js
-"bit.envs/compilers/typescript": {
+"bit.envs/compilers/typescript@[version]": {
     "rawConfig": {
         "tsconfig": {
             "compilerOptions": {},
@@ -130,7 +130,7 @@ Do the following:
 Add the flowing configuration override in the bit.json
 
 ```js
-"bit.envs/compilers/typescript": {
+"bit.envs/compilers/typescript@[version]": {
     "rawConfig": {
         "tsconfig": {
             "compilerOptions": {

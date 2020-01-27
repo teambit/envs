@@ -7,7 +7,7 @@ const IGNORED_FILES = ['package.json', 'package-lock.json', 'tsconfig.json'];
 
 export const typeScriptPreset: Preset = {
   getDynamicConfig(rawConfig?: GenericObject) {
-    const isDev = rawConfig?.development;
+    const isDev = rawConfig?.development ? rawConfig.development : false;
 
     return {
       compilerPath: 'typescript/bin/tsc',

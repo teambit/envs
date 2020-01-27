@@ -26,4 +26,12 @@ describe('TypeScript Preset', function() {
       : {};
     expect(preset.compilerArguments).to.eql([]);
   });
+  it('should set development to true', function() {
+    const preset = typeScriptPreset.getDynamicConfig ? typeScriptPreset.getDynamicConfig({ development: true }) : {};
+    expect(preset.development).to.be.true;
+  });
+  it('should set development to false', function() {
+    const preset = typeScriptPreset.getDynamicConfig ? typeScriptPreset.getDynamicConfig() : {};
+    expect(preset.development).to.be.false;
+  });
 });
