@@ -86,11 +86,6 @@
         }
       },
       "compilers/typescript": {
-        "dependencies": {
-          "@types/recursive-readdir": "+",
-          "recursive-readdir": "+",
-          "bit-bin": "-"
-        },
         "devDependencies": {
           "@types/node": "+",
           "@types/mocha": "^5.2.7",
