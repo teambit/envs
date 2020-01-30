@@ -128,7 +128,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native@1.0.1": {
+    "bit.envs/compilers/react-native@1.0.2": {
         "files": [
             {
                 "relativePath": "packages/react-native/README.md",
@@ -201,12 +201,17 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.40": {
+    "bit.envs/compilers/react-typescript@3.1.41": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
                 "test": false,
                 "name": "README.md"
+            },
+            {
+                "relativePath": "packages/react-typescript/config.md",
+                "test": false,
+                "name": "config.md"
             },
             {
                 "relativePath": "packages/react-typescript/package.json",
@@ -340,7 +345,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.1.36": {
+    "bit.envs/compilers/typescript@3.1.37": {
         "files": [
             {
                 "name": "README.md",
