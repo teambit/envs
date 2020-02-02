@@ -5,6 +5,10 @@ import { getBabelrc, FIXED_OUT_DIR } from './babelrc';
 import { getPackageDependencies, getDependencieVersion } from './dependencies-helpers';
 import { babelPrefixResolve } from './babel-prefix-resolve';
 
+const COMPILED_EXTENSIONS = ['.js'];
+const IGNORED_FILES = ['package.json', 'package-lock.json', '.babelrc', 'babel.config.js'];
+const COMPILER_ARGUMENTS = ['./**/*', '--ignore', `node_modules,.dependencies,${FIXED_OUT_DIR}`, '-d', FIXED_OUT_DIR];
+
 export const reactNativePreset: Preset = {
   getDynamicPackageDependencies(ctx?: CompilerContext) {
     const deps = {
@@ -38,25 +42,17 @@ export const reactNativePreset: Preset = {
     return deps;
   },
   getDynamicConfig(rawConfig?: GenericObject) {
-    const configUserOverrides = rawConfig?.babel ? rawConfig.babel : {};
     const isDev = rawConfig?.development ? rawConfig.development : false;
-    const compilerArguments = rawConfig?.compilerArguments
-      ? rawConfig.compilerArguments
-      : ['./**/*', '--ignore', `node_modules,.dependencies,${FIXED_OUT_DIR}`, '-d', FIXED_OUT_DIR];
-    const compiledFileTypes = rawConfig?.compiledFileTypes ? rawConfig.compiledFileTypes : ['.js'];
-    const copyPolicyIgnorePatterns = rawConfig?.copyPolicy?.ignorePatterns
-      ? rawConfig.copyPolicy.ignorePatterns
-      : ['package.json', 'package-lock.json', '.babelrc', 'babel.config.js'];
 
     const defaultConfig = {
       compilerPath: '@babel/cli/bin/babel',
-      compilerArguments,
-      compiledFileTypes,
+      compilerArguments: rawConfig?.compilerArguments || COMPILER_ARGUMENTS,
+      compiledFileTypes: rawConfig?.compiledFileTypes || COMPILED_EXTENSIONS,
       configFileName: 'babel.config.json',
-      babel: getBabelrc(isDev, configUserOverrides),
+      babel: getBabelrc(isDev, rawConfig?.babel || {}),
       development: isDev,
       copyPolicy: {
-        ignorePatterns: copyPolicyIgnorePatterns,
+        ignorePatterns: rawConfig?.copyPolicy?.ignorePatterns || IGNORED_FILES,
         disable: false
       },
       useExperimentalCache: false
