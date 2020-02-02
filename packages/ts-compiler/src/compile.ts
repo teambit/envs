@@ -24,7 +24,7 @@ export async function compile(cc: CompilerContext, preset: Preset) {
     const dists = await collectNonDistFiles(context);
     results = { dists };
   } else {
-    results = await _compile(context, cc);
+    results = await _compile(context, cc, preset);
   }
 
   if (!process.env[DEBUG_FLAG]) {
@@ -38,11 +38,15 @@ async function preCompile(context: CompilationContext, preset: Preset) {
     ? Promise.all([createConfigFile(context), preset.preCompile(context)])
     : createConfigFile(context);
 }
+async function runCompiler(action: () => Promise<any>, preset: Preset) {
+  return preset.runCompiler ? Promise.all([action(), preset.runCompiler()]) : action();
+}
 
-async function _compile(context: CompilationContext, cc: CompilerContext) {
+async function _compile(context: CompilationContext, cc: CompilerContext, preset: Preset) {
   const pathToCompiler = require.resolve(cc.dynamicConfig!.compilerPath);
   const compilerArguments = cc.dynamicConfig!.compilerArguments;
-  await runNodeScriptInDir(context.directory, pathToCompiler, compilerArguments);
+  // await runNodeScriptInDir(context.directory, pathToCompiler, compilerArguments);
+  await runCompiler(() => runNodeScriptInDir(context.directory, pathToCompiler, compilerArguments), preset);
   const dists = await collectDistFiles(context);
   const nonCompiledDists = await collectNonDistFiles(context);
   const mainFile = findMainFile(context, dists);
