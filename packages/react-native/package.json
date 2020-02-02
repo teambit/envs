@@ -17,7 +17,7 @@
         "@babel/core": "^7.8.3",
         "@bit/bit.envs.common.compiler-types": "0.0.11",
         "@bit/bit.envs.common.preset": "0.0.10",
-        "@bit/bit.envs.compilers.typescript": "3.1.36",
+        "@bit/bit.envs.compilers.typescript": "3.1.38",
         "fs-extra": "^8.1.0",
         "lodash": "^4.17.15",
         "metro-react-native-babel-preset": "^0.57.0",
