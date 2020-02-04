@@ -264,7 +264,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react@1.0.13": {
+    "bit.envs/compilers/react@1.0.14": {
         "files": [
             {
                 "relativePath": "packages/react/.babelrc",
