@@ -128,7 +128,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native@1.0.6": {
+    "bit.envs/compilers/react-native@1.0.7": {
         "files": [
             {
                 "relativePath": "packages/react-native/README.md",
