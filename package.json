@@ -87,12 +87,14 @@
       },
       "compilers/typescript": {
         "dependencies": {
-          "bit-bin": "-"
+          "bit-bin": "-",
+          "@bit/bit.envs.common.build-component": "-"
         },
         "devDependencies": {
           "@types/node": "+",
           "@types/mocha": "^5.2.7",
-          "bit-bin": "14.6.0"
+          "bit-bin": "14.6.0",
+          "@bit/bit.envs.common.build-component": "0.0.4"
         }
       },
       "compilers/react-typescript": {
@@ -119,12 +121,14 @@
         "dependencies": {
           "bit-bin": "-",
           "@babel/cli": "^7.8.3",
-          "@babel/core": "^7.8.3"
+          "@babel/core": "^7.8.3",
+          "@bit/bit.envs.common.build-component": "-"
         },
         "devDependencies": {
           "@types/node": "+",
           "@types/mocha": "^5.2.7",
-          "bit-bin": "^14.7.1"
+          "bit-bin": "^14.7.1",
+          "@bit/bit.envs.common.build-component": "0.0.4"
         }
       }
     }
