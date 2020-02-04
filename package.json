@@ -107,6 +107,7 @@
       },
       "compilers/react": {
         "dependencies": {
+          "@babel/core": "^7.8.4",
           "bit-bin": "-"
         },
         "devDependencies": {
