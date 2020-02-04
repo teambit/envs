@@ -86,6 +86,19 @@
         }
       },
       "compilers/typescript": {
+        "dependencies": {
+          "bit-bin": "-"
+        },
+        "devDependencies": {
+          "@types/node": "+",
+          "@types/mocha": "^5.2.7",
+          "bit-bin": "14.6.0"
+        }
+      },
+      "compilers/react-typescript": {
+        "dependencies": {
+          "bit-bin": "-"
+        },
         "devDependencies": {
           "@types/node": "+",
           "@types/mocha": "^5.2.7",
