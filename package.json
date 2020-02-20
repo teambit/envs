@@ -95,6 +95,15 @@
           "bit-bin": "14.6.0"
         }
       },
+      "compilers/angular": {
+        "dependencies": {
+          "bit-bin": "-"
+        },
+        "devDependencies": {
+          "@types/node": "+",
+          "bit-bin": "14.6.0"
+        }
+      },
       "compilers/react-typescript": {
         "dependencies": {
           "bit-bin": "-"
