@@ -43,10 +43,10 @@ const compile = async (_files, distPath, api) => {
 async function _compile(context) {
   await runNGPackagr(context);
   const dists = await collectDistFiles(context);
-  const packageJson = getPackageJsonObject(dists, context.name);
+  const packageJson: any = getPackageJsonObject(dists, context.name);
   const { main } = packageJson;
   delete packageJson.main;
-  print('main is: ', main);
+  print('main is: ' + main);
   return { mainFile: main, dists, packageJson };
 }
 

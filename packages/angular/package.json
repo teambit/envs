@@ -17,10 +17,5 @@
   },
   "devDependencies": {},
   "peerDependencies": {},
-  "license": "SEE LICENSE IN LICENSE",
-  "bit": {
-    "env": {
-      "compiler": "bit.envs/compilers/babel@7.0.1"
-    }
-  }
+  "license": "SEE LICENSE IN LICENSE"
 }

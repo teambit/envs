@@ -20,6 +20,7 @@
     "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "importHelpers": false,
     "preserveSymlinks": true,
     "lib": ["dom", "es2018"]
