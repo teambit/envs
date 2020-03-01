@@ -3,6 +3,10 @@
   "version": "0.2.0",
   "homepage": "https://bit.dev/bit/envs/compilers/angular",
   "main": "dist/angular.js",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist types"
+  },
   "dependencies": {
     "@angular/compiler": "^8.0.0",
     "@angular/compiler-cli": "^8.0.0",
