@@ -438,5 +438,33 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.7.3"
+    "compilers/angular": {
+        "files": [
+            {
+                "relativePath": "packages/angular/angular.ts",
+                "test": false,
+                "name": "angular.ts"
+            },
+            {
+                "relativePath": "packages/angular/package.json",
+                "test": false,
+                "name": "package.json"
+            },
+            {
+                "relativePath": "packages/angular/readme.md",
+                "test": false,
+                "name": "readme.md"
+            },
+            {
+                "relativePath": "packages/angular/tsconfig.json",
+                "test": false,
+                "name": "tsconfig.json"
+            }
+        ],
+        "mainFile": "packages/angular/angular.ts",
+        "trackDir": "packages/angular",
+        "origin": "AUTHORED",
+        "exported": false
+    },
+    "version": "14.7.4"
 }
