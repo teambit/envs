@@ -1,4 +1,5 @@
 # A component bundler for Vue components.
+
 Compiles and bundles a [Vue](https://vuejs.org) component.
 
 Please note that while bundling components is possible, it is [recommended to transpiling components](https://docs.bit.dev/docs/best-practices.html#prefer-transpiling-over-bundling)
@@ -6,11 +7,13 @@ Please note that while bundling components is possible, it is [recommended to tr
 ## How to use?
 
 Import the environment.
+
 ```bash
 bit import bit.envs/bundlers/vue -c
 ```
 
 Then build using [bit build](https://docs.bitsrc.io/docs/cli-build.html).
+
 ```bash
 bit build
 ```
