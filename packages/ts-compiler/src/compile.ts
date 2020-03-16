@@ -18,6 +18,7 @@ export async function compile(cc: CompilerContext, preset: Preset) {
   const srcTestFiles = getSrcTestFiles(cc.files);
   const context = await createContext(res, directory, cc, srcTestFiles);
   let results = null;
+
   await preCompile(context, preset);
   const compiledFileTypes = preset.getDynamicConfig ? preset.getDynamicConfig(cc.rawConfig).compiledFileTypes : [];
   if (getNonCompiledFiles(cc.files, compiledFileTypes).length === cc.files.length) {
@@ -33,10 +34,13 @@ export async function compile(cc: CompilerContext, preset: Preset) {
   return results;
 }
 
-async function preCompile(context: CompilationContext, preset: Preset) {
-  return preset.preCompile
-    ? Promise.all([createConfigFile(context), preset.preCompile(context)])
-    : createConfigFile(context);
+async function preCompile(context: CompilationContext, preset: Preset): Promise<any> {
+  let promises = [createConfigFile(context)];
+
+  if (preset.preCompile) {
+    promises = [...promises, preset.preCompile(context)];
+  }
+  return Promise.all(promises);
 }
 async function runCompiler(action: () => Promise<any>, preset: Preset) {
   return preset.runCompiler ? Promise.all([action(), preset.runCompiler()]) : action();
@@ -119,7 +123,7 @@ async function runNodeScriptInDir(directory: string, scriptFile: string, args: s
   return result;
 }
 
-async function createConfigFile(context: CompilationContext) {
+async function createConfigFile(context: CompilationContext): Promise<any> {
   const configFileName = context.cc.dynamicConfig!.configFileName; //example: typescript will be tsconfig.json
   const content: GenericObject = context.cc.dynamicConfig![getNameOfFile(configFileName, '.')]; //the key of the config file is defined by configFileName and can be dynamic.
   const pathToConfig = getConfigFilePath(context);
