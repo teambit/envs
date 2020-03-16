@@ -146,6 +146,12 @@
           "@types/node": "+",
           "@types/jest": "+"
         }
+      },
+      "compilers/vue": {
+        "devDependencies": {
+          "@types/node": "+",
+          "@types/jest": "+"
+        }
       }
     }
   }

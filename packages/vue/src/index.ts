@@ -9,12 +9,12 @@ import { vueConfig } from './vueConfig';
 
 import {
   CompilerContext,
-  ActionReturnType,
+  BuildResults,
   createCapsule,
   destroyCapsule,
   getSourceFiles,
   readFiles
-} from '@bit/bit.envs.common.utils';
+} from '@bit/bit.envs.compilers.utils';
 
 if (process.env.DEBUG) {
   debug('build');
@@ -29,7 +29,7 @@ export function getDynamicConfig(ctx: CompilerContext) {
   return ctx.rawConfig;
 }
 
-export async function action(ctx: CompilerContext): Promise<ActionReturnType> {
+export async function action(ctx: CompilerContext): Promise<BuildResults> {
   const { context, files } = ctx;
   const { componentObject, isolate } = context;
 
@@ -51,10 +51,9 @@ export async function action(ctx: CompilerContext): Promise<ActionReturnType> {
     const service = new vueCli(directory);
     await service.run('build', {
       mode: 'development',
-      entry: componentObject.mainFile,
+      entry: path.join(process.cwd(), componentObject.mainFile),
       target: 'lib',
       name: componentObject.name,
-      formats: ['commonjs'],
       dest: 'dist'
     });
   } catch (e) {
@@ -62,12 +61,15 @@ export async function action(ctx: CompilerContext): Promise<ActionReturnType> {
     process.exit(1);
   }
 
-  //get dists and main file
+  //get dists
   const dists = await readFiles(distDir);
-
+  console.log(dists);
   destroyCapsule(res.capsule);
   return {
     mainFile: `${componentObject.name}.common.js`,
-    dists: dists || []
+    dists: dists || [],
+    packageJson: {
+      browser: '${componentObject.name}.umd.js'
+    }
   };
 }

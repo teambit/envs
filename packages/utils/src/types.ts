@@ -1,9 +1,5 @@
 import Vinyl from 'vinyl';
 
-export interface GenericObject {
-  [key: string]: any;
-}
-
 export interface IsolateOptions {
   targetDir: string;
   shouldBuildDependencies?: boolean;
@@ -12,11 +8,11 @@ export interface IsolateOptions {
 }
 
 export interface CompilerContext {
-  context: GenericObject;
+  context: Record<string, any>;
   configFiles: Vinyl[];
   files: Vinyl[];
-  rawConfig: GenericObject;
-  dynamicConfig?: GenericObject;
+  rawConfig: Record<string, any>;
+  dynamicConfig?: Record<string, any>;
   api?: any;
 }
 
@@ -27,7 +23,8 @@ export interface ActionContext {
   isolate: () => any;
 }
 
-export interface ActionReturnType {
+export interface BuildResults {
   dists: Vinyl[];
   mainFile?: string;
+  packageJson?: Record<string, any>;
 }

@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as os from 'os';
 import debug from 'debug';
 
-import { GenericObject, IsolateOptions } from './types';
+import { IsolateOptions } from './types';
 
 if (process.env.DEBUG) {
   debug('capsule');
@@ -17,7 +17,7 @@ export function getCapsuleName(infix: string = '') {
 
 export async function createCapsule(
   isolate: (isolateOptions: IsolateOptions) => any,
-  isolateOptions: GenericObject = {},
+  isolateOptions: Record<string, any> = {},
   capsulePath?: string
 ) {
   const targetDir = capsulePath || getCapsuleName();
