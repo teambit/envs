@@ -338,6 +338,11 @@
     "bit.envs/compilers/stencil@0.0.15": {
         "files": [
             {
+                "name": "README.md",
+                "relativePath": "packages/stencil/README.md",
+                "test": false
+            },
+            {
                 "relativePath": "packages/stencil/jest.config.js",
                 "test": false,
                 "name": "jest.config.js"
@@ -345,11 +350,6 @@
             {
                 "name": "package.json",
                 "relativePath": "packages/stencil/package.json",
-                "test": false
-            },
-            {
-                "name": "README.md",
-                "relativePath": "packages/stencil/readme.md",
                 "test": false
             },
             {
@@ -524,23 +524,8 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/vue@0.0.2": {
+    "bit.envs/compilers/vue@0.0.4": {
         "files": [
-            {
-                "relativePath": "packages/vue/jest.config.js",
-                "test": false,
-                "name": "jest.config.js"
-            },
-            {
-                "relativePath": "packages/vue/package.json",
-                "test": false,
-                "name": "package.json"
-            },
-            {
-                "relativePath": "packages/vue/src/e2e.spec.ts",
-                "test": false,
-                "name": "e2e.spec.ts"
-            },
             {
                 "relativePath": "packages/vue/src/index.ts",
                 "test": false,
@@ -552,6 +537,11 @@
                 "name": "readme.MD"
             },
             {
+                "relativePath": "packages/vue/src/simple.e2e.ts",
+                "test": true,
+                "name": "simple.e2e.ts"
+            },
+            {
                 "relativePath": "packages/vue/src/tsconfig.ts",
                 "test": false,
                 "name": "tsconfig.ts"
@@ -560,15 +550,10 @@
                 "relativePath": "packages/vue/src/vueConfig.ts",
                 "test": false,
                 "name": "vueConfig.ts"
-            },
-            {
-                "relativePath": "packages/vue/tsconfig.json",
-                "test": false,
-                "name": "tsconfig.json"
             }
         ],
         "mainFile": "packages/vue/src/index.ts",
-        "trackDir": "packages/vue",
+        "trackDir": "packages/vue/src",
         "origin": "AUTHORED",
         "exported": true
     },

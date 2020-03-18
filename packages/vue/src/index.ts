@@ -69,7 +69,7 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
     mainFile: `${componentObject.name}.common.js`,
     dists: dists || [],
     packageJson: {
-      browser: '${componentObject.name}.umd.js'
+      browser: `${componentObject.name}.umd.js`
     }
   };
 }

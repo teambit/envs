@@ -19,8 +19,8 @@ describe('vue compiler', () => {
     const COMP_ID = 'hello-world';
     FILES.forEach(f => {
       helper.fs.createFile(f.folder, f.name, f.content);
-      helper.command.addComponent(path.join(f.folder, f.name), { i: COMP_ID });
     });
+    helper.command.addComponent('src', { i: COMP_ID, m: 'src/helloWorld.vue', t: 'src/helloWorld.spec.ts' });
     const bitJson = helper.bitJson.read();
     (bitJson.env = {
       compiler: {
@@ -89,6 +89,7 @@ const FILES = [
   {
     folder: 'src',
     name: 'helloWorld.spec.ts',
+    test: true,
     content: ''
   },
   {
