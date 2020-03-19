@@ -60,13 +60,11 @@
   "bit": {
     "env": {
       "compiler": {
-        "bit.envs/compilers/typescript@3.1.31": {
+        "bit.envs/compilers/typescript": {
           "rawConfig": {
             "tsconfig": {
               "compilerOptions": {
-                "target": "ES5",
-                "module": "CommonJS",
-                "skipLibCheck": true
+                "module": "CommonJS"
               }
             }
           }
@@ -102,8 +100,7 @@
           "bit-bin": "-"
         },
         "devDependencies": {
-          "@types/node": "+",
-          "bit-bin": "14.6.0"
+          "@types/node": "+"
         }
       },
       "compilers/react-typescript": {

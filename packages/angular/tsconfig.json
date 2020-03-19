@@ -1,11 +1,4 @@
 {
-  "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
-    "skipTemplateCodegen": true,
-    "strictMetadataEmit": false,
-    "fullTemplateTypeCheck": false,
-    "enableResourceInlining": true
-  },
   "buildOnSave": false,
   "compileOnSave": false,
   "compilerOptions": {

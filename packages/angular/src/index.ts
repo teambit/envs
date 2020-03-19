@@ -1,52 +1,77 @@
 // implicit dependencies made explicit
-import '@angular/compiler';
-import '@angular/compiler-cli';
-import '@angular/core';
-import 'ng-packagr';
-import 'typescript';
-import 'tslib';
-import 'tsickle';
+// import '@angular/compiler';
+// import '@angular/compiler-cli';
+// import '@angular/core';
+// import '@angular/bazel';
+// import '@bazel/typescript';
+// import 'ng-packagr';
+// import 'typescript';
+// import 'tslib';
+// import 'tsickle';
 
 import path from 'path';
+import debug from 'debug';
 import execa from 'execa';
+
 import readdir from 'recursive-readdir';
 import Vinyl from 'vinyl';
 import { promises as fs, existsSync } from 'fs';
 
-const os = require('os');
-const tsconfig = require(path.join(__dirname, './tsconfig.json'));
+import { TSConfig } from './tsconfig';
 
-const FILE_NAME = 'public_api';
-const DEBUG_FLAG = 'NG_DEBUG';
+import {
+  CompilerContext,
+  BuildResults,
+  createCapsule,
+  destroyCapsule,
+  getSourceFiles,
+  readFiles
+} from '@bit/bit.envs.compilers.utils';
 
-function print(msg) {
-  process.env[DEBUG_FLAG] && console.log(msg);
+if (process.env.DEBUG) {
+  debug('build');
 }
 
-const compile = async (_files, distPath, api) => {
-  const { res, directory } = await isolate(api); // create capsule
-  const context = await createContext(res, directory, distPath); // prepare context object
+const FILE_NAME = 'public_api';
+
+export async function action(ctx: CompilerContext): Promise<BuildResults> {
+  const { context, files } = ctx;
+  const { componentObject, isolate } = context;
+
+  // build capsule
+  const { res, directory } = await createCapsule(isolate, { shouldBuildDependencies: true });
+  const distDir = path.join(directory, 'dist');
+
+  // const { res, directory } = await isolate(api); // create capsule
+  // const context = await createContext(res, directory, distPath); // prepare context object
 
   if (!~context.dependencies.indexOf('@angular/core')) {
     await res.installPackages(['@angular/core', 'rxjs', 'zone.js']);
   }
 
-  await adjustFileSystem(context);
-  const results = await _compile(context);
-  if (!process.env[DEBUG_FLAG]) {
-    await context.capsule.destroy();
-  }
+  const ngPackge = await createPackagrFile(context);
 
-  return results;
-};
+  await createPublicAPIFile(context);
 
-async function _compile(context) {
+  // create tsconfig.json
+  let sources: Array<Vinyl> = getSourceFiles(files, ['ts']);
+  let TS = Object.assign(TSConfig, {
+    include: sources.map(s => s.path)
+  });
+  await fs.writeFile(path.join(directory, 'tsconfig.json'), JSON.stringify(TS, null, 4));
+
   await runNGPackagr(context);
-  const dists = await collectDistFiles(context);
+
+  //get dists
+  const dists = await readFiles(distDir);
+  console.log(dists);
+
   const packageJson: any = getPackageJsonObject(dists, context.name);
   const { main } = packageJson;
   delete packageJson.main;
-  print('main is: ' + main);
+  debug('main is: ' + main);
+  destroyCapsule(res.capsule);
+
   return { mainFile: main, dists, packageJson };
 }
 
@@ -60,19 +85,6 @@ async function createContext(res, directory, distPath) {
     capsule: res.capsule,
     directory
   };
-}
-
-async function isolate(api) {
-  const uuidHack = `capsule-${Date.now()
-    .toString()
-    .slice(-5)}`;
-  const targetDir = path.join(os.tmpdir(), 'bit', uuidHack);
-  const componentName = api.componentObject.name;
-  print(`\n building ${componentName} on directory ${targetDir}`);
-
-  const res = await api.isolate({ targetDir, shouldBuildDependencies: true });
-
-  return { res, directory: targetDir };
 }
 
 async function collectDistFiles(context) {
@@ -107,13 +119,6 @@ async function runNGPackagr(context) {
   return result;
 }
 
-async function adjustFileSystem(context) {
-  const ngPackge = await createPackagrFile(context);
-  await createPublicAPIFile(context);
-  await createTSConfig(context);
-  return ngPackge;
-}
-
 async function createPackagrFile(context) {
   const compDir = context.directory;
   const content = `{
@@ -131,12 +136,6 @@ async function createPackagrFile(context) {
 
 function getTSConfigPath(context) {
   return path.join(context.directory, 'tsconfig.json');
-}
-
-function createTSConfig(context) {
-  const pathToConfig = getTSConfigPath(context);
-  const content = tsconfig;
-  return fs.writeFile(pathToConfig, JSON.stringify(content, null, 4));
 }
 
 function getPackageJsonObject(dists, name) {
@@ -176,5 +175,3 @@ function createPublicAPIFile(context) {
 function getCustomDependencies(dir) {
   return Object.keys(require(`${dir}/package.json`).dependencies || {});
 }
-
-export default { compile };

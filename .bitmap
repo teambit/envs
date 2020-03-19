@@ -131,28 +131,23 @@
     "bit.envs/compilers/angular@0.2.1": {
         "files": [
             {
-                "relativePath": "packages/angular/angular.ts",
+                "relativePath": "packages/angular/src/index.ts",
                 "test": false,
-                "name": "angular.ts"
+                "name": "index.ts"
             },
             {
-                "relativePath": "packages/angular/package.json",
-                "test": false,
-                "name": "package.json"
-            },
-            {
-                "relativePath": "packages/angular/readme.md",
+                "relativePath": "packages/angular/src/readme.md",
                 "test": false,
                 "name": "readme.md"
             },
             {
-                "relativePath": "packages/angular/tsconfig.json",
+                "relativePath": "packages/angular/src/tsconfig.ts",
                 "test": false,
-                "name": "tsconfig.json"
+                "name": "tsconfig.ts"
             }
         ],
-        "mainFile": "packages/angular/angular.ts",
-        "trackDir": "packages/angular",
+        "mainFile": "packages/angular/src/index.ts",
+        "trackDir": "packages/angular/src",
         "origin": "AUTHORED",
         "exported": true
     },
@@ -466,21 +461,11 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/utils@0.0.5": {
+    "bit.envs/compilers/utils@0.0.6": {
         "files": [
             {
-                "relativePath": "packages/utils/jest.config.js",
-                "test": false,
-                "name": "jest.config.js"
-            },
-            {
-                "relativePath": "packages/utils/package.json",
-                "test": false,
-                "name": "package.json"
-            },
-            {
                 "relativePath": "packages/utils/src/capsule.utils.spec.ts",
-                "test": true,
+                "test": false,
                 "name": "capsule.utils.spec.ts"
             },
             {
@@ -490,7 +475,7 @@
             },
             {
                 "relativePath": "packages/utils/src/files.utils.spec.ts",
-                "test": true,
+                "test": false,
                 "name": "files.utils.spec.ts"
             },
             {
@@ -512,19 +497,14 @@
                 "relativePath": "packages/utils/src/types.ts",
                 "test": false,
                 "name": "types.ts"
-            },
-            {
-                "relativePath": "packages/utils/tsconfig.json",
-                "test": false,
-                "name": "tsconfig.json"
             }
         ],
         "mainFile": "packages/utils/src/index.ts",
-        "trackDir": "packages/utils",
+        "trackDir": "packages/utils/src",
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/vue@0.0.4": {
+    "bit.envs/compilers/vue@0.0.5": {
         "files": [
             {
                 "relativePath": "packages/vue/src/index.ts",
