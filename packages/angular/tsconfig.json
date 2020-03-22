@@ -1,22 +1,22 @@
 {
-  "buildOnSave": false,
-  "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
-    "target": "es2015",
-    "module": "es2015",
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
     "moduleResolution": "node",
-    "outDir": "dist",
-    "declaration": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "skipLibCheck": true,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "importHelpers": false,
-    "preserveSymlinks": true,
-    "lib": ["dom", "es2018"]
+    "allowJs": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "outDir": "dist",
+    "typeRoots": ["node_modules/@types"],
+    "types": ["webpack-env", "node", "jest"],
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "exclude": ["node_modules", "dist", "**/*.ngfactory.ts", "**/*.shim.ts", "**/*.spec.ts"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

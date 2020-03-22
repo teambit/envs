@@ -3,59 +3,64 @@ import path from 'path';
 
 const FIXTURES = [
   {
+    name: 'HelloWorld.css',
     folder: 'src',
-    name: 'helloWorld.vue',
     content: `
-    <template>
-        <div class="hello">
-        <h1>{{ msg }}</h1>
-        <ul>
-            <li>
-            some text
-            </li>
-        </ul>
-        </div>
-    </template>
-    
-    <script>
-    import './HelloWorld.css';
-    export default {
-        name: "HelloWorld",
-        props: {
-        msg: String
-        }
-    };
-    </script>
-    
-    <style scoped>
-    h3 {
-        margin: 40px 0 0;
+    div {
+      background-color: #68bb5d;
+      color: white;
     }
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    a {
-        color: #42b983;
-    }
-    </style>
+  `
+  },
+  {
+    name: 'HelloWorld.html',
+    folder: 'src',
+    content: `
+  <div>
+    Hello World
+  </div>
+  `
+  },
+  {
+    name: 'HelloWorld.ts',
+    folder: 'src',
+    content: `
+  import { Component } from '@angular/core';
+  
+  @Component({
+    selector: 'hello-world',
+    templateUrl: './HelloWorld.html',
+    styleUrls: ['./HelloWorld.css']
+  })
+  export class HelloWorld {
   }
   `
   },
   {
+    name: 'HelloWorld.module.ts',
     folder: 'src',
-    name: 'helloWorld.spec.ts',
-    test: true,
-    content: ''
-  },
-  {
-    folder: 'src',
-    name: 'HelloWorld.css',
-    content: 'h1{ background: azure; }'
+    content: `
+  import { NgModule } from '@angular/core';
+  import { CommonModule } from '@angular/common';
+  import { HelloWorld } from './HelloWorld';
+  
+  @NgModule({
+    declarations: [
+      MyComponent
+    ],
+    imports: [
+      CommonModule
+    ],
+    exports: [
+      MyComponent
+    ]
+  })
+  export class HelloWorldModule { }
+  `
   }
 ];
 
-describe('vue compiler', (): void => {
+describe('Angular compiler', (): void => {
   let helper: Helper;
   beforeAll((): void => {
     process.env.DEBUG = 'true';
@@ -69,12 +74,12 @@ describe('vue compiler', (): void => {
     helper.scopeHelper.destroy();
   });
 
-  it('should compile a simple Vue component', (): void => {
+  it('should compile a simple Angular component', (): void => {
     const COMP_ID = 'hello-world';
     FIXTURES.forEach((f): void => {
       helper.fs.createFile(f.folder, f.name, f.content);
     });
-    helper.command.addComponent('src', { i: COMP_ID, m: 'src/helloWorld.vue', t: 'src/helloWorld.spec.ts' });
+    helper.command.addComponent('src', { i: COMP_ID, m: 'src/HelloWorld.module.ts' });
     const bitJson = helper.bitJson.read();
     (bitJson.env = {
       compiler: {

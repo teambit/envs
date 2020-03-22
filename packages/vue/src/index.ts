@@ -1,7 +1,6 @@
 import path from 'path';
 import debug from 'debug';
-import fs from 'fs-extra';
-const vueCli = require('@vue/cli-service');
+import { promises as fs } from 'fs';
 import Vinyl from 'vinyl';
 
 import { TSConfig } from './tsconfig';
@@ -16,16 +15,19 @@ import {
   readFiles
 } from '@bit/bit.envs.compilers.utils';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const vueCli = require('@vue/cli-service');
+
 if (process.env.DEBUG) {
   debug('build');
 }
 const COMPILED_EXTS = ['vue', 'ts', 'tsx'];
 
-export function getDynamicPackageDependencies(ctx: CompilerContext, name?: string) {
+export function getDynamicPackageDependencies(ctx: CompilerContext, name?: string): Record<string, any> {
   return {};
 }
 
-export function getDynamicConfig(ctx: CompilerContext) {
+export function getDynamicConfig(ctx: CompilerContext): Record<string, string> {
   return ctx.rawConfig;
 }
 
@@ -38,7 +40,7 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
   const distDir = path.join(directory, 'dist');
 
   // write TS config into capsule
-  let sources: Array<Vinyl> = getSourceFiles(files, COMPILED_EXTS);
+  let sources: Vinyl[] = getSourceFiles(files, COMPILED_EXTS);
   let TS = Object.assign(TSConfig, {
     include: sources.map(s => s.path)
   });

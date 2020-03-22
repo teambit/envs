@@ -18,7 +18,6 @@ export const TSConfig = {
     inlineSourceMap: true,
     inlineSources: true,
     baseUrl: '.',
-    types: ['webpack-env'],
     paths: {
       '@/*': ['src/*'],
       '~/*': ['./*']
@@ -30,7 +29,8 @@ export const TSConfig = {
     skipTemplateCodegen: true,
     strictMetadataEmit: false,
     fullTemplateTypeCheck: false,
-    enableResourceInlining: true
+    enableResourceInlining: true,
+    enableIvy: false
   },
   exclude: ['node_modules', '.bit']
 };
