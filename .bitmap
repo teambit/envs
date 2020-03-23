@@ -509,7 +509,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/vue@0.0.5": {
+    "bit.envs/compilers/vue@0.0.7": {
         "files": [
             {
                 "relativePath": "packages/vue/src/index.ts",

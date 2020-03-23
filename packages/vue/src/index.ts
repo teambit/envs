@@ -1,3 +1,17 @@
+import '@vue/cli-plugin-babel';
+import '@vue/cli-plugin-eslint';
+import '@vue/cli-plugin-typescript';
+import 'eslint';
+import 'eslint-loader';
+import 'eslint-plugin-prettier';
+import 'eslint-plugin-vue';
+import 'postcss-loader';
+import 'recursive-readdir';
+import 'url-loader';
+import 'vue';
+import 'vue-property-decorator';
+import 'vue-template-compiler';
+
 import path from 'path';
 import debug from 'debug';
 import { promises as fs } from 'fs';
@@ -12,7 +26,7 @@ import {
   createCapsule,
   destroyCapsule,
   getSourceFiles,
-  readFiles
+  readFiles,
 } from '@bit/bit.envs.compilers.utils';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -23,7 +37,7 @@ if (process.env.DEBUG) {
 }
 const COMPILED_EXTS = ['vue', 'ts', 'tsx'];
 
-export function getDynamicPackageDependencies(ctx: CompilerContext, name?: string): Record<string, any> {
+export function getDynamicPackageDependencies(): Record<string, any> {
   return {};
 }
 
@@ -32,17 +46,16 @@ export function getDynamicConfig(ctx: CompilerContext): Record<string, string> {
 }
 
 export async function action(ctx: CompilerContext): Promise<BuildResults> {
-  const { context, files } = ctx;
-  const { componentObject, isolate } = context;
-
   // build capsule
-  const { res, directory } = await createCapsule(isolate, { shouldBuildDependencies: true });
+  const { res, directory } = await createCapsule(ctx.context.isolate, { shouldBuildDependencies: true });
   const distDir = path.join(directory, 'dist');
+  const componentObject = res.componentWithDependencies.component.toObject();
+  const { files, mainFile, name } = componentObject;
 
   // write TS config into capsule
   let sources: Vinyl[] = getSourceFiles(files, COMPILED_EXTS);
   let TS = Object.assign(TSConfig, {
-    include: sources.map(s => s.path)
+    include: sources.map((s) => s.path),
   });
   await fs.writeFile(path.join(directory, 'tsconfig.json'), JSON.stringify(TS, null, 4));
 
@@ -53,10 +66,10 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
     const service = new vueCli(directory);
     await service.run('build', {
       mode: 'development',
-      entry: path.join(process.cwd(), componentObject.mainFile),
+      entry: path.resolve(directory, mainFile),
       target: 'lib',
-      name: componentObject.name,
-      dest: 'dist'
+      name,
+      dest: 'dist',
     });
   } catch (e) {
     console.log(e);
@@ -65,13 +78,14 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
 
   //get dists
   const dists = await readFiles(distDir);
-  console.log(dists);
+
   destroyCapsule(res.capsule);
+
   return {
-    mainFile: `${componentObject.name}.common.js`,
+    mainFile: `${name}.common.js`,
     dists: dists || [],
     packageJson: {
-      browser: `${componentObject.name}.umd.js`
-    }
+      browser: `${name}.umd.js`,
+    },
   };
 }
