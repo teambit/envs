@@ -358,9 +358,14 @@
                 "test": false
             },
             {
-                "relativePath": "packages/stencil/stencil.config.ts",
+                "relativePath": "packages/stencil/src/readme.MD",
                 "test": false,
-                "name": "stencil.config.ts"
+                "name": "readme.MD"
+            },
+            {
+                "relativePath": "packages/stencil/src/tsconfig.ts",
+                "test": false,
+                "name": "tsconfig.ts"
             },
             {
                 "relativePath": "packages/stencil/tsconfig.json",
