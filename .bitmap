@@ -128,27 +128,27 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/angular@9.0.0": {
+    "bit.envs/compilers/angular@9.0.2": {
         "files": [
             {
+                "name": "index.ts",
                 "relativePath": "packages/angular/src/index.ts",
-                "test": false,
-                "name": "index.ts"
+                "test": false
             },
             {
+                "name": "readme.md",
                 "relativePath": "packages/angular/src/readme.md",
-                "test": false,
-                "name": "readme.md"
+                "test": false
             },
             {
+                "name": "simple.e2e.ts",
                 "relativePath": "packages/angular/src/simple.e2e.ts",
-                "test": true,
-                "name": "simple.e2e.ts"
+                "test": true
             },
             {
+                "name": "tsconfig.ts",
                 "relativePath": "packages/angular/src/tsconfig.ts",
-                "test": false,
-                "name": "tsconfig.ts"
+                "test": false
             }
         ],
         "mainFile": "packages/angular/src/index.ts",
@@ -471,42 +471,42 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/utils@0.0.6": {
+    "bit.envs/compilers/utils@0.0.7": {
         "files": [
             {
+                "name": "capsule.utils.spec.ts",
                 "relativePath": "packages/utils/src/capsule.utils.spec.ts",
-                "test": false,
-                "name": "capsule.utils.spec.ts"
+                "test": false
             },
             {
+                "name": "capsule.utils.ts",
                 "relativePath": "packages/utils/src/capsule.utils.ts",
-                "test": false,
-                "name": "capsule.utils.ts"
+                "test": false
             },
             {
+                "name": "files.utils.spec.ts",
                 "relativePath": "packages/utils/src/files.utils.spec.ts",
-                "test": false,
-                "name": "files.utils.spec.ts"
+                "test": false
             },
             {
+                "name": "files.utils.ts",
                 "relativePath": "packages/utils/src/files.utils.ts",
-                "test": false,
-                "name": "files.utils.ts"
+                "test": false
             },
             {
+                "name": "index.ts",
                 "relativePath": "packages/utils/src/index.ts",
-                "test": false,
-                "name": "index.ts"
+                "test": false
             },
             {
+                "name": "readme.MD",
                 "relativePath": "packages/utils/src/readme.MD",
-                "test": false,
-                "name": "readme.MD"
+                "test": false
             },
             {
+                "name": "types.ts",
                 "relativePath": "packages/utils/src/types.ts",
-                "test": false,
-                "name": "types.ts"
+                "test": false
             }
         ],
         "mainFile": "packages/utils/src/index.ts",

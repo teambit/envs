@@ -22,7 +22,7 @@ import {
   createCapsule,
   destroyCapsule,
   getTestFiles,
-  readFiles
+  readFiles,
 } from '@bit/bit.envs.compilers.utils';
 
 if (process.env.DEBUG) {
@@ -32,13 +32,13 @@ if (process.env.DEBUG) {
 const DEV_DEPS = {
   tslib: '>=1.0.0',
   'webpack-env': '>=0.8.0',
-  '@angular/core': '>= 8.0.0'
+  '@angular/core': '>= 8.0.0',
 };
 const PKG_JSON_KEYS = ['es2015', 'esm5', 'esm2015', 'fesm5', 'fesm2015', 'module', 'typings'];
 
 export function getDynamicPackageDependencies(): Record<string, any> {
   return {
-    devDependencies: DEV_DEPS
+    devDependencies: DEV_DEPS,
   };
 }
 
@@ -56,7 +56,7 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
   // create tsconfig.json
   let tests: Vinyl[] = getTestFiles(files, []);
   let TS = Object.assign(TSConfig, {
-    exclude: [...TSConfig.exclude, ...tests.map((s: Vinyl): string => s.path)]
+    exclude: [...TSConfig.exclude, ...tests.map((s: Vinyl): string => s.path)],
   });
 
   const TSFile = path.resolve(directory, 'tsconfig.json');
@@ -67,9 +67,9 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
   const ngPackage = {
     dest: 'dist',
     lib: {
-      entryFile: mainFile
+      entryFile: mainFile,
     },
-    whitelistedNonPeerDependencies: Object.keys(DEV_DEPS)
+    whitelistedNonPeerDependencies: [...Object.keys(DEV_DEPS), ...Object.keys(componentObject.packageDependencies)],
   };
   if (!fs.existsSync(ngPackageFile)) {
     fs.writeFileSync(ngPackageFile, JSON.stringify(ngPackage, null, 4));
@@ -100,6 +100,6 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
   return {
     mainFile: pkgJsonContent.main,
     dists,
-    packageJson
+    packageJson,
   };
 }
