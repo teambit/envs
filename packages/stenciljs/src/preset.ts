@@ -7,6 +7,15 @@ const COMPILED_EXTENSIONS = ['.ts', '.tsx'];
 const IGNORED_FILES = ['package.json', 'package-lock.json', 'tsconfig.json', 'stencil.config.js'];
 
 export const stencilPreset: Preset = {
+  getDynamicPackageDependencies() {
+    return {
+      dependencies: {},
+      devDependencies: {},
+      peerDependencies: {
+        '@stencil/core': '^1.11.3',
+      },
+    };
+  },
   async preCompile(ctx) {
     // await moveComponentToSourceFolder(ctx);
     await createStencilConfig(ctx);
