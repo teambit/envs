@@ -39,7 +39,7 @@ export const reactPreset: Preset = {
       tsconfig: getTSConfig(isDev, config.tsconfig),
       development: isDev,
       copyPolicy: {
-        ignorePatterns: rawConfig!.copyPolicy.ignorePatterns || IGNORED_FILES,
+        ignorePatterns: (config.copyPolicy as any).ignorePatterns || IGNORED_FILES,
         disable: false,
       },
     };

@@ -55,12 +55,12 @@ export const reactNativePreset: Preset = {
     const defaultConfig = {
       compilerPath: '@babel/cli/bin/babel',
       compilerArguments: config.compilerArguments,
-      compiledFileTypes: config.compilerArguments,
+      compiledFileTypes: config.compiledFileTypes,
       configFileName: 'babel.config.json',
       babel: getBabelrc(isDev, config.babel),
       development: isDev,
       copyPolicy: {
-        ignorePatterns: rawConfig!.copyPolicy!.ignorePatterns || IGNORED_FILES,
+        ignorePatterns: (config.copyPolicy as any).ignorePatterns || IGNORED_FILES,
         disable: false,
       },
       useExperimentalCache: false,
