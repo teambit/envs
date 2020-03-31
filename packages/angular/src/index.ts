@@ -49,6 +49,7 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
   const distDir = path.join(directory, 'dist');
 
   const componentObject = res.componentWithDependencies.component.toObject();
+  console.log(res.componentWithDependencies);
   const { files, mainFile } = componentObject;
 
   debug(`Building capsule in ${directory}`);
