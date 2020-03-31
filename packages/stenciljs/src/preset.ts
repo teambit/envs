@@ -8,7 +8,7 @@ const IGNORED_FILES = ['package.json', 'package-lock.json', 'tsconfig.json', 'st
 
 export const stencilPreset: Preset = {
   async preCompile(ctx) {
-    await moveComponentToSourceFolder(ctx);
+    // await moveComponentToSourceFolder(ctx);
     await createStencilConfig(ctx);
   },
   getDynamicConfig(rawConfig?: GenericObject) {
@@ -54,7 +54,7 @@ export async function createStencilConfig(ctx: CompilationContext) {
   await fs.writeFile(configPath, configString, 'utf8');
 }
 
-export async function moveComponentToSourceFolder(_ctx: CompilationContext) {
-  // I might need to put all component files in src folder. - 2 hours
-  return Promise.resolve();
-}
+// export async function moveComponentToSourceFolder(_ctx: CompilationContext) {
+//   // I might need to put all component files in src folder. - 2 hours
+//   return Promise.resolve();
+// }
