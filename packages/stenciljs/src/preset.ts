@@ -39,7 +39,7 @@ export const stencilPreset: Preset = {
     return defaultConfig;
   },
   enrichResult(value: GenericObject, _info: CompilationContext) {
-    // add package.json keys 1 hour
+    // add package.json types, esm etc...
     return Promise.resolve(value);
   },
 };
