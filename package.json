@@ -123,7 +123,7 @@
         },
         "env": {
           "compiler": {
-            "bit.envs/compilers/typescript@3.1.40": {
+            "bit.envs/compilers/typescript@3.1.43": {
               "rawConfig": {
                 "compilerPath": "typescript/bin/tsc",
                 "compilerArguments": [
@@ -232,7 +232,7 @@
         },
         "env": {
           "compiler": {
-            "bit.envs/compilers/typescript@3.1.40": {
+            "bit.envs/compilers/typescript@3.1.43": {
               "rawConfig": {
                 "compilerPath": "typescript/bin/tsc",
                 "compilerArguments": [
