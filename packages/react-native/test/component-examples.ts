@@ -11,7 +11,7 @@ class NormalButton extends Component {
       <Button
         title={text.toUpperCase()}
         raised={true}
-        onPress={() => this.props.onPress?.()}
+        onPress={() => this.props.onPress()}
         buttonStyle={{
           height,
           width,

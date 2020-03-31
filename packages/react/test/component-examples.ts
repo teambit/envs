@@ -7,7 +7,7 @@ class NormalButton extends Component {
     const { text, backgroundColor, width, height, style } = this.props;
     return (
       <button
-        onClick={() => this.props.onClick?.()}
+        onClick={() => this.props.onClick()}
         style={{
           height,
           width,
