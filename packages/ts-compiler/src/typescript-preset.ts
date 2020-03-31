@@ -7,19 +7,27 @@ const IGNORED_FILES = ['package.json', 'package-lock.json', 'tsconfig.json'];
 
 export const typeScriptPreset: Preset = {
   getDynamicConfig(rawConfig?: GenericObject) {
-    const isDev = rawConfig?.development ? rawConfig.development : false;
-
+    const config = {
+      compilerArguments: ['--declaration'],
+      compiledFileTypes: COMPILED_EXTENSIONS,
+      configFileName: 'tsconfig.json',
+      tsconfig: {},
+      development: false,
+      copyPolicy: {},
+      ...(rawConfig || {}),
+    };
+    const isDev = config.development;
     return {
       compilerPath: 'typescript/bin/tsc',
-      compilerArguments: rawConfig?.compilerArguments || ['--declaration'],
-      compiledFileTypes: rawConfig?.compiledFileTypes || COMPILED_EXTENSIONS,
+      compilerArguments: config.compilerArguments,
+      compiledFileTypes: config.compiledFileTypes,
       configFileName: 'tsconfig.json',
-      tsconfig: getTSConfig(isDev, rawConfig?.tsconfig || {}),
+      tsconfig: getTSConfig(isDev, config.tsconfig),
       development: isDev,
       copyPolicy: {
-        ignorePatterns: rawConfig?.copyPolicy?.ignorePatterns || IGNORED_FILES,
-        disable: false
-      }
+        ignorePatterns: (config.copyPolicy as any).ignorePatterns! || IGNORED_FILES,
+        disable: false,
+      },
     };
-  }
+  },
 };

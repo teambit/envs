@@ -3,8 +3,8 @@ import Vinyl from 'vinyl';
 import path from 'path';
 import readdir from 'recursive-readdir';
 
-function mapExtensions(extensions: Array<String>) {
-  return extensions.map(e => `.${e}`);
+function mapExtensions(extensions: string[]) {
+  return extensions.map((e) => `.${e}`);
 }
 
 /**
@@ -12,8 +12,10 @@ function mapExtensions(extensions: Array<String>) {
  * @param sources list of sources to review
  * @param extensions list of extensions to match
  */
-export function getSourceFiles(sources: Array<Vinyl>, extensions: Array<String> = []): Array<Vinyl> {
-  return sources.filter(s => (extensions.length > 0 ? mapExtensions(extensions).includes(s.extname) : true) && !s.test);
+export function getSourceFiles(sources: Vinyl[], extensions: string[] = []): Vinyl[] {
+  return sources.filter(
+    (s) => (extensions.length > 0 ? mapExtensions(extensions).includes(s.extname) : true) && !s.test
+  );
 }
 
 /**
@@ -21,9 +23,9 @@ export function getSourceFiles(sources: Array<Vinyl>, extensions: Array<String> 
  * @param sources list of sources to review
  * @param extensions list of extensions to match
  */
-export function getTestFiles(sources: Array<Vinyl>, extensions: Array<String> = []): Array<Vinyl> {
+export function getTestFiles(sources: Vinyl[], extensions: string[] = []): Vinyl[] {
   return sources.filter(
-    s => (extensions.length > 0 ? mapExtensions(extensions).includes(s.extname) : true) && !!s.test
+    (s) => (extensions.length > 0 ? mapExtensions(extensions).includes(s.extname) : true) && !!s.test
   );
 }
 
@@ -31,12 +33,12 @@ export function getTestFiles(sources: Array<Vinyl>, extensions: Array<String> = 
  * Return files in directory as set of Vinyls relative to the dist directory
  * @param path Path to read files from
  */
-export async function readFiles(dir: string): Promise<Array<Vinyl> | undefined> {
+export async function readFiles(dir: string): Promise<Vinyl[] | undefined> {
   const dirFiles = await readdir(dir);
-  let files = dirFiles.map(async f => {
+  let files = dirFiles.map(async (f) => {
     return new Vinyl({
       path: path.relative(dir, f),
-      contents: await fs.readFile(f)
+      contents: await fs.readFile(f),
     });
   });
   return Promise.all(files);

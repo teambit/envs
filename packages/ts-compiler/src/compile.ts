@@ -31,6 +31,9 @@ export async function compile(cc: CompilerContext, preset: Preset) {
   if (!process.env[DEBUG_FLAG]) {
     await context.capsule.destroy();
   }
+  if ((preset as any).enrichResult) {
+    return (preset as any).enrichResult(results, context);
+  }
   return results;
 }
 
@@ -59,7 +62,7 @@ async function _compile(context: CompilationContext, cc: CompilerContext, preset
 }
 
 export function getNonCompiledFiles(files: Vinyl[], compiledFileTypes: Array<string>) {
-  return files.filter(f => {
+  return files.filter((f) => {
     return !compiledFileTypes.includes(f.extname);
   });
 }
@@ -69,7 +72,7 @@ export function findMainFile(context: CompilationContext, dists: Vinyl[]) {
   const sourceFileName = getNameOfFile(context.main, context.main.substring(context.main.indexOf('.')));
   const pathPrefix = `${compDistRoot}${compDistRoot.endsWith(path.sep) ? '' : path.sep}`;
   const distMainFileExt = '.js';
-  const res = dists.find(val => {
+  const res = dists.find((val) => {
     if (!val.path.endsWith(distMainFileExt)) {
       // makes sure to not pick up files such as '.js.map'
       return false;
@@ -95,12 +98,12 @@ function createContext(
     directory,
     res,
     cc,
-    srcTestFiles
+    srcTestFiles,
   };
 }
 
 function getSrcTestFiles(files: Vinyl[]) {
-  return files.filter(f => {
+  return files.filter((f) => {
     return f.test === true;
   });
 }
@@ -135,7 +138,7 @@ export async function collectDistFiles(context: CompilationContext): Promise<Vin
   const compDistRoot = path.resolve(capsuleDir, FIXED_OUT_DIR);
   const files = await readdir(compDistRoot);
   const readFiles = await Promise.all(
-    files.map(file => {
+    files.map((file) => {
       return fs.readFile(file);
     })
   );
@@ -153,7 +156,7 @@ export async function collectDistFiles(context: CompilationContext): Promise<Vin
       path: pathToFile,
       contents: readFiles[index],
       base: compDistRoot,
-      test
+      test,
     });
   });
 }
@@ -162,26 +165,26 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
   const dynamicConfig: GenericObject = context.cc.dynamicConfig!;
   const copyPolicy: CopyPolicy = dynamicConfig.copyPolicy;
 
-  if (dynamicConfig?.copyPolicy?.disable) {
+  if (dynamicConfig.copyPolicy.disable) {
     return Promise.resolve([]);
   }
 
   const capsuleDir = context.directory;
   const compDistRoot = path.resolve(capsuleDir, FIXED_OUT_DIR);
-  const ignoreFunction = function(file: string, _stats: Stats) {
+  const ignoreFunction = function (file: string, _stats: Stats) {
     if (file.endsWith('.d.ts')) {
       return false;
     }
     const defaultIgnore = [`node_modules${path.sep}`, FIXED_OUT_DIR, '.dependencies'].concat(
       dynamicConfig.compiledFileTypes
     );
-    return defaultIgnore.concat(copyPolicy.ignorePatterns).reduce(function(prev, curr) {
+    return defaultIgnore.concat(copyPolicy.ignorePatterns).reduce(function (prev, curr) {
       return prev || !!~file.indexOf(curr);
     }, false);
   };
   const fileList = await readdir(capsuleDir, [ignoreFunction]);
   const readFiles = await Promise.all(
-    fileList.map(file => {
+    fileList.map((file) => {
       return fs.readFile(file);
     })
   );
@@ -194,7 +197,7 @@ async function collectNonDistFiles(context: CompilationContext): Promise<Vinyl[]
       path: pathToFile,
       contents: readFiles[index],
       base: compDistRoot,
-      test
+      test,
     });
   });
   return list;
@@ -217,7 +220,7 @@ function getWithoutExt(filename: string): string {
 }
 
 function isTestFile(srcTestFiles: Vinyl[], fileToCheck: string, compareWithExtension: boolean = true) {
-  const found = srcTestFiles.find(testFile => {
+  const found = srcTestFiles.find((testFile) => {
     if (compareWithExtension) {
       return testFile.relative === fileToCheck;
     }

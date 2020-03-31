@@ -22,7 +22,7 @@
     "md5": "^2.2.1",
     "mkdirp": "^0.5.1",
     "recursive-readdir": "^2.2.2",
-    "typescript": "^3.7.2",
+    "typescript": "^3.8.2",
     "vinyl": "^2.2.0"
   },
   "devDependencies": {
