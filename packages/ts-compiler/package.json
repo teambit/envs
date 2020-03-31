@@ -15,14 +15,14 @@
   "dependencies": {
     "@bit/bit.envs.common.compiler-types": "0.0.11",
     "@bit/bit.envs.common.isolate": "0.0.6",
-    "@bit/bit.envs.common.preset": "0.0.10",
+    "@bit/bit.envs.common.preset": "0.0.12",
     "execa": "^2.0.4",
     "fs-extra": "^8.1.0",
     "lodash": "^4.17.15",
     "md5": "^2.2.1",
     "mkdirp": "^0.5.1",
     "recursive-readdir": "^2.2.2",
-    "typescript": "^3.8.2",
+    "typescript": "3.8.3",
     "vinyl": "^2.2.0"
   },
   "devDependencies": {
