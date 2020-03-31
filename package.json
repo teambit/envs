@@ -74,7 +74,7 @@
           "rawConfig": {
             "tsconfig": {
               "compilerOptions": {
-		"skipLibCheck": true,
+                "skipLibCheck": true,
                 "module": "CommonJS"
               },
               "exclude": [
@@ -245,7 +245,7 @@
                 "configFileName": "tsconfig.json",
                 "tsconfig": {
                   "compilerOptions": {
-	            "skipLibCheck": true,
+                    "skipLibCheck": true,
                     "outDir": "dist",
                     "target": "ES2015",
                     "sourceMap": false,

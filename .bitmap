@@ -90,7 +90,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/angular@9.0.5": {
+    "bit.envs/compilers/angular@9.0.6": {
         "files": [
             {
                 "name": "index.ts",
@@ -297,7 +297,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/stencil@0.0.18": {
+    "bit.envs/compilers/stencil@0.0.19": {
         "files": [
             {
                 "name": "README.md",
@@ -476,7 +476,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/vue@0.0.12": {
+    "bit.envs/compilers/vue@0.0.13": {
         "files": [
             {
                 "name": "index.ts",
