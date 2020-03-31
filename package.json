@@ -74,6 +74,7 @@
           "rawConfig": {
             "tsconfig": {
               "compilerOptions": {
+		"skipLibCheck": true,
                 "module": "CommonJS"
               },
               "exclude": [
@@ -144,6 +145,7 @@
                     "allowSyntheticDefaultImports": true,
                     "resolveJsonModule": true,
                     "declaration": true,
+                    "skipLibCheck": true,
                     "experimentalDecorators": true,
                     "inlineSourceMap": false,
                     "inlineSources": false,
@@ -243,6 +245,7 @@
                 "configFileName": "tsconfig.json",
                 "tsconfig": {
                   "compilerOptions": {
+	            "skipLibCheck": true,
                     "outDir": "dist",
                     "target": "ES2015",
                     "sourceMap": false,

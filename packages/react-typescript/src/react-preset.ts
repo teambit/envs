@@ -15,29 +15,38 @@ export const reactPreset: Preset = {
         react: '^16.11.0',
         'react-dom': '^16.11.0',
         '@types/react': '16.9.11',
-        '@types/react-dom': '16.9.4'
-      }
+        '@types/react-dom': '16.9.4',
+      },
     };
   },
   getDynamicConfig(rawConfig?: GenericObject) {
-    const isDev = rawConfig?.development ? rawConfig.development : false;
+    const config = {
+      compilerArguments: ['--declaration'],
+      compiledFileTypes: COMPILED_EXTENSIONS,
+      configFileName: 'tsconfig.json',
+      tsconfig: {},
+      development: false,
+      copyPolicy: {},
+      ...(rawConfig || {}),
+    };
+    const isDev = config.development;
 
     const defaultConfig = {
       compilerPath: 'typescript/bin/tsc',
-      compilerArguments: rawConfig?.compilerArguments || ['--declaration'],
-      compiledFileTypes: rawConfig?.compiledFileTypes || COMPILED_EXTENSIONS,
+      compilerArguments: config.compilerArguments,
+      compiledFileTypes: config.compiledFileTypes,
       configFileName: 'tsconfig.json',
-      tsconfig: getTSConfig(isDev, rawConfig?.tsconfig || {}),
+      tsconfig: getTSConfig(isDev, config.tsconfig),
       development: isDev,
       copyPolicy: {
-        ignorePatterns: rawConfig?.copyPolicy?.ignorePatterns || IGNORED_FILES,
-        disable: false
-      }
+        ignorePatterns: rawConfig!.copyPolicy.ignorePatterns || IGNORED_FILES,
+        disable: false,
+      },
     };
 
     return defaultConfig;
   },
   async preCompile(ctx: CompilationContext) {
     await generateTypes(ctx.directory);
-  }
+  },
 };

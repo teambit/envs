@@ -20,5 +20,5 @@ export interface Preset {
   getDynamicConfig?(rawConfig?: GenericObject): GenericObject;
   runCompiler?(): Promise<void>;
   preCompile?(ctx: CompilationContext): Promise<void>;
-  enrichResult?(value: GenericObject): Promise<GenericObject>;
+  enrichResult?(value: GenericObject, info: CompilationContext): Promise<GenericObject>;
 }
