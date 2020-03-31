@@ -90,7 +90,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/angular@9.0.4": {
+    "bit.envs/compilers/angular@9.0.5": {
         "files": [
             {
                 "name": "index.ts",
@@ -118,7 +118,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native@1.0.10": {
+    "bit.envs/compilers/react-native@1.0.11": {
         "files": [
             {
                 "relativePath": "packages/react-native/README.md",
@@ -191,7 +191,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.47": {
+    "bit.envs/compilers/react-typescript@3.1.48": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -297,7 +297,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/stencil@0.0.17": {
+    "bit.envs/compilers/stencil@0.0.18": {
         "files": [
             {
                 "name": "README.md",
@@ -476,7 +476,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/vue@0.0.11": {
+    "bit.envs/compilers/vue@0.0.12": {
         "files": [
             {
                 "name": "index.ts",
