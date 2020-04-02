@@ -30,7 +30,7 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 | Vue                | [vue](https://bit.dev/bit/envs/bundlers/vue)                            | `bit import bit.envs/bundlers/vue -c`               |
 | Angular            | [angular](https://bit.dev/bit/envs/compilers/angular)                   | `bit import bit.envs/compilers/angular -c`          |
 | Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)             | `bit import bit.envs/compilers/typescript -c`       |
-| Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/typescript)                  | `bit import bit.envs/compilers/babel -c`            |
+| Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/babel)                  | `bit import bit.envs/compilers/babel -c`            |
 
 ### Which tester to use?
 
