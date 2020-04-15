@@ -9,27 +9,28 @@ describe('babel react-native', () => {
   let results: BuildResult = {
     directory: '',
     files: [],
-    showComponent: {}
+    showComponent: {},
   };
-  before(async function() {
+  before(async function () {
     this.timeout(1000 * 10 * 10);
     results = await buildComponentInWorkspace(helper, {
       compilerPath: 'dist/src/index.js',
       envTester: 'dist/src/index.js',
       component: {
         'src/comp.js': NormalButtonComponent,
+        'src/comp2.jsx': NormalButtonComponent,
         'src/card.js': CardComponent,
         'src/input.js': InputComponent,
         'src/func.js': '',
         'src/test.css': '',
-        'src/try.svg': ''
-      }
+        'src/try.svg': '',
+      },
     });
   });
-  after(async function() {
+  after(async function () {
     if (results.directory) {
-      return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
+      return new Promise((resolve, reject) => rimraf(results.directory, {}, (error) => (error ? reject() : resolve())));
     }
   });
-  it('build should pass', async function() {});
+  it('build should pass', async function () {});
 });

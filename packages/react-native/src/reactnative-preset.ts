@@ -5,7 +5,7 @@ import { getBabelrc, FIXED_OUT_DIR } from './babelrc';
 import { getPackageDependencies, getDependencieVersion } from './dependencies-helpers';
 import { babelPrefixResolve } from './babel-prefix-resolve';
 
-const COMPILED_EXTENSIONS = ['.js'];
+const COMPILED_EXTENSIONS = ['.js', '.jsx'];
 const IGNORED_FILES = ['package.json', 'package-lock.json', '.babelrc', 'babel.config.js'];
 const COMPILER_ARGUMENTS = ['./**/*', '--ignore', `node_modules,.dependencies,${FIXED_OUT_DIR}`, '-d', FIXED_OUT_DIR];
 

@@ -44,7 +44,7 @@ This config state is as if you would configure the compiler as following by hand
                     "rawConfig": {
                         "compilerPath": "@babel/cli/bin/babel",
                         "compilerArguments": ["./**/*", "--ignore", "node_modules,.dependencies,dist", "-d", "dist"],
-                        "compiledFileTypes": [".js"],
+                        "compiledFileTypes": [".js", ".jsx"],
                         "configFileName": "babel.config.json",
                         "babel": {
                             "plugins": [],
