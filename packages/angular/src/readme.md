@@ -8,7 +8,7 @@ Beneath the surface, this Bit compiler uses [ng-packagr](https://github.com/ng-p
 Install in your project using the following command:
 
 ```bash
-bit import bit.envs/angular -c
+bit import bit.envs/compilers/angular
 ```
 
 ## How to use?
