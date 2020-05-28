@@ -3,7 +3,7 @@
 [![Actions Status](https://github.com/teambit/envs/workflows/CI/badge.svg)](https://github.com/teambit/envs/actions)
 [![components](https://img.shields.io/badge/dynamic/json.svg?color=6e3991&label=components&query=payload.totalComponents&url=https%3A%2F%2Fapi.bit.dev%2Fscope%2Fbit%2Fenvs)](https://bit.dev/bit/envs)
 <a href="https://opensource.org/licenses/Apache-2.0"><img alt="apache" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
-[![Gitter chat](https://badgen.now.sh/badge/chat/on%20gitter/cyan)](https://gitter.im/bit-src/Bit)
+[![Slack](https://badgen.now.sh/badge/chat/on%20Slack/cyan)](https://join.slack.com/t/bit-dev-community/shared_invite/enQtNzM2NzQ3MTQzMTg3LWI2YmFmZjQwMTkxNmFmNTVkYzU2MGI2YjgwMmJlZDdkNWVhOGIzZDFlYjg4MGRmOTM4ODAxNTIxMTMwNWVhMzg)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 A curated list of **Extensions** maintained by Bit's [maintainers](https://github.com/orgs/teambit/people) to use as dev tools for components. These extensions implement best practices for distributing components and setting them up to be reused across projects.
@@ -30,7 +30,7 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 | Vue                | [vue](https://bit.dev/bit/envs/bundlers/vue)                            | `bit import bit.envs/bundlers/vue -c`               |
 | Angular            | [angular](https://bit.dev/bit/envs/compilers/angular)                   | `bit import bit.envs/compilers/angular -c`          |
 | Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)             | `bit import bit.envs/compilers/typescript -c`       |
-| Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/babel)                  | `bit import bit.envs/compilers/babel -c`            |
+| Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/babel)                       | `bit import bit.envs/compilers/babel -c`            |
 
 ### Which tester to use?
 
