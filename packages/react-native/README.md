@@ -19,22 +19,6 @@ Then build using [bit build](https://docs.bitsrc.io/docs/cli-build.html).
 bit build
 ```
 
-## Expending metro-config blacklist to ignore also .bit folder
-
-In order to not receive this error from the metro when running the simulation: https://github.com/teambit/envs/issues/143  
-Edit the `metro.config.js` file:
-
-```
-const blacklist = require('metro-config/src/defaults/blacklist');
-
-module.exports = {
-  ...
-  resolver: {
-    blacklistRE: blacklist([/.bit\/.*/]),
-  },
-};
-```
-
 ## Configuration Reference
 
 When first importing the compiler the bit entry in the package.json will look as following:
@@ -90,6 +74,23 @@ This config state is as if you would configure the compiler as following by hand
 - **copyPolicy** - manage the copy policy.
 - **copyPolicy.ignorePatterns** - Array of patterns to exclude files from being copied.
 - **copyPolicy.disable** - turn off the copy policy.
+
+## Metro has encountered an error while trying to resolve module 'react-native'...
+
+If you get this error, you need to expend the metro-config blacklist to ignore also `.bit` folder.
+Link to the issue https://github.com/teambit/envs/issues/143  
+Edit the `metro.config.js` file:
+
+```
+const blacklist = require('metro-config/src/defaults/blacklist');
+
+module.exports = {
+  ...
+  resolver: {
+    blacklistRE: blacklist([/.bit\/.*/]),
+  },
+};
+```
 
 ## F.A.Q
 
