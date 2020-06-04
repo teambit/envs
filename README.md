@@ -5,7 +5,7 @@
 <a href="https://opensource.org/licenses/Apache-2.0"><img alt="apache" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Slack](https://badgen.now.sh/badge/chat/on%20Slack/cyan)](https://join.slack.com/t/bit-dev-community/shared_invite/enQtNzM2NzQ3MTQzMTg3LWI2YmFmZjQwMTkxNmFmNTVkYzU2MGI2YjgwMmJlZDdkNWVhOGIzZDFlYjg4MGRmOTM4ODAxNTIxMTMwNWVhMzg)
-[![reddit](https://img.shields.io/reddit/subreddit-subscribers/bit_dev?label=Follow%20Bit&style=social)](https://www.reddit.com/r/bit_dev/)
+[![reddit](https://img.shields.io/reddit/subreddit-subscribers/bit_dev?label=Follow%20Bit&style=flat)](https://www.reddit.com/r/bit_dev/)
 
 A curated list of **Extensions** maintained by Bit's [maintainers](https://github.com/orgs/teambit/people) to use as dev tools for components. These extensions implement best practices for distributing components and setting them up to be reused across projects.
 
