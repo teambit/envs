@@ -19,6 +19,22 @@ Then build using [bit build](https://docs.bitsrc.io/docs/cli-build.html).
 bit build
 ```
 
+## Expending metro-config blacklist to ignore also .bit folder
+
+In order to not receive this error from the metro when running the simulation: https://github.com/teambit/envs/issues/143  
+Edit the `metro.config.js` file:
+
+```
+const blacklist = require('metro-config/src/defaults/blacklist');
+
+module.exports = {
+  ...
+  resolver: {
+    blacklistRE: blacklist([/.bit\/.*/]),
+  },
+};
+```
+
 ## Configuration Reference
 
 When first importing the compiler the bit entry in the package.json will look as following:
