@@ -115,7 +115,8 @@
       },
       "compilers/angular": {
         "dependencies": {
-          "bit-bin": "-"
+          "bit-bin": "-",
+          "typescript": "3.8.3"
         },
         "devDependencies": {
           "@types/node": "+",
