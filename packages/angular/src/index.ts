@@ -33,6 +33,7 @@ const DEV_DEPS = {
   tslib: '>=1.0.0',
   'webpack-env': '>=0.8.0',
   '@angular/core': '>= 8.0.0',
+  '@angular/common': '>= 8.0.0',
 };
 const PKG_JSON_KEYS = ['es2015', 'esm5', 'esm2015', 'fesm5', 'fesm2015', 'module', 'typings'];
 

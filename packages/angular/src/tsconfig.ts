@@ -20,9 +20,9 @@ export const TSConfig = {
     baseUrl: '.',
     paths: {
       '@/*': ['src/*'],
-      '~/*': ['./*']
+      '~/*': ['./*'],
     },
-    lib: ['esnext', 'dom', 'dom.iterable', 'scripthost', 'es2018']
+    lib: ['esnext', 'dom', 'dom.iterable', 'scripthost', 'es2018'],
   },
   angularCompilerOptions: {
     annotateForClosureCompiler: true,
@@ -30,7 +30,7 @@ export const TSConfig = {
     strictMetadataEmit: false,
     fullTemplateTypeCheck: false,
     enableResourceInlining: true,
-    enableIvy: false
+    enableIvy: false,
   },
-  exclude: ['node_modules', '.bit']
+  exclude: ['node_modules', '.bit'],
 };

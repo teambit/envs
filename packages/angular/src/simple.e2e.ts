@@ -10,7 +10,7 @@ const FIXTURES = [
       background-color: #68bb5d;
       color: white;
     }
-  `
+  `,
   },
   {
     name: 'HelloWorld.html',
@@ -19,7 +19,7 @@ const FIXTURES = [
   <div>
     Hello World
   </div>
-  `
+  `,
   },
   {
     name: 'HelloWorld.ts',
@@ -34,7 +34,7 @@ const FIXTURES = [
   })
   export class HelloWorld {
   }
-  `
+  `,
   },
   {
     name: 'HelloWorld.module.ts',
@@ -46,18 +46,18 @@ const FIXTURES = [
   
   @NgModule({
     declarations: [
-      MyComponent
+      HelloWorld
     ],
     imports: [
       CommonModule
     ],
     exports: [
-      MyComponent
+      HelloWorld
     ]
   })
   export class HelloWorldModule { }
-  `
-  }
+  `,
+  },
 ];
 
 describe('Angular compiler', (): void => {
@@ -85,18 +85,19 @@ describe('Angular compiler', (): void => {
       compiler: {
         meta: {
           options: {
-            file: path.join(__dirname, '../dist/index.js')
-          }
-        }
-      }
+            file: path.join(__dirname, '../dist/index.js'),
+          },
+        },
+      },
     }),
       helper.bitJson.write(bitJson);
     helper.command.build(COMP_ID);
     expect(helper.fs.getConsumerFiles('dist/*.*')).toEqual([
-      'dist/demo.html',
-      'dist/hello-world.common.js',
-      'dist/hello-world.umd.js',
-      'dist/hello-world.umd.min.js'
+      'dist/bit-hello-world.d.ts',
+      'dist/bit-hello-world.metadata.json',
+      'dist/HelloWorld.d.ts',
+      'dist/HelloWorld.module.d.ts',
+      'dist/package.json',
     ]);
   });
 });
