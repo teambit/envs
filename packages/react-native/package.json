@@ -20,7 +20,7 @@
         "@bit/bit.envs.compilers.typescript": "3.1.38",
         "fs-extra": "^8.1.0",
         "lodash": "^4.17.15",
-        "metro-react-native-babel-preset": "^0.57.0",
+        "metro-react-native-babel-preset": "^0.59.0",
         "rimraf": "^3.0.0"
     },
     "devDependencies": {

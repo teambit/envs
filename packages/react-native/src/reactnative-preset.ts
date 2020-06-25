@@ -14,11 +14,11 @@ export const reactNativePreset: Preset = {
     const deps = {
       dependencies: {},
       devDependencies: {
-        'metro-react-native-babel-preset': '^0.57.0',
+        'metro-react-native-babel-preset': '0.59.0',
       },
       peerDependencies: {
-        react: '^16.9.0',
-        'react-native': '^0.61.5',
+        react: '16.11.0',
+        'react-native': '0.62.2',
       },
     };
 
