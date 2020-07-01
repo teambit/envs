@@ -21,7 +21,6 @@
   "dependencies": {
     "@bit/bit.envs.compilers.utils": "^0.1.9",
     "@bit/bit.envs.internal.babel-base-compiler": "^1.0.4",
-    "@types/mocha": "^5.2.7",
     "execa": "^2.0.4",
     "lodash": "^4.17.15",
     "recursive-readdir": "^2.2.2",
@@ -39,6 +38,7 @@
     "@types/babel__core": "^7.1.2",
     "@types/jest": "^25.1.3",
     "@types/lodash": "^4.14.149",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^12.7.4",
     "@types/recursive-readdir": "^2.2.0",
     "@types/uuid": "^3.4.5",
@@ -94,8 +94,7 @@
     "overrides": {
       "*": {
         "devDependencies": {
-          "@types/node": "+",
-          "@types/mocha": "^5.2.7"
+          "@types/node": "^12.7.4"
         }
       },
       "types": {
@@ -109,7 +108,7 @@
         },
         "devDependencies": {
           "@types/node": "+",
-          "@types/mocha": "^5.2.7",
+          "@types/mocha": "^7.0.2",
           "bit-bin": "14.6.0"
         }
       },
@@ -191,7 +190,7 @@
         },
         "devDependencies": {
           "@types/node": "+",
-          "@types/mocha": "^5.2.7",
+          "@types/mocha": "^7.0.2",
           "bit-bin": "14.6.0"
         }
       },
@@ -202,22 +201,30 @@
         },
         "devDependencies": {
           "@types/node": "+",
-          "@types/mocha": "^5.2.7",
-          "bit-bin": "^14.7.1"
+          "@types/mocha": "^7.0.2",
+          "bit-bin": "14.7.6"
         }
       },
       "compilers/react-native": {
         "dependencies": {
+          "@types/chai": "-",
+          "@types/mocha": "-",
+          "@types/rimraf": "-",
+          "@types/vinyl": "-",
           "bit-bin": "-",
-          "@babel/cli": "^7.8.3",
-          "@babel/core": "^7.8.3",
-          "@bit/bit.envs.common.build-component": "-"
+          "chai": "-",
+          "mocha": "-",
+          "rimraf": "-"
         },
         "devDependencies": {
-          "@types/node": "+",
-          "@types/mocha": "^5.2.7",
-          "bit-bin": "^14.7.1",
-          "@bit/bit.envs.common.build-component": "0.0.14"
+          "@types/chai": "^4.2.5",
+          "@types/mocha": "^7.0.2",
+          "@types/rimraf": "^2.0.3",
+          "@types/vinyl": "^2.0.4",
+          "bit-bin": "14.7.6",
+          "chai": "^4.2.0",
+          "mocha": "^8.0.1",
+          "rimraf": "^3.0.2"
         }
       },
       "compilers/utils": {
@@ -291,6 +298,14 @@
               "options": {}
             }
           }
+        }
+      },
+      "common/build-component": {
+        "devDependencies": {
+          "@types/chai": "^4.2.5",
+          "@types/mocha": "^7.0.2",
+          "@types/rimraf": "^2.0.3",
+          "@types/fs-extra": "^8.0.1"
         }
       }
     }
