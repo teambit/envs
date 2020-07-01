@@ -1,0 +1,47 @@
+name: Bit export CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [master]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  bit-export:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+    env:
+      BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Install dependencies and build app
+      - name: Install Dependencies
+        run: npm install
+      - name: Install bit-bin
+        run: sudo npm install bit-bin@14.7.6 -g --unsafe-perm
+      - name: bit config
+        run: |
+          bit config set analytics_reporting false
+          bit config set anonymous_reporting false
+          bit config set user.token $BIT_TOKEN
+          bit config
+      - name: bit import
+        run: |
+          bit -v && bit import
+      - name: bit export
+        run: |
+          bit status
+          bit tag -a
+          bit export
+      - name: Commit changes
+        run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git commit -am "Automated commit"
+          git push

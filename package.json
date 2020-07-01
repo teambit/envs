@@ -91,6 +91,7 @@
     },
     "componentsDefaultDirectory": "components/{name}",
     "packageManager": "npm",
+    "defaultScope": "bit.envs",
     "overrides": {
       "*": {
         "devDependencies": {
