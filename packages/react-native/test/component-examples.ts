@@ -1,4 +1,4 @@
-const NormalButtonComponent: string = `
+const NormalButtonComponent = `
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'; // ES6
 import { StyleSheet } from 'react-native';
@@ -44,7 +44,7 @@ NormalButton.defaultProps = {
 export default NormalButton;
 `;
 
-const CardComponent: string = `
+const CardComponent = `
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'; // ES6
 import { StyleSheet, Text, View, TouchableWithoutFeedback, Animated, Image } from 'react-native';
@@ -207,7 +207,7 @@ Card.defaultProps = {
 export default Card;
 `;
 
-const InputComponent: string = `
+const InputComponent = `
 import React from 'react';
 import PropTypes from 'prop-types';
 import {

@@ -1,8 +1,8 @@
-import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
-import { expect } from 'chai';
-import rimraf = require('rimraf');
 import { buildComponentInWorkspace, BuildResult } from '@bit/bit.envs.common.build-component';
-import { NormalButtonComponent, CardComponent, InputComponent } from './component-examples';
+import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
+import 'chai';
+import rimraf = require('rimraf');
+import { CardComponent, InputComponent, NormalButtonComponent } from './component-examples';
 
 describe('babel react-native', () => {
   const helper = new Helper();
@@ -13,9 +13,10 @@ describe('babel react-native', () => {
   };
   before(async function () {
     this.timeout(1000 * 10 * 10);
+    //@ts-ignore
     results = await buildComponentInWorkspace(helper, {
-      compilerPath: 'dist/src/index.js',
-      envTester: 'dist/src/index.js',
+      compilerPath: 'dist/index.js',
+      envTester: 'dist/index.js',
       component: {
         'src/comp.js': NormalButtonComponent,
         'src/comp2.jsx': NormalButtonComponent,

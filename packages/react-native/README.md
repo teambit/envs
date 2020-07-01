@@ -1,7 +1,6 @@
 # React-Native compiler
 
 A React-Native component compiler for [Bit](https://github.com/teambit/bit).
-The compiler is also heavily based on [typescript](https://github.com/teambit/envs/blob/master/packages/ts-compiler/README.md) compiler.
 
 ## How to use?
 
@@ -19,61 +18,10 @@ Then build using [bit build](https://docs.bitsrc.io/docs/cli-build.html).
 bit build
 ```
 
-## Configuration Reference
+## What's inside
 
-When first importing the compiler the bit entry in the package.json will look as following:
-
-```js
-{
-    "bit": {
-        "env": {
-            "compiler": "bit.envs/compilers/react-native@[version]"
-        }
-    }
-}
-```
-
-This config state is as if you would configure the compiler as following by hand:
-
-```js
-{
-    "bit": {
-        "env": {
-            "compiler": {
-                "bit.envs/compilers/react-native@[version]": {
-                    "rawConfig": {
-                        "compilerPath": "@babel/cli/bin/babel",
-                        "compilerArguments": ["./**/*", "--ignore", "node_modules,.dependencies,dist", "-d", "dist"],
-                        "compiledFileTypes": [".js", ".jsx"],
-                        "configFileName": "babel.config.json",
-                        "babel": {
-                            "plugins": [],
-                            "presets": ["module:metro-react-native-babel-preset"],
-                            "sourceMaps": false,
-                            "minified": false
-                        },
-                        "development": false
-                        "copyPolicy": {
-                            "ignorePatterns": ["package.json", "package-lock.json", ".babelrc", "babel.config.js"],
-                            "disable": false
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-```
-
-- **compilerPath** - set the path to the compiler.
-- **compilerArguments** - arguments options to run with the compiler.
-- **compiledFileTypes** - file types to be compiled.
-- **configFileName** - config file that the compiler should have.
-- **babel** - override `babel.config.json` configuration.
-- **development** - enable or disable dev mode to include source maps and better debugging capabilities.
-- **copyPolicy** - manage the copy policy.
-- **copyPolicy.ignorePatterns** - Array of patterns to exclude files from being copied.
-- **copyPolicy.disable** - turn off the copy policy.
+- Compiles `js` and `jsx` files.
+- In order to see which babel presets and plugins are used, take a look at the [config.md](config.md) file.
 
 ## Metro has encountered an error while trying to resolve module 'react-native'...
 
