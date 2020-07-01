@@ -4,15 +4,20 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+    env:
+      BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
     steps:
       - uses: actions/checkout@v1
-      - name: install
+      - name: Install Dependencies
+        run: npm install
+      - name: Install bit-bin
+        run: sudo npm install bit-bin@14.7.6 -g --unsafe-perm
+      - name: bit config
         run: |
-          npm i
-      - name: config bit
-        run: |
-          packages/ts-compiler/node_modules/.bin/bit config set analytics_reporting false
-          packages/ts-compiler/node_modules/.bin/bit config set error_reporting false
-          packages/ts-compiler/node_modules/.bin/bit config set no_warnings true
+          bit config set analytics_reporting false
+          bit config set anonymous_reporting false
+          bit config set user.token $BIT_TOKEN
+          bit config
       - name: run tests
         run: npm run test
