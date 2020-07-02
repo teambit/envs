@@ -40,6 +40,13 @@ jobs:
       - name: bit import
         run: |
           bit -v && bit import
+      - name: bit import compiler
+        # workaround https://github.com/teambit/bit/issues/2689
+        run: |
+          cp bit.json bit.json.backup
+          bit import bit.envs/compilers/typescript@3.1.47 -c
+          cp bit.json.backup bit.json
+          rm -rf bit.json.backup
       - name: bit export
         run: |
           bit status
