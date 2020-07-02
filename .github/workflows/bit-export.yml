@@ -22,4 +22,4 @@ jobs:
 
       # Install dependencies and build app
       - name: Install Dependencies
-        run: echo "$BIT_TOKEN"
+        run: echo "export script"
