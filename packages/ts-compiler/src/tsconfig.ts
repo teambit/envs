@@ -2,7 +2,7 @@ import { GenericObject } from '@bit/bit.envs.common.compiler-types';
 import { merge } from 'lodash';
 
 export const FIXED_OUT_DIR = 'dist';
-export function getTSConfig(isDev: boolean, overrideConfig: GenericObject): object {
+export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
   const defaultOptions = {
     compilerOptions: {
       outDir: FIXED_OUT_DIR,
