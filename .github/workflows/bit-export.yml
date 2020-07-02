@@ -22,26 +22,4 @@ jobs:
 
       # Install dependencies and build app
       - name: Install Dependencies
-        run: npm install
-      - name: Install bit-bin
-        run: sudo npm install bit-bin@14.7.6 -g --unsafe-perm
-      - name: bit config
-        run: |
-          bit config set analytics_reporting false
-          bit config set anonymous_reporting false
-          bit config set user.token $BIT_TOKEN
-          bit config
-      - name: bit import
-        run: |
-          bit -v && bit import
-      - name: bit export
-        run: |
-          bit status
-          bit tag -a
-          bit export
-      - name: Commit changes
-        run: |
-          git config --global user.name '${{ github.actor }}'
-          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
-          git commit -am "Automated commit"
-          git push
+        run: echo "$BIT_TOKEN"
