@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Install Dependencies
-        run: npm config list && npm install
+        run: npm config set @bit:registry https://node.bit.dev && npm config list && npm install
       - name: Install bit-bin
         run: sudo npm install bit-bin@14.7.6 -g --unsafe-perm
       - name: bit config
