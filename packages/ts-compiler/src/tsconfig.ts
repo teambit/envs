@@ -1,8 +1,8 @@
-import { merge } from 'lodash';
 import { GenericObject } from '@bit/bit.envs.common.compiler-types';
+import { merge } from 'lodash';
 
 export const FIXED_OUT_DIR = 'dist';
-export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
+export function getTSConfig(isDev: boolean, overrideConfig: GenericObject): object {
   const defaultOptions = {
     compilerOptions: {
       outDir: FIXED_OUT_DIR,
@@ -28,13 +28,13 @@ export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
       rootDir: './',
       removeComments: !isDev,
       typeRoots: [
-        './node_modules/@types' // be able to consume @types.
+        './node_modules/@types', // be able to consume @types.
       ],
       // bundle size in component would be better if we don't depend on tslib.
-      importHelpers: false
+      importHelpers: false,
     },
     include: ['./**/*'],
-    exclude: ['node_modules', '.dependencies', FIXED_OUT_DIR]
+    exclude: ['node_modules', '.dependencies', FIXED_OUT_DIR],
   };
 
   const config = merge({}, defaultOptions, overrideConfig);
