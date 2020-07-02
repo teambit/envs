@@ -1,12 +1,12 @@
 name: Test
 
 on: [push, pull_request]
+env:
+  BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
 jobs:
   test:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'skip-ci')"
-    env:
-      BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
     steps:
       - uses: actions/checkout@v1
       - name: Install Dependencies
@@ -21,3 +21,12 @@ jobs:
           bit config
       - name: run tests
         run: npm run test
+  bit-export:
+    runs-on: ubuntu-latest
+    needs: test
+    if: "!contains(github.event.head_commit.message, 'skip-ci')"
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: echo "export script"
