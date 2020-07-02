@@ -1,4 +1,4 @@
-name: Test
+name: Test and Export
 
 on: [push, pull_request]
 env:
@@ -27,6 +27,19 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip-ci')"
     steps:
       - uses: actions/checkout@v2
-
       - name: Install Dependencies
-        run: echo "export script"
+        run: npm install
+      - name: bit import
+        run: |
+          bit -v && bit import
+      - name: bit export
+        run: |
+          bit status
+          bit tag -a
+          bit export
+      - name: Commit changes
+        run: |
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git commit -am "Automated commit"
+          git push
