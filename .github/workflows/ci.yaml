@@ -1,6 +1,8 @@
 name: Test and Export
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [master]
 env:
   BIT_TOKEN: ${{ secrets.BIT_TOKEN }}
 jobs:
