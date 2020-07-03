@@ -23,7 +23,9 @@ bit build
 - Compiles `js` and `jsx` files.
 - In order to see which babel presets and plugins are used, take a look at the [config.md](config.md) file.
 
-## Metro has encountered an error while trying to resolve module 'react-native'...
+## Common issues
+
+### Metro has encountered an error while trying to resolve module 'react-native'...
 
 If you get this error, you need to expend the metro-config blacklist to ignore also `.bit` folder.
 Link to the issue https://github.com/teambit/envs/issues/143  
@@ -36,6 +38,23 @@ module.exports = {
   ...
   resolver: {
     blacklistRE: blacklist([/.bit\/.*/]),
+  },
+};
+```
+
+### Expo "jest-haste-map" error after bit import of a component
+
+If you get this error, you need to expend the metro-config blacklist to ignore also `bit` folder.
+Link to the issue https://github.com/teambit/envs/issues/149  
+Edit the `metro.config.js` file:
+
+```
+const blacklist = require('metro-config/src/defaults/blacklist');
+
+module.exports = {
+  ...
+  resolver: {
+    blacklistRE: blacklist([/\/bit\/(?!.*dist).*/]),
   },
 };
 ```
