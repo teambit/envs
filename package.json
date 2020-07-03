@@ -19,7 +19,6 @@
   "author": "Teambit",
   "license": "MIT",
   "dependencies": {
-    "@bit/bit.envs.compilers.utils": "^0.1.9",
     "@bit/bit.envs.internal.babel-base-compiler": "^1.0.4",
     "execa": "^2.0.4",
     "lodash": "^4.17.15",

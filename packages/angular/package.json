@@ -15,7 +15,7 @@
     "@angular/compiler-cli": "^9.1.9",
     "@angular/core": "^9.1.9",
     "@bazel/typescript": "^1.7.0",
-    "@bit/bit.envs.compilers.utils": "^0.1.9",
+    "@bit/bit.envs.compilers.utils": "^0.1.10",
     "debug": "^4.1.1",
     "execa": "^4.0.0",
     "ng-packagr": "^9.0.0",
