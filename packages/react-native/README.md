@@ -44,9 +44,11 @@ module.exports = {
 
 ### Expo "jest-haste-map" error after bit import of a component
 
-If you get this error, you need to expend the metro-config blacklist to ignore also `bit` folder.
-Link to the issue https://github.com/teambit/envs/issues/149  
-Edit the `metro.config.js` file:
+If you get this error, you need to expend the metro-config blacklist to ignore also the components default directory folder where Bit import components.
+Link to the issue https://github.com/teambit/envs/issues/149
+
+The default directory is: `"componentsDefaultDirectory": "components/{name}"`
+According to the directory, edit the `metro.config.js` file:
 
 ```
 const blacklist = require('metro-config/src/defaults/blacklist');
@@ -54,7 +56,7 @@ const blacklist = require('metro-config/src/defaults/blacklist');
 module.exports = {
   ...
   resolver: {
-    blacklistRE: blacklist([/\/bit\/(?!.*dist).*/]),
+    blacklistRE: blacklist([/\/components\/(?!.*dist).*/]),
   },
 };
 ```
