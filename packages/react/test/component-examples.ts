@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'; // ES6
 
 class NormalButton extends Component {
   render() {
+    const object = {}
+    const foo = object.foo ?? 'default';
     const { text, backgroundColor, width, height, style } = this.props;
     return (
       <button
