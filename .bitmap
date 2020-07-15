@@ -272,7 +272,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/stencil@0.0.31": {
+    "bit.envs/compilers/stencil@0.0.32": {
         "files": [
             {
                 "name": "README.md",
