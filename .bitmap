@@ -280,11 +280,6 @@
                 "test": false
             },
             {
-                "relativePath": "packages/stencil/jest.config.js",
-                "test": false,
-                "name": "jest.config.js"
-            },
-            {
                 "name": "package.json",
                 "relativePath": "packages/stencil/package.json",
                 "test": false
@@ -295,9 +290,14 @@
                 "test": false
             },
             {
-                "relativePath": "packages/stencil/src/readme.MD",
+                "relativePath": "packages/stencil/src/logger.ts",
                 "test": false,
-                "name": "readme.MD"
+                "name": "logger.ts"
+            },
+            {
+                "relativePath": "packages/stencil/src/move-files.ts",
+                "test": false,
+                "name": "move-files.ts"
             },
             {
                 "relativePath": "packages/stencil/src/tsconfig.ts",
@@ -484,5 +484,5 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "version": "14.7.6"
+    "version": "14.8.8"
 }

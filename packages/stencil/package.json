@@ -15,39 +15,21 @@
     "loader/"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "build:watch": "tsc --watch",
-    "test": "jest",
-    "test:watch": "jest --watchAll"
+    "clean": "rm -rf dist types",
+    "test": "echo \"Test files are not defined for Stencil compiler\"",
+    "test:hero": "run-s clean build test"
   },
   "devDependencies": {
-    "@stencil/core": "^1.11.2",
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.3",
-    "@types/vinyl": "^2.0.4"
+    "@stencil/core": "1.14.0",
+    "@types/node": "13.9.3",
+    "@types/vinyl": "2.0.4"
   },
   "license": "MIT",
   "dependencies": {
-    "@bit/bit.envs.compilers.utils": "0.0.6",
-    "debug": "^4.1.1",
-    "vinyl": "^2.2.0"
-  },
-  "bit": {
-    "env": {
-      "compiler": {
-        "bit.envs/compilers/typescript@3.1.37": {
-          "rawConfig": {
-            "tsconfig": {
-              "compilerOptions": {
-                "target": "ES5",
-                "module": "CommonJS"
-              }
-            }
-          }
-        }
-      }
-    },
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm"
+    "@bit/bit.envs.compilers.utils": "0.1.7",
+    "execa": "^4.0.3",
+    "vinyl": "2.2.0"
   }
 }
