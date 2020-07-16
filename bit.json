@@ -30,12 +30,20 @@
     },
     "compilers/typescript": {
       "dependencies": {
-        "bit-bin": "-"
+        "bit-bin": "-",
+        "chai": "-",
+        "mocha": "-",
+        "rimraf": "-",
+        "sinon": "-"
       },
       "devDependencies": {
         "@types/node": "+",
         "@types/mocha": "^7.0.2",
-        "bit-bin": "14.6.0"
+        "bit-bin": "14.6.0",
+        "chai": "^4.2.0",
+        "mocha": "^6.2.0",
+        "rimraf": "^3.0.0",
+        "sinon": "^7.5.0"
       }
     },
     "compilers/angular": {
@@ -93,13 +101,16 @@
     },
     "compilers/react-typescript": {
       "dependencies": {
-        "bit-bin": "-"
+        "bit-bin": "-",
+        "@bit/bit.envs.common.create-workspace": "-",
+        "chai": "-"
       },
       "devDependencies": {
         "@types/node": "+",
         "@types/mocha": "^7.0.2",
         "bit-bin": "14.6.0",
-        "@bit/bit.envs.common.build-component": "0.0.19"
+        "@bit/bit.envs.common.create-workspace": "0.0.11",
+        "chai": "^4.2.0"
       }
     },
     "compilers/react": {
