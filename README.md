@@ -32,6 +32,7 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 | Angular            | [angular](https://bit.dev/bit/envs/compilers/angular)                   | `bit import bit.envs/compilers/angular -c`          |
 | Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)             | `bit import bit.envs/compilers/typescript -c`       |
 | Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/babel)                       | `bit import bit.envs/compilers/babel -c`            |
+| Stencil            | [stencil](https://bit.dev/bit/envs/compilers/stencil)                   | `bit import bit.envs/compilers/stencil -c`          |
 
 ### Which tester to use?
 
