@@ -13,6 +13,7 @@
     "license": "ISC",
     "dependencies": {
         "debug": "^4.1.1",
+        "deepmerge": "^4.2.2",
         "fs-extra": "^8.1.0",
         "vinyl": "^2.2.0"
     },

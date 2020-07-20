@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@bit/bit.envs.compilers.utils": "0.1.7",
+    "@bit/bit.envs.compilers.utils": "^0.1.11",
     "execa": "^4.0.3",
     "vinyl": "2.2.0"
   }
