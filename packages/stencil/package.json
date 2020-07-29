@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@stencil/core": "1.14.0",
+    "@stencil/sass": "^1.3.2",
     "@types/node": "13.9.3",
     "@types/vinyl": "2.0.4"
   },
