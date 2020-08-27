@@ -1,3 +1,4 @@
+// @ts-ignore
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { expect } from 'chai';
 import rimraf = require('rimraf');
@@ -9,22 +10,22 @@ describe('typescript react', () => {
   let results: BuildResult = {
     directory: '',
     files: [],
-    showComponent: {}
+    showComponent: {},
   };
-  before(async function() {
+  before(async function () {
     this.timeout(1000 * 10 * 10);
     results = await buildComponentInWorkspace(helper, {
       compilerPath: 'dist/src/index.js',
-      envTester: 'dist/src/index.js'
+      envTester: 'dist/src/index.js',
     });
   });
-  after(async function() {
+  after(async function () {
     if (results.directory) {
-      return new Promise((resolve, reject) => rimraf(results.directory, {}, error => (error ? reject() : resolve())));
+      return new Promise((resolve, reject) => rimraf(results.directory, {}, (error) => (error ? reject() : resolve())));
     }
   });
-  it('build should pass', async function() {});
-  it('should have correct dependencies', function() {
+  it('build should pass', async function () {});
+  it('should have correct dependencies', function () {
     const presetConfig = reactPreset.getDynamicPackageDependencies!();
     expect(results.showComponent.compilerPackageDependencies).to.deep.equal(presetConfig);
   });
