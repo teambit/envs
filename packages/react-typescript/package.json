@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@bit/bit.envs.common.preset": "0.0.10",
-    "@bit/bit.envs.compilers.typescript": "3.1.49",
+    "@bit/bit.envs.compilers.typescript": "^3.1.49",
     "@types/fs-extra": "^8.0.1",
     "@types/rimraf": "^2.0.3",
     "fs-extra": "^8.1.0",
@@ -25,6 +25,7 @@
     "@bit/bit.envs.common.build-component": "0.0.19",
     "@bit/bit.envs.common.create-workspace": "0.0.11",
     "@types/chai": "^4.2.5",
+    "bit-bin": "14.8.8",
     "chai": "^4.2.0"
   }
 }

@@ -1,4 +1,3 @@
-// @ts-ignore
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { expect } from 'chai';
 import rimraf = require('rimraf');
