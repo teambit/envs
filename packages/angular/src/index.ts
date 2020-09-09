@@ -43,6 +43,10 @@ export function getDynamicPackageDependencies(): Record<string, any> {
   };
 }
 
+function escapeRegExp(input: string): string {
+  return input.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
 export async function action(ctx: CompilerContext): Promise<BuildResults> {
   // build capsule
 
@@ -71,7 +75,11 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
     lib: {
       entryFile: mainFile,
     },
-    whitelistedNonPeerDependencies: [...Object.keys(DEV_DEPS), ...Object.keys(componentObject.packageDependencies)],
+    whitelistedNonPeerDependencies: [
+      ...Object.keys(DEV_DEPS).map(escapeRegExp),
+      ...Object.keys(componentObject.packageDependencies).map(escapeRegExp),
+      escapeRegExp('@bit'), // ...bitDependencies
+    ],
   };
   if (!fs.existsSync(ngPackageFile)) {
     fs.writeFileSync(ngPackageFile, JSON.stringify(ngPackage, null, 4));
