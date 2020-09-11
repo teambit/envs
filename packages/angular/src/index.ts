@@ -17,8 +17,8 @@ import * as fs from 'fs';
 import { TSConfig } from './tsconfig';
 
 import {
-  CompilerContext,
   BuildResults,
+  CompilerContext,
   createCapsule,
   destroyCapsule,
   getTestFiles,
@@ -35,7 +35,21 @@ const DEV_DEPS = {
   '@angular/core': '>= 8.0.0',
   '@angular/common': '>= 8.0.0',
 };
-const PKG_JSON_KEYS = ['es2015', 'esm5', 'esm2015', 'fesm5', 'fesm2015', 'module', 'typings'];
+
+const PKG_JSON_KEYS = [
+  'es2015_ivy_ngcc',
+  'es2015',
+  'esm5',
+  'esm2015',
+  'fesm5',
+  'fesm2015_ivy_ngcc',
+  'fesm2015',
+  'module',
+  'typings',
+  'metadata',
+];
+
+const DIST_DIRECTORY = 'dist';
 
 export function getDynamicPackageDependencies(): Record<string, any> {
   return {
@@ -47,6 +61,7 @@ function escapeRegExp(input: string): string {
   return input.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
+
 export async function action(ctx: CompilerContext): Promise<BuildResults> {
   // build capsule
 
@@ -54,10 +69,9 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
   const distDir = path.join(directory, 'dist');
 
   const componentObject = res.componentWithDependencies.component.toObject();
-  console.log(res.componentWithDependencies);
   const { files, mainFile } = componentObject;
 
-  debug(`Building capsule in ${directory}`);
+  debug(`Building capsule in ${ directory }`);
 
   // create tsconfig.json
   let tests: Vinyl[] = getTestFiles(files, []);
@@ -103,7 +117,9 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
   const pkgJsonContent = require(path.resolve(distDir, 'package.json'));
   const packageJson: Record<string, any> = {};
   PKG_JSON_KEYS.forEach((k: string): void => {
-    packageJson[k] = pkgJsonContent[k];
+    if (k in pkgJsonContent) {
+      packageJson[k] = path.join(DIST_DIRECTORY, pkgJsonContent[k]);
+    }
   });
   destroyCapsule(res.capsule);
 
