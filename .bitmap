@@ -90,7 +90,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/angular@9.0.21": {
+    "bit.envs/compilers/angular@9.0.22": {
         "files": [
             {
                 "name": "index.ts",
@@ -461,7 +461,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/vue@0.1.10": {
+    "bit.envs/compilers/vue@0.1.11": {
         "files": [
             {
                 "name": "readme.MD",
