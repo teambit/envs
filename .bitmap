@@ -461,7 +461,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/vue@0.1.11": {
+    "bit.envs/compilers/vue@0.1.12": {
         "files": [
             {
                 "name": "readme.MD",
