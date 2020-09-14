@@ -61,7 +61,6 @@ function escapeRegExp(input: string): string {
   return input.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
-
 export async function action(ctx: CompilerContext): Promise<BuildResults> {
   // build capsule
 
@@ -71,7 +70,7 @@ export async function action(ctx: CompilerContext): Promise<BuildResults> {
   const componentObject = res.componentWithDependencies.component.toObject();
   const { files, mainFile } = componentObject;
 
-  debug(`Building capsule in ${ directory }`);
+  debug(`Building capsule in ${directory}`);
 
   // create tsconfig.json
   let tests: Vinyl[] = getTestFiles(files, []);

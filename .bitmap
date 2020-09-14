@@ -90,7 +90,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/angular@9.0.22": {
+    "bit.envs/compilers/angular@9.0.23": {
         "files": [
             {
                 "name": "index.ts",
