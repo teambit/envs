@@ -14,7 +14,7 @@ This is a Vue compiler based on [vue-cli 3](https://cli.vuejs.org/) for building
 You can use this compiler in a bit workspace containing Vue components:
 
 ```bash
-bit import -c bit.envs/compilers/typescript
+bit import -c bit.envs/compilers/vue
 bit build
 ```
 
