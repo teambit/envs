@@ -1,4 +1,5 @@
 import { createWorkspace } from './create-workspace';
+// @ts-ignore
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import path from 'path';
 import fs from 'fs-extra';
@@ -32,14 +33,14 @@ export function getDefaultComponent(): GenericObject {
     }`,
     'src/test.css': '',
     'src/types.d.ts': '',
-    'src/try.svg': ''
+    'src/try.svg': '',
   };
 }
 
 export function getBitAddCommand(files: Array<string>, compId: string): string {
   let bitAddCommand = 'bit add';
   let testsFiles = '';
-  files.forEach(filePath => {
+  files.forEach((filePath) => {
     if (filePath.includes('.spec.')) {
       testsFiles += `${filePath},`;
     } else {
@@ -64,9 +65,9 @@ export async function buildComponentInWorkspace(helper: Helper, opts?: BuildOpti
     packageJSON: {
       dependencies: {
         '@types/react': '^16.9.11',
-        react: '^16.11.0'
-      }
-    }
+        react: '^16.11.0',
+      },
+    },
   } as any);
 
   helper.scopeHelper.initWorkspace(results.directory);
@@ -99,5 +100,5 @@ function getCommandString(compId: string, opts?: BuildOptions) {
 }
 
 export async function removeWorkspace(directory: string) {
-  return new Promise((resolve, reject) => rimraf(directory, {}, error => (error ? reject() : resolve())));
+  return new Promise((resolve, reject) => rimraf(directory, {}, (error) => (error ? reject() : resolve())));
 }

@@ -13,6 +13,7 @@ describe('typescript react', () => {
   };
   before(async function () {
     this.timeout(1000 * 10 * 10);
+    // @ts-ignore
     results = await buildComponentInWorkspace(helper, {
       compilerPath: 'dist/src/index.js',
       envTester: 'dist/src/index.js',

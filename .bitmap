@@ -464,13 +464,13 @@
     "bit.envs/compilers/vue@0.1.12": {
         "files": [
             {
-                "name": "readme.MD",
-                "relativePath": "packages/vue/src/README.md",
+                "name": "index.ts",
+                "relativePath": "packages/vue/src/index.ts",
                 "test": false
             },
             {
-                "name": "index.ts",
-                "relativePath": "packages/vue/src/index.ts",
+                "name": "readme.MD",
+                "relativePath": "packages/vue/src/readme.MD",
                 "test": false
             },
             {
