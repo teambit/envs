@@ -12,7 +12,7 @@ jobs:
       - name: Install Dependencies
         run: npm config set @bit:registry https://node.bit.dev && npm config list && npm install
       - name: Install bit-bin
-        run: sudo npm install bit-bin@14.7.6 -g --unsafe-perm
+        run: sudo npm install bit-bin@14.8.8 -g --unsafe-perm
       - name: bit config
         run: |
           bit config set analytics_reporting false
