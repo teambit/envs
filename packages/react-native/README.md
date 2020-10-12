@@ -42,7 +42,7 @@ module.exports = {
 };
 ```
 
-### Expo "jest-haste-map" error after bit import of a component
+### Expo "jest-haste-map" error after bit import of a component - naming collision
 
 If you get this error, you need to expend the metro-config blacklist to ignore also the components default directory folder where Bit import components.
 Link to the issue https://github.com/teambit/envs/issues/149
