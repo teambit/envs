@@ -118,7 +118,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native@1.0.22": {
+    "bit.envs/compilers/react-native@1.0.23": {
         "files": [
             {
                 "relativePath": "packages/react-native/.babelrc",
@@ -166,7 +166,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.58": {
+    "bit.envs/compilers/react-typescript@3.1.59": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
@@ -272,7 +272,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/stencil@0.0.36": {
+    "bit.envs/compilers/stencil@0.0.37": {
         "files": [
             {
                 "name": "README.md",
@@ -315,7 +315,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/typescript@3.1.50": {
+    "bit.envs/compilers/typescript@3.1.51": {
         "files": [
             {
                 "name": "README.md",
