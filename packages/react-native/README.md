@@ -27,7 +27,7 @@ bit build
 
 ### Metro has encountered an error while trying to resolve module 'react-native'...
 
-If you get this error, you need to expend the metro-config blacklist to ignore also `.bit` folder.
+If you get this error, you need to expend the metro-config blacklist to ignore `.bit` folder.
 Link to the issue https://github.com/teambit/envs/issues/143  
 Edit the `metro.config.js` file:
 
@@ -44,7 +44,7 @@ module.exports = {
 
 ### Expo "jest-haste-map" error after bit import of a component - naming collision
 
-If you get this error, you need to expend the metro-config blacklist to ignore also the components default directory folder where Bit import components.
+If you get this error, you need to expend the metro-config blacklist to ignore all the non 'dist' files from imported components.  
 Link to the issue https://github.com/teambit/envs/issues/149
 
 The default directory is: `"componentsDefaultDirectory": "components/{name}"`
