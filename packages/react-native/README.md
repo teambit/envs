@@ -44,7 +44,7 @@ module.exports = {
 
 ### Expo "jest-haste-map" error after bit import of a component - naming collision
 
-If you get this error, you need to expend the metro-config blacklist to ignore all the non 'dist' files from imported components.  
+If you get this error, you need to expend the metro-config blacklist to ignore all the non 'dist' files from imported components, and also to ignore the bit folder under `.git`.  
 Link to the issue https://github.com/teambit/envs/issues/149
 
 The default directory is: `"componentsDefaultDirectory": "components/{name}"`
@@ -56,7 +56,7 @@ const blacklist = require('metro-config/src/defaults/blacklist');
 module.exports = {
   ...
   resolver: {
-    blacklistRE: blacklist([/\/components\/(?!.*dist).*/]),
+    blacklistRE: blacklist([/components\/(?!.*dist).*/, /.git\/bit\/.*/]),
   },
 };
 ```
