@@ -36,6 +36,11 @@ function print_tsconfig() {
     printf "### Default Configuration used in capsule\n \`\`\`js\n $result\n \`\`\` \n" > packages/ts-compiler/config.md
 }
 
+function print_react_native_tsconfig() {
+    result=$(node -e 'console.log(JSON.stringify(require("./packages/react-native-typescript/dist/src/tsconfig.js").getTSConfig(true, {})))' | jq .)
+    printf "### Default Configuration used in capsule\n \`\`\`js\n $result\n \`\`\` \n" > packages/react-native-typescript/config.md
+}
+
 TIMEFORMAT="Task completed in %3lR"
 time ${@:-default}
 

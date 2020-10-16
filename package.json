@@ -13,7 +13,8 @@
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix --jsx",
     "watch": "bit watch",
     "postinstall": "./.taskfile post_install ",
-    "changelog": "conventional-changelog -o CHANGELOG.md"
+    "changelog": "conventional-changelog -o CHANGELOG.md",
+    "print-rn-tsconfig": "./.taskfile print_react_native_tsconfig"
   },
   "keywords": [],
   "author": "Teambit",

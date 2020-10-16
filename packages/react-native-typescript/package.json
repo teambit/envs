@@ -1,0 +1,31 @@
+{
+  "name": "react-native-typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node node_modules/.bin/mocha dist/test/*.spec.js",
+    "test:hero": "run-s clean build test",
+    "build": "tsc",
+    "clean": "rm -rf dist types"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@bit/bit.envs.common.preset": "0.0.10",
+    "@bit/bit.envs.compilers.typescript": "^3.1.49",
+    "@types/fs-extra": "^8.0.1",
+    "@types/rimraf": "^2.0.3",
+    "fs-extra": "^8.1.0",
+    "recursive-readdir": "^2.2.2",
+    "rimraf": "^3.0.0"
+  },
+  "devDependencies": {
+    "@bit/bit.envs.common.build-component": "0.0.19",
+    "@bit/bit.envs.common.create-workspace": "0.0.11",
+    "@types/chai": "^4.2.5",
+    "bit-bin": "14.8.8",
+    "chai": "^4.2.0"
+  }
+}
