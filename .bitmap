@@ -118,7 +118,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native-typescript@0.0.2": {
+    "bit.envs/compilers/react-native-typescript@0.0.3": {
         "files": [
             {
                 "relativePath": "packages/react-native-typescript/README.md",
