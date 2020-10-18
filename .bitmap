@@ -118,7 +118,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native-typescript@0.0.1": {
+    "bit.envs/compilers/react-native-typescript@0.0.2": {
         "files": [
             {
                 "relativePath": "packages/react-native-typescript/README.md",
@@ -186,7 +186,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-native@1.0.24": {
+    "bit.envs/compilers/react-native@1.0.25": {
         "files": [
             {
                 "relativePath": "packages/react-native/.babelrc",
@@ -234,7 +234,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react-typescript@3.1.60": {
+    "bit.envs/compilers/react-typescript@3.1.61": {
         "files": [
             {
                 "relativePath": "packages/react-typescript/README.md",
