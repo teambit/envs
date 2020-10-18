@@ -12,7 +12,7 @@ In order to run this extension your must have a [bit workspace](https://docs.bit
 Install the React-Native-Typescript compiler
 
 ```
-$ bit import -c bit.envs/compilers/react--native-typescript
+$ bit import -c bit.envs/compilers/react-native-typescript
 ```
 
 Then, you can simply build the component using `bit build`
