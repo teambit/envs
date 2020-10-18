@@ -118,6 +118,74 @@
         "origin": "AUTHORED",
         "exported": true
     },
+    "bit.envs/compilers/react-native-typescript@0.0.1": {
+        "files": [
+            {
+                "relativePath": "packages/react-native-typescript/README.md",
+                "test": false,
+                "name": "README.md"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/config.md",
+                "test": false,
+                "name": "config.md"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/package.json",
+                "test": false,
+                "name": "package.json"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/src/generate-types.ts",
+                "test": false,
+                "name": "generate-types.ts"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/src/index.ts",
+                "test": false,
+                "name": "index.ts"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/src/react-native-preset.ts",
+                "test": false,
+                "name": "react-native-preset.ts"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/src/tsconfig.ts",
+                "test": false,
+                "name": "tsconfig.ts"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/test/compile-react.spec.ts",
+                "test": false,
+                "name": "compile-react.spec.ts"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/test/component-examples.ts",
+                "test": false,
+                "name": "component-examples.ts"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/test/generate-types.spec.ts",
+                "test": false,
+                "name": "generate-types.spec.ts"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/test/preset.spec.ts",
+                "test": false,
+                "name": "preset.spec.ts"
+            },
+            {
+                "relativePath": "packages/react-native-typescript/tsconfig.json",
+                "test": false,
+                "name": "tsconfig.json"
+            }
+        ],
+        "mainFile": "packages/react-native-typescript/src/index.ts",
+        "trackDir": "packages/react-native-typescript",
+        "origin": "AUTHORED",
+        "exported": true
+    },
     "bit.envs/compilers/react-native@1.0.24": {
         "files": [
             {

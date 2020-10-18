@@ -1,8 +1,9 @@
 import Helper from 'bit-bin/dist/e2e-helper/e2e-helper';
 import { expect } from 'chai';
 import rimraf = require('rimraf');
-import { reactPreset } from '../src/react-preset';
+import { reactPreset } from '../src/react-native-preset';
 import { buildComponentInWorkspace, BuildResult } from '@bit/bit.envs.common.build-component';
+import { CardComponent } from './component-examples';
 
 describe('react native typescript', () => {
   const helper = new Helper();
@@ -17,6 +18,9 @@ describe('react native typescript', () => {
     results = await buildComponentInWorkspace(helper, {
       compilerPath: 'dist/src/index.js',
       envTester: 'dist/src/index.js',
+      component: {
+        'src/card.tsx': CardComponent,
+      },
     });
   });
   after(async () => {

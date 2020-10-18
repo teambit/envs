@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { reactPreset } from '../src/react-preset';
+import { reactPreset } from '../src/react-native-preset';
 
 describe('React Native TypeScript Preset', () => {
   it('should return getDynamicConfig function from React Native TypeScript Preset', () => {

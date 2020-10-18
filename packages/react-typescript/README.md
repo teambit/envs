@@ -64,7 +64,7 @@ This config state is as if you would configure the compiler as following by hand
                         "tsconfig": {},
                         "development": false
                         "copyPolicy": {
-                            "ignorePatterns": ["package.json", "package-lock.json"],
+                            "ignorePatterns": ["package.json", "package-lock.json", "tsconfig.json"],
                             "disable": false
                         }
                     }
@@ -76,7 +76,7 @@ This config state is as if you would configure the compiler as following by hand
 ```
 
 - **compilerPath** - set the path to the compiler.  
-  E.g: for a Babel based compiler, it will be `@babel/cli/bin/babel`.
+  E.g:foraBabelbasedcompiler,itwillbe`@babel/cli/bin/babel`.
 - **compilerArguments** - arguments options to run with the compiler.
 - **compiledFileTypes** - file types to be compiled.
 - **configFileName** - config file that the compiler should have.

@@ -15,17 +15,18 @@
   "dependencies": {
     "@bit/bit.envs.common.preset": "0.0.10",
     "@bit/bit.envs.compilers.typescript": "^3.1.49",
-    "@types/fs-extra": "^8.0.1",
-    "@types/rimraf": "^2.0.3",
     "fs-extra": "^8.1.0",
-    "recursive-readdir": "^2.2.2",
-    "rimraf": "^3.0.0"
+    "recursive-readdir": "^2.2.2"
   },
   "devDependencies": {
     "@bit/bit.envs.common.build-component": "0.0.19",
     "@bit/bit.envs.common.create-workspace": "0.0.11",
     "@types/chai": "^4.2.5",
+    "@types/fs-extra": "^8.0.1",
+    "@types/rimraf": "^2.0.3",
     "bit-bin": "14.8.8",
-    "chai": "^4.2.0"
+    "chai": "^4.2.0",
+    "mocha": "^8.2.0",
+    "rimraf": "^3.0.0"
   }
 }

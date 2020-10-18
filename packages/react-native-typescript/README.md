@@ -1,6 +1,6 @@
-# React-Typescript Compiler
+# React-Native-Typescript Compiler
 
-A TypeScript component compiler for [Bit](https://github.com/teambit/bit).
+A React Native TypeScript component compiler for [Bit](https://github.com/teambit/bit).
 Check out the [best practices](https://docs.bit.dev/docs/best-practices) and also the specific [React guidelines](https://docs.bit.dev/docs/react-guidelines).
 
 The compiler is also heavily based on [typescript](https://github.com/teambit/envs/blob/master/packages/ts-compiler/README.md) compiler.
@@ -9,10 +9,10 @@ The compiler is also heavily based on [typescript](https://github.com/teambit/en
 
 In order to run this extension your must have a [bit workspace](https://docs.bit.dev/docs/concepts#bit-workspace) with at least one component defined, for more information on how to build please read the [docs](https://docs.bit.dev/docs/building-components) section on the bit website. TL;DR version:
 
-Install the React-Typescript compiler
+Install the React-Native-Typescript compiler
 
 ```
-$ bit import -c bit.envs/compilers/react-typescript
+$ bit import -c bit.envs/compilers/react--native-typescript
 ```
 
 Then, you can simply build the component using `bit build`
@@ -42,7 +42,7 @@ When first importing the compiler the bit entry in the package.json will look as
 {
     "bit": {
         "env": {
-            "compiler": "bit.envs/compilers/react-typescript@[version]"
+            "compiler": "bit.envs/compilers/react--native-typescript@[version]"
         }
     }
 }
@@ -62,9 +62,9 @@ This config state is as if you would configure the compiler as following by hand
                         "compiledFileTypes": [".ts", ".tsx"],
                         "configFileName": "tsconfig.json",
                         "tsconfig": {},
-                        "development": false
+                        "development": true
                         "copyPolicy": {
-                            "ignorePatterns": ["package.json", "package-lock.json"],
+                            "ignorePatterns": ["package.json", "package-lock.json", "tsconfig.json"],
                             "disable": false
                         }
                     }
@@ -91,7 +91,7 @@ This config state is as if you would configure the compiler as following by hand
 
 #### What are my configuration ?
 
-The default configuration without dev mode or overrides is [here](./config.md).
+The default configuration without overrides is [here](./config.md).
 
 #### Whats to do component builds in workspace and doesn't build in capsule?
 
@@ -126,3 +126,45 @@ Do the following:
     }
 }
 ```
+
+## Common issues
+
+### Metro has encountered an error while trying to resolve module 'react-native'...
+
+If you get this error, you need to expend the metro-config blacklist to ignore `.bit` folder.
+Link to the issue https://github.com/teambit/envs/issues/143  
+Edit the `metro.config.js` file:
+
+```
+const blacklist = require('metro-config/src/defaults/blacklist');
+
+module.exports = {
+  ...
+  resolver: {
+    blacklistRE: blacklist([/.bit\/.*/]),
+  },
+};
+```
+
+### Expo "jest-haste-map" error after bit import of a component - naming collision
+
+If you get this error, you need to expend the metro-config blacklist to ignore all the non 'dist' files from imported components, and also to ignore the bit folder under `.git`.  
+Link to the issue https://github.com/teambit/envs/issues/149
+
+The default directory is: `"componentsDefaultDirectory": "components/{name}"`
+According to the directory, edit the `metro.config.js` file:
+
+```
+const blacklist = require('metro-config/src/defaults/blacklist');
+
+module.exports = {
+  ...
+  resolver: {
+    blacklistRE: blacklist([/^[^/]components\/(?!.*dist).*/, /.git\/bit\/.*/]),
+  },
+};
+```
+
+## Got any issues or questions?
+
+Collaboration on this Bit environment happens in [this repository](https://github.com/teambit/envs). Please open an issue or submit pull request there.
