@@ -23,16 +23,17 @@ A curated list of **Extensions** maintained by Bit's [maintainers](https://githu
 
 ### Which compiler to use?
 
-| Flavor             | Env                                                                     | Import Command                                      |
-| ------------------ | ----------------------------------------------------------------------- | --------------------------------------------------- |
-| React JS           | [react](https://bit.dev/bit/envs/compilers/react)                       | `bit import bit.envs/compilers/react -c`            |
-| React TS           | [react-typescript](https://bit.dev/bit/envs/compilers/react-typescript) | `bit import bit.envs/compilers/react-typescript -c` |
-| React Native JS    | [react-native](https://bit.dev/bit/envs/compilers/react-native)         | `bit import bit.envs/compilers/react-native -c`     |
-| Vue                | [vue](https://bit.dev/bit/envs/bundlers/vue)                            | `bit import bit.envs/bundlers/vue -c`               |
-| Angular            | [angular](https://bit.dev/bit/envs/compilers/angular)                   | `bit import bit.envs/compilers/angular -c`          |
-| Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)             | `bit import bit.envs/compilers/typescript -c`       |
-| Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/babel)                       | `bit import bit.envs/compilers/babel -c`            |
-| Stencil            | [stencil](https://bit.dev/bit/envs/compilers/stencil)                   | `bit import bit.envs/compilers/stencil -c`          |
+| Flavor             | Env                                                                                   | Import Command                                             |
+| ------------------ | ------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| React JS           | [react](https://bit.dev/bit/envs/compilers/react)                                     | `bit import bit.envs/compilers/react -c`                   |
+| React TS           | [react-typescript](https://bit.dev/bit/envs/compilers/react-typescript)               | `bit import bit.envs/compilers/react-typescript -c`        |
+| React Native JS    | [react-native](https://bit.dev/bit/envs/compilers/react-native)                       | `bit import bit.envs/compilers/react-native -c`            |
+| React Native TS    | [react-native-typescript](https://bit.dev/bit/envs/compilers/react-native-typescript) | `bit import bit.envs/compilers/react-native-typescript -c` |
+| Vue                | [vue](https://bit.dev/bit/envs/bundlers/vue)                                          | `bit import bit.envs/bundlers/vue -c`                      |
+| Angular            | [angular](https://bit.dev/bit/envs/compilers/angular)                                 | `bit import bit.envs/compilers/angular -c`                 |
+| Typescript Vanilla | [typescript](https://bit.dev/bit/envs/compilers/typescript)                           | `bit import bit.envs/compilers/typescript -c`              |
+| Javascript Vanilla | [babel](https://bit.dev/bit/envs/compilers/babel)                                     | `bit import bit.envs/compilers/babel -c`                   |
+| Stencil            | [stencil](https://bit.dev/bit/envs/compilers/stencil)                                 | `bit import bit.envs/compilers/stencil -c`                 |
 
 ### Which tester to use?
 
