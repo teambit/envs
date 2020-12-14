@@ -29,13 +29,13 @@ export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
       rootDir: './',
       removeComments: !isDev,
       typeRoots: [
-        './node_modules/@types' // be able to consume @types.
+        './node_modules/@types', // be able to consume @types.
       ],
       // bundle size in component would be better if we don't depend on tslib.
-      importHelpers: false
+      importHelpers: false,
     },
     include: ['./**/*'],
-    exclude: ['node_modules', '.dependencies', FIXED_OUT_DIR]
+    exclude: ['node_modules', '.dependencies', FIXED_OUT_DIR],
   };
 
   const config = merge({}, defaultOptions, overrideConfig);

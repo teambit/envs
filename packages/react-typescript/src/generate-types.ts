@@ -4,9 +4,11 @@ import fs from 'fs-extra';
 export async function generateTypes(_dir: string) {
   const strategies = getStrategies();
   const dir = await readdir(_dir, ['node_modules', 'dist', '.dependencies']);
-  const filesToCreate = dir.filter(file => Object.keys(strategies).some(extension => file.endsWith(`.${extension}`)));
+  const filesToCreate = dir.filter((file) =>
+    Object.keys(strategies).some((extension) => file.endsWith(`.${extension}`))
+  );
   return await Promise.all(
-    filesToCreate.map(file => {
+    filesToCreate.map((file) => {
       const extension = file.split('.')[file.split('.').length - 1];
       const content = (strategies as any)[extension];
       const dtsFilePath = `${file}.d.ts`;
@@ -30,7 +32,7 @@ function getStrategies() {
     png: getImageType(),
     ico: getImageType(),
     gif: getImageType(),
-    bmp: getImageType()
+    bmp: getImageType(),
   };
   return strategies;
 }

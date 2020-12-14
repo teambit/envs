@@ -1,3 +1,4 @@
+import rimraf from 'rimraf';
 import { CompilationContext, GenericObject } from '@bit/bit.envs.common.compiler-types';
 import { Preset } from '@bit/bit.envs.common.preset';
 import { generateTypes } from './generate-types';
@@ -48,5 +49,7 @@ export const reactPreset: Preset = {
   },
   async preCompile(ctx: CompilationContext) {
     await generateTypes(ctx.directory);
+    // issue https://github.com/teambit/bit/issues/3129
+    rimraf.sync(`${ctx.directory}/node_modules/@types/react-native`);
   },
 };
