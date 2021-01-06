@@ -11,12 +11,13 @@ export const reactPreset: Preset = {
   getDynamicPackageDependencies() {
     return {
       dependencies: {},
-      devDependencies: {},
+      devDependencies: {
+        '@types/react': '^17.0.0',
+        '@types/react-dom': '^17.0.0',
+      },
       peerDependencies: {
-        react: '^16.11.0',
-        'react-dom': '^16.11.0',
-        '@types/react': '16.9.11',
-        '@types/react-dom': '16.9.4',
+        react: '^17.0.1',
+        'react-dom': '^17.0.1',
       },
     };
   },
