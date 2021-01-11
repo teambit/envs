@@ -1,288 +1,245 @@
 {
-    "env": {
-        "compiler": {
-            "bit.envs/compilers/typescript@3.1.49": {
-                "rawConfig": {
-                    "tsconfig": {
-                        "compilerOptions": {
-                            "skipLibCheck": true,
-                            "module": "CommonJS"
-                        },
-                        "exclude": [
-                            "node_modules",
-                            "dist",
-                            ".dependencies",
-                            "*.spec.ts",
-                            "*.e2e.ts"
-                        ]
-                    }
-                }
-            }
+  "env": {
+    "compiler": {
+      "bit.envs/compilers/typescript@3.1.49": {
+        "rawConfig": {
+          "tsconfig": {
+            "compilerOptions": {
+              "skipLibCheck": true,
+              "module": "CommonJS"
+            },
+            "exclude": ["node_modules", "dist", ".dependencies", "*.spec.ts", "*.e2e.ts"]
+          }
         }
-    },
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm",
-    "defaultScope": "bit.envs",
-    "overrides": {
-        "*": {
-            "devDependencies": {
-                "@types/node": "^12.7.4"
-            }
-        },
-        "types": {
-            "env": {
-                "compiler": "-"
-            }
-        },
-        "compilers/typescript": {
-            "dependencies": {
-                "bit-bin": "-",
-                "chai": "-",
-                "mocha": "-",
-                "rimraf": "-",
-                "sinon": "-"
-            },
-            "devDependencies": {
-                "@types/node": "+",
-                "@types/mocha": "^7.0.2",
-                "bit-bin": "14.6.0",
-                "chai": "^4.2.0",
-                "mocha": "^6.2.0",
-                "rimraf": "^3.0.0",
-                "sinon": "^7.5.0"
-            }
-        },
-        "compilers/angular": {
-            "dependencies": {
-                "bit-bin": "-"
-            },
-            "devDependencies": {
-                "@types/node": "+",
-                "@types/webpack-env": "+"
-            },
-            "env": {
-                "compiler": {
-                    "bit.envs/compilers/typescript@3.1.49": {
-                        "rawConfig": {
-                            "compilerPath": "typescript/bin/tsc",
-                            "compilerArguments": [
-                                "--declaration"
-                            ],
-                            "compiledFileTypes": [
-                                ".ts",
-                                ".tsx"
-                            ],
-                            "configFileName": "tsconfig.json",
-                            "tsconfig": {
-                                "compilerOptions": {
-                                    "outDir": "dist",
-                                    "target": "ES2015",
-                                    "sourceMap": false,
-                                    "moduleResolution": "Node",
-                                    "esModuleInterop": true,
-                                    "module": "CommonJS",
-                                    "allowSyntheticDefaultImports": true,
-                                    "resolveJsonModule": true,
-                                    "declaration": true,
-                                    "skipLibCheck": true,
-                                    "experimentalDecorators": true,
-                                    "inlineSourceMap": false,
-                                    "inlineSources": false,
-                                    "jsx": "react",
-                                    "rootDir": "./",
-                                    "removeComments": true,
-                                    "typeRoots": [
-                                        "./node_modules/@types"
-                                    ],
-                                    "importHelpers": false
-                                },
-                                "include": [
-                                    "./**/*"
-                                ],
-                                "exclude": [
-                                    "node_modules",
-                                    "dist",
-                                    ".dependencies",
-                                    "*.spec.ts",
-                                    "*.e2e.ts"
-                                ]
-                            },
-                            "development": false,
-                            "copyPolicy": {
-                                "ignorePatterns": [
-                                    "package.json",
-                                    "package-lock.json",
-                                    "tsconfig.json"
-                                ],
-                                "disable": false
-                            }
-                        },
-                        "options": {},
-                        "files": {}
-                    }
-                }
-            }
-        },
-        "compilers/react-typescript": {
-            "dependencies": {
-                "bit-bin": "-",
-                "@bit/bit.envs.common.create-workspace": "-",
-                "chai": "-"
-            },
-            "devDependencies": {
-                "@types/node": "+",
-                "@types/mocha": "^7.0.2",
-                "bit-bin": "14.6.0",
-                "@bit/bit.envs.common.create-workspace": "0.0.11",
-                "chai": "^4.2.0"
-            }
-        },
-        "compilers/react": {
-            "dependencies": {
-                "@babel/core": "^7.8.4",
-                "bit-bin": "-"
-            },
-            "devDependencies": {
-                "@types/node": "+",
-                "@types/mocha": "^7.0.2",
-                "bit-bin": "14.7.6"
-            }
-        },
-        "compilers/react-native": {
-            "dependencies": {
-                "@types/chai": "-",
-                "@types/mocha": "-",
-                "@types/rimraf": "-",
-                "@types/vinyl": "-",
-                "bit-bin": "-",
-                "chai": "-",
-                "mocha": "-",
-                "rimraf": "-"
-            },
-            "devDependencies": {
-                "@types/chai": "^4.2.5",
-                "@types/mocha": "^7.0.2",
-                "@types/rimraf": "^2.0.3",
-                "@types/vinyl": "^2.0.4",
-                "bit-bin": "14.7.6",
-                "chai": "^4.2.0",
-                "mocha": "^8.0.1",
-                "rimraf": "^3.0.2"
-            }
-        },
-        "compilers/react-native-typescript": {
-            "dependencies": {
-                "@bit/bit.envs.common.create-workspace": "-",
-                "bit-bin": "-",
-                "chai": "-",
-                "rimraf": "-"
-            },
-            "devDependencies": {
-                "@bit/bit.envs.common.create-workspace": "0.0.12",
-                "bit-bin": "14.8.8",
-                "chai": "^4.2.0",
-                "rimraf": "^3.0.0",
-                "@types/node": "+",
-                "@types/mocha": "^7.0.2"
-            }
-        },
-        "compilers/utils": {
-            "devDependencies": {
-                "@types/node": "+",
-                "@types/jest": "+"
-            }
-        },
-        "compilers/vue": {
-            "devDependencies": {
-                "@types/node": "+",
-                "@types/jest": "+"
-            },
-            "env": {
-                "compiler": {
-                    "bit.envs/compilers/typescript@3.1.49": {
-                        "rawConfig": {
-                            "compilerPath": "typescript/bin/tsc",
-                            "compilerArguments": [
-                                "--declaration"
-                            ],
-                            "compiledFileTypes": [
-                                ".ts",
-                                ".tsx"
-                            ],
-                            "configFileName": "tsconfig.json",
-                            "tsconfig": {
-                                "compilerOptions": {
-                                    "skipLibCheck": true,
-                                    "outDir": "dist",
-                                    "target": "ES2015",
-                                    "sourceMap": false,
-                                    "moduleResolution": "Node",
-                                    "esModuleInterop": true,
-                                    "module": "CommonJS",
-                                    "allowSyntheticDefaultImports": true,
-                                    "resolveJsonModule": true,
-                                    "declaration": true,
-                                    "experimentalDecorators": true,
-                                    "inlineSourceMap": false,
-                                    "inlineSources": false,
-                                    "jsx": "react",
-                                    "rootDir": "./",
-                                    "removeComments": true,
-                                    "typeRoots": [
-                                        "./node_modules/@types"
-                                    ],
-                                    "importHelpers": false
-                                },
-                                "include": [
-                                    "./**/*"
-                                ],
-                                "exclude": [
-                                    "node_modules",
-                                    "dist",
-                                    ".dependencies",
-                                    "*.spec.ts",
-                                    "*.e2e.ts"
-                                ]
-                            },
-                            "development": false,
-                            "copyPolicy": {
-                                "ignorePatterns": [
-                                    "package.json",
-                                    "package-lock.json",
-                                    "tsconfig.json"
-                                ],
-                                "disable": false
-                            }
-                        },
-                        "options": {}
-                    }
-                }
-            }
-        },
-        "common/build-component": {
-            "devDependencies": {
-                "@types/chai": "^4.2.5",
-                "@types/mocha": "^7.0.2",
-                "@types/rimraf": "^2.0.3",
-                "@types/fs-extra": "^8.0.1"
-            }
-        },
-        "compilers/stencil": {
-            "env": {
-                "compiler": {
-                    "bit.envs/compilers/typescript@3.1.49": {
-                        "rawConfig": {
-                            "tsconfig": {
-                                "compilerOptions": {
-                                    "target": "ES2015",
-                                    "module": "CommonJS",
-                                    "esModuleInterop": true
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+      }
     }
+  },
+  "componentsDefaultDirectory": "components/{name}",
+  "packageManager": "npm",
+  "defaultScope": "bit.envs",
+  "overrides": {
+    "*": {
+      "devDependencies": {
+        "@types/node": "^12.7.4"
+      }
+    },
+    "types": {
+      "env": {
+        "compiler": "-"
+      }
+    },
+    "compilers/typescript": {
+      "dependencies": {
+        "bit-bin": "-",
+        "chai": "-",
+        "mocha": "-",
+        "rimraf": "-",
+        "sinon": "-"
+      },
+      "devDependencies": {
+        "@types/node": "+",
+        "@types/mocha": "^7.0.2",
+        "bit-bin": "14.6.0",
+        "chai": "^4.2.0",
+        "mocha": "^6.2.0",
+        "rimraf": "^3.0.0",
+        "sinon": "^7.5.0"
+      }
+    },
+    "compilers/angular": {
+      "dependencies": {
+        "bit-bin": "-",
+        "typescript": "4.0.3"
+      },
+      "devDependencies": {
+        "@types/node": "+",
+        "@types/webpack-env": "+"
+      },
+      "env": {
+        "compiler": {
+          "bit.envs/compilers/typescript@3.1.49": {
+            "rawConfig": {
+              "compilerPath": "typescript/bin/tsc",
+              "compilerArguments": ["--declaration"],
+              "compiledFileTypes": [".ts", ".tsx"],
+              "configFileName": "tsconfig.json",
+              "tsconfig": {
+                "compilerOptions": {
+                  "outDir": "dist",
+                  "target": "ES2015",
+                  "sourceMap": false,
+                  "moduleResolution": "Node",
+                  "esModuleInterop": true,
+                  "module": "CommonJS",
+                  "allowSyntheticDefaultImports": true,
+                  "resolveJsonModule": true,
+                  "declaration": true,
+                  "skipLibCheck": true,
+                  "experimentalDecorators": true,
+                  "inlineSourceMap": false,
+                  "inlineSources": false,
+                  "jsx": "react",
+                  "rootDir": "./",
+                  "removeComments": true,
+                  "typeRoots": ["./node_modules/@types"],
+                  "importHelpers": false
+                },
+                "include": ["./**/*"],
+                "exclude": ["node_modules", "dist", ".dependencies", "*.spec.ts", "*.e2e.ts"]
+              },
+              "development": false,
+              "copyPolicy": {
+                "ignorePatterns": ["package.json", "package-lock.json", "tsconfig.json"],
+                "disable": false
+              }
+            },
+            "options": {},
+            "files": {}
+          }
+        }
+      }
+    },
+    "compilers/react-typescript": {
+      "dependencies": {
+        "bit-bin": "-",
+        "@bit/bit.envs.common.create-workspace": "-",
+        "chai": "-"
+      },
+      "devDependencies": {
+        "@types/node": "+",
+        "@types/mocha": "^7.0.2",
+        "bit-bin": "14.6.0",
+        "@bit/bit.envs.common.create-workspace": "0.0.11",
+        "chai": "^4.2.0"
+      }
+    },
+    "compilers/react": {
+      "dependencies": {
+        "@babel/core": "^7.8.4",
+        "bit-bin": "-"
+      },
+      "devDependencies": {
+        "@types/node": "+",
+        "@types/mocha": "^7.0.2",
+        "bit-bin": "14.7.6"
+      }
+    },
+    "compilers/react-native": {
+      "dependencies": {
+        "@types/chai": "-",
+        "@types/mocha": "-",
+        "@types/rimraf": "-",
+        "@types/vinyl": "-",
+        "bit-bin": "-",
+        "chai": "-",
+        "mocha": "-",
+        "rimraf": "-"
+      },
+      "devDependencies": {
+        "@types/chai": "^4.2.5",
+        "@types/mocha": "^7.0.2",
+        "@types/rimraf": "^2.0.3",
+        "@types/vinyl": "^2.0.4",
+        "bit-bin": "14.7.6",
+        "chai": "^4.2.0",
+        "mocha": "^8.0.1",
+        "rimraf": "^3.0.2"
+      }
+    },
+    "compilers/react-native-typescript": {
+      "dependencies": {
+        "@bit/bit.envs.common.create-workspace": "-",
+        "bit-bin": "-",
+        "chai": "-",
+        "rimraf": "-"
+      },
+      "devDependencies": {
+        "@bit/bit.envs.common.create-workspace": "0.0.12",
+        "bit-bin": "14.8.8",
+        "chai": "^4.2.0",
+        "rimraf": "^3.0.0",
+        "@types/node": "+",
+        "@types/mocha": "^7.0.2"
+      }
+    },
+    "compilers/utils": {
+      "devDependencies": {
+        "@types/node": "+",
+        "@types/jest": "+"
+      }
+    },
+    "compilers/vue": {
+      "devDependencies": {
+        "@types/node": "+",
+        "@types/jest": "+"
+      },
+      "env": {
+        "compiler": {
+          "bit.envs/compilers/typescript@3.1.49": {
+            "rawConfig": {
+              "compilerPath": "typescript/bin/tsc",
+              "compilerArguments": ["--declaration"],
+              "compiledFileTypes": [".ts", ".tsx"],
+              "configFileName": "tsconfig.json",
+              "tsconfig": {
+                "compilerOptions": {
+                  "skipLibCheck": true,
+                  "outDir": "dist",
+                  "target": "ES2015",
+                  "sourceMap": false,
+                  "moduleResolution": "Node",
+                  "esModuleInterop": true,
+                  "module": "CommonJS",
+                  "allowSyntheticDefaultImports": true,
+                  "resolveJsonModule": true,
+                  "declaration": true,
+                  "experimentalDecorators": true,
+                  "inlineSourceMap": false,
+                  "inlineSources": false,
+                  "jsx": "react",
+                  "rootDir": "./",
+                  "removeComments": true,
+                  "typeRoots": ["./node_modules/@types"],
+                  "importHelpers": false
+                },
+                "include": ["./**/*"],
+                "exclude": ["node_modules", "dist", ".dependencies", "*.spec.ts", "*.e2e.ts"]
+              },
+              "development": false,
+              "copyPolicy": {
+                "ignorePatterns": ["package.json", "package-lock.json", "tsconfig.json"],
+                "disable": false
+              }
+            },
+            "options": {}
+          }
+        }
+      }
+    },
+    "common/build-component": {
+      "devDependencies": {
+        "@types/chai": "^4.2.5",
+        "@types/mocha": "^7.0.2",
+        "@types/rimraf": "^2.0.3",
+        "@types/fs-extra": "^8.0.1"
+      }
+    },
+    "compilers/stencil": {
+      "env": {
+        "compiler": {
+          "bit.envs/compilers/typescript@3.1.49": {
+            "rawConfig": {
+              "tsconfig": {
+                "compilerOptions": {
+                  "target": "ES2015",
+                  "module": "CommonJS",
+                  "esModuleInterop": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

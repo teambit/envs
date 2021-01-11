@@ -30,10 +30,10 @@ if (process.env.DEBUG) {
 }
 
 const DEV_DEPS = {
-  tslib: '>=1.0.0',
+  tslib: '>=2.1.0',
   'webpack-env': '>=0.8.0',
-  '@angular/core': '>= 8.0.0',
-  '@angular/common': '>= 8.0.0',
+  '@angular/core': '>= 11.0.8',
+  '@angular/common': '>= 11.0.8',
 };
 
 const PKG_JSON_KEYS = [

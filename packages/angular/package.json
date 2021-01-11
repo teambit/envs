@@ -11,9 +11,9 @@
     "clean": "rm -rf dist types"
   },
   "dependencies": {
-    "@angular/compiler": "11.0.1",
-    "@angular/compiler-cli": "11.0.1",
-    "@angular/core": "11.0.1",
+    "@angular/compiler": "^11.0.8",
+    "@angular/compiler-cli": "^11.0.8",
+    "@angular/core": "^11.0.8",
     "@bazel/typescript": "2.3.0",
     "@bit/bit.envs.compilers.utils": "^0.1.10",
     "debug": "^4.1.1",
@@ -21,7 +21,7 @@
     "ng-packagr": "11.0.2",
     "recursive-readdir": "^2.2.2",
     "tsickle": "^0.38.1",
-    "tslib": "^1.11.1",
+    "tslib": "^2.1.0",
     "typescript": "4.0.3",
     "vinyl": "^2.1.0"
   },
