@@ -297,7 +297,7 @@
         "origin": "AUTHORED",
         "exported": true
     },
-    "bit.envs/compilers/react@1.0.22": {
+    "bit.envs/compilers/react@1.0.23": {
         "files": [
             {
                 "relativePath": "packages/react/.babelrc",
