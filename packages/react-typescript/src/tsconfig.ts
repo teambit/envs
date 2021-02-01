@@ -24,7 +24,7 @@ export function getTSConfig(isDev: boolean, overrideConfig: GenericObject) {
       inlineSourceMap: false,
       inlineSources: isDev,
       lib: ['dom', 'es2015'],
-      jsx: 'react',
+      jsx: 'react-jsx',
       // the root of the capsule is CWD when transpiling and should be rootDir to adjust library sturcture.
       rootDir: './',
       removeComments: !isDev,
