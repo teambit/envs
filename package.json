@@ -20,7 +20,6 @@
   "author": "Teambit",
   "license": "MIT",
   "dependencies": {
-    "@bit/bit.envs.internal.babel-base-compiler": "^1.0.4",
     "execa": "^4.0.3",
     "lodash": "^4.17.15",
     "recursive-readdir": "^2.2.2",

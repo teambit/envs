@@ -7,8 +7,9 @@ import '@babel/plugin-proposal-object-rest-spread';
 import '@babel/plugin-proposal-optional-chaining';
 import '@babel/plugin-proposal-nullish-coalescing-operator';
 import Vinyl from 'vinyl';
+// @ts-ignore
+import baseCompile from '@bit/bit.envs.internal.babel-base-compiler';
 
-const baseCompile = require('@bit/bit.envs.internal.babel-base-compiler');
 const compiledFileTypes = ['js', 'jsx'];
 
 const compile = (files: Vinyl[], distPath: string) => {
