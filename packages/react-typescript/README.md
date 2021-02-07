@@ -3,7 +3,8 @@
 A TypeScript component compiler for [Bit](https://github.com/teambit/bit).
 Check out the [best practices](https://docs.bit.dev/docs/best-practices) and also the specific [React guidelines](https://docs.bit.dev/docs/react-guidelines).
 
-The compiler is also heavily based on [typescript](https://github.com/teambit/envs/blob/master/packages/ts-compiler/README.md) compiler.
+The compiler is also heavily based on [typescript](https://github.com/teambit/envs/blob/master/packages/ts-compiler/README.md) compiler.  
+From version [4.0.0](https://bit.dev/bit/envs/compilers/react-typescript?version=4.0.0) this compiler supports React 17, if you are using React 16, please use version [3.1.70](https://bit.dev/bit/envs/compilers/react-typescript?version=3.1.70).
 
 ## How to use?
 

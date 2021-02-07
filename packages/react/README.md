@@ -1,6 +1,7 @@
 # Babel-based transpiling environment for React components
 
-Bit build enviroment for transpiling React components using Bit.
+Bit build enviroment for transpiling React components using Bit.  
+From version [2.0.0](https://bit.dev/bit/envs/compilers/react?version=2.0.0) this compiler supports React 17, if you are using React 16, please use version [1.0.30](https://bit.dev/bit/envs/compilers/react?version=1.0.30).
 
 ## How to use?
 
